@@ -110,28 +110,35 @@ function toClientPropType(
             return "DynamicValue<FileValue>";
         case "datasource":
             return "ListValue";
-        case "attribute":
+        case "attribute": {
             if (!prop.attributeTypes?.length) {
                 throw new Error("[XML] Attribute property requires attributeTypes element");
             }
             const types = prop.attributeTypes
                 .map(ats => ats.attributeType)
                 .reduce((a, i) => a.concat(i), [])
-                .map(at => toClientType(at.$.name));
+                .map(at => toAttributeClientType(at.$.name));
             const uniqueTypes = Array.from(new Set(types));
             return prop.$.dataSource
                 ? `ListAttributeValue<${uniqueTypes.join(" | ")}>`
                 : `EditableValue<${uniqueTypes.join(" | ")}>`;
-        case "association":
+        }
+        case "association": {
             if (!prop.associationTypes?.length) {
                 throw new Error("[XML] Association property requires associationTypes element");
             }
-            return "ModifiableValue<ObjectItem>";
+            const types = prop.associationTypes
+                .map(ats => ats.associationType)
+                .reduce((a, i) => a.concat(i), [])
+                .map(at => toAssociationOutputType(at.$.name));
+            const uniqueTypes = Array.from(new Set(types));
+            return uniqueTypes.join(" | ");
+        }
         case "expression":
             if (!prop.returnType || prop.returnType.length === 0) {
                 throw new Error("[XML] Expression property requires returnType element");
             }
-            const type = toClientType(prop.returnType[0].$.type);
+            const type = toAttributeClientType(prop.returnType[0].$.type);
             return prop.$.dataSource ? `ListExpressionValue<${type}>` : `DynamicValue<${type}>`;
         case "enumeration":
             const typeName = capitalizeFirstLetter(prop.$.key) + "Enum";
@@ -168,7 +175,7 @@ function generateEnum(typeName: string, prop: Property) {
     return `export type ${typeName} = ${members.join(" | ")};`;
 }
 
-export function toClientType(xmlType: string): string {
+export function toAttributeClientType(xmlType: string): string {
     switch (xmlType) {
         case "Boolean":
             return "boolean";
@@ -183,6 +190,17 @@ export function toClientType(xmlType: string): string {
         case "String":
         case "Enum":
             return "string";
+        default:
+            return "any";
+    }
+}
+
+export function toAssociationOutputType(xmlType: string) {
+    switch (xmlType) {
+        case "Reference":
+            return "ReferenceValue";
+        case "ReferenceSet":
+            return "ReferenceSetValue";
         default:
             return "any";
     }
