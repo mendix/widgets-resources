@@ -67,8 +67,8 @@ export default async args => {
                 }),
                 postcss({
                     extensions: [".css", ".sass", ".scss"],
-                    extract: production && outputFormat === "amd",
-                    inject: !production,
+                    extract: outputFormat === "amd",
+                    inject: false,
                     minimize: production,
                     plugins: [postcssImport(), postcssUrl({ url: "inline" })],
                     sourceMap: !production ? "inline" : false,
