@@ -20,18 +20,22 @@ async function main() {
     const root = process.cwd();
     const testsDir = join(root, "tests");
     const testProjectDir = join(testsDir, "testProject");
+    const repoPath = join(testsDir, "Native-Mobile-Resources-main");
 
     mkdir("-p", testsDir);
     execSync(`unzip -o ${testArchivePath} -d ${testsDir}`);
-    mv(`${testsDir}/Native-Mobile-Resources-main`, testProjectDir);
+    mv(repoPath, testProjectDir);
+
+    rm("-f", repoPath);
     rm("-f", testArchivePath);
 
     const output = execSync("npx lerna list --json --since origin/master --scope '*-native'");
-    const packages = JSON.parse(output);
+    const changesPackages = JSON.parse(output);
+    const changedPackagesJoined = changesPackages.map(p => p.name).join(",");
 
-    execSync("npx lerna run release --since origin/master --scope '*-native'", { stdio: "inherit" });
+    execSync(`npx lerna run release --scope '{${changedPackagesJoined}}'`, { stdio: "inherit" });
 
-    packages.forEach(({ name, location }) => {
+    changesPackages.forEach(({ name, location }) => {
         if (["mobile-resources-native", "nanoflow-actions-native"].includes(name)) {
             // for js actions
             const path = name === "mobile-resources-native" ? "nativemobileresources" : "nanoflowcommons";
@@ -52,7 +56,7 @@ async function main() {
     }
 
     const existingImages = execSync(`docker image ls -q ${ghcr}mxbuild:${mendixVersion}`).toString().trim();
-    const scriptsPath = join(root, "packages/tools/pluggable-widgets-tools/scripts");
+    const scriptsPath = join(root, "changesPackages", "tools", "pluggable-widgets-tools", "scripts");
 
     if (!existingImages) {
         console.log(`Creating new mxbuild docker image...`);
@@ -86,7 +90,7 @@ async function main() {
         // Build testProject via mxbuild
         const projectFile = "/source/tests/testProject/NativeComponentsTestProject.mpr";
         mxbuildContainerId = execSync(
-            `docker run -p 8083:8083 -td -v ${root}:/source --rm ${ghcr}mxbuild:${mendixVersion} bash`
+            `docker run -p 8083:8083 -i -td -v ${root}:/source --rm ${ghcr}mxbuild:${mendixVersion} bash`
         )
             .toString()
             .trim();
@@ -109,19 +113,18 @@ async function main() {
         execSync(
             `docker exec -td ${mxbuildContainerId} bash -c "cd /source/tests/testProject/deployment/native && ` +
                 `/tmp/mxbuild/modeler/tools/node/node /tmp/mxbuild/modeler/tools/node/node_modules/react-native/local-cli/cli.js ` +
-                `start --port '8083' --config '/source/tests/testProject/deployment/native/metro.config.json' --no-interactive"`,
-            { stdio: "inherit" }
+                `start --port '8083' --config '/source/tests/testProject/deployment/native/metro.config.json' > /source/tests/testProject/deployment/log/packager.txt"`
         );
 
-        // wait until metro bundler is alive
-        if ((await tryReach("http://localhost:8083/status", "Could not reach Metro, trying again...")) === 0) {
-            throw new Error("Metro bundler did not start in time...");
-        }
-        console.log("Metro started.");
+        await tryReach("http://localhost:8083/status", "Metro bundler");
 
         console.log("Preheating bundler for Android dev=false minify=true");
         await Promise.race([
-            fetch("http://localhost:8083/index.bundle?platform=android&dev=false&minify=true"),
+            fetch("http://localhost:8083/index.bundle?platform=android&dev=false&minify=true").then(response => {
+                if (!response.ok) {
+                    throw new HTTPResponseError(response, "from Metro");
+                }
+            }),
             new Promise((_, reject) =>
                 setTimeout(() => reject(new Error("Preheating call timed out!")), 10 * 60 * 1000)
             )
@@ -137,37 +140,34 @@ async function main() {
             .toString()
             .trim();
 
-        // wait until runtime is alive
-        if ((await tryReach("http://localhost:8083", "Could not reach http://localhost:8083, trying again...")) === 0) {
-            throw new Error("Runtime didn't start in time, existing now...");
-        }
+        await tryReach("http://localhost:8080", "Runtime");
 
-        const changedPackages = packages.map(package => package.name).join(",");
         console.log("Setup for android...");
         execSync("npm run setup-android");
         console.log("Android successfully setup");
         // https://github.com/lerna/lerna/issues/1846
-        // execSync(`npx lerna run test:e2e:local:android --stream --concurrency 1 --scope '{${changedPackages},}'`);
-        execSync(`npx lerna run test:e2e:local:android --stream --concurrency 1 --scope '{bar-chart-native,}'`);
-    } catch (e) {
-        execSync(`cat /Users/runner/work/widgets-resources/tests/testProject/deployment/log/native_packager_log.txt`, {
-            stdio: "inherit"
-        });
-        try {
-            execSync(`docker logs ${mxbuildContainerId}`, { stdio: "inherit" });
-            execSync(
-                `docker exec -td ${mxbuildContainerId} bash -c "cat /source/tests/testProject/deployment/log/native_packager_log.txt"`,
-                { stdio: "inherit" }
-            );
-            execSync(`docker logs ${runtimeContainerId}`, { stdio: "inherit" });
-        } catch (_) {}
-        if (runtimeContainerId) {
-            console.log(cat("results/runtime.log").toString());
+        execSync(`npx lerna run test:e2e:local:android --stream --concurrency 1 --scope '{${changedPackagesJoined}}'`);
+    } catch (error) {
+        console.error(error.message);
+
+        if (error.response) {
+            console.error(await error.response.text());
         }
-        throw e;
+
+        try {
+            execSync(`cat ${testProjectDir}/deployment/log/packager.txt`, {
+                stdio: "inherit"
+            });
+        } catch (_) {}
+
+        mxbuildContainerId && execSync(`docker logs ${mxbuildContainerId}`, { stdio: "inherit" });
+        runtimeContainerId && execSync(`docker logs ${runtimeContainerId}`, { stdio: "inherit" });
+        runtimeContainerId && console.log(cat("results/runtime.log").toString());
+
+        throw error;
     } finally {
-        execSync(`docker rm -f ${mxbuildContainerId}`);
-        execSync(`docker rm -f ${runtimeContainerId}`);
+        mxbuildContainerId && execSync(`docker rm -f ${mxbuildContainerId}`);
+        runtimeContainerId && execSync(`docker rm -f ${runtimeContainerId}`);
     }
 }
 
@@ -223,7 +223,7 @@ async function getMendixVersion() {
     return mendixVersion;
 }
 
-async function tryReach(url, errorMessage) {
+async function tryReach(url, name) {
     let attempts = 60;
     for (; attempts > 0; --attempts) {
         try {
@@ -232,9 +232,20 @@ async function tryReach(url, errorMessage) {
                 break;
             }
         } catch (e) {
-            console.log(errorMessage);
+            console.log(`Could not reach ${name}, trying again...`);
         }
         await new Promise(resolve => setTimeout(resolve, 3000));
     }
-    return attempts;
+    if (attempts === 0) {
+        throw new Error(`${name} did not start in time...`);
+    }
+
+    console.log(`${name} is up!`);
+}
+
+class HTTPResponseError extends Error {
+    constructor(response, ...args) {
+        super(`HTTP Response Error: ${response.status} ${response.statusText} ${args.join(" ")}`);
+        this.response = response;
+    }
 }
