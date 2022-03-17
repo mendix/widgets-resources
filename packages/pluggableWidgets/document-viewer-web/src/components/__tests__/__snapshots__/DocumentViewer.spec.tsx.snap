@@ -2,9 +2,10 @@
 
 exports[`DocumentViewer renders correctly the structure 1`] = `
 <div
-  className="mx-document-viewer"
+  className="widget-document-viewer"
 >
   <object
+    className="widget-document-viewer-content"
     data="http://localhost/sample.pdf"
     type="application/pdf"
   >

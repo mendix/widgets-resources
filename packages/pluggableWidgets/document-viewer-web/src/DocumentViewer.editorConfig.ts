@@ -2,13 +2,15 @@ import { DocumentViewerPreviewProps } from "../typings/DocumentViewerProps";
 import { hidePropertyIn, Problem, Properties } from "@mendix/piw-utils-internal";
 
 export function getProperties(props: DocumentViewerPreviewProps, defaultProperties: Properties): Properties {
-    hidePropertyIn(defaultProperties, props, props.dataSourceType === "file" ? "uri" : "file");
+    hidePropertyIn(defaultProperties, props, props.dataSourceType === "file" ? "url" : "file");
 
     return defaultProperties;
 }
 
-export function check(props: DocumentViewerPreviewProps): Problem[] {
-    if (props.dataSourceType === "file" && !props.file) {
+type Checker = (props: DocumentViewerPreviewProps) => Problem[];
+
+const fileSourceCheck: Checker = ({ dataSourceType, file }) => {
+    if (dataSourceType === "file" && !file) {
         return [
             {
                 property: "file",
@@ -17,14 +19,22 @@ export function check(props: DocumentViewerPreviewProps): Problem[] {
         ];
     }
 
-    if (props.dataSourceType === "uri" && !props.uri) {
+    return [];
+};
+
+const urlSourceCheck: Checker = ({ dataSourceType, url }) => {
+    if (dataSourceType === "url" && !url) {
         return [
             {
-                property: "uri",
-                message: "Missing value for 'URI' property"
+                property: "url",
+                message: "Missing value for 'URL' property"
             }
         ];
     }
 
     return [];
+};
+
+export function check(props: DocumentViewerPreviewProps): Problem[] {
+    return [fileSourceCheck, urlSourceCheck].map(checker => checker(props)).flat();
 }

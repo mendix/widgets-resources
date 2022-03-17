@@ -6,7 +6,7 @@
 import { CSSProperties } from "react";
 import { DynamicValue, FileValue } from "mendix";
 
-export type DataSourceTypeEnum = "file" | "uri";
+export type DataSourceTypeEnum = "file" | "url";
 
 export type WidthUnitEnum = "percentage" | "pixels";
 
@@ -19,7 +19,7 @@ export interface DocumentViewerContainerProps {
     tabIndex?: number;
     dataSourceType: DataSourceTypeEnum;
     file?: DynamicValue<FileValue>;
-    uri: string;
+    url: string;
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
@@ -33,7 +33,7 @@ export interface DocumentViewerPreviewProps {
     readOnly: boolean;
     dataSourceType: DataSourceTypeEnum;
     file: string;
-    uri: string;
+    url: string;
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;

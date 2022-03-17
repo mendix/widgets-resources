@@ -12,14 +12,14 @@
                     <description />
                     <enumerationValues>
                         <enumerationValue key="file">File</enumerationValue>
-                        <enumerationValue key="uri">URI</enumerationValue>
+                        <enumerationValue key="url">URL</enumerationValue>
                     </enumerationValues>
                 </property>
                 <property key="file" type="file" required="false">
                     <caption>File Entity</caption>
                     <description />
                 </property>
-                <property key="uri" type="string" required="false">
+                <property key="url" type="string" required="false">
                     <caption>URI</caption>
                     <description />
                 </property>
