@@ -1,7 +1,7 @@
 import { StructurePreviewProps } from "@mendix/piw-utils-internal";
 
-import vewViewGlobeDark from "./assets/WebviewGlobe.dark.svg";
-import vewViewGlobeLight from "./assets/WebviewGlobe.light.svg";
+import vewViewGlobeDark from "./assets/WebViewGlobe.dark.svg";
+import vewViewGlobeLight from "./assets/WebViewGlobe.light.svg";
 
 import { WebViewPreviewProps } from "../typings/WebViewProps";
 
