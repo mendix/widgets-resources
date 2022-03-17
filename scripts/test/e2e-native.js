@@ -126,7 +126,7 @@ async function main() {
                 }
             }),
             new Promise((_, reject) =>
-                setTimeout(() => reject(new Error("Preheating call timed out!")), 10 * 60 * 1000)
+                setTimeout(() => reject(new Error("Preheating call timed out!")), 20 * 60 * 1000)
             )
         ]);
         console.log("Preheating done!");
