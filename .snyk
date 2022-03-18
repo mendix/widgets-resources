@@ -2,9 +2,9 @@
 version: v1.22.2
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
-  CVE-2021-23337:
-    - '*':
-        reason: None Given
-        expires: 2022-04-17T08:21:13.962Z
-        created: 2022-03-18T08:21:13.967Z
+    SNYK-JS-LODASHTEMPLATE-1088054:
+        - "*":
+              reason: None Given
+              expires: 2022-04-17T08:27:18.149Z
+              created: 2022-03-18T08:27:18.155Z
 patch: {}
