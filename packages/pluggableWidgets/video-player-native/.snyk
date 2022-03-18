@@ -7,16 +7,4 @@ ignore:
               reason: None Given
               expires: 2022-04-17T08:27:18.149Z
               created: 2022-03-18T08:27:18.155Z
-        - react-native-vector-icons@7.1.0:
-              reason: None Given
-              expires: 2022-04-17T08:46:02.225Z
-              created: 2022-03-18T08:46:02.230Z
-        - video-player-native@3.3.0:
-              reason: None Given
-              expires: 2022-04-17T08:46:02.225Z
-              created: 2022-03-18T08:46:02.230Z
-        - lodash.template@4.5.0:
-              reason: None Given
-              expires: 2022-04-17T08:46:02.225Z
-              created: 2022-03-18T08:46:02.230Z
 patch: {}
