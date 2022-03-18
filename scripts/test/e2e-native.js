@@ -109,22 +109,22 @@ async function main() {
         });
         console.log("All widgets are updated and project .mpr created.");
 
-        console.log("Starting metro...");
-        execSync(
-            `docker exec -td ${mxbuildContainerId} bash -c "cd /source/tests/testProject/deployment/native && ` +
-                `/tmp/mxbuild/modeler/tools/node/node /tmp/mxbuild/modeler/tools/node/node_modules/react-native/local-cli/cli.js ` +
-                `start --port '8083' --config '/source/tests/testProject/deployment/native/metro.config.json' > /source/tests/testProject/deployment/log/packager.txt"`
-        );
-
-        await tryReach("Metro bundler", () => fetchUrl("http://localhost:8083/status"));
-
-        console.log("Preheating bundler for Android dev=false minify=true");
-        await tryReach(
-            "Bundler",
-            () => fetchOrTimeout("http://localhost:8083/index.bundle?platform=android&dev=false&minify=true"),
-            10
-        );
-        console.log("Preheating done!");
+        // console.log("Starting metro...");
+        // execSync(
+        //     `docker exec -td ${mxbuildContainerId} bash -c "cd /source/tests/testProject/deployment/native && ` +
+        //         `/tmp/mxbuild/modeler/tools/node/node /tmp/mxbuild/modeler/tools/node/node_modules/react-native/local-cli/cli.js ` +
+        //         `start --port '8083' --config '/source/tests/testProject/deployment/native/metro.config.json' > /source/tests/testProject/deployment/log/packager.txt"`
+        // );
+        //
+        // await tryReach("Metro bundler", () => fetchUrl("http://localhost:8083/status"));
+        //
+        // console.log("Preheating bundler for Android dev=false minify=true");
+        // await tryReach(
+        //     "Bundler",
+        //     () => fetchOrTimeout("http://localhost:8083/index.bundle?platform=android&dev=false&minify=true"),
+        //     10
+        // );
+        // console.log("Preheating done!");
 
         // Spin up the runtime and run the testProject
         runtimeContainerId = execSync(
