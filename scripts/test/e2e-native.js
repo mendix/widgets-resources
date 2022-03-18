@@ -116,19 +116,14 @@ async function main() {
                 `start --port '8083' --config '/source/tests/testProject/deployment/native/metro.config.json' > /source/tests/testProject/deployment/log/packager.txt"`
         );
 
-        await tryReach("http://localhost:8083/status", "Metro bundler");
+        await tryReach("Metro bundler", () => fetchUrl("http://localhost:8083/status"));
 
         console.log("Preheating bundler for Android dev=false minify=true");
-        await Promise.race([
-            fetch("http://localhost:8083/index.bundle?platform=android&dev=false&minify=true").then(response => {
-                if (!response.ok) {
-                    throw new HTTPResponseError(response, "from Metro");
-                }
-            }),
-            new Promise((_, reject) =>
-                setTimeout(() => reject(new Error("Preheating call timed out!")), 20 * 60 * 1000)
-            )
-        ]);
+        await tryReach(
+            "Bundler",
+            () => fetchOrTimeout("http://localhost:8083/index.bundle?platform=android&dev=false&minify=true"),
+            3
+        );
         console.log("Preheating done!");
 
         // Spin up the runtime and run the testProject
@@ -140,12 +135,12 @@ async function main() {
             .toString()
             .trim();
 
-        await tryReach("http://localhost:8080", "Runtime");
+        await tryReach("Runtime", () => fetchUrl("http://localhost:8080"));
 
         console.log("Setup for android...");
         execSync("npm run setup-android");
         console.log("Android successfully setup");
-        // https://github.com/lerna/lerna/issues/1846
+
         execSync(`npx lerna run test:e2e:local:android --stream --concurrency 1 --scope '{${changedPackagesJoined}}'`);
     } catch (error) {
         console.error(error.message);
@@ -223,21 +218,36 @@ async function getMendixVersion() {
     return mendixVersion;
 }
 
-async function tryReach(url, name) {
-    let attempts = 60;
+async function fetchUrl(url) {
+    return (await fetch(url)).ok;
+}
+
+async function fetchOrTimeout(url) {
+    return await Promise.race([
+        fetch(url).then(response => {
+            if (!response.ok) {
+                throw new HTTPResponseError(response, "from Metro");
+            }
+            return true;
+        }),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("Preheating call timed out!")), 10 * 60 * 1000))
+    ]);
+}
+
+async function tryReach(name, fn, attempts = 60) {
     for (; attempts > 0; --attempts) {
         try {
-            const response = await fetch(url);
-            if (response.ok) {
+            if (await fn()) {
                 break;
             }
         } catch (e) {
+            console.error(e);
             console.log(`Could not reach ${name}, trying again...`);
         }
         await new Promise(resolve => setTimeout(resolve, 3000));
     }
     if (attempts === 0) {
-        throw new Error(`${name} did not start in time...`);
+        throw new Error(`${name} did not reach completion in time...`);
     }
 
     console.log(`${name} is up!`);
