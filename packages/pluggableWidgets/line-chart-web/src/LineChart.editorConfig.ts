@@ -99,7 +99,7 @@ export function getPreview(values: LineChartPreviewProps, isDarkMode: boolean): 
     return {
         type: "RowLayout",
         columnSize: "fixed",
-        children: values.showLegend ? [chartImage, legendImage, filler] : [chartImage, filler]
+        children: values.showLegend ? [chartImage, legendImage] : [chartImage, filler]
     };
 }
 
