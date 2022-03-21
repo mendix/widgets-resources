@@ -45,32 +45,14 @@ const assetsDirName = "assets";
  * Its main purpose to "adjust" asset path so that
  * after bundling css by studio assets paths stay correct.
  * Adjustment is required because of assets copying -- postcss-url can copy
- * files, but final url will be relative to *destenation* file ans though
+ * files, but final url will be relative to *destenation* file and though
  * will be broken after bundling by studio (pro).
  *
- * Because how widget styles added to the page depends on
- * env (in prod all styles comes as one bit widgets.css,
- * in dev styles are bundled with widget js code and injected to <head>)
- * we have to use slightly different transform functions for each env.
- * In short, we using absolute paths in dev mode as all styles injected
- * to the head. In prod we using paths that relative to the `widgets.css` file.
- *
- * Examples
- *
- * In dev env
- * before: assets/icon.png
- * after: /widgets/com/mendix/widget/web/accordion/assets/icon.png
- *
- * In prod env:
+ * Example
  * before: assets/icon.png
  * after: com/mendix/widget/web/accordion/assets/icon.png
  */
-const createCssUrlTransform = production => {
-    const prodTransform = asset => `${outWidgetDir}/${asset.url}`;
-    const devTransform = asset => `/widgets/${outWidgetDir}/${asset.url}`;
-
-    return production ? prodTransform : devTransform;
-};
+const cssUrlTransform = asset => `${outWidgetDir}/${asset.url}`;
 
 export default async args => {
     const production = Boolean(args.configProduction);
@@ -118,7 +100,7 @@ export default async args => {
                          * This instance of postcss-url is just for adjusting asset path.
                          * Check doc comment for *createCssUrlTransform* for explanation.
                          */
-                        postcssUrl({ url: createCssUrlTransform(production) })
+                        postcssUrl({ url: cssUrlTransform })
                     ],
                     sourceMap: !production ? "inline" : false,
                     use: ["sass"],
