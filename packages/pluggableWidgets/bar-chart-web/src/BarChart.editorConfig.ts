@@ -13,13 +13,10 @@ import {
 
 import BarChartGroupedDark from "./assets/BarChart-grouped.dark.svg";
 import BarChartGroupedLight from "./assets/BarChart-grouped.light.svg";
-import BarChartGroupedLegendDark from "./assets/BarChart-grouped-legend.dark.svg";
-import BarChartGroupedLegendLight from "./assets/BarChart-grouped-legend.light.svg";
-
 import BarChartStackedDark from "./assets/BarChart-stacked.dark.svg";
 import BarChartStackedLight from "./assets/BarChart-stacked.light.svg";
-import BarChartStackedLegendDark from "./assets/BarChart-stacked-legend.dark.svg";
-import BarChartStackedLegendLight from "./assets/BarChart-stacked-legend.light.svg";
+import BarChartLegendDark from "./assets/BarChart-legend.dark.svg";
+import BarChartLegendLight from "./assets/BarChart-legend.light.svg";
 
 export function getProperties(
     values: BarChartPreviewProps,
@@ -72,12 +69,12 @@ export function getProperties(
 export function getPreview(values: BarChartPreviewProps, isDarkMode: boolean): StructurePreviewProps | null {
     const items = {
         group: {
-            dark: { structure: BarChartGroupedDark, legend: BarChartGroupedLegendDark },
-            light: { structure: BarChartGroupedLight, legend: BarChartGroupedLegendLight }
+            dark: { structure: BarChartGroupedDark, legend: BarChartLegendDark },
+            light: { structure: BarChartGroupedLight, legend: BarChartLegendLight }
         },
         stack: {
-            dark: { structure: BarChartStackedDark, legend: BarChartStackedLegendDark },
-            light: { structure: BarChartStackedLight, legend: BarChartStackedLegendLight }
+            dark: { structure: BarChartStackedDark, legend: BarChartLegendDark },
+            light: { structure: BarChartStackedLight, legend: BarChartLegendLight }
         }
     };
 
@@ -107,7 +104,7 @@ export function getPreview(values: BarChartPreviewProps, isDarkMode: boolean): S
     return {
         type: "RowLayout",
         columnSize: "fixed",
-        children: values.showLegend ? [chartImage, legendImage, filler] : [chartImage, filler]
+        children: values.showLegend ? [chartImage, legendImage] : [chartImage, filler]
     };
 }
 
