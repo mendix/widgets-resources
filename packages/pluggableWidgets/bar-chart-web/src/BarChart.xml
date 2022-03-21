@@ -185,9 +185,11 @@
                     </enumerationValues>
                 </property>
             </propertyGroup>
+            <propertyGroup caption="Visibility">
+                <systemProperty key="Visibility" />
+            </propertyGroup>
             <propertyGroup caption="Common">
                 <systemProperty key="Name" />
-                <systemProperty key="Visibility" />
                 <systemProperty key="TabIndex" />
             </propertyGroup>
         </propertyGroup>

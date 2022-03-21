@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { ensure } from "@mendix/pluggable-widgets-tools";
 import { Datum, PlotData } from "plotly.js";
 import { executeAction } from "@mendix/piw-utils-internal";
-import { MendixChartDataProps } from "src/components/Chart";
+import { MendixChartDataProps } from "../components/Chart";
 
 type PlotChartDataPoints = {
     x: Array<NonNullable<Datum>>;
     y: Array<NonNullable<Datum>>;
-    hovertext: Array<string | undefined>;
+    hovertext: string[] | undefined;
     hoverinfo: PlotData["hoverinfo"];
     // We want this optional.
     name?: PlotData["name"];
@@ -200,7 +200,7 @@ function extractDataPoints(
     }
     const xData: PlotChartDataPoints["x"] = [];
     const yData: PlotChartDataPoints["y"] = [];
-    const hoverTextData: PlotChartDataPoints["hovertext"] = [];
+    const hoverTextData: Array<string | undefined> = [];
 
     for (const item of dataSourceItems) {
         const x = xValue.get(item);
@@ -222,7 +222,9 @@ function extractDataPoints(
         ...(seriesName ? { name: seriesName } : {}),
         x: xData,
         y: yData,
-        hovertext: hoverTextData,
+        hovertext: hoverTextData.some(text => text !== undefined && text !== "")
+            ? (hoverTextData as string[])
+            : undefined,
         hoverinfo: hoverTextData.some(text => text !== undefined && text !== "") ? "text" : "none"
     };
 }

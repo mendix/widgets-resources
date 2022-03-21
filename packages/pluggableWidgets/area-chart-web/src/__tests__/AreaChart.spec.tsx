@@ -23,7 +23,6 @@ describe("The AreaChart widget", () => {
                 class="line-chart-class"
                 series={configs.map(setupBasicSeries)}
                 showLegend={false}
-                developerMode="basic"
                 widthUnit="percentage"
                 width={0}
                 heightUnit="pixels"
@@ -32,6 +31,8 @@ describe("The AreaChart widget", () => {
                 customLayout=""
                 customConfigurations=""
                 enableThemeConfig={false}
+                enableAdvancedOptions={false}
+                enableDeveloperMode={false}
             />
         );
     }

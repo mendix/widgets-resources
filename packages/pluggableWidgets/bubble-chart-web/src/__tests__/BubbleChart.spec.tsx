@@ -23,7 +23,6 @@ describe("The Bubble widget", () => {
                 class="bubble-chart-class"
                 lines={configs.map(setupBasicSeries)}
                 showLegend={false}
-                developerMode="basic"
                 widthUnit="percentage"
                 width={0}
                 heightUnit="pixels"
@@ -32,6 +31,8 @@ describe("The Bubble widget", () => {
                 customLayout=""
                 customConfigurations=""
                 enableThemeConfig={false}
+                enableAdvancedOptions={false}
+                enableDeveloperMode={false}
             />
         );
     }

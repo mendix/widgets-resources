@@ -33,18 +33,16 @@ export interface LinesType {
     staticYAttribute?: ListAttributeValue<string | Date | Big>;
     dynamicYAttribute?: ListAttributeValue<string | Date | Big>;
     aggregationType: AggregationTypeEnum;
-    customSeriesOptions: string;
     staticSizeAttribute?: ListAttributeValue<Big>;
     dynamicSizeAttribute?: ListAttributeValue<Big>;
     autosize: boolean;
     sizeref: number;
-    markerColor?: DynamicValue<string>;
-    onClickAction?: ActionValue;
     staticTooltipHoverText?: ListExpressionValue<string>;
     dynamicTooltipHoverText?: ListExpressionValue<string>;
+    markerColor?: DynamicValue<string>;
+    onClickAction?: ActionValue;
+    customSeriesOptions: string;
 }
-
-export type DeveloperModeEnum = "basic" | "advanced" | "developer";
 
 export type WidthUnitEnum = "percentage" | "pixels";
 
@@ -64,15 +62,15 @@ export interface LinesPreviewType {
     staticYAttribute: string;
     dynamicYAttribute: string;
     aggregationType: AggregationTypeEnum;
-    customSeriesOptions: string;
     staticSizeAttribute: string;
     dynamicSizeAttribute: string;
     autosize: boolean;
     sizeref: number | null;
-    markerColor: string;
-    onClickAction: {} | null;
     staticTooltipHoverText: string;
     dynamicTooltipHoverText: string;
+    markerColor: string;
+    onClickAction: {} | null;
+    customSeriesOptions: string;
 }
 
 export interface BubbleChartContainerProps {
@@ -81,10 +79,11 @@ export interface BubbleChartContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     lines: LinesType[];
-    showLegend: boolean;
+    enableAdvancedOptions: boolean;
+    enableDeveloperMode: boolean;
     xAxisLabel?: DynamicValue<string>;
     yAxisLabel?: DynamicValue<string>;
-    developerMode: DeveloperModeEnum;
+    showLegend: boolean;
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
@@ -101,10 +100,11 @@ export interface BubbleChartPreviewProps {
     styleObject?: CSSProperties;
     readOnly: boolean;
     lines: LinesPreviewType[];
-    showLegend: boolean;
+    enableAdvancedOptions: boolean;
+    enableDeveloperMode: boolean;
     xAxisLabel: string;
     yAxisLabel: string;
-    developerMode: DeveloperModeEnum;
+    showLegend: boolean;
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;
