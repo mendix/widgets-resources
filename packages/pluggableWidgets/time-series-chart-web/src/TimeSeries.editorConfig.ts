@@ -13,13 +13,10 @@ import { TimeSeriesPreviewProps } from "../typings/TimeSeriesProps";
 
 import TimeSeriesDark from "./assets/TimeSeries.dark.svg";
 import TimeSeriesLight from "./assets/TimeSeries.light.svg";
-import TimeSeriesLegendDark from "./assets/TimeSeries-legend.dark.svg";
-import TimeSeriesLegendLight from "./assets/TimeSeries-legend.light.svg";
-
 import TimeSeriesRangeDark from "./assets/TimeSeries-range.dark.svg";
 import TimeSeriesRangeLight from "./assets/TimeSeries-range.light.svg";
-import TimeSeriesRangeLegendDark from "./assets/TimeSeries-range-legend.dark.svg";
-import TimeSeriesRangeLegendLight from "./assets/TimeSeries-range-legend.light.svg";
+import TimeSeriesLegendDark from "./assets/TimeSeries-legend.dark.svg";
+import TimeSeriesLegendLight from "./assets/TimeSeries-legend.light.svg";
 
 export function getProperties(
     values: TimeSeriesPreviewProps,
@@ -83,8 +80,8 @@ export function getPreview(values: TimeSeriesPreviewProps, isDarkMode: boolean):
             light: { structure: TimeSeriesLight, legend: TimeSeriesLegendLight }
         },
         range: {
-            dark: { structure: TimeSeriesRangeDark, legend: TimeSeriesRangeLegendDark },
-            light: { structure: TimeSeriesRangeLight, legend: TimeSeriesRangeLegendLight }
+            dark: { structure: TimeSeriesRangeDark, legend: TimeSeriesLegendDark },
+            light: { structure: TimeSeriesRangeLight, legend: TimeSeriesLegendLight }
         }
     };
 
@@ -118,7 +115,7 @@ export function getPreview(values: TimeSeriesPreviewProps, isDarkMode: boolean):
     return {
         type: "RowLayout",
         columnSize: "fixed",
-        children: values.showLegend ? [chartImage, legendImage, filler] : [chartImage, filler]
+        children: values.showLegend ? [chartImage, legendImage] : [chartImage, filler]
     };
 }
 
