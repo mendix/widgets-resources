@@ -12,13 +12,10 @@ import { PieChartPreviewProps } from "../typings/PieChartProps";
 
 import PieChartDark from "./assets/PieChart.dark.svg";
 import PieChartLight from "./assets/PieChart.light.svg";
-import PieChartLegendDark from "./assets/PieChart-legend.dark.svg";
-import PieChartLegendLight from "./assets/PieChart-legend.light.svg";
-
 import DoughnutDark from "./assets/DoughnutChart.dark.svg";
 import DoughnutLight from "./assets/DoughnutChart.light.svg";
-import DoughnutLegendDark from "./assets/DoughnutChart-legend.dark.svg";
-import DoughnutLegendLight from "./assets/DoughnutChart-legend.light.svg";
+import PieDoughnutChartLegendDark from "./assets/PieDoughnut-legend.dark.svg";
+import PieDoughnutChartLegendLight from "./assets/PieDoughnut-legend.light.svg";
 
 export function getProperties(
     values: PieChartPreviewProps,
@@ -46,12 +43,12 @@ export function getProperties(
 export function getPreview(values: PieChartPreviewProps, isDarkMode: boolean): StructurePreviewProps | null {
     const items = {
         pie: {
-            dark: { structure: PieChartDark, legend: PieChartLegendDark },
-            light: { structure: PieChartLight, legend: PieChartLegendLight }
+            dark: { structure: PieChartDark, legend: PieDoughnutChartLegendDark },
+            light: { structure: PieChartLight, legend: PieDoughnutChartLegendLight }
         },
         doughnut: {
-            dark: { structure: DoughnutDark, legend: DoughnutLegendDark },
-            light: { structure: DoughnutLight, legend: DoughnutLegendLight }
+            dark: { structure: DoughnutDark, legend: PieDoughnutChartLegendDark },
+            light: { structure: DoughnutLight, legend: PieDoughnutChartLegendLight }
         }
     };
 
@@ -85,7 +82,7 @@ export function getPreview(values: PieChartPreviewProps, isDarkMode: boolean): S
     return {
         type: "RowLayout",
         columnSize: "fixed",
-        children: values.showLegend ? [chartImage, legendImage, filler] : [chartImage, filler]
+        children: values.showLegend ? [chartImage, legendImage] : [chartImage, filler]
     };
 }
 
