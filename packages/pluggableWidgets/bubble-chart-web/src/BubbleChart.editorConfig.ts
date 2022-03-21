@@ -45,12 +45,14 @@ export function getProperties(
     });
 
     if (platform === "web") {
-        hidePropertiesIn(defaultProperties, values, [
-            "customLayout",
-            "customConfigurations",
-            "enableThemeConfig",
-            "enableDeveloperMode"
-        ]);
+        if (!values.enableAdvancedOptions) {
+            hidePropertiesIn(defaultProperties, values, [
+                "customLayout",
+                "customConfigurations",
+                "enableThemeConfig",
+                "enableDeveloperMode"
+            ]);
+        }
 
         transformGroupsIntoTabs(defaultProperties);
     } else {
