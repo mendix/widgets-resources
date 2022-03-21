@@ -13,13 +13,10 @@ import {
 
 import ColumnChartGroupedDark from "./assets/ColumnChart-grouped.dark.svg";
 import ColumnChartGroupedLight from "./assets/ColumnChart-grouped.light.svg";
-import ColumnChartGroupedLegendDark from "./assets/ColumnChart-grouped-legend.dark.svg";
-import ColumnChartGroupedLegendLight from "./assets/ColumnChart-grouped-legend.light.svg";
-
 import ColumnChartStackedDark from "./assets/ColumnChart-stacked.dark.svg";
 import ColumnChartStackedLight from "./assets/ColumnChart-stacked.light.svg";
-import ColumnChartStackedLegendDark from "./assets/ColumnChart-stacked-legend.dark.svg";
-import ColumnChartStackedLegendLight from "./assets/ColumnChart-stacked-legend.light.svg";
+import ColumnChartLegendDark from "./assets/ColumnChart-legend.dark.svg";
+import ColumnChartLegendLight from "./assets/ColumnChart-legend.light.svg";
 
 export function getProperties(
     values: ColumnChartPreviewProps,
@@ -72,12 +69,12 @@ export function getProperties(
 export function getPreview(values: ColumnChartPreviewProps, isDarkMode: boolean): StructurePreviewProps | null {
     const items = {
         group: {
-            dark: { structure: ColumnChartGroupedDark, legend: ColumnChartGroupedLegendDark },
-            light: { structure: ColumnChartGroupedLight, legend: ColumnChartGroupedLegendLight }
+            dark: { structure: ColumnChartGroupedDark, legend: ColumnChartLegendDark },
+            light: { structure: ColumnChartGroupedLight, legend: ColumnChartLegendLight }
         },
         stack: {
-            dark: { structure: ColumnChartStackedDark, legend: ColumnChartStackedLegendDark },
-            light: { structure: ColumnChartStackedLight, legend: ColumnChartStackedLegendLight }
+            dark: { structure: ColumnChartStackedDark, legend: ColumnChartLegendDark },
+            light: { structure: ColumnChartStackedLight, legend: ColumnChartLegendLight }
         }
     };
 
@@ -107,7 +104,7 @@ export function getPreview(values: ColumnChartPreviewProps, isDarkMode: boolean)
     return {
         type: "RowLayout",
         columnSize: "fixed",
-        children: values.showLegend ? [chartImage, legendImage, filler] : [chartImage, filler]
+        children: values.showLegend ? [chartImage, legendImage] : [chartImage, filler]
     };
 }
 
