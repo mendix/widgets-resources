@@ -48,7 +48,7 @@ async function getGithubAssetUrl() {
     console.log("Retrieving informations from Github Tag");
     const request = await fetch("GET", "https://api.github.com/repos/mendix/widgets-resources/releases?per_page=10");
     const data = (await request) ?? [];
-    const releaseId = data.filter(info => info.tag_name === process.env.TAG)?.pop()?.id;
+    const releaseId = data.find(info => info.tag_name === process.env.TAG)?.id;
     if (!releaseId) {
         throw new Error(`Could not find release with tag ${process.env.TAG} on GitHub`);
     }
@@ -57,7 +57,7 @@ async function getGithubAssetUrl() {
         `https://api.github.com/repos/mendix/widgets-resources/releases/${releaseId}/assets`
     );
     const assetsData = (await assetsRequest) ?? [];
-    const downloadUrl = assetsData.filter(asset => asset.name.endsWith(".mpk"))?.pop()?.browser_download_url;
+    const downloadUrl = assetsData.find(asset => asset.name.endsWith(".mpk"))?.browser_download_url;
     if (!downloadUrl) {
         throw new Error(`Could not retrieve MPK url from GitHub release with tag ${process.env.TAG}`);
     }
@@ -67,7 +67,6 @@ async function getGithubAssetUrl() {
 async function createDraft(marketplaceId, version, minimumMXVersion) {
     console.log(`Creating draft in the Mendix Marketplace..`);
     console.log(`ID: ${marketplaceId} - Version: ${version} - MXVersion: ${minimumMXVersion}`);
-    const url = `${config.appStoreUrl}/packages/${marketplaceId}/version`;
     const [major, minor, patch] = version.split(".");
     try {
         const body = {
@@ -82,7 +81,7 @@ async function createDraft(marketplaceId, version, minimumMXVersion) {
             }
         };
 
-        return fetch("POST", url, JSON.stringify(body));
+        return fetchMarketplace("POST", `packages/${marketplaceId}/version`, JSON.stringify(body));
     } catch (error) {
         error.message = `Failed creating draft in the appstore with error: ${error.message}`;
         throw error;
@@ -91,32 +90,33 @@ async function createDraft(marketplaceId, version, minimumMXVersion) {
 
 function publishDraft(UUID) {
     console.log(`Publishing draft in the Mendix Marketplace..`);
-    const url = `${config.appStoreUrl}/version/${UUID}/publish`;
     try {
-        return fetch("PUT", url);
+        return fetchMarketplace("PUT", `version/${UUID}/publish`);
     } catch (error) {
         error.message = `Failed publishing draft in the appstore with error: ${error.message}`;
         throw error;
     }
 }
 
-async function fetch(method, url, body) {
+async function fetchMarketplace(method, url, body) {
+    return fetch(method, `${config.appStoreUrl}/${url}`, body, {
+        "Mendix-Username": process.env.MARKETPLACE_USERNAME,
+        "Mendix-ApiKey": process.env.MARKETPLACE_API_KEY
+    });
+}
+
+async function fetch(method, url, body, additionalHeaders) {
     let response;
     const httpsOptions = {
         method,
         redirect: "follow",
         headers: {
             Accept: "application/json",
-            "Mendix-Username": process.env.MARKETPLACE_USERNAME,
-            "Mendix-ApiKey": process.env.MARKETPLACE_API_KEY
+            ...additionalHeaders,
+            ...(body && { "Content-Type": "application/json" })
         },
-        body: undefined
+        body
     };
-
-    if (body) {
-        httpsOptions.body = body;
-        httpsOptions.headers["Content-Type"] = "application/json";
-    }
 
     console.log(`Fetching URL (${method}): ${url}`);
     try {
