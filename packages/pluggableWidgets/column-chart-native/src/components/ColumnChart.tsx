@@ -96,7 +96,6 @@ export function ColumnChart({
             return null;
         }
 
-        // datum.y is actually the X axis data points due to the way Victory handles horizontal charts
         const Columns = series.map(({ customColumnStyle, dataPoints }, index) => {
             const seriesStyle =
                 style.columns?.customColumnStyles && customColumnStyle
@@ -107,7 +106,6 @@ export function ColumnChart({
 
             return (
                 <VictoryBar
-                    horizontal={false}
                     key={index}
                     data={dataPoints}
                     width={ColumnStyles.width}
@@ -121,7 +119,7 @@ export function ColumnChart({
                         }
                     }}
                     {...sortProps}
-                    {...(showLabels ? { labels: ({ datum }: { datum: BarProps["datum"] }) => datum.y } : undefined)}
+                    {...(showLabels ? { labels: ({ datum }: { datum: BarProps["datum"] }) => datum.x } : undefined)}
                 />
             );
         });
@@ -234,7 +232,6 @@ export function ColumnChart({
                                     >
                                         <VictoryAxis
                                             orientation={"bottom"}
-                                            dependentAxis
                                             style={mapToAxisStyle(style.grid, style.xAxis)}
                                             {...(firstSeries?.xFormatter
                                                 ? { tickFormat: firstSeries.xFormatter }
@@ -243,6 +240,7 @@ export function ColumnChart({
                                         <VictoryAxis
                                             style={mapToAxisStyle(style.grid, style.yAxis)}
                                             orientation={"left"}
+                                            dependentAxis
                                             {...(firstSeries?.yFormatter
                                                 ? { tickFormat: firstSeries.yFormatter }
                                                 : undefined)}

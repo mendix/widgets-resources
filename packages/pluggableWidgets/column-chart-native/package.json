@@ -1,7 +1,7 @@
 {
   "name": "column-chart-native",
   "widgetName": "ColumnChart",
-  "version": "2.1.0",
+  "version": "1.0.0",
   "license": "Apache-2.0",
   "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "repository": {
