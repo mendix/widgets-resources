@@ -10,6 +10,7 @@ import {
     transformGroupsIntoTabs
 } from "@mendix/piw-utils-internal";
 import { BubbleChartPreviewProps } from "../typings/BubbleChartProps";
+
 import BubbleChartLightSvg from "./assets/BubbleChart.light.svg";
 import BubbleChartDarkSvg from "./assets/BubbleChart.dark.svg";
 import BubbleChartLegendLightSvg from "./assets/BubbleChart-legend.light.svg";
@@ -68,19 +69,25 @@ export function getProperties(
 }
 
 export function getPreview(values: BubbleChartPreviewProps, isDarkMode: boolean): StructurePreviewProps | null {
+    const items = {
+        dark: { structure: BubbleChartDarkSvg, legend: BubbleChartLegendDarkSvg },
+        light: { structure: BubbleChartLightSvg, legend: BubbleChartLegendLightSvg }
+    };
+
+    const getImage = (type: "structure" | "legend") => {
+        const colorMode = isDarkMode ? "dark" : "light";
+        return items[colorMode][type];
+    };
+
     const chartImage = {
         type: "Image",
-        document: decodeURIComponent(
-            (isDarkMode ? BubbleChartDarkSvg : BubbleChartLightSvg).replace("data:image/svg+xml,", "")
-        ),
+        document: decodeURIComponent(getImage("structure").replace("data:image/svg+xml,", "")),
         width: 375
     } as ImageProps;
 
     const legendImage = {
         type: "Image",
-        document: decodeURIComponent(
-            (isDarkMode ? BubbleChartLegendDarkSvg : BubbleChartLegendLightSvg).replace("data:image/svg+xml,", "")
-        ),
+        document: decodeURIComponent(getImage("legend").replace("data:image/svg+xml,", "")),
         width: 85
     } as ImageProps;
 
@@ -93,7 +100,7 @@ export function getPreview(values: BubbleChartPreviewProps, isDarkMode: boolean)
     return {
         type: "RowLayout",
         columnSize: "fixed",
-        children: values.showLegend ? [chartImage, legendImage, filler] : [chartImage, filler]
+        children: values.showLegend ? [chartImage, legendImage] : [chartImage, filler]
     };
 }
 
