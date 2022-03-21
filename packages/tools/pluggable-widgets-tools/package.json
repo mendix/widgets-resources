@@ -48,6 +48,7 @@
     "@rollup/plugin-node-resolve": "^13.0.4",
     "@rollup/plugin-typescript": "^8.3.0",
     "@rollup/plugin-url": "^6.1.0",
+    "@rollup/pluginutils": "^4.2.0",
     "@testing-library/dom": "^8.1.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
