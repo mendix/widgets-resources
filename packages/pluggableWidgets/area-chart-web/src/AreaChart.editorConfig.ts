@@ -10,6 +10,7 @@ import {
     transformGroupsIntoTabs
 } from "@mendix/piw-utils-internal";
 import { AreaChartPreviewProps } from "../typings/AreaChartProps";
+
 import AreaChartLightSvg from "./assets/AreaChart.light.svg";
 import AreaChartDarkSvg from "./assets/AreaChart.dark.svg";
 import AreaChartLegendLightSvg from "./assets/AreaChart-legend.light.svg";
@@ -65,19 +66,25 @@ export function getProperties(
 }
 
 export function getPreview(values: AreaChartPreviewProps, isDarkMode: boolean): StructurePreviewProps | null {
+    const items = {
+        dark: { structure: AreaChartDarkSvg, legend: AreaChartLegendDarkSvg },
+        light: { structure: AreaChartLightSvg, legend: AreaChartLegendLightSvg }
+    };
+
+    const getImage = (type: "structure" | "legend") => {
+        const colorMode = isDarkMode ? "dark" : "light";
+        return items[colorMode][type];
+    };
+
     const chartImage = {
         type: "Image",
-        document: decodeURIComponent(
-            (isDarkMode ? AreaChartDarkSvg : AreaChartLightSvg).replace("data:image/svg+xml,", "")
-        ),
+        document: decodeURIComponent(getImage("structure").replace("data:image/svg+xml,", "")),
         width: 375
     } as ImageProps;
 
     const legendImage = {
         type: "Image",
-        document: decodeURIComponent(
-            (isDarkMode ? AreaChartLegendDarkSvg : AreaChartLegendLightSvg).replace("data:image/svg+xml,", "")
-        ),
+        document: decodeURIComponent(getImage("legend").replace("data:image/svg+xml,", "")),
         width: 85
     } as ImageProps;
 
@@ -90,7 +97,7 @@ export function getPreview(values: AreaChartPreviewProps, isDarkMode: boolean): 
     return {
         type: "RowLayout",
         columnSize: "fixed",
-        children: values.showLegend ? [chartImage, legendImage, filler] : [chartImage, filler]
+        children: values.showLegend ? [chartImage, legendImage] : [chartImage, filler]
     };
 }
 
