@@ -26,28 +26,28 @@ async function main() {
     execSync(`unzip -o ${testArchivePath} -d ${testsDir}`);
     mv(repoPath, testProjectDir);
 
-    rm("-f", repoPath);
+    rm("-fr", repoPath);
     rm("-f", testArchivePath);
 
-    const output = execSync("npx lerna list --json --since origin/master --scope '*-native'");
-    const changesPackages = JSON.parse(output);
-    const changedPackagesJoined = changesPackages.map(p => p.name).join(",") + ","; // end comma useful when only one package is changed.
-
-    execSync(`npx lerna run release --scope '{${changedPackagesJoined}}'`, { stdio: "inherit" });
-
-    changesPackages.forEach(({ name, location }) => {
-        if (["mobile-resources-native", "nanoflow-actions-native"].includes(name)) {
-            // for js actions
-            const path = name === "mobile-resources-native" ? "nativemobileresources" : "nanoflowcommons";
-            const jsActionsPath = `${testProjectDir}/javascriptsource/${path}/actions`;
-            rm("-rf", jsActionsPath);
-            cp("-r", `${location}/dist`, jsActionsPath);
-        } else {
-            // for widgets
-            // this is acceptable if there's one built version.
-            cp(`${location}/dist/**/*.mpk`, `${testProjectDir}/widgets`);
-        }
-    });
+    // const output = execSync("npx lerna list --json --since origin/master --scope '*-native'");
+    // const changesPackages = JSON.parse(output);
+    // const changedPackagesJoined = changesPackages.map(p => p.name).join(",") + ","; // end comma useful when only one package is changed.
+    //
+    // execSync(`npx lerna run release --scope '{${changedPackagesJoined}}'`, { stdio: "inherit" });
+    //
+    // changesPackages.forEach(({ name, location }) => {
+    //     if (["mobile-resources-native", "nanoflow-actions-native"].includes(name)) {
+    //         // for js actions
+    //         const path = name === "mobile-resources-native" ? "nativemobileresources" : "nanoflowcommons";
+    //         const jsActionsPath = `${testProjectDir}/javascriptsource/${path}/actions`;
+    //         rm("-rf", jsActionsPath);
+    //         cp("-r", `${location}/dist`, jsActionsPath);
+    //     } else {
+    //         // for widgets
+    //         // this is acceptable if there's one built version.
+    //         cp(`${location}/dist/**/*.mpk`, `${testProjectDir}/widgets`);
+    //     }
+    // });
 
     // When running on CI pull the docker image from Github Container Registry
     if (ghcr) {
@@ -56,7 +56,7 @@ async function main() {
     }
 
     const existingImages = execSync(`docker image ls -q ${ghcr}mxbuild:${mendixVersion}`).toString().trim();
-    const scriptsPath = join(root, "changesPackages", "tools", "pluggable-widgets-tools", "scripts");
+    const scriptsPath = join(root, "packages", "tools", "pluggable-widgets-tools", "scripts");
 
     if (!existingImages) {
         console.log(`Creating new mxbuild docker image...`);
@@ -109,39 +109,39 @@ async function main() {
         });
         console.log("All widgets are updated and project .mpr created.");
 
-        // console.log("Starting metro...");
-        // execSync(
-        //     `docker exec -td ${mxbuildContainerId} bash -c "cd /source/tests/testProject/deployment/native && ` +
-        //         `/tmp/mxbuild/modeler/tools/node/node /tmp/mxbuild/modeler/tools/node/node_modules/react-native/local-cli/cli.js ` +
-        //         `start --port '8083' --config '/source/tests/testProject/deployment/native/metro.config.json' > /source/tests/testProject/deployment/log/packager.txt"`
-        // );
-        //
-        // await tryReach("Metro bundler", () => fetchUrl("http://localhost:8083/status"));
-        //
-        // console.log("Preheating bundler for Android dev=false minify=true");
-        // await tryReach(
-        //     "Bundler",
-        //     () => fetchOrTimeout("http://localhost:8083/index.bundle?platform=android&dev=false&minify=true"),
-        //     10
-        // );
-        // console.log("Preheating done!");
+        console.log("Starting metro...");
+        execSync(
+            `docker exec -td ${mxbuildContainerId} bash -c "cd /source/tests/testProject/deployment/native && ` +
+                `/tmp/mxbuild/modeler/tools/node/node /tmp/mxbuild/modeler/tools/node/node_modules/react-native/local-cli/cli.js ` +
+                `start --port '8083' --config '/source/tests/testProject/deployment/native/metro.config.json' > /source/tests/testProject/deployment/log/packager.txt"`
+        );
+
+        await tryReach("Metro bundler", () => fetchUrl("http://localhost:8083/status"));
+
+        console.log("Preheating bundler for Android dev=false minify=true");
+        await tryReach(
+            "Bundler",
+            () => fetchOrTimeout("http://localhost:8083/index.bundle?platform=android&dev=false&minify=true"),
+            10
+        );
+        console.log("Preheating done!");
 
         // Spin up the runtime and run the testProject
-        runtimeContainerId = execSync(
-            `docker run -td -v ${root}:/source -v ${scriptsPath}:/shared:ro -w /source -p 8080:8080 ` +
-                `-e MENDIX_VERSION=${mendixVersion} --entrypoint /bin/bash ` +
-                `--rm ${ghcr}mxruntime:${mendixVersion} /shared/runtime.sh`
-        )
-            .toString()
-            .trim();
+        // runtimeContainerId = execSync(
+        //     `docker run -td -v ${root}:/source -v ${scriptsPath}:/shared:ro -w /source -p 8080:8080 ` +
+        //         `-e MENDIX_VERSION=${mendixVersion} --entrypoint /bin/bash ` +
+        //         `--rm ${ghcr}mxruntime:${mendixVersion} /shared/runtime.sh`
+        // )
+        //     .toString()
+        //     .trim();
 
-        await tryReach("Runtime", () => fetchUrl("http://localhost:8080"));
+        // await tryReach("Runtime", () => fetchUrl("http://localhost:8080"));
 
         console.log("Setup for android...");
-        execSync("npm run setup-android");
+        // execSync("npm run setup-android");
         console.log("Android successfully setup");
 
-        execSync(`npx lerna run test:e2e:local:android --stream --concurrency 1 --scope '{${changedPackagesJoined}}'`);
+        // execSync(`npx lerna run test:e2e:local:android --stream --concurrency 1 --scope '{${changedPackagesJoined}}'`);
     } catch (error) {
         console.error(error.message);
 
@@ -161,8 +161,8 @@ async function main() {
 
         throw error;
     } finally {
-        mxbuildContainerId && execSync(`docker rm -f ${mxbuildContainerId}`);
-        runtimeContainerId && execSync(`docker rm -f ${runtimeContainerId}`);
+        // mxbuildContainerId && execSync(`docker rm -f ${mxbuildContainerId}`);
+        // runtimeContainerId && execSync(`docker rm -f ${runtimeContainerId}`);
     }
 }
 
