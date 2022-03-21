@@ -46,7 +46,6 @@
     "content-overview:data": "lerna run generate-data --scope data",
     "content-overview:site:build": "lerna run build --scope data",
     "content-overview:site:export": "lerna run export --scope data"
-
   },
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
@@ -70,7 +69,7 @@
     "@types/xml2js": "^0.4.5",
     "cross-env": "^7.0.2",
     "deepmerge": "^4.2.2",
-    "detox": "^19.2.0",
+    "detox": "^19.5.7",
     "husky": "^7.0.0",
     "identity-obj-proxy": "^3.0.0",
     "image-js": "^0.33.0",

@@ -100,6 +100,7 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
                 visible={this.state.status === "todo"}
                 {...{ avoidKeyboard: true, onModalHide: this.onDialogHideHandler }}
                 {...this.dialogContainerProps}
+                testID={`${this.props.name}$popup`}
             >
                 <Dialog.Title style={this.styles.title}>Send Feedback</Dialog.Title>
                 <TextInput
