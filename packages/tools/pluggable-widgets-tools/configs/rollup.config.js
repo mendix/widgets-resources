@@ -40,6 +40,38 @@ const mpkDir = join(sourcePath, "dist", widgetVersion);
 const mpkFile = join(mpkDir, process.env.MPKOUTPUT ? process.env.MPKOUTPUT : `${widgetPackage}.${widgetName}.mpk`);
 const assetsDirName = "assets";
 
+/**
+ * This function is used by postcss-url.
+ * Its main purpose to "adjust" asset path so that
+ * after bundling css by studio assets paths stay correct.
+ * Adjustment is required because of assets copying -- postcss-url can copy
+ * files, but final url will be relative to *destenation* file ans though
+ * will be broken after bundling by studio (pro).
+ *
+ * Because how widget styles added to the page depends on
+ * env (in prod all styles comes as one bit widgets.css,
+ * in dev styles are bundled with widget js code and injected to <head>)
+ * we have to use slightly different transform functions for each env.
+ * In short, we using absolute paths in dev mode as all styles injected
+ * to the head. In prod we using paths that relative to the `widgets.css` file.
+ *
+ * Examples
+ *
+ * In dev env
+ * before: assets/icon.png
+ * after: /widgets/com/mendix/widget/web/accordion/assets/icon.png
+ *
+ * In prod env:
+ * before: assets/icon.png
+ * after: com/mendix/widget/web/accordion/assets/icon.png
+ */
+const createCssUrlTransform = production => {
+    const prodTransform = asset => `${outWidgetDir}/${asset.url}`;
+    const devTransform = asset => `/widgets/${outWidgetDir}/${asset.url}`;
+
+    return production ? prodTransform : devTransform;
+};
+
 export default async args => {
     const production = Boolean(args.configProduction);
     if (!production && projectPath) {
@@ -70,9 +102,27 @@ export default async args => {
                     extract: outputFormat === "amd",
                     inject: false,
                     minimize: production,
-                    plugins: [postcssImport(), postcssUrl({ url: "inline" })],
+                    plugins: [
+                        postcssImport(),
+                        /**
+                         * We need two copies of postcss-url because of final styles bundling in studio (pro).
+                         * On line below, we just copying assets to widget bundle directory (com.mendix.widgets...)
+                         * To make it work, this plugin have few requirements:
+                         * 1. You should put your assets in src/assets/
+                         * 2. You should use relative path in your .scss files (e.g. url(../assets/icon.png)
+                         * 3. This plugin relies on `to` property of postcss plugin and it should be present, when
+                         * copying files to destination.
+                         */
+                        postcssUrl({ url: "copy", assetsPath: "assets" }),
+                        /**
+                         * This instance of postcss-url is just for adjusting asset path.
+                         * Check doc comment for *createCssUrlTransform* for explanation.
+                         */
+                        postcssUrl({ url: createCssUrlTransform(production) })
+                    ],
                     sourceMap: !production ? "inline" : false,
-                    use: ["sass"]
+                    use: ["sass"],
+                    to: join(outDir, `${outWidgetFile}.css`)
                 }),
                 alias({
                     entries: {
