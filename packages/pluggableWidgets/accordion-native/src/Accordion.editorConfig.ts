@@ -1,6 +1,99 @@
-import { changePropertyIn, hidePropertyIn, Properties, Problem } from "@mendix/piw-utils-internal";
+import {
+    StructurePreviewProps,
+    changePropertyIn,
+    hidePropertyIn,
+    Properties,
+    Problem
+} from "@mendix/piw-utils-internal";
 
 import { AccordionPreviewProps, GroupsPreviewType } from "../typings/AccordionProps";
+
+export function getPreview(values: AccordionPreviewProps, isDarkMode: boolean): StructurePreviewProps {
+    return {
+        type: "Container",
+        backgroundColor: isDarkMode ? "#454545" : "#F5F5F5",
+        borders: true,
+        children: [
+            {
+                type: "Container",
+                padding: 8,
+                children: [
+                    {
+                        type: "Text",
+                        fontColor: isDarkMode ? "#DEDEDE" : "#0A1324",
+                        content: "Accordion"
+                    }
+                ]
+            },
+            {
+                type: "Container",
+                children: renderAccordionGroups(values.groups, isDarkMode)
+            }
+        ]
+    };
+}
+
+function renderAccordionGroups(groups: GroupsPreviewType[], isDarkMode: boolean): StructurePreviewProps[] {
+    if (groups.length === 0) {
+        return [
+            {
+                type: "Container",
+                backgroundColor: isDarkMode ? "#4F4F4F" : "#F5F5F5",
+                borders: true,
+                children: [
+                    {
+                        type: "Container",
+                        padding: 8,
+                        children: [
+                            {
+                                type: "Text",
+                                fontColor: isDarkMode ? "#DEDEDE" : "#0A1324",
+                                bold: true,
+                                content: "[No groups configured]"
+                            }
+                        ]
+                    },
+                    {
+                        type: "Container",
+                        backgroundColor: isDarkMode ? "#252525" : "#FFFFFF",
+                        children: [
+                            {
+                                type: "RowLayout",
+                                padding: 24,
+                                columnSize: "grow",
+                                children: [
+                                    {
+                                        type: "Container",
+                                        grow: 1
+                                    },
+                                    {
+                                        type: "Text",
+                                        content: "Add groups in order to place widget here"
+                                    },
+                                    {
+                                        type: "Container",
+                                        grow: 1
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+    }
+
+    return groups
+        .map<StructurePreviewProps[]>((group, index) =>
+            group.headerRenderMode === "custom"
+                ? [
+                      { type: "DropZone", property: group.headerContent, placeholder: `Group/${index + 1}/Header` },
+                      { type: "DropZone", property: group.content, placeholder: `Group/${index + 1}/Content` }
+                  ]
+                : [{ type: "DropZone", property: group.content, placeholder: `Group/${index + 1}/Content` }]
+        )
+        .reduce((previousValue, currentValue) => previousValue.concat(currentValue), []);
+}
 
 export function getProperties(values: AccordionPreviewProps, defaultProperties: Properties): Properties {
     values.groups.forEach((group, index) => {
