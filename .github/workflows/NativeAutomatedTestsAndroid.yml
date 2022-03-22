@@ -65,11 +65,11 @@ jobs:
               uses: android-actions/setup-android@3404b45d4c43e74e30dcad1a47fb89a0573f5a7e
             - name: "Installing dependencies"
               run: npm install
-            - name: "t"
-              run: echo "10.0.2.2 8083-mendix-widgetsresource-50nk6ocedbm.ws-eu38.gitpod.io" | sudo tee -a /etc/hosts
             - name: "Start Mendix Environment and run tests"
               run:
                   npm run start:native-tests-ci
+              env:
+                  CI: true
                   # - name: "Executing E2E tests"
                   #   if:
                   #       github.event_name == 'push' || (github.event_name == 'pull_request' &&
