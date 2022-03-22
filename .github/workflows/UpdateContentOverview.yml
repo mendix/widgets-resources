@@ -59,14 +59,18 @@ jobs:
           pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
           merge-method: merge
       - name: "Setting AWS credentials"
-        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        if: >-
+          (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) ||
+          (github.event_name == 'push' && github.ref == 'refs/heads/master')
         uses: aws-actions/configure-aws-credentials@05b148adc31e091bafbaf404f745055d4d3bc9d2 # v1.6.1
         with:
           aws-access-key-id: ${{ secrets.AWS_CONTENT_DATA_ID }}
           aws-secret-access-key: ${{ secrets.AWS_CONTENT_DATA_SECRET }}
           aws-region: eu-central-1
       - name: "Uploading to S3"
-        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        if: >-
+          (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) ||
+          (github.event_name == 'push' && github.ref == 'refs/heads/master')
         run: |
           aws s3 sync scripts/data/out s3://widgetresources-data/$GITHUB_REF_NAME/
           echo https://widgetresources-data.s3.eu-central-1.amazonaws.com/$GITHUB_REF_NAME/index.html
