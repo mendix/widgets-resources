@@ -13,7 +13,7 @@ export class QRCode extends Component<Props> {
 
     render(): JSX.Element {
         return (
-            <View style={this.styles.container}>
+            <View style={this.styles.container} testID={this.props.name}>
                 {this.props.value.value ? (
                     <RNQRCode
                         value={this.props.value.value}
