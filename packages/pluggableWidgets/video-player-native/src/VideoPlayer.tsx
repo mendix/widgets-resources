@@ -8,10 +8,10 @@ import {
     Text,
     TouchableOpacity,
     TouchableWithoutFeedback,
-    View
+    View,
+    NativeModules
 } from "react-native";
 import Video, { OnProgressData, VideoProperties } from "react-native-video";
-import SystemNavigationBar from "react-native-system-navigation-bar";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { VideoPlayerProps } from "../typings/VideoPlayerProps";
 import { defaultVideoStyle, VideoStyle } from "./ui/Styles";
@@ -83,14 +83,18 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
         }
     }, [props.showControls, showControls, showControlsHandler]);
 
-    function fullScreenHandler(isFullScreen: boolean): void {
+    async function fullScreenHandler(isFullScreen: boolean): Promise<void> {
         setFullScreen(isFullScreen);
-        if (isFullScreen) {
-            SystemNavigationBar.navigationHide();
-        } else {
-            SystemNavigationBar.navigationShow();
+        const { NavigationBar } = NativeModules;
+        if (NavigationBar) {
+            const SystemNavigationBar = (await import("react-native-system-navigation-bar")).default;
+            if (isFullScreen) {
+                SystemNavigationBar.navigationHide();
+            } else {
+                SystemNavigationBar.navigationShow();
+            }
+            StatusBar.setHidden(isFullScreen);
         }
-        StatusBar.setHidden(isFullScreen);
     }
 
     const videoProps: VideoProperties = {
