@@ -133,8 +133,28 @@ async function updateNativeComponentsTestProject(moduleInfo, tmpFolder, nativeWi
     if (nativeWidgetFolders) {
         console.log("Deleting existing widgets from test project...");
         const widgetsDir = join(tmpFolder, "widgets");
+
+        // backup two web widgets that are used in the test project
+        const tempBackup = join(tmpFolder, "widgets-backup");
+        await mkdir(tempBackup);
+
+        const htmlSnippetWidgetName = "HTMLSnippet.mpk";
+        const htmlSnippetTempPath = join(tempBackup, htmlSnippetWidgetName);
+        const htmlSnippetPath = join(widgetsDir, htmlSnippetWidgetName);
+        await copyFile(htmlSnippetPath, htmlSnippetTempPath);
+
+        const sprintrFeedbackWidgetName = "SprintrFeedbackWidget.mpk";
+        const sprintFeedbackTempPath = join(tempBackup, sprintrFeedbackWidgetName);
+        const sprintrFeedbackPath = join(widgetsDir, sprintrFeedbackWidgetName);
+        await copyFile(sprintrFeedbackPath, sprintFeedbackTempPath);
+
         await rm(widgetsDir, { force: true, recursive: true }); // this is useful to avoid retaining stale widgets in the test project.
         await mkdir(widgetsDir);
+
+        await copyFile(htmlSnippetTempPath, htmlSnippetPath);
+        await copyFile(sprintFeedbackTempPath, sprintrFeedbackPath);
+        await rm(tempBackup, { force: true, recursive: true });
+
         console.log("Copying widget resources widgets into test project...");
         await Promise.all([
             ...nativeWidgetFolders.map(async folder => {
