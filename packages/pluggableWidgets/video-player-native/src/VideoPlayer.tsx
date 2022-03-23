@@ -12,6 +12,7 @@ import {
     NativeModules
 } from "react-native";
 import Video, { OnProgressData, VideoProperties } from "react-native-video";
+import SystemNavigationBar from "react-native-system-navigation-bar";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { VideoPlayerProps } from "../typings/VideoPlayerProps";
 import { defaultVideoStyle, VideoStyle } from "./ui/Styles";
@@ -87,7 +88,6 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
         setFullScreen(isFullScreen);
         const { NavigationBar } = NativeModules;
         if (NavigationBar) {
-            const SystemNavigationBar = (await import("react-native-system-navigation-bar")).default;
             if (isFullScreen) {
                 SystemNavigationBar.navigationHide();
             } else {
