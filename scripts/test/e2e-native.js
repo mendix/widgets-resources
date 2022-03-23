@@ -122,7 +122,7 @@ async function main() {
         await tryReach(
             "Bundler",
             () => fetchOrTimeout("http://localhost:8083/index.bundle?platform=android&dev=false&minify=true"),
-            30
+            300
         );
         console.log("Preheating done!");
 
