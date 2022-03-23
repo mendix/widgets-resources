@@ -93,7 +93,7 @@
     "jest-svg-transformer": "^1.0.0",
     "mendix": "^9.13.43286",
     "metro-react-native-babel-preset": "~0.63.0",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.2.3",
     "postcss": "^8.3.11",
     "postcss-import": "^14.0.2",
     "postcss-url": "^10.1.0",
