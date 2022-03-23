@@ -224,12 +224,14 @@ async function fetchUrl(url) {
 
 async function fetchOrTimeout(url) {
     return await Promise.race([
-        fetch(url).then(response => {
-            if (!response.ok) {
-                throw new HTTPResponseError(response, "from Metro");
-            }
-            return true;
-        }),
+        new Promise(resolve => setTimeout(resolve, 60 * 1000))
+            .then(() => fetch(url))
+            .then(response => {
+                if (!response.ok) {
+                    throw new HTTPResponseError(response, "from Metro");
+                }
+                return true;
+            }),
         new Promise((_, reject) => setTimeout(() => reject(new Error("Preheating call timed out!")), 10 * 60 * 1000))
     ]);
 }
