@@ -52,7 +52,7 @@ jobs:
             - name: "Defining node version"
               uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
               with:
-                  node-version-file: ".nvmrc"
+                  node-version: '16'
             # - name: Install docker
             #   uses: docker-practice/actions-setup-docker@51fd5009666ea5e3382fe125abf5d73d31386b59
             - name: Login to GitHub Container Registry

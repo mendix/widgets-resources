@@ -1,5 +1,5 @@
 const { execSync } = require("child_process");
-const fetch = require("node-fetch");
+import fetch from "node-fetch";
 const { join } = require("path");
 const { cat, mkdir, rm, mv, cp } = require("shelljs");
 const { pipeline } = require("stream");
