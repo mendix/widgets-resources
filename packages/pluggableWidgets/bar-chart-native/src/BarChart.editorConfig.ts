@@ -4,22 +4,48 @@ import barChartGroupedSvgDark from "./assets/BarChart.Grouped.dark.svg";
 import barChartGroupedSvgLight from "./assets/BarChart.Grouped.light.svg";
 import barChartStackedSvgDark from "./assets/BarChart.Stacked.dark.svg";
 import barChartStackedSvgLight from "./assets/BarChart.Stacked.light.svg";
+import barChartLegendSvgDark from "./assets/BarChart.Legend.dark.svg";
+import barChartLegendSvgLight from "./assets/BarChart.Legend.light.svg";
 
 import { BarChartPreviewProps } from "../typings/BarChartProps";
 
 export function getPreview(values: BarChartPreviewProps, isDarkMode: boolean): StructurePreviewProps {
     return {
-        type: "Image",
-        document: decodeURIComponent(
-            (values.presentation === "grouped"
-                ? isDarkMode
-                    ? barChartGroupedSvgDark
-                    : barChartGroupedSvgLight
-                : isDarkMode
-                ? barChartStackedSvgDark
-                : barChartStackedSvgLight
-            ).replace("data:image/svg+xml,", "")
-        )
+        type: "RowLayout",
+        columnSize: "grow",
+        children: [
+            {
+                type: "Image",
+                document: decodeURIComponent(
+                    (values.presentation === "grouped"
+                        ? isDarkMode
+                            ? barChartGroupedSvgDark
+                            : barChartGroupedSvgLight
+                        : isDarkMode
+                        ? barChartStackedSvgDark
+                        : barChartStackedSvgLight
+                    ).replace("data:image/svg+xml,", "")
+                )
+            },
+            ...((values.showLegend
+                ? [
+                      {
+                          type: "Container",
+                          grow: 1
+                      },
+                      {
+                          type: "Image",
+                          document: decodeURIComponent(
+                              (isDarkMode ? barChartLegendSvgDark : barChartLegendSvgLight).replace(
+                                  "data:image/svg+xml,",
+                                  ""
+                              )
+                          ),
+                          width: 85
+                      }
+                  ]
+                : [{ type: "Container" }]) as StructurePreviewProps[])
+        ]
     };
 }
 
