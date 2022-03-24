@@ -12,8 +12,13 @@ import { BackgroundGradientProps } from "../typings/BackgroundGradientProps";
 export type props = BackgroundGradientProps<CustomStyle>;
 
 export function BackgroundGradient({ name, colorList, angle, content, opacity, onClick, style }: props): ReactElement {
-    const colors = colorList.map(colorsObject => colorsObject.color);
-    const offsets = colorList.map(colorsObject => Number(colorsObject.offset));
+    let sortedColorList = colorList.sort((a, b) => Number(a.offset) - Number(b.offset));
+    // checking if the color list only have one color item , then we should duplicate it. one color list throws an exception on android.
+    if (sortedColorList.length === 1) {
+        sortedColorList = [...sortedColorList, ...sortedColorList];
+    }
+    const colors = sortedColorList.map(colorsObject => colorsObject.color.toLowerCase());
+    const offsets = sortedColorList.map(colorsObject => Number(colorsObject.offset));
     const styles = mergeNativeStyles(defaultStyle, style);
     return (
         <Pressable
@@ -28,7 +33,7 @@ export function BackgroundGradient({ name, colorList, angle, content, opacity, o
                 ])
             }
         >
-            <LinearGradient colors={colors} locations={offsets} useAngle={!!angle} angle={angle}>
+            <LinearGradient colors={colors} locations={offsets} useAngle angle={angle}>
                 {content}
             </LinearGradient>
         </Pressable>

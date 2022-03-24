@@ -19,14 +19,14 @@
                             </property>
                             <property key="offset" type="decimal" defaultValue="0.0" required="true">
                                 <caption>Offset</caption>
-                                <description>Position that the gradient starts at, as a fraction of the overall size of the gradient - Should be between 0 and 1</description>
+                                <description>A color-stop's value, followed by one or more optional stop positions. - Should be between 0 and 1</description>
                             </property>
                         </propertyGroup>
                     </properties>
                 </property>
                 <property key="angle" type="integer" defaultValue="0">
                     <caption>Angle</caption>
-                    <description>For angled gradient effect</description>
+                    <description>Line of direction. A value of 0 is equivalent to top; increasing values rotates clockwise.</description>
                 </property>
                 <property key="opacity" type="decimal" defaultValue="1.0">
                     <caption>Opacity</caption>
