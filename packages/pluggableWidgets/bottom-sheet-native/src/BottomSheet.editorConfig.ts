@@ -1,69 +1,26 @@
 import {
     StructurePreviewProps,
-    ContainerProps,
     changePropertyIn,
     hidePropertiesIn,
     hidePropertyIn,
     Problem,
-    Properties
+    Properties,
+    RowLayoutProps
 } from "@mendix/piw-utils-internal";
 
 import { BottomSheetPreviewProps } from "../typings/BottomSheetProps";
 
 export function getPreview(values: BottomSheetPreviewProps, isDarkMode: boolean): StructurePreviewProps {
-    const content: ContainerProps = {
-        type: "Container",
-        children: []
-    };
-
-    if (values.type === "modal") {
-        if (values.modalRendering === "custom") {
-            content.children = [
-                {
-                    type: "DropZone",
-                    property: values.largeContent as object,
-                    placeholder: "Content"
-                }
-            ];
-        }
-    } else {
-        content.children = [
-            {
-                type: "DropZone",
-                property: values.smallContent as object,
-                placeholder: "Always visible"
-            },
-            {
-                type: "DropZone",
-                property: values.largeContent as object,
-                placeholder: "Visible on first drag"
-            }
-        ];
-
-        if (values.showFullscreenContent) {
-            content.children = [
-                ...content.children,
-                {
-                    type: "DropZone",
-                    property: values.fullscreenContent as object,
-                    placeholder: "Visible on drag to top of screen"
-                }
-            ];
-        }
-    }
-
     return {
         type: "Container",
         borders: true,
         children: [
             {
                 type: "Container",
-                borders: false,
                 backgroundColor: isDarkMode ? "#454545" : "#F5F5F5",
                 children: [
                     {
                         type: "Container",
-                        borders: false,
                         padding: 4,
                         children: [
                             {
@@ -75,7 +32,56 @@ export function getPreview(values: BottomSheetPreviewProps, isDarkMode: boolean)
                     }
                 ]
             },
-            content
+            ...((values.type === "modal"
+                ? values.modalRendering === "custom"
+                    ? [
+                          {
+                              type: "DropZone",
+                              property: values.largeContent,
+                              placeholder: "Content"
+                          }
+                      ]
+                    : values.itemsBasic.map<RowLayoutProps>((value, index) => ({
+                          type: "RowLayout",
+                          columnSize: "grow",
+                          padding: 12,
+                          borders: true,
+                          children: [
+                              {
+                                  type: "Container",
+                                  grow: 1
+                              },
+                              {
+                                  type: "Text",
+                                  content: value.caption || `[Item ${index + 1}]`
+                              },
+                              {
+                                  type: "Container",
+                                  grow: 1
+                              }
+                          ]
+                      }))
+                : [
+                      {
+                          type: "DropZone",
+                          property: values.smallContent as object,
+                          placeholder: "Always visible"
+                      },
+                      {
+                          type: "DropZone",
+                          property: values.largeContent as object,
+                          placeholder: "Visible on first drag"
+                      },
+                      ...(values.showFullscreenContent
+                          ? [
+                                {
+                                    type: "DropZone",
+                                    property: values.fullscreenContent as object,
+                                    placeholder: "Visible on drag to top of screen"
+                                }
+                            ]
+                          : [])
+                  ]) as StructurePreviewProps[])
         ]
     };
 }
