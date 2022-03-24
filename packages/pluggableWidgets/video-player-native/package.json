@@ -1,7 +1,7 @@
 {
   "name": "video-player-native",
   "widgetName": "VideoPlayer",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -20,7 +20,9 @@
   },
   "dependencies": {
     "@mendix/piw-native-utils-internal": "^1.0.0",
-    "react-native-video": "5.1.1"
+    "react-native-video": "5.2.0",
+    "react-native-vector-icons": "7.1.0",
+    "react-native-system-navigation-bar": "1.0.2"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",

@@ -8,6 +8,10 @@ export interface VideoStyle extends Style {
     };
     video: ViewStyle;
     errorMessage: TextStyle;
+    fullScreenVideoPlayer: ViewStyle;
+    controlBtnContainerStyle: ViewStyle;
+    fullScreenVideoStyle: ViewStyle;
+    fullScreenActivityIndicatorStyle: ViewStyle;
 }
 
 export const defaultVideoStyle: VideoStyle = {
@@ -26,5 +30,28 @@ export const defaultVideoStyle: VideoStyle = {
     },
     errorMessage: {
         color: "white"
+    },
+    fullScreenVideoPlayer: {
+        justifyContent: "center",
+        backgroundColor: "black",
+        margin: 0
+    },
+    controlBtnContainerStyle: {
+        position: "absolute",
+        top: "10%",
+        right: 10,
+        padding: 2,
+        backgroundColor: "rgba(0,0,0,0.5)",
+        borderRadius: 1,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    fullScreenVideoStyle: {
+        width: "100%",
+        height: "100%"
+    },
+    fullScreenActivityIndicatorStyle: {
+        position: "absolute",
+        alignSelf: "center"
     }
 };

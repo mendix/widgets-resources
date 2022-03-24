@@ -726,6 +726,10 @@ export interface VideoPlayerType {
         backgroundColor?: string;
     };
     video?: ViewStyle;
+    fullScreenVideoPlayer?: ViewStyle;
+    controlBtnContainerStyle?: ViewStyle;
+    fullScreenVideoStyle?: ViewStyle;
+    fullScreenActivityIndicatorStyle?: ViewStyle;
 }
 
 // Web View
