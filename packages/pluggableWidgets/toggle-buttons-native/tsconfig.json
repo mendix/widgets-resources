@@ -1,5 +1,8 @@
 {
     "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
     "baseUrl": "./",
-    "include": ["node_modules/@mendix/pluggable-widgets-tools/typings", "./src"]
+    "include": ["node_modules/@mendix/pluggable-widgets-tools/typings", "./src", "./typings"],
+    "compilerOptions": {
+        "typeRoots": ["node_modules/@types", "../../../node_modules/@types"]
+    }
 }
