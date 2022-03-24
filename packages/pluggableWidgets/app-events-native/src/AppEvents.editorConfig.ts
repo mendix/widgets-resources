@@ -1,109 +1,65 @@
-import { StructurePreviewProps } from "@mendix/piw-utils-internal";
+import { RowLayoutProps, StructurePreviewProps, TextProps } from "@mendix/piw-utils-internal";
 
 import { AppEventsPreviewProps } from "../typings/AppEventsProps";
 
-export const getPreview = (values: AppEventsPreviewProps, isDarkMode: boolean): StructurePreviewProps => {
-    const actionList = new Array<StructurePreviewProps>();
-
-    if (values.onLoadAction) {
-        actionList.push({
-            type: "Text",
-            content: "On page load"
-        });
-    }
-
-    if (values.onUnloadAction) {
-        actionList.push({
-            type: "Text",
-            content: "On page unload"
-        });
-    }
-
-    if (values.onResumeAction) {
-        actionList.push({
-            type: "Text",
-            content: "On app resume"
-        });
-    }
-
-    if (values.onResumeTimeout) {
-        actionList.push({
-            type: "Text",
-            content: "On app resume timeout"
-        });
-    }
-
-    if (values.onOnlineAction) {
-        actionList.push({
-            type: "Text",
-            content: "On online"
-        });
-    }
-
-    if (values.onOnlineAction && values.onOnlineTimeout) {
-        actionList.push({
-            type: "Text",
-            content: "On online timeout"
-        });
-    }
-
-    if (values.onOfflineAction) {
-        actionList.push({
-            type: "Text",
-            content: "On offline"
-        });
-    }
-
-    if (values.onOfflineAction && values.onOfflineTimeout) {
-        actionList.push({
-            type: "Text",
-            content: "On offline timeout"
-        });
-    }
-
-    if (values.onTimeoutAction) {
-        actionList.push({
-            type: "Text",
-            content: "On timeout"
-        });
-    }
-
-    if (actionList.length === 0) {
-        actionList.push({
-            type: "RowLayout",
-            columnSize: "grow",
+export const getPreview = (values: AppEventsPreviewProps, isDarkMode: boolean): StructurePreviewProps => ({
+    type: "Container",
+    borders: true,
+    children: [
+        {
+            type: "Container",
+            borders: false,
+            backgroundColor: isDarkMode ? "#454545" : "#F5F5F5",
             children: [
                 {
-                    type: "Container"
-                },
-                {
-                    type: "Text",
-                    content: "Configure events"
-                },
-                {
-                    type: "Container"
+                    type: "Container",
+                    borders: false,
+                    padding: 4,
+                    children: renderTextActionList(values)
                 }
             ]
-        });
-    }
+        }
+    ]
+});
 
-    return {
-        type: "Container",
-        borders: true,
-        children: [
+const renderTextActionList = (values: AppEventsPreviewProps): TextProps[] | RowLayoutProps[] => {
+    const textBase: TextProps = {
+        type: "Text",
+        content: ""
+    };
+
+    const textActionList: TextProps[] = [
+        ...(values.onLoadAction ? [{ ...textBase, content: "On page load" }] : []),
+        ...(values.onUnloadAction ? [{ ...textBase, content: "On page unload" }] : []),
+        ...(values.onResumeAction ? [{ ...textBase, content: "On app resume" }] : []),
+        ...(values.onResumeTimeout ? [{ ...textBase, content: "On app resume timeout" }] : []),
+        ...(values.onOnlineAction ? [{ ...textBase, content: "On online" }] : []),
+        ...(values.onOnlineAction && values.onOnlineTimeout ? [{ ...textBase, content: "On online timeout" }] : []),
+        ...(values.onOfflineAction ? [{ ...textBase, content: "On offline" }] : []),
+        ...(values.onOfflineAction && values.onOfflineTimeout ? [{ ...textBase, content: "On offline timeout" }] : []),
+        ...(values.onTimeoutAction ? [{ ...textBase, content: "On timeout" }] : [])
+    ] as TextProps[];
+
+    if (textActionList.length === 0) {
+        return [
             {
-                type: "Container",
-                borders: false,
-                backgroundColor: isDarkMode ? "#454545" : "#F5F5F5",
+                type: "RowLayout",
+                columnSize: "grow",
                 children: [
                     {
-                        type: "Container",
-                        borders: false,
-                        padding: 4,
-                        children: actionList
+                        type: "Container"
+                    },
+                    {
+                        type: "Text",
+                        content: "Configure events"
+                    },
+                    {
+                        type: "Container"
                     }
                 ]
             }
-        ]
-    };
+        ];
+    }
+
+    return textActionList;
 };

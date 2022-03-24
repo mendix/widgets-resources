@@ -4,8 +4,7 @@ import {
     hidePropertiesIn,
     hidePropertyIn,
     Problem,
-    Properties,
-    RowLayoutProps
+    Properties
 } from "@mendix/piw-utils-internal";
 
 import { BottomSheetPreviewProps } from "../typings/BottomSheetProps";
@@ -41,7 +40,7 @@ export function getPreview(values: BottomSheetPreviewProps, isDarkMode: boolean)
                               placeholder: "Content"
                           }
                       ]
-                    : values.itemsBasic.map<RowLayoutProps>((value, index) => ({
+                    : values.itemsBasic.map((value, index) => ({
                           type: "RowLayout",
                           columnSize: "grow",
                           padding: 12,
@@ -64,19 +63,19 @@ export function getPreview(values: BottomSheetPreviewProps, isDarkMode: boolean)
                 : [
                       {
                           type: "DropZone",
-                          property: values.smallContent as object,
+                          property: values.smallContent,
                           placeholder: "Always visible"
                       },
                       {
                           type: "DropZone",
-                          property: values.largeContent as object,
+                          property: values.largeContent,
                           placeholder: "Visible on first drag"
                       },
                       ...(values.showFullscreenContent
                           ? [
                                 {
                                     type: "DropZone",
-                                    property: values.fullscreenContent as object,
+                                    property: values.fullscreenContent,
                                     placeholder: "Visible on drag to top of screen"
                                 }
                             ]

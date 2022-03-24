@@ -79,7 +79,7 @@ export function getPreview(values: AccordionPreviewProps, isDarkMode: boolean): 
             {
                 type: "Container",
                 children: [
-                    ...((values.groups.length === 0
+                    ...(values.groups.length === 0
                         ? [noGroupsContainer]
                         : values.groups
                               .map<StructurePreviewProps[]>((group, index) =>
@@ -104,10 +104,7 @@ export function getPreview(values: AccordionPreviewProps, isDarkMode: boolean): 
                                             }
                                         ]
                               )
-                              .reduce(
-                                  (previousValue, currentValue) => previousValue.concat(currentValue),
-                                  []
-                              )) as StructurePreviewProps[])
+                              .reduce((previousValue, currentValue) => previousValue.concat(currentValue), []))
                 ]
             }
         ]

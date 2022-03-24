@@ -2,13 +2,10 @@ import { RowLayoutProps, StructurePreviewProps } from "@mendix/piw-utils-interna
 
 import { ToggleButtonsPreviewProps } from "../typings/ToggleButtonsProps";
 
-// import toggleButtonSvgDark from "./assets/ToggleButtonDefault.dark.svg";
-// import toggleButtonSvgLight from "./assets/ToggleButtonDefault.light.svg";
-
 export function getPreview(_: ToggleButtonsPreviewProps, isDarkMode: boolean): StructurePreviewProps {
+    const buttonWhiteFontColor = "#FFFFFF";
     const buttonBorderRadius = 4;
-    const buttonFontColor: string = isDarkMode ? "#FFFFFF" : "#000000";
-    const buttonActiveFontColor: string = isDarkMode ? "#FFFFFF" : "#FFFFFF";
+    const buttonFontColor: string = isDarkMode ? buttonWhiteFontColor : "#000000";
 
     const renderButton = (content: string, isActive = false): RowLayoutProps => ({
         type: "RowLayout",
@@ -26,7 +23,7 @@ export function getPreview(_: ToggleButtonsPreviewProps, isDarkMode: boolean): S
                     {
                         type: "Text",
                         fontSize: 12,
-                        fontColor: isActive ? buttonActiveFontColor : buttonFontColor,
+                        fontColor: isActive ? buttonWhiteFontColor : buttonFontColor,
                         content
                     }
                 ]
