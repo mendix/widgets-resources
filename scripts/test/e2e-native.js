@@ -113,15 +113,17 @@ async function main() {
         execSync(
             `docker exec -td ${mxbuildContainerId} bash -c "cd /source/tests/testProject/deployment/native && ` +
                 `/tmp/mxbuild/modeler/tools/node/node /tmp/mxbuild/modeler/tools/node/node_modules/react-native/local-cli/cli.js ` +
-                `start --port '8083' --config '/source/tests/testProject/deployment/native/metro.config.json' > /source/tests/testProject/deployment/log/packager.txt"`
+                `start --port '8083' --verbose --config '/source/tests/testProject/deployment/native/metro.config.json' > /source/tests/testProject/deployment/log/packager.txt"`
         );
 
         await tryReach("Metro bundler", () => fetchUrl("http://localhost:8083/status"));
 
         console.log("Preheating bundler for Android dev=false minify=true");
+        const makeItNativeArguments =
+            "?platform=android&dev=false&minify=true&app=com.mendix.developerapp.mx9&modulesOnly=false&runModule=true";
         await tryReach(
             "Bundler",
-            () => fetchOrTimeout("http://localhost:8083/index.bundle?platform=android&dev=false&minify=true"),
+            () => fetchOrTimeout(`http://localhost:8083/index.bundle${makeItNativeArguments}`),
             30,
             60 * 3
         );
