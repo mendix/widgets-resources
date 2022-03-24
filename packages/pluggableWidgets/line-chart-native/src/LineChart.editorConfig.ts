@@ -2,15 +2,41 @@ import { StructurePreviewProps, hideNestedPropertiesIn, Problem, Properties } fr
 
 import lineChartSvgDark from "./assets/LineChart.dark.svg";
 import lineChartSvgLight from "./assets/LineChart.light.svg";
+import lineChartLegendSvgDark from "./assets/LineChart.Legend.dark.svg";
+import lineChartLegendSvgLight from "./assets/LineChart.Legend.light.svg";
 
 import { LineChartPreviewProps } from "../typings/LineChartProps";
 
-export function getPreview(_: LineChartPreviewProps, isDarkMode: boolean): StructurePreviewProps {
+export function getPreview(values: LineChartPreviewProps, isDarkMode: boolean): StructurePreviewProps {
     return {
-        type: "Image",
-        document: decodeURIComponent(
-            (isDarkMode ? lineChartSvgDark : lineChartSvgLight).replace("data:image/svg+xml,", "")
-        )
+        type: "RowLayout",
+        columnSize: "grow",
+        children: [
+            {
+                type: "Image",
+                document: decodeURIComponent(
+                    (isDarkMode ? lineChartSvgDark : lineChartSvgLight).replace("data:image/svg+xml,", "")
+                )
+            },
+            ...((values.showLegend
+                ? [
+                      {
+                          type: "Container",
+                          grow: 1
+                      },
+                      {
+                          type: "Image",
+                          document: decodeURIComponent(
+                              (isDarkMode ? lineChartLegendSvgDark : lineChartLegendSvgLight).replace(
+                                  "data:image/svg+xml,",
+                                  ""
+                              )
+                          ),
+                          width: 85
+                      }
+                  ]
+                : [{ type: "Container" }]) as StructurePreviewProps[])
+        ]
     };
 }
 
