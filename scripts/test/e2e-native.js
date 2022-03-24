@@ -122,7 +122,8 @@ async function main() {
         await tryReach(
             "Bundler",
             () => fetchOrTimeout("http://localhost:8083/index.bundle?platform=android&dev=false&minify=true"),
-            300
+            30,
+            60 * 3
         );
         console.log("Preheating done!");
 
@@ -224,29 +225,28 @@ async function fetchUrl(url) {
 
 async function fetchOrTimeout(url) {
     return await Promise.race([
-        new Promise(resolve => setTimeout(resolve, 60 * 1000))
-            .then(() => fetch(url))
-            .then(response => {
-                if (!response.ok) {
-                    throw new HTTPResponseError(response, "from Metro");
-                }
-                return true;
-            }),
+        fetch(url).then(response => {
+            if (!response.ok) {
+                throw new HTTPResponseError(response, "from Metro");
+            }
+            return true;
+        }),
         new Promise((_, reject) => setTimeout(() => reject(new Error("Preheating call timed out!")), 10 * 60 * 1000))
     ]);
 }
 
-async function tryReach(name, fn, attempts = 60) {
+async function tryReach(name, fn, attempts = 60, pause = 3) {
     for (; attempts > 0; --attempts) {
         try {
+            console.log(`Trying to reach ${name}...`);
             if (await fn()) {
                 break;
             }
         } catch (e) {
             console.error(e);
-            console.log(`Could not reach ${name}, trying again...`);
+            console.log(`Could not reach ${name}, pausing...`);
         }
-        await new Promise(resolve => setTimeout(resolve, 3000));
+        await new Promise(resolve => setTimeout(resolve, pause * 1000));
     }
     if (attempts === 0) {
         throw new Error(`${name} did not reach completion in time...`);
