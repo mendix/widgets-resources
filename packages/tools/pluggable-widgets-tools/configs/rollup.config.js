@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync } from "fs";
+import { existsSync, mkdirSync, writeFile } from "fs";
 import { join, relative } from "path";
 import alias from "@rollup/plugin-alias";
 import { getBabelInputPlugin, getBabelOutputPlugin } from "@rollup/plugin-babel";
@@ -17,7 +17,7 @@ import license from "rollup-plugin-license";
 import livereload from "rollup-plugin-livereload";
 import postcss from "rollup-plugin-postcss";
 import { terser } from "rollup-plugin-terser";
-import { cp } from "shelljs";
+import { cp, mkdir } from "shelljs";
 import { zip } from "zip-a-folder";
 import { widgetTyping } from "./rollup-plugin-widget-typing";
 import {
@@ -32,13 +32,18 @@ import {
     widgetVersion
 } from "./shared";
 import url from "./rollup-plugin-assets";
+import mime from "mime-types";
+import crypto from "crypto";
 
 const outDir = join(sourcePath, "/dist/tmp/widgets/");
 const outWidgetDir = join(widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase());
 const outWidgetFile = join(outWidgetDir, `${widgetName}`);
+const absoluteOutPackageDir = join(outDir, outWidgetDir);
 const mpkDir = join(sourcePath, "dist", widgetVersion);
 const mpkFile = join(mpkDir, process.env.MPKOUTPUT ? process.env.MPKOUTPUT : `${widgetPackage}.${widgetName}.mpk`);
 const assetsDirName = "assets";
+const absoluteOutAssetsDir = join(absoluteOutPackageDir, assetsDirName);
+const outAssetsDir = join(outWidgetDir, assetsDirName);
 
 /**
  * This function is used by postcss-url.
@@ -52,7 +57,40 @@ const assetsDirName = "assets";
  * before: assets/icon.png
  * after: com/mendix/widget/web/accordion/assets/icon.png
  */
-const cssUrlTransform = asset => `${outWidgetDir}/${asset.url}`;
+const cssUrlTransform = asset =>
+    asset.url.startsWith(`${assetsDirName}/`) ? `${outWidgetDir}/${asset.url}` : asset.url;
+
+/**
+ * Take inlined base64 assets and transform them into concrete files into the `assets` folder.
+ */
+function custom(asset) {
+    const { url } = asset;
+    if (url.startsWith("data:")) {
+        const [, mimeType, data] = url.match(/data:([^;]*).*;base64,(.*)/);
+        let extension = mime.extension(mimeType);
+        // Only add extension if we mimeType has associated extension
+        extension = extension ? `.${extension}` : "";
+        const fileHash = crypto.createHash("md5").update(data).digest("hex");
+        const filename = `${fileHash}${extension}`;
+        const filePath = join(absoluteOutAssetsDir, filename);
+
+        mkdir("-p", absoluteOutAssetsDir);
+
+        writeFile(filePath, data, "base64", err => {
+            if (err) {
+                if (err.code === "EEXIST") {
+                    return;
+                }
+
+                throw err;
+            }
+        });
+
+        return `${outAssetsDir}/${filename}`;
+    }
+
+    return asset.url;
+}
 
 export default async args => {
     const production = Boolean(args.configProduction);
@@ -76,8 +114,8 @@ export default async args => {
                 url({
                     include: imagesAndFonts,
                     limit: 0,
-                    publicPath: `${join("widgets", outWidgetDir, assetsDirName)}/`, // Prefix for the actual import, relative to Mendix web server root
-                    destDir: join(outDir, outWidgetDir, assetsDirName)
+                    publicPath: `${join("widgets", outAssetsDir)}/`, // Prefix for the actual import, relative to Mendix web server root
+                    destDir: absoluteOutAssetsDir
                 }),
                 postcss({
                     extensions: [".css", ".sass", ".scss"],
@@ -100,7 +138,8 @@ export default async args => {
                          * This instance of postcss-url is just for adjusting asset path.
                          * Check doc comment for *createCssUrlTransform* for explanation.
                          */
-                        postcssUrl({ url: cssUrlTransform })
+                        postcssUrl({ url: cssUrlTransform }),
+                        postcssUrl({ url: custom, assetsPath: absoluteOutPackageDir })
                     ],
                     sourceMap: !production ? "inline" : false,
                     use: ["sass"],
