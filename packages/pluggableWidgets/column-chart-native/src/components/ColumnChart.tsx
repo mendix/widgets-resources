@@ -216,10 +216,8 @@ export function ColumnChart({
                                 : null}
                             <View onLayout={updateChartDimensions} style={{ flex: 1 }}>
                                 {chartDimensions ? (
-                                    // flip the domain padding x and y axis values due to how victory library handles
-                                    // horizontal charts.
                                     <VictoryChart
-                                        domainPadding={{ x: style.domain?.padding?.y, y: style.domain?.padding?.x }}
+                                        domainPadding={{ x: style.domain?.padding?.x, y: style.domain?.padding?.y }}
                                         height={chartDimensions?.height}
                                         width={chartDimensions?.width}
                                         padding={aggregateGridPadding(style.grid)}
