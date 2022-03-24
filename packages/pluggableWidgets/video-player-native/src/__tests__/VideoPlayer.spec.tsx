@@ -1,16 +1,21 @@
 import { dynamicValue } from "@mendix/piw-utils-internal";
 import { createElement } from "react";
-import { Text, View } from "react-native";
-import { fireEvent, render } from "react-native-testing-library";
+import { Modal, Text, View } from "react-native";
+import { act, fireEvent, render, waitFor } from "@testing-library/react-native";
 import { VideoProperties } from "react-native-video";
 
-import { Props, VideoPlayer } from "../VideoPlayer";
+import { VideoPlayer } from "../VideoPlayer";
+import { VideoPlayerProps } from "../../typings/VideoPlayerProps";
+import { VideoStyle } from "../ui/Styles";
 
 jest.mock("react-native-video", () => "Video");
+jest.mock("react-native-system-navigation-bar", () => ({
+    navigationHide: jest.fn(),
+    navigationShow: jest.fn()
+}));
 
 describe("VideoPlayer", () => {
-    let defaultProps: Props;
-
+    let defaultProps: VideoPlayerProps<VideoStyle>;
     beforeEach(() => {
         defaultProps = {
             name: "video-player-test",
@@ -48,7 +53,7 @@ describe("VideoPlayer", () => {
         fireEvent(component.getByTestId("video-player-test"), "load", { naturalSize: { width: 640, height: 360 } });
 
         expect(component.toJSON()).toMatchSnapshot();
-        expect(component.getByTestId("video-player-test").props.style).toEqual({ width: "100%", height: "100%" });
+        expect(component.getByTestId("video-player-test").props.style).toEqual({ width: "100%", aspectRatio: 16 / 9 });
     });
 
     it("shows the loading indicator if the source changes", () => {
@@ -81,6 +86,36 @@ describe("VideoPlayer", () => {
         fireEvent(component.getByTestId("video-player-test"), "error");
 
         expect(component.UNSAFE_getByType(Text).props.style).toEqual({ color: "white" });
-        expect(component.UNSAFE_getByType(Text).props.children).toEqual("The video failed to load :(");
+        expect(component.UNSAFE_getByType(Text).props.children).toEqual("The video failed to load");
+    });
+
+    describe("VideoPlayerAndroid", () => {
+        beforeAll(() => {
+            jest.mock("react-native/Libraries/Utilities/Platform", () => ({
+                OS: "android",
+                select: jest.fn(dict => dict.android)
+            }));
+        });
+        it("render video with controls", () => {
+            const component = render(<VideoPlayer {...defaultProps} />);
+            expect(component).toMatchSnapshot();
+        });
+        it("render video without controls if showControls is set to false", () => {
+            const component = render(<VideoPlayer {...defaultProps} showControls={false} />);
+            expect(component).toMatchSnapshot();
+        });
+
+        it("show fullscreen when press fullscreen icon-- android", async () => {
+            const component = render(<VideoPlayer {...defaultProps} />);
+            const fullScreenBtn = component.getByTestId("btn-fullscreen");
+            await act(async () => {
+                fireEvent.press(fullScreenBtn);
+                await waitFor(() => {
+                    component.getByTestId("btn-fullscreen-exit");
+                    const modal = component.UNSAFE_getByType(Modal);
+                    expect(modal.props.visible).toBe(true);
+                });
+            });
+        });
     });
 });
