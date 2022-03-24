@@ -25,7 +25,7 @@ export function getPreview(values: BottomSheetPreviewProps, isDarkMode: boolean)
                         children: [
                             {
                                 type: "Text",
-                                fontColor: isDarkMode ? "#DEDEDE" : "#0A1324",
+                                fontColor: isDarkMode ? "#DEDEDE" : "#6B707B",
                                 content: "Bottom Sheet"
                             }
                         ]

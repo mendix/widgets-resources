@@ -8,7 +8,7 @@ import { WebViewPreviewProps } from "../typings/WebViewProps";
 export const getPreview = (values: WebViewPreviewProps, isDarkMode: boolean): StructurePreviewProps => ({
     type: "Container",
     borders: true,
-    backgroundColor: isDarkMode ? "#454545" : "#F5F5F5",
+    backgroundColor: isDarkMode ? "#3E3E3E" : "#F2F2F3",
     children: [
         {
             type: "RowLayout",
@@ -31,12 +31,8 @@ export const getPreview = (values: WebViewPreviewProps, isDarkMode: boolean): St
                     children: [
                         {
                             type: "Text",
-                            content:
-                                values.content === ""
-                                    ? values.url === ""
-                                        ? "Configure your webpage"
-                                        : values.url
-                                    : "HTML Content"
+                            fontColor: isDarkMode ? "#C5C5C5" : "#6B707B",
+                            content: !values.content ? values.url || "Configure your webpage" : "HTML Content"
                         }
                     ]
                 },

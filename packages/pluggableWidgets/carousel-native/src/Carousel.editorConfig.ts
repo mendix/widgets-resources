@@ -28,17 +28,22 @@ export function getPreview(values: CarouselPreviewProps, isDarkMode: boolean): S
 
     return {
         type: "Container",
-        backgroundColor: isDarkMode ? "#454545" : "#F5F5F5",
         borders: true,
         children: [
             {
                 type: "Container",
-                padding: 8,
+                backgroundColor: isDarkMode ? "#454545" : "#F5F5F5",
                 children: [
                     {
-                        type: "Text",
-                        fontColor: isDarkMode ? "#DEDEDE" : "#0A1324",
-                        content: "Carousel"
+                        type: "Container",
+                        padding: 4,
+                        children: [
+                            {
+                                type: "Text",
+                                fontColor: isDarkMode ? "#DEDEDE" : "#6B707B",
+                                content: "Carousel"
+                            }
+                        ]
                     }
                 ]
             },

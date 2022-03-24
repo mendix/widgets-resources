@@ -17,7 +17,7 @@ export function getPreview(values: SafeAreaViewPreviewProps, isDarkMode: boolean
                         children: [
                             {
                                 type: "Text",
-                                fontColor: isDarkMode ? "#DEDEDE" : "#0A1324",
+                                fontColor: isDarkMode ? "#DEDEDE" : "#6B707B",
                                 content: "Safe area view"
                             }
                         ]

@@ -19,11 +19,11 @@ export function getPreview(values: PopupMenuPreviewProps, isDarkMode: boolean): 
                 children: [
                     {
                         type: "Container",
-                        padding: 8,
+                        padding: 4,
                         children: [
                             {
                                 type: "Text",
-                                fontColor: isDarkMode ? "#DEDEDE" : "#0A1324",
+                                fontColor: isDarkMode ? "#DEDEDE" : "#6B707B",
                                 content: "Pop Up Menu"
                             }
                         ]

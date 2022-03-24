@@ -17,7 +17,7 @@ export function getPreview(values: RepeaterPreviewProps, isDarkMode: boolean): S
                         children: [
                             {
                                 type: "Text",
-                                fontColor: isDarkMode ? "#DEDEDE" : "#0A1324",
+                                fontColor: isDarkMode ? "#DEDEDE" : "#6B707B",
                                 content: "Repeater"
                             }
                         ]
