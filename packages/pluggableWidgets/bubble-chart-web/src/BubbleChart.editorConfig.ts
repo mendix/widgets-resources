@@ -100,7 +100,7 @@ export function getPreview(values: BubbleChartPreviewProps, isDarkMode: boolean)
     return {
         type: "RowLayout",
         columnSize: "fixed",
-        children: values.showLegend ? [chartImage, legendImage] : [chartImage, filler]
+        children: values.showLegend ? [chartImage, legendImage, filler] : [chartImage, filler]
     };
 }
 

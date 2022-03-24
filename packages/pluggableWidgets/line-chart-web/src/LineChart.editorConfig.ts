@@ -87,7 +87,7 @@ export function getPreview(values: LineChartPreviewProps, isDarkMode: boolean): 
     const legendImage = {
         type: "Image",
         document: decodeURIComponent(getImage("legend").replace("data:image/svg+xml,", "")),
-        width: 57
+        width: 85
     } as ImageProps;
 
     const filler = {
@@ -99,7 +99,7 @@ export function getPreview(values: LineChartPreviewProps, isDarkMode: boolean): 
     return {
         type: "RowLayout",
         columnSize: "fixed",
-        children: values.showLegend ? [chartImage, legendImage] : [chartImage, filler]
+        children: values.showLegend ? [chartImage, legendImage, filler] : [chartImage, filler]
     };
 }
 
