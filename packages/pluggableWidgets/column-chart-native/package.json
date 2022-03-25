@@ -30,6 +30,7 @@
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "detox": "^19.2.0",
-    "eslint": "^7.20.0"
+    "eslint": "^7.20.0",
+    "victory-bar":"35.11.4"
   }
 }

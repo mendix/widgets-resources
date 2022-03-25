@@ -1,7 +1,7 @@
 import { createElement, ReactElement, useCallback, useMemo, useState } from "react";
 import { LayoutChangeEvent, Text, View } from "react-native";
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryGroup, VictoryStack } from "victory-native";
-import { BarProps } from "victory-Bar";
+import { BarProps } from "victory-bar";
 import { extractStyles } from "@mendix/pluggable-widgets-tools";
 
 import { ColumnChartStyle } from "../ui/Styles";
