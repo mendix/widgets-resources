@@ -5,12 +5,18 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // - the code between BEGIN EXTRA CODE and END EXTRA CODE
 // Other code you write will be lost the next time you deploy the project.
+import { Big } from "big.js";
+
+// BEGIN EXTRA CODE
+// END EXTRA CODE
+
 /**
+ * Updates an entity without needing to refresh the whole page via passing an entity.
  * @param {string} entityToRefresh - Entity which will be refreshed.
  * @returns {Promise.<void>}
  */
-async function RefreshEntity(entityToRefresh) {
-    // BEGIN USER CODE
+export async function RefreshEntity(entityToRefresh) {
+	// BEGIN USER CODE
     if (!entityToRefresh) {
         return Promise.reject(new Error("EntityToRefresh parameter is required"));
     }
@@ -20,7 +26,5 @@ async function RefreshEntity(entityToRefresh) {
             callback: () => resolve(true)
         });
     });
-    // END USER CODE
+	// END USER CODE
 }
-
-export { RefreshEntity };
