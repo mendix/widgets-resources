@@ -97,6 +97,7 @@ Array [
       ]
     }
     swipeThreshold={100}
+    testID="feedback-test$popup"
     transparent={true}
     visible={false}
   >
@@ -193,6 +194,7 @@ Array [
           ]
         }
         swipeThreshold={100}
+        testID="feedback-test$popup"
       >
         <View
           onLayout={[Function]}

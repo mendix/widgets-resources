@@ -2,6 +2,8 @@ import { expectToMatchScreenshot, resetDevice, setText, tapMenuItem } from "../.
 import { element, by, waitFor } from "detox";
 
 describe("Feedback widget", () => {
+    const widgetName = "feedback";
+
     beforeEach(async () => {
         await tapMenuItem("Feedback");
     });
@@ -11,13 +13,13 @@ describe("Feedback widget", () => {
     });
 
     it("should be able to submit a feedback item", async () => {
-        await expectToMatchScreenshot(element(by.id("feedback1$button")));
+        await expectToMatchScreenshot(element(by.id(`${widgetName}$button`)));
 
-        await element(by.id("feedback1$button")).tap();
-        await expectToMatchScreenshot(element(by.id("feedback1$popup")));
+        await element(by.id(`${widgetName}$button`)).tap();
+        await expectToMatchScreenshot(element(by.id(`${widgetName}$popup`)));
 
-        await setText(element(by.id("feedback1$input")), "e2e test for feedback widget");
-        await element(by.id("feedback1$send")).tap();
+        await setText(element(by.id(`${widgetName}$input`)), "e2e test for feedback widget");
+        await element(by.id(`${widgetName}$send`)).tap();
 
         await waitFor(element(by.text("Feedback successfully sent")))
             .toBeVisible()
