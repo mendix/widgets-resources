@@ -88,7 +88,7 @@ export function check(values: BackgroundGradientPreviewProps): Problem[] {
     } else if (colorList.some(item => !checkTwoDecimalDigits(item.offset || 0))) {
         errors.push({
             property: "colorList",
-            message: "color offset can only have two numbers after decimal point"
+            message: "​​The offset is limited to 2 decimal places"
         });
     }
 

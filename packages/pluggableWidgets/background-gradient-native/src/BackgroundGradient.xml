@@ -9,7 +9,7 @@
         <propertyGroup caption="General">
             <propertyGroup caption="General">
                 <property key="colorList" type="object" isList="true" required="true">
-                    <caption>Color List</caption>
+                    <caption>Color list</caption>
                     <description />
                     <properties>
                         <propertyGroup caption="Item">
