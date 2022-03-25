@@ -2,7 +2,7 @@ $hover-color: #f8f8f8 !default;
 $background-color: #fff !default;
 $selected-color: #dadcde !default;
 $border-color: #ced0d3 !default;
-$arrow: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='15px' height='8px'><polyline id='Line' fill='none' stroke='%23555555' points='0.5 0.5 6 6 11.545361 0.5'></polyline></svg>";
+$arrow: "resources/dropdown-arrow.svg";
 
 @import "DatePicker";
 
