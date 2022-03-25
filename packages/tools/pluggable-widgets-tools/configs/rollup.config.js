@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, writeFile } from "fs";
+import { existsSync, mkdirSync } from "fs";
 import { join, relative } from "path";
 import alias from "@rollup/plugin-alias";
 import { getBabelInputPlugin, getBabelOutputPlugin } from "@rollup/plugin-babel";
@@ -17,7 +17,7 @@ import license from "rollup-plugin-license";
 import livereload from "rollup-plugin-livereload";
 import postcss from "rollup-plugin-postcss";
 import { terser } from "rollup-plugin-terser";
-import { cp, mkdir } from "shelljs";
+import { cp } from "shelljs";
 import { zip } from "zip-a-folder";
 import { widgetTyping } from "./rollup-plugin-widget-typing";
 import {
@@ -32,8 +32,6 @@ import {
     widgetVersion
 } from "./shared";
 import url from "./rollup-plugin-assets";
-import mime from "mime-types";
-import crypto from "crypto";
 
 const outDir = join(sourcePath, "/dist/tmp/widgets/");
 const outWidgetDir = join(widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase());
@@ -60,38 +58,6 @@ const outAssetsDir = join(outWidgetDir, assetsDirName);
 const cssUrlTransform = asset =>
     asset.url.startsWith(`${assetsDirName}/`) ? `${outWidgetDir}/${asset.url}` : asset.url;
 
-/**
- * Take inlined base64 assets and transform them into concrete files into the `assets` folder.
- */
-function custom(asset) {
-    const { url } = asset;
-    if (url.startsWith("data:")) {
-        const [, mimeType, data] = url.match(/data:([^;]*).*;base64,(.*)/);
-        let extension = mime.extension(mimeType);
-        // Only add extension if we mimeType has associated extension
-        extension = extension ? `.${extension}` : "";
-        const fileHash = crypto.createHash("md5").update(data).digest("hex");
-        const filename = `${fileHash}${extension}`;
-        const filePath = join(absoluteOutAssetsDir, filename);
-
-        mkdir("-p", absoluteOutAssetsDir);
-
-        writeFile(filePath, data, "base64", err => {
-            if (err) {
-                if (err.code === "EEXIST") {
-                    return;
-                }
-
-                throw err;
-            }
-        });
-
-        return `${outAssetsDir}/${filename}`;
-    }
-
-    return asset.url;
-}
-
 export default async args => {
     const production = Boolean(args.configProduction);
     if (!production && projectPath) {
@@ -117,34 +83,7 @@ export default async args => {
                     publicPath: `${join("widgets", outAssetsDir)}/`, // Prefix for the actual import, relative to Mendix web server root
                     destDir: absoluteOutAssetsDir
                 }),
-                postcss({
-                    extensions: [".css", ".sass", ".scss"],
-                    extract: outputFormat === "amd",
-                    inject: false,
-                    minimize: production,
-                    plugins: [
-                        postcssImport(),
-                        /**
-                         * We need two copies of postcss-url because of final styles bundling in studio (pro).
-                         * On line below, we just copying assets to widget bundle directory (com.mendix.widgets...)
-                         * To make it work, this plugin have few requirements:
-                         * 1. You should put your assets in src/assets/
-                         * 2. You should use relative path in your .scss files (e.g. url(../assets/icon.png)
-                         * 3. This plugin relies on `to` property of postcss plugin and it should be present, when
-                         * copying files to destination.
-                         */
-                        postcssUrl({ url: "copy", assetsPath: "assets" }),
-                        /**
-                         * This instance of postcss-url is just for adjusting asset path.
-                         * Check doc comment for *createCssUrlTransform* for explanation.
-                         */
-                        postcssUrl({ url: cssUrlTransform }),
-                        postcssUrl({ url: custom, assetsPath: absoluteOutPackageDir })
-                    ],
-                    sourceMap: !production ? "inline" : false,
-                    use: ["sass"],
-                    to: join(outDir, `${outWidgetFile}.css`)
-                }),
+                postCssPlugin(outputFormat, production),
                 alias({
                     entries: {
                         "react-hot-loader/root": join(__dirname, "hot")
@@ -377,3 +316,34 @@ const webExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/, /^big.
 const editorPreviewExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/];
 
 const editorConfigExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/];
+
+export function postCssPlugin(outputFormat, production, postcssPlugins = []) {
+    return postcss({
+        extensions: [".css", ".sass", ".scss"],
+        extract: outputFormat === "amd",
+        inject: false,
+        minimize: production,
+        plugins: [
+            postcssImport(),
+            /**
+             * We need two copies of postcss-url because of final styles bundling in studio (pro).
+             * On line below, we just copying assets to widget bundle directory (com.mendix.widgets...)
+             * To make it work, this plugin have few requirements:
+             * 1. You should put your assets in src/assets/
+             * 2. You should use relative path in your .scss files (e.g. url(../assets/icon.png)
+             * 3. This plugin relies on `to` property of postcss plugin and it should be present, when
+             * copying files to destination.
+             */
+            postcssUrl({ url: "copy", assetsPath: "assets" }),
+            /**
+             * This instance of postcss-url is just for adjusting asset path.
+             * Check doc comment for *createCssUrlTransform* for explanation.
+             */
+            postcssUrl({ url: cssUrlTransform }),
+            ...postcssPlugins
+        ],
+        sourceMap: !production ? "inline" : false,
+        use: ["sass"],
+        to: join(outDir, `${outWidgetFile}.css`)
+    });
+}
