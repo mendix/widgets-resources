@@ -9,7 +9,11 @@ export const SafeAreaView = (props: SafeAreaViewProps<SafeAreaViewStyle>): JSX.E
     const styles = flattenStyles(defaultSafeAreaViewStyle, props.style);
 
     return (
-        <ReactSaveAreaView style={{ flex: 1 }} pointerEvents={"box-none"} testID={props.name}>
+        <ReactSaveAreaView
+            style={{ flex: 1, ...{ backgroundColor: styles.container.backgroundColor } }}
+            pointerEvents={"box-none"}
+            testID={props.name}
+        >
             <View style={styles.container} pointerEvents={"box-none"}>
                 {props.content}
             </View>
