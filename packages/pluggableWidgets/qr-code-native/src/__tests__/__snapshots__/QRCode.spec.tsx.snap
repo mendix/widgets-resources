@@ -3,6 +3,7 @@
 exports[`QRCode renders a qr code 1`] = `
 <View
   style={Object {}}
+  testID="qr-code-test"
 >
   <RNSVGSvgView
     align="xMidYMid"
@@ -292,5 +293,6 @@ exports[`QRCode renders a qr code 1`] = `
 exports[`QRCode renders an empty container when there is no value 1`] = `
 <View
   style={Object {}}
+  testID="qr-code-test"
 />
 `;
