@@ -67,7 +67,7 @@ export function check(values: BackgroundGradientPreviewProps): Problem[] {
         if (opacity > 1 || opacity < 0) {
             errors.push({
                 property: "opacity",
-                message: "opacity should be between 0 and 1"
+                message: "Opacity should be between 0 and 1"
             });
         }
     }
@@ -75,7 +75,7 @@ export function check(values: BackgroundGradientPreviewProps): Problem[] {
         if (angle > 360 || angle < 0) {
             errors.push({
                 property: "angle",
-                message: "angle should be between 0 and 360"
+                message: "Angle should be between 0 and 360"
             });
         }
     }
@@ -83,7 +83,7 @@ export function check(values: BackgroundGradientPreviewProps): Problem[] {
     if (colorList.some(item => item.offset! > 1 || item.offset! < 0)) {
         errors.push({
             property: "colorList",
-            message: "color offset should be between 0 and 1"
+            message: "Color offset should be between 0 and 1"
         });
     } else if (colorList.some(item => !checkTwoDecimalDigits(item.offset || 0))) {
         errors.push({
