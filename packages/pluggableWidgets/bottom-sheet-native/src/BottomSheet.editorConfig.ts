@@ -10,6 +10,7 @@ import {
 import { BottomSheetPreviewProps } from "../typings/BottomSheetProps";
 
 export function getPreview(values: BottomSheetPreviewProps, isDarkMode: boolean): StructurePreviewProps {
+    const contentFontColor = isDarkMode ? "#DEDEDE" : "#6B707B";
     return {
         type: "Container",
         borders: true,
@@ -24,7 +25,7 @@ export function getPreview(values: BottomSheetPreviewProps, isDarkMode: boolean)
                         children: [
                             {
                                 type: "Text",
-                                fontColor: isDarkMode ? "#DEDEDE" : "#6B707B",
+                                fontColor: contentFontColor,
                                 content: "Bottom Sheet"
                             }
                         ]
@@ -52,6 +53,7 @@ export function getPreview(values: BottomSheetPreviewProps, isDarkMode: boolean)
                               },
                               {
                                   type: "Text",
+                                  fontColor: contentFontColor,
                                   content: value.caption || `[Item ${index + 1}]`
                               },
                               {

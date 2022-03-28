@@ -10,44 +10,48 @@ import {
 import { AccordionPreviewProps, GroupsPreviewType } from "../typings/AccordionProps";
 
 export function getPreview(values: AccordionPreviewProps, isDarkMode: boolean): StructurePreviewProps {
+    const headerBackgroundColor: string = isDarkMode ? "#454545" : "#F5F5F5";
+
     const noGroupsContainer: ContainerProps = {
         type: "Container",
-        backgroundColor: isDarkMode ? "#4F4F4F" : "#F5F5F5",
         borders: true,
         children: [
             {
                 type: "Container",
-                padding: 8,
+                backgroundColor: headerBackgroundColor,
                 children: [
                     {
-                        type: "Text",
-                        fontColor: isDarkMode ? "#DEDEDE" : "#0A1324",
-                        bold: true,
-                        content: "[No groups configured]"
+                        type: "RowLayout",
+                        padding: 8,
+                        columnSize: "grow",
+                        children: [
+                            { type: "Container" },
+                            {
+                                type: "Text",
+                                fontColor: isDarkMode ? "#A4A4A4" : "#0A1324",
+                                bold: true,
+                                content: "[No groups configured]"
+                            },
+                            { type: "Container" }
+                        ]
                     }
                 ]
             },
             {
                 type: "Container",
-                backgroundColor: isDarkMode ? "#252525" : "#FFFFFF",
                 children: [
                     {
                         type: "RowLayout",
-                        padding: 24,
+                        padding: 8,
                         columnSize: "grow",
                         children: [
-                            {
-                                type: "Container",
-                                grow: 1
-                            },
+                            { type: "Container" },
                             {
                                 type: "Text",
-                                content: "Add groups in order to place widget here"
+                                content: "Add groups in order to place widget here",
+                                fontColor: isDarkMode ? "#A4A4A4" : "#6B707B"
                             },
-                            {
-                                type: "Container",
-                                grow: 1
-                            }
+                            { type: "Container" }
                         ]
                     }
                 ]
@@ -61,11 +65,12 @@ export function getPreview(values: AccordionPreviewProps, isDarkMode: boolean): 
         children: [
             {
                 type: "Container",
-                backgroundColor: isDarkMode ? "#454545" : "#F5F5F5",
+                backgroundColor: headerBackgroundColor,
                 children: [
                     {
                         type: "Container",
                         padding: 4,
+                        borders: true,
                         children: [
                             {
                                 type: "Text",
