@@ -1,4 +1,4 @@
-import { StructurePreviewProps } from "@mendix/piw-utils-internal";
+import { StructurePreviewProps, Problem } from "@mendix/piw-utils-internal";
 import { BackgroundGradientPreviewProps } from "../typings/BackgroundGradientProps";
 import iconLight from "./assets/backgroundGradient_light.svg";
 import iconDark from "./assets/backgroundGradient_dark.svg";
@@ -55,3 +55,66 @@ export const getPreview = (values: BackgroundGradientPreviewProps, isDarkMode: b
         }
     ]
 });
+
+export function check(values: BackgroundGradientPreviewProps): Problem[] {
+    const errors: Problem[] = [];
+    const { opacity, angle, colorList } = values;
+    if (opacity) {
+        if (opacity > 1) {
+            errors.push({
+                property: "opacity",
+                message: "opacity can't be more than 1"
+            });
+        } else if (opacity < 0) {
+            errors.push({
+                property: "opacity",
+                message: "opacity can't be less than 0"
+            });
+        }
+    }
+    if (angle) {
+        if (angle > 360) {
+            errors.push({
+                property: "angle",
+                message: "angle can't be more than 360"
+            });
+        } else if (angle < 0) {
+            errors.push({
+                property: "angle",
+                message: "angle can't be less than 0"
+            });
+        }
+    }
+
+    if (colorList.some(item => item.offset! > 1 || item.offset! < 0)) {
+        errors.push({
+            property: "colorList",
+            message: "color offset should be between 0 and 1"
+        });
+    }
+
+    // if (!values.advancedMode) {
+    //     if (!values.basicItems.length) {
+    //         errors.push({
+    //             property: "basicItems",
+    //             message: "For the popup menu to be visible, you need to add at least one item to it."
+    //         });
+    //     }
+    //     values.basicItems.forEach((item, index) => {
+    //         if (item.itemType === "item" && !item.caption) {
+    //             errors.push({
+    //                 property: `basicItems/${index + 1}/caption`,
+    //                 message: "The 'Caption' property is required."
+    //             });
+    //         }
+    //     });
+    // } else {
+    //     if (!values.customItems.length) {
+    //         errors.push({
+    //             property: "customItems",
+    //             message: "For the popup menu to be visible, you need to add at least one item to it."
+    //         });
+    //     }
+    // }
+    return errors;
+}
