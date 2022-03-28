@@ -12,6 +12,8 @@ export default class VideoPlayer extends Component<VideoPlayerContainerProps> {
         const useExpressionForLinks = this.props.type === "expression";
         const url = useExpressionForLinks ? this.props.urlExpression?.value : this.props.videoUrl?.value;
         const poster = useExpressionForLinks ? this.props.posterExpression?.value : this.props.posterUrl?.value;
+        const key = poster ? `${url}-${poster}` : `${url}`;
+
         return (
             <SizeContainer
                 className={classNames("widget-video-player widget-video-player-container", this.props.class)}
@@ -24,6 +26,7 @@ export default class VideoPlayer extends Component<VideoPlayerContainerProps> {
                 tabIndex={this.props.tabIndex}
             >
                 <Video
+                    key={key}
                     url={url}
                     poster={poster}
                     autoStart={this.props.autoStart}
