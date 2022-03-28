@@ -36,9 +36,12 @@ import url from "./rollup-plugin-assets";
 const outDir = join(sourcePath, "/dist/tmp/widgets/");
 const outWidgetDir = join(widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase());
 const outWidgetFile = join(outWidgetDir, `${widgetName}`);
+const absoluteOutPackageDir = join(outDir, outWidgetDir);
 const mpkDir = join(sourcePath, "dist", widgetVersion);
 const mpkFile = join(mpkDir, process.env.MPKOUTPUT ? process.env.MPKOUTPUT : `${widgetPackage}.${widgetName}.mpk`);
 const assetsDirName = "assets";
+const absoluteOutAssetsDir = join(absoluteOutPackageDir, assetsDirName);
+const outAssetsDir = join(outWidgetDir, assetsDirName);
 
 /**
  * This function is used by postcss-url.
@@ -52,7 +55,8 @@ const assetsDirName = "assets";
  * before: assets/icon.png
  * after: com/mendix/widget/web/accordion/assets/icon.png
  */
-const cssUrlTransform = asset => `${outWidgetDir}/${asset.url}`;
+const cssUrlTransform = asset =>
+    asset.url.startsWith(`${assetsDirName}/`) ? `${outWidgetDir}/${asset.url}` : asset.url;
 
 export default async args => {
     const production = Boolean(args.configProduction);
@@ -76,36 +80,10 @@ export default async args => {
                 url({
                     include: imagesAndFonts,
                     limit: 0,
-                    publicPath: `${join("widgets", outWidgetDir, assetsDirName)}/`, // Prefix for the actual import, relative to Mendix web server root
-                    destDir: join(outDir, outWidgetDir, assetsDirName)
+                    publicPath: `${join("widgets", outAssetsDir)}/`, // Prefix for the actual import, relative to Mendix web server root
+                    destDir: absoluteOutAssetsDir
                 }),
-                postcss({
-                    extensions: [".css", ".sass", ".scss"],
-                    extract: outputFormat === "amd",
-                    inject: false,
-                    minimize: production,
-                    plugins: [
-                        postcssImport(),
-                        /**
-                         * We need two copies of postcss-url because of final styles bundling in studio (pro).
-                         * On line below, we just copying assets to widget bundle directory (com.mendix.widgets...)
-                         * To make it work, this plugin have few requirements:
-                         * 1. You should put your assets in src/assets/
-                         * 2. You should use relative path in your .scss files (e.g. url(../assets/icon.png)
-                         * 3. This plugin relies on `to` property of postcss plugin and it should be present, when
-                         * copying files to destination.
-                         */
-                        postcssUrl({ url: "copy", assetsPath: "assets" }),
-                        /**
-                         * This instance of postcss-url is just for adjusting asset path.
-                         * Check doc comment for *createCssUrlTransform* for explanation.
-                         */
-                        postcssUrl({ url: cssUrlTransform })
-                    ],
-                    sourceMap: !production ? "inline" : false,
-                    use: ["sass"],
-                    to: join(outDir, `${outWidgetFile}.css`)
-                }),
+                postCssPlugin(outputFormat, production),
                 alias({
                     entries: {
                         "react-hot-loader/root": join(__dirname, "hot")
@@ -338,3 +316,34 @@ const webExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/, /^big.
 const editorPreviewExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/];
 
 const editorConfigExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/];
+
+export function postCssPlugin(outputFormat, production, postcssPlugins = []) {
+    return postcss({
+        extensions: [".css", ".sass", ".scss"],
+        extract: outputFormat === "amd",
+        inject: false,
+        minimize: production,
+        plugins: [
+            postcssImport(),
+            /**
+             * We need two copies of postcss-url because of final styles bundling in studio (pro).
+             * On line below, we just copying assets to widget bundle directory (com.mendix.widgets...)
+             * To make it work, this plugin have few requirements:
+             * 1. You should put your assets in src/assets/
+             * 2. You should use relative path in your .scss files (e.g. url(../assets/icon.png)
+             * 3. This plugin relies on `to` property of postcss plugin and it should be present, when
+             * copying files to destination.
+             */
+            postcssUrl({ url: "copy", assetsPath: "assets" }),
+            /**
+             * This instance of postcss-url is just for adjusting asset path.
+             * Check doc comment for *createCssUrlTransform* for explanation.
+             */
+            postcssUrl({ url: cssUrlTransform }),
+            ...postcssPlugins
+        ],
+        sourceMap: !production ? "inline" : false,
+        use: ["sass"],
+        to: join(outDir, `${outWidgetFile}.css`)
+    });
+}
