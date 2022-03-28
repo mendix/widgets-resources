@@ -5,8 +5,6 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // - the code between BEGIN EXTRA CODE and END EXTRA CODE
 // Other code you write will be lost the next time you deploy the project.
-import { Big } from "big.js";
-
 // BEGIN EXTRA CODE
 const COUNTER_STORE = "idCounter";
 let locked = false;
@@ -17,36 +15,33 @@ function sleep(time) {
 async function initializeCounter() {
     currentCounter = JSON.parse((await getItem(COUNTER_STORE)) || "-1");
 }
-function getItem(key) {
+async function getItem(key) {
     if (navigator && navigator.product === "ReactNative") {
-        const AsyncStorage = require("@react-native-community/async-storage").default;
+        const AsyncStorage = (await import('@react-native-community/async-storage')).default;
         return AsyncStorage.getItem(key);
     }
     if (window) {
-        const value = window.localStorage.getItem(key);
-        return Promise.resolve(value);
+        return window.localStorage.getItem(key);
     }
-    return Promise.reject(new Error("No storage API available"));
+    throw new Error("No storage API available");
 }
-function setItem(key, value) {
+async function setItem(key, value) {
     if (navigator && navigator.product === "ReactNative") {
-        const AsyncStorage = require("@react-native-community/async-storage").default;
+        const AsyncStorage = (await import('@react-native-community/async-storage')).default;
         return AsyncStorage.setItem(key, value);
     }
     if (window) {
-        window.localStorage.setItem(key, value);
-        return Promise.resolve();
+        return window.localStorage.setItem(key, value);
     }
-    return Promise.reject(new Error("No storage API available"));
+    throw new Error("No storage API available");
 }
 // END EXTRA CODE
-
 /**
  * Generates a unique ID based on the current session.
  * @returns {Promise.<string>}
  */
-export async function GenerateUniqueID() {
-	// BEGIN USER CODE
+async function GenerateUniqueID() {
+    // BEGIN USER CODE
     const sessionId = mx.session.getConfig("sessionObjectId");
     const rnd = Math.round(Math.random() * 10000);
     // eslint-disable-next-line no-unmodified-loop-condition
@@ -60,5 +55,7 @@ export async function GenerateUniqueID() {
     await setItem(COUNTER_STORE, JSON.stringify(++currentCounter));
     locked = false;
     return `${sessionId}:${currentCounter}:${rnd}`;
-	// END USER CODE
+    // END USER CODE
 }
+
+export { GenerateUniqueID };
