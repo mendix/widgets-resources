@@ -21304,4 +21304,613 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
   margin-right: 16px;
 }
 
+/* ==========================================================================
+   Alerts
+
+   Default Bootstrap Alert boxes. Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages
+========================================================================== */
+.alert {
+  margin-top: 0;
+  padding: 16px;
+  border: 1px solid;
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.alert-icon {
+  font-size: 24px;
+}
+
+.alert-title {
+  color: inherit;
+}
+
+.alert-description {
+  color: inherit;
+}
+
+.alert-primary,
+.alert {
+  color: #172c89;
+  border-color: #1b34a0;
+  background-color: #e9edfc;
+}
+
+.alert-secondary {
+  color: #172c89;
+  border-color: #1b34a0;
+  background-color: #e9edfc;
+}
+
+.alert-success {
+  color: #246b25;
+  border-color: #2a7d2b;
+  background-color: #d8f0d8;
+}
+
+.alert-warning {
+  color: #8e6311;
+  border-color: #a57414;
+  background-color: #fbedd2;
+}
+
+.alert-danger {
+  color: #88262f;
+  border-color: #9f2c37;
+  background-color: #f9d9dc;
+}
+
+.has-error .alert {
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Breadcrumbs
+
+========================================================================== */
+.breadcrumb {
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  background-color: transparent;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.breadcrumb-item {
+  display: inline-block;
+  margin: 0;
+}
+.breadcrumb-item:last-child {
+  color: #0a1325;
+}
+.breadcrumb-item:last-child a {
+  text-decoration: none;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  display: inline-block;
+  padding-right: 8px;
+  padding-left: 8px;
+  content: "/";
+  color: #a9acb3;
+}
+
+.breadcrumb-large {
+  font-size: 24px;
+}
+
+.breadcrumb-underline {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ced0d3;
+}
+
+/* ==========================================================================
+   Cards
+
+========================================================================== */
+.card {
+  border: 0;
+  border-radius: 4px;
+  background-color: #ffffff;
+  overflow: hidden;
+  position: relative;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.card-body {
+  padding: 24px;
+}
+
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(250, 250, 250, 0) 8%, rgba(0, 0, 0, 0.99) 121%, #000 100%);
+  padding: 24px;
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+}
+
+.card-icon {
+  font-size: 31px;
+}
+
+.card-with-image {
+  overflow: hidden;
+}
+
+.card-with-background {
+  position: relative;
+}
+
+/* ==========================================================================
+   Chats
+
+========================================================================== */
+.chat {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #fff;
+}
+
+.chat-content {
+  display: flex;
+  overflow: auto;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.chat-content .chat-list {
+  position: relative;
+  overflow: auto;
+}
+.chat-content .chat-list ul {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-bottom: 16px;
+}
+.chat-content .chat-list li {
+  padding: 15px 30px;
+  animation: fadeIn 0.2s;
+  background-color: transparent;
+  animation-fill-mode: both;
+}
+.chat-content .chat-list li, .chat-content .chat-list li:last-child {
+  border: 0;
+}
+.chat-content .chat-list .mx-listview-loadMore {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: block;
+  width: 50%;
+  margin: 15px auto;
+  color: #ffffff;
+  background-color: #264ae5;
+  box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.05);
+}
+
+.chat-message {
+  display: flex;
+}
+
+.chat-avatar {
+  margin: 0 20px 0 0;
+  border-radius: 50%;
+}
+
+.chat-message-content {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.chat-message-balloon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+}
+.chat-message-balloon::after {
+  position: absolute;
+  top: 10px;
+  right: 100%;
+  width: 0;
+  height: 0;
+  content: "";
+  border: 10px solid transparent;
+  border-top: 0;
+  border-right-color: #f8f8f8;
+  border-left: 0;
+}
+
+.chat-message-time {
+  padding-top: 2px;
+}
+.chat-message-time .form-control-static {
+  border: 0;
+}
+
+.chat-footer {
+  z-index: 1;
+  padding: 16px;
+  background-color: #f8f8f8;
+  box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.05);
+}
+
+.chat-input {
+  display: flex;
+}
+.chat-input .chat-textbox {
+  flex: 1;
+  margin-right: 24px;
+  margin-bottom: 0;
+}
+.chat-input .chat-textbox .form-control {
+  border: 0;
+}
+
+.chat-message-self {
+  justify-content: flex-end;
+}
+.chat-message-self .chat-avatar {
+  margin: 0 0 0 20px;
+}
+.chat-message-self .chat-message-balloon {
+  background-color: #d4dbfa;
+}
+.chat-message-self .chat-message-balloon::after {
+  left: 100%;
+  border: 10px solid transparent;
+  border-top: 0;
+  border-right: 0;
+  border-left-color: #d4dbfa;
+}
+.chat-message-self .chat-message-time {
+  text-align: right;
+}
+
+/* ==========================================================================
+   Control Group
+
+   A group of buttons next to eachother
+========================================================================== */
+.controlgroup .btn,
+.controlgroup .btn-group {
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+.controlgroup .btn:last-child,
+.controlgroup .btn-group:last-child {
+  margin-right: 0;
+}
+.controlgroup .btn .btn,
+.controlgroup .btn-group .btn {
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.controlgroup .btn-group .btn + .btn {
+  margin-left: -1px;
+}
+
+/* ==========================================================================
+   Full page blocks
+
+   Blocks that take up the full width and height
+========================================================================== */
+.fullpageblock {
+  position: relative;
+  height: 100%;
+  min-height: 100%;
+}
+.fullpageblock .fullheight {
+  height: 100% !important;
+}
+.fullpageblock .fullheight > .mx-dataview-content {
+  height: inherit !important;
+}
+.fullpageblock .fullpage-overlay {
+  position: absolute;
+  z-index: 10;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+/* ==========================================================================
+   Pageheader
+========================================================================== */
+.pageheader {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+/* ==========================================================================
+   Hero header
+
+========================================================================== */
+.headerhero {
+  width: 100%;
+  min-height: 240px;
+  background-color: #264ae5;
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.headerhero-title {
+  color: #fff;
+}
+
+.headerhero-subtitle {
+  color: #fff;
+}
+
+.headerhero-backgroundimage {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  filter: brightness(60%);
+}
+
+.btn.headerhero-action {
+  color: #fff;
+}
+
+.heroheader-overlay {
+  z-index: 1;
+}
+
+/* ==========================================================================
+   Form Block
+
+   Used in default forms
+========================================================================== */
+.formblock {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+/* ==========================================================================
+   Master Detail
+
+    A list with a listening dataview
+========================================================================== */
+.masterdetail {
+  background: #fff;
+}
+.masterdetail .masterdetail-master {
+  border-right: 1px solid #ced0d3;
+}
+.masterdetail .masterdetail-detail {
+  padding: 24px;
+}
+
+.masterdetail-vertical {
+  background: #fff;
+}
+.masterdetail-vertical .masterdetail-master {
+  border-bottom: 1px solid #ced0d3;
+}
+.masterdetail-vertical .masterdetail-detail {
+  padding: 24px;
+}
+
+/* ==========================================================================
+   User profile blocks
+   -
+========================================================================== */
+.wizard {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.wizard-step {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.wizard-step-number {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  color: #0a1325;
+  font-size: 24px;
+  border-radius: 50%;
+  background-color: #fff;
+  border-color: #ced0d3;
+}
+
+.wizard-step-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  color: #0a1325;
+}
+
+.wizard-circle .wizard-step {
+  flex-direction: column;
+}
+.wizard-circle .wizard-step::before {
+  position: absolute;
+  z-index: 0;
+  top: 32px;
+  display: block;
+  width: 100%;
+  height: 2px;
+  content: "";
+  background-color: #ced0d3;
+}
+
+.wizard-arrow .wizard-step {
+  height: 48px;
+  margin-left: calc(0px - (48px / 2));
+  padding-left: 24px;
+  background-color: #fff;
+  justify-content: flex-start;
+  border: 1px solid #ced0d3;
+}
+.wizard-arrow .wizard-step::before, .wizard-arrow .wizard-step::after {
+  position: absolute;
+  z-index: 1;
+  left: 100%;
+  margin-left: calc(0px - ((48px / 2) - 1px));
+  content: " ";
+  border-style: solid;
+  border-color: transparent;
+}
+.wizard-arrow .wizard-step::after {
+  top: 0;
+  border-width: calc((48px / 2) - 1px);
+  border-left-color: #fff;
+}
+.wizard-arrow .wizard-step::before {
+  top: -1px;
+  border-width: 24px;
+  border-left-color: #ced0d3;
+}
+.wizard-arrow .wizard-step:first-child {
+  margin-left: 0;
+  padding-left: 0;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.wizard-arrow .wizard-step:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.wizard-arrow .wizard-step:last-child::before, .wizard-arrow .wizard-step:last-child::after {
+  display: none;
+}
+
+.wizard-circle .wizard-step-active .wizard-step-number {
+  color: #1b34a0;
+  border-color: #1b34a0;
+  background-color: #d4dbfa;
+}
+.wizard-circle .wizard-step-active .wizard-step-text {
+  color: #1b34a0;
+}
+
+.wizard-circle .wizard-step-visited .wizard-step-number {
+  color: #2a7d2b;
+  border-color: #2a7d2b;
+  background-color: #d8f0d8;
+}
+.wizard-circle .wizard-step-visited .wizard-step-text {
+  color: #2a7d2b;
+}
+
+.wizard-arrow .wizard-step-active {
+  background-color: #d4dbfa;
+}
+.wizard-arrow .wizard-step-active .wizard-step-text {
+  color: #1b34a0;
+}
+.wizard-arrow .wizard-step-active::after {
+  border-left-color: #d4dbfa;
+}
+
+.wizard-arrow .wizard-step-visited .wizard-step-text {
+  color: #264ae5;
+}
+
+.login-formblock {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.listtab-tabs.mx-tabcontainer {
+  background: #fff;
+}
+.listtab-tabs.mx-tabcontainer .mx-tabcontainer-tabs {
+  background: #264ae5;
+  margin-bottom: 0;
+}
+.listtab-tabs.mx-tabcontainer .mx-tabcontainer-tabs li > a {
+  color: #fff;
+  opacity: 0.6;
+}
+.listtab-tabs.mx-tabcontainer .mx-tabcontainer-tabs li > a:hover, .listtab-tabs.mx-tabcontainer .mx-tabcontainer-tabs li > a:focus {
+  color: #fff;
+}
+.listtab-tabs.mx-tabcontainer .mx-tabcontainer-tabs li.active > a {
+  opacity: 1;
+  color: #fff;
+  border-color: #fff;
+}
+.listtab-tabs.mx-tabcontainer .mx-tabcontainer-tabs li.active > a:hover, .listtab-tabs.mx-tabcontainer .mx-tabcontainer-tabs li.active > a:focus {
+  color: #fff;
+  border-color: #fff;
+}
+
+.springboard-grid {
+  display: flex;
+  flex-direction: column;
+}
+.springboard-grid .row {
+  flex: 1;
+}
+.springboard-grid .row .col {
+  display: flex;
+}
+
+.springboard-header {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.springboard-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.statuspage-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.statuspage-content {
+  flex: 1;
+}
+
+.statuspage-icon {
+  color: #fff;
+}
+
+.statuspage-subtitle {
+  opacity: 0.6;
+}
+
 /*# sourceMappingURL=theme.compiled.css.map */

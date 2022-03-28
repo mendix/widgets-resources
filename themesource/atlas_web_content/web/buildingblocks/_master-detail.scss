@@ -1,0 +1,26 @@
+/* ==========================================================================
+   Master Detail
+
+    A list with a listening dataview
+========================================================================== */
+.masterdetail {
+    background: #fff;
+    .masterdetail-master {
+        border-right: 1px solid $border-color-default;
+    }
+    .masterdetail-detail {
+        padding: $spacing-large;
+    }
+}
+
+//== Variations
+//-------------------------------------------------------------------------------------------------------------------//
+.masterdetail-vertical {
+    background: #fff;
+    .masterdetail-master {
+        border-bottom: 1px solid $border-color-default;
+    }
+    .masterdetail-detail {
+        padding: $spacing-large;
+    }
+}
