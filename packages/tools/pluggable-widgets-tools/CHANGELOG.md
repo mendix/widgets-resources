@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+- We fixed the way assets are handled inside widgets to comply with strict Content-Security-Policy.
+
+## [9.11.0] - 2022-02-25
+
 ### Added
 - We added compatibility with node 15+ and npm 7+.
 - We added resolutions for `react`, `react-dom` and `react-native` in order to be compatible with node 15+ and npm 7+.
