@@ -6,6 +6,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.6.0] Native Mobile Resources - 2022-3-28
+
+
+## [3.2.1] Feedback
+### Changed
+
+-   Added test id
+
+## [3.1.1] QRCode
+### Added
+
+-   Added test id
+
+## [3.3.0] VideoPlayer
+### Added
+
+- Android full screen support. Full screen icon can be found on top left of the video if show controls property is set to `true`, when the icon is pressed the video will continue working on an overlay modal.
+
 ## [3.5.2] Native Mobile Resources - 2022-3-22
 ### Fixed
 
