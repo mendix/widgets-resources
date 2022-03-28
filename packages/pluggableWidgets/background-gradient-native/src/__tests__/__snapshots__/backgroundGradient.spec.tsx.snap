@@ -47,7 +47,7 @@ exports[`Background gradient render background gradient correctly 1`] = `
         "y": 0,
       }
     }
-    useAngle={false}
+    useAngle={true}
   >
     <Text>
       Test
