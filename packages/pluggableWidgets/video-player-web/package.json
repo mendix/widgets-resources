@@ -1,7 +1,7 @@
 {
   "name": "video-player-web",
   "widgetName": "VideoPlayer",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Player for YouTube, Dailymotion, Vimeo and Mp4 videos",
   "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "repository": {
