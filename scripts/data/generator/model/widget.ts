@@ -115,7 +115,7 @@ export class Widget {
             matches => matches.length > 0
         );
         const hasE2ETests = await withGlob(
-            `${packagePath}/tests/**/*.spec.{js,jsx,ts,tsx}`,
+            `${packagePath}/{e2e,cypress}/**/*.spec.{js,jsx,ts,tsx}`,
             matches => matches.length > 0
         );
 
