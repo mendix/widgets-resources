@@ -17,21 +17,27 @@ export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
     const optionsRef = useRef<HTMLUListElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
     const position = usePositionObserver(buttonRef.current, show);
+    const visibleCount = props.columns.length - props.hiddenColumns.length;
+    const isOnlyOneColumnVisible = visibleCount < 2;
 
     useOnClickOutside([buttonRef, optionsRef], () => setShow(false));
 
     const label = props.label ?? "Column selector";
 
     const onClick = useCallback(
-        (isVisible: boolean, id: string) =>
-            props.setHiddenColumns(prev => {
-                if (!isVisible) {
-                    return prev.filter(v => v !== id);
-                } else {
-                    return [...prev, id];
-                }
-            }),
-        [props.setHiddenColumns]
+        (isVisible: boolean, id: string) => {
+            const isLastVisibleColumn = isVisible && isOnlyOneColumnVisible;
+            if (!isLastVisibleColumn) {
+                props.setHiddenColumns(prev => {
+                    if (!isVisible) {
+                        return prev.filter(v => v !== id);
+                    } else {
+                        return [...prev, id];
+                    }
+                });
+            }
+        },
+        [props.setHiddenColumns, isOnlyOneColumnVisible]
     );
 
     const firstHidableColumnIndex = useMemo(() => props.columns.findIndex(c => c.canHide), [props.columns]);
@@ -52,6 +58,7 @@ export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
         >
             {props.columns.map((column: ColumnProperty, index: number) => {
                 const isVisible = !props.hiddenColumns.includes(column.id);
+                const isLastVisibleColumn = isVisible && isOnlyOneColumnVisible;
                 return column.canHide ? (
                     <li
                         key={index}
@@ -81,7 +88,7 @@ export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
                     >
                         <input
                             checked={isVisible}
-                            disabled={isVisible && props.columns.length - props.hiddenColumns.length === 1}
+                            disabled={isLastVisibleColumn}
                             id={`${props.id}_checkbox_toggle_${index}`}
                             style={{ pointerEvents: "none" }}
                             type="checkbox"
