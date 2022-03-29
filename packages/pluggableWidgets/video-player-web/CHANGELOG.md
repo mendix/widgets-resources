@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-- We fixed the issue when after changing URL property of Video Player, app navigation is get broken. (Ticket #143982)
+- We fixed the issue that when changing the URL property of the Video Player, app navigation is get broken. (Ticket #143982)
 
 ## [3.1.0] - 2021-12-23
 

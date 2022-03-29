@@ -12,7 +12,7 @@ export default class VideoPlayer extends Component<VideoPlayerContainerProps> {
         const useExpressionForLinks = this.props.type === "expression";
         const url = useExpressionForLinks ? this.props.urlExpression?.value : this.props.videoUrl?.value;
         const poster = useExpressionForLinks ? this.props.posterExpression?.value : this.props.posterUrl?.value;
-        const key = poster ? `${url}-${poster}` : `${url}`;
+        const key = poster ? `${url}-${poster}` : url;
 
         return (
             <SizeContainer
