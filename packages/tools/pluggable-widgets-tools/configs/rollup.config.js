@@ -7,7 +7,6 @@ import image from "@rollup/plugin-image";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import replace from "rollup-plugin-re";
 import typescript from "@rollup/plugin-typescript";
-import url from "@rollup/plugin-url";
 import { red, yellow, blue } from "ansi-colors";
 import postcssImport from "postcss-import";
 import postcssUrl from "postcss-url";
@@ -32,11 +31,14 @@ import {
     widgetPackage,
     widgetVersion
 } from "./shared";
+import url from "./rollup-plugin-assets";
 
 const outDir = join(sourcePath, "/dist/tmp/widgets/");
-const outWidgetFile = join(widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase(), `${widgetName}`);
+const outWidgetDir = join(widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase());
+const outWidgetFile = join(outWidgetDir, `${widgetName}`);
 const mpkDir = join(sourcePath, "dist", widgetVersion);
 const mpkFile = join(mpkDir, process.env.MPKOUTPUT ? process.env.MPKOUTPUT : `${widgetPackage}.${widgetName}.mpk`);
+const assetsDirName = "assets";
 
 export default async args => {
     const production = Boolean(args.configProduction);
@@ -57,7 +59,12 @@ export default async args => {
             external: webExternal,
             plugins: [
                 ...getClientComponentPlugins(),
-                url({ include: imagesAndFonts, limit: 100000 }),
+                url({
+                    include: imagesAndFonts,
+                    limit: 0,
+                    publicPath: `${join("widgets", outWidgetDir, assetsDirName)}/`, // Prefix for the actual import, relative to Mendix web server root
+                    destDir: join(outDir, outWidgetDir, assetsDirName)
+                }),
                 postcss({
                     extensions: [".css", ".sass", ".scss"],
                     extract: production && outputFormat === "amd",
