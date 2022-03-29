@@ -11,9 +11,16 @@ module.exports = {
             }
         },
         {
-            files: ["package.json", "package.json"],
+            files: "package.json",
             options: {
                 tabWidth: 2
+            }
+        },
+        {
+            files: "package-lock.json",
+            options: {
+                tabWidth: 4,
+                useTabs: false
             }
         },
         {
