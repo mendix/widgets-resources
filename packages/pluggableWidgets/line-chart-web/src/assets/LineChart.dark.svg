@@ -1,20 +1,20 @@
-<svg width="406" height="232" viewBox="0 0 406 232" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="41.7722" y="27.087" width="356.962" height="1.26087" fill="#646464"/>
-<rect x="41.7722" y="105.261" width="356.962" height="1.26088" fill="#646464"/>
-<rect x="41.7722" y="183.435" width="356.962" height="1.26088" fill="#646464"/>
-<path d="M64.5571 151.913L169.62 136.783L382.279 167.043" stroke="#FFDA70"/>
-<ellipse cx="169.62" cy="136.783" rx="2.53164" ry="2.52174" fill="#FFDA70"/>
-<ellipse cx="274.684" cy="151.913" rx="2.53166" ry="2.52174" fill="#FFDA70"/>
-<ellipse cx="381.013" cy="167.043" rx="2.53166" ry="2.52175" fill="#FFDA70"/>
-<ellipse cx="64.557" cy="151.913" rx="2.53165" ry="2.52174" fill="#FFDA70"/>
-<path d="M67.0886 29.6087L167.089 91.3913L274.684 76.2609L383.544 139.304" stroke="#344BCE"/>
-<ellipse cx="65.8229" cy="28.3479" rx="2.53165" ry="2.52174" fill="#344BCE"/>
-<ellipse cx="167.089" cy="91.3913" rx="2.53166" ry="2.52174" fill="#344BCE"/>
-<ellipse cx="274.684" cy="76.2609" rx="2.53166" ry="2.52174" fill="#344BCE"/>
-<ellipse cx="382.279" cy="139.304" rx="2.53163" ry="2.52174" fill="#579BF9"/>
-<path d="M63.2913 76.2609L169.62 59.8696L274.684 121.652L382.279 136.783" stroke="#579BF9"/>
-<ellipse cx="64.557" cy="76.2609" rx="2.53165" ry="2.52174" fill="#579BF9"/>
-<ellipse cx="169.62" cy="59.8696" rx="2.53164" ry="2.52174" fill="#579BF9"/>
-<ellipse cx="274.684" cy="121.652" rx="2.53166" ry="2.52174" fill="#579BF9"/>
-<ellipse cx="382.278" cy="136.783" rx="2.53165" ry="2.52174" fill="#344BCE"/>
+<svg width="720" height="440" viewBox="0 0 720 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect y="62.5425" width="720" height="2.54252" fill="#646464"/>
+<rect y="220.179" width="720" height="2.54254" fill="#646464"/>
+<rect y="377.815" width="720" height="2.54256" fill="#646464"/>
+<path d="M45.9578 314.252L257.873 283.742L686.809 344.763" stroke="#FFDA70" stroke-width="2"/>
+<ellipse cx="257.873" cy="283.742" rx="5.10637" ry="5.08504" fill="#FFDA70"/>
+<ellipse cx="469.787" cy="314.252" rx="5.10645" ry="5.08505" fill="#FFDA70"/>
+<ellipse cx="684.256" cy="344.763" rx="5.10639" ry="5.08508" fill="#FFDA70"/>
+<ellipse cx="45.9577" cy="314.252" rx="5.10639" ry="5.08505" fill="#FFDA70"/>
+<path d="M51.0638 67.6276L252.766 192.211L469.787 161.701L689.362 288.827" stroke="#344BCE" stroke-width="2"/>
+<ellipse cx="48.5105" cy="65.085" rx="5.10639" ry="5.08505" fill="#344BCE"/>
+<ellipse cx="252.766" cy="192.211" rx="5.10641" ry="5.08505" fill="#344BCE"/>
+<ellipse cx="469.787" cy="161.701" rx="5.10645" ry="5.08505" fill="#344BCE"/>
+<ellipse cx="686.808" cy="288.827" rx="5.10635" ry="5.08505" fill="#579BF9"/>
+<path d="M43.4045 161.701L257.873 128.648L469.788 253.232L686.809 283.742" stroke="#579BF9" stroke-width="2"/>
+<ellipse cx="45.9577" cy="161.701" rx="5.10639" ry="5.08505" fill="#579BF9"/>
+<ellipse cx="257.873" cy="128.648" rx="5.10637" ry="5.08504" fill="#579BF9"/>
+<ellipse cx="469.787" cy="253.232" rx="5.10645" ry="5.08504" fill="#579BF9"/>
+<ellipse cx="686.809" cy="283.742" rx="5.10639" ry="5.08504" fill="#344BCE"/>
 </svg>
