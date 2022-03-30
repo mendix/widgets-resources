@@ -18,7 +18,7 @@ export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const position = usePositionObserver(buttonRef.current, show);
     const visibleCount = props.columns.length - props.hiddenColumns.length;
-    const isOnlyOneColumnVisible = visibleCount < 2;
+    const isOnlyOneColumnVisible = visibleCount === 1;
 
     useOnClickOutside([buttonRef, optionsRef], () => setShow(false));
 
