@@ -92,5 +92,13 @@
   },
   "engines": {
     "node": ">=14"
+  },
+  "overrides": {
+    "@testing-library/react-native": {
+      "react-test-renderer": "17.0.2"
+    },
+    "react-native": {
+      "use-subscription": "1.5.1"
+    }
   }
 }
