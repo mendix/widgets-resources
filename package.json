@@ -92,5 +92,11 @@
   },
   "engines": {
     "node": ">=14"
+  },
+  "overrides": {
+    "react": "17.0.1"
+  },
+  "resolutions": {
+    "react": "17.0.1"
   }
 }
