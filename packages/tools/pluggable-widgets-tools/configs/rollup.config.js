@@ -7,7 +7,6 @@ import image from "@rollup/plugin-image";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import replace from "rollup-plugin-re";
 import typescript from "@rollup/plugin-typescript";
-import url from "@rollup/plugin-url";
 import { red, yellow, blue } from "ansi-colors";
 import postcssImport from "postcss-import";
 import postcssUrl from "postcss-url";
@@ -32,11 +31,32 @@ import {
     widgetPackage,
     widgetVersion
 } from "./shared";
+import url from "./rollup-plugin-assets";
 
 const outDir = join(sourcePath, "/dist/tmp/widgets/");
-const outWidgetFile = join(widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase(), `${widgetName}`);
+const outWidgetDir = join(widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase());
+const outWidgetFile = join(outWidgetDir, `${widgetName}`);
+const absoluteOutPackageDir = join(outDir, outWidgetDir);
 const mpkDir = join(sourcePath, "dist", widgetVersion);
 const mpkFile = join(mpkDir, process.env.MPKOUTPUT ? process.env.MPKOUTPUT : `${widgetPackage}.${widgetName}.mpk`);
+const assetsDirName = "assets";
+const absoluteOutAssetsDir = join(absoluteOutPackageDir, assetsDirName);
+const outAssetsDir = join(outWidgetDir, assetsDirName);
+
+/**
+ * This function is used by postcss-url.
+ * Its main purpose to "adjust" asset path so that
+ * after bundling css by studio assets paths stay correct.
+ * Adjustment is required because of assets copying -- postcss-url can copy
+ * files, but final url will be relative to *destenation* file and though
+ * will be broken after bundling by studio (pro).
+ *
+ * Example
+ * before: assets/icon.png
+ * after: com/mendix/widget/web/accordion/assets/icon.png
+ */
+const cssUrlTransform = asset =>
+    asset.url.startsWith(`${assetsDirName}/`) ? `${outWidgetDir}/${asset.url}` : asset.url;
 
 export default async args => {
     const production = Boolean(args.configProduction);
@@ -57,16 +77,13 @@ export default async args => {
             external: webExternal,
             plugins: [
                 ...getClientComponentPlugins(),
-                url({ include: imagesAndFonts, limit: 100000 }),
-                postcss({
-                    extensions: [".css", ".sass", ".scss"],
-                    extract: production && outputFormat === "amd",
-                    inject: !production,
-                    minimize: production,
-                    plugins: [postcssImport(), postcssUrl({ url: "inline" })],
-                    sourceMap: !production ? "inline" : false,
-                    use: ["sass"]
+                url({
+                    include: imagesAndFonts,
+                    limit: 0,
+                    publicPath: `${join("widgets", outAssetsDir)}/`, // Prefix for the actual import, relative to Mendix web server root
+                    destDir: absoluteOutAssetsDir
                 }),
+                postCssPlugin(outputFormat, production),
                 alias({
                     entries: {
                         "react-hot-loader/root": join(__dirname, "hot")
@@ -299,3 +316,34 @@ const webExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/, /^big.
 const editorPreviewExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/];
 
 const editorConfigExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/];
+
+export function postCssPlugin(outputFormat, production, postcssPlugins = []) {
+    return postcss({
+        extensions: [".css", ".sass", ".scss"],
+        extract: outputFormat === "amd",
+        inject: false,
+        minimize: production,
+        plugins: [
+            postcssImport(),
+            /**
+             * We need two copies of postcss-url because of final styles bundling in studio (pro).
+             * On line below, we just copying assets to widget bundle directory (com.mendix.widgets...)
+             * To make it work, this plugin have few requirements:
+             * 1. You should put your assets in src/assets/
+             * 2. You should use relative path in your .scss files (e.g. url(../assets/icon.png)
+             * 3. This plugin relies on `to` property of postcss plugin and it should be present, when
+             * copying files to destination.
+             */
+            postcssUrl({ url: "copy", assetsPath: "assets" }),
+            /**
+             * This instance of postcss-url is just for adjusting asset path.
+             * Check doc comment for *createCssUrlTransform* for explanation.
+             */
+            postcssUrl({ url: cssUrlTransform }),
+            ...postcssPlugins
+        ],
+        sourceMap: !production ? "inline" : false,
+        use: ["sass"],
+        to: join(outDir, `${outWidgetFile}.css`)
+    });
+}
