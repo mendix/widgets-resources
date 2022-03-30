@@ -94,9 +94,11 @@
     "node": ">=14"
   },
   "overrides": {
-    "react": "17.0.1"
-  },
-  "resolutions": {
-    "react": "17.0.1"
+    "@testing-library/react-native": {
+      "react-test-renderer": "17.0.2"
+    },
+    "react-native": {
+      "use-subscription": "1.5.1"
+    }
   }
 }
