@@ -1,7 +1,7 @@
 {
   "name": "signature-native",
   "widgetName": "Signature",
-  "version": "2.1.1",
+  "version": "1.0.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "detox": "^19.5.7",
     "eslint": "^7.20.0"
   }
 }
