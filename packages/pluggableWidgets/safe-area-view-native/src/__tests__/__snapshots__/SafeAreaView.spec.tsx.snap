@@ -6,6 +6,7 @@ exports[`Safe area view renders with content 1`] = `
   pointerEvents="box-none"
   style={
     Object {
+      "backgroundColor": undefined,
       "flex": 1,
     }
   }
@@ -32,6 +33,7 @@ exports[`Safe area view renders with custom styling 1`] = `
   pointerEvents="box-none"
   style={
     Object {
+      "backgroundColor": "green",
       "flex": 1,
     }
   }
@@ -59,6 +61,7 @@ exports[`Safe area view renders without content 1`] = `
   pointerEvents="box-none"
   style={
     Object {
+      "backgroundColor": undefined,
       "flex": 1,
     }
   }
