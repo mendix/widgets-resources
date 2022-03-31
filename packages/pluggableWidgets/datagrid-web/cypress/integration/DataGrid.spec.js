@@ -81,6 +81,23 @@ describe("datagrid-web", () => {
             cy.wait(1000);
             cy.get(".mx-name-datagrid1 .column-header").first().should("not.be.visible");
         });
+
+        it("do not allow to hide last visible column", () => {
+            cy.get(".mx-name-datagrid1 .column-header").first().should("be.visible");
+            cy.get(".mx-name-datagrid1 .column-selector-button").click();
+            cy.get(".column-selectors input:checked").should("have.length", 3);
+            cy.get(".column-selectors > li").eq(2).click();
+            cy.get(".column-selectors > li").eq(1).click();
+            cy.get(".column-selectors input:checked").should("have.length", 1);
+            cy.get(".column-selectors > li").eq(0).click();
+            cy.get(".column-selectors input:checked").should("have.length", 1);
+            // Trigger Enter keypress
+            cy.get(".column-selectors > li").eq(0).trigger("keydown", { keyCode: 13 });
+            cy.get(".column-selectors input:checked").should("have.length", 1);
+            // Trigger Space keypress
+            cy.get(".column-selectors > li").eq(0).trigger("keydown", { keyCode: 32 });
+            cy.get(".column-selectors input:checked").should("have.length", 1);
+        });
     });
 
     describe("capabilities: onClick action", () => {
