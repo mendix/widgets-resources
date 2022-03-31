@@ -16,6 +16,7 @@ import classNames from "classnames";
 import { isDate, isValid } from "date-fns";
 import { createPortal } from "react-dom";
 import replaceAllInserter from "string.prototype.replaceall";
+import { doubleMonthOrDayWhenSingle } from "../utils/utils";
 
 export type RangeDateValue = [Date | undefined, Date | undefined];
 
@@ -55,11 +56,12 @@ export const DatePicker = forwardRef(
             }, 10);
         }, []);
 
-        const dateFormats = props.dateFormat ? [props.dateFormat] : undefined;
-        // Check is date format only contains short versions of day and month
-        if (!!props.dateFormat && /(?<![dm])([dm])(?!\1)/.test(props.dateFormat)) {
+        let dateFormats;
+        if (props.dateFormat) {
             // Replace with full patterns d -> dd, M -> MM
-            dateFormats?.push(props.dateFormat.replaceAll(/(?<!d)d(?!d)|(?<!M)M(?!M)/g, m => m + m));
+            const fixedFormatString = doubleMonthOrDayWhenSingle(props.dateFormat);
+            dateFormats =
+                props.dateFormat !== fixedFormatString ? [props.dateFormat, fixedFormatString] : [props.dateFormat];
         }
 
         return (
