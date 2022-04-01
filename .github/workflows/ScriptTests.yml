@@ -33,8 +33,6 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: "Checking-out code"
               uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
-              with:
-                  submodules: false
             - name: "Fetching master to compare"
               if: github.event_name == 'pull_request' && steps.files.outputs.global_files == ''
               run:

@@ -15,8 +15,6 @@ jobs:
         steps:
             - name: "Checking-out code"
               uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
-              with:
-                  submodules: false
             - name: "Defining node version"
               uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 # v3
               with:

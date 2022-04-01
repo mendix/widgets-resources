@@ -18,8 +18,6 @@ jobs:
         steps:
             - name: "Checking-out code"
               uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
-              with:
-                  submodules: false
             - name: "Defining Environment Variables"
               id: variables
               run: echo "::set-output name=tag::$(git tag --points-at HEAD)"
