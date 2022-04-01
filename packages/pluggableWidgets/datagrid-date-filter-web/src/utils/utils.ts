@@ -28,22 +28,5 @@ export function changeTimeToMidnight(date: Date): Date {
  * @param formatString
  */
 export function doubleMonthOrDayWhenSingle(formatString: string): string {
-    return Array.from(formatString)
-        .reduce<string[]>((acc, char, index, array) => {
-            if (char === "d" || char === "M") {
-                const isFirst = index === 0;
-                const isLast = index === array.length - 1;
-                const isNotEqualPrev = isFirst || char !== array[index - 1];
-                const isNotEqualNext = isLast || char !== array[index + 1];
-
-                if (isNotEqualPrev && isNotEqualNext) {
-                    acc.push(char + char);
-                    return acc;
-                }
-            }
-
-            acc.push(char);
-            return acc;
-        }, [])
-        .join("");
+    return formatString.replaceAll(/d+|M+/g, m => (m.length > 1 ? m : m + m));
 }
