@@ -36,7 +36,7 @@ export function Signature(props: Props): ReactElement {
     );
 
     return (
-        <View style={[{ flex: 1 }, containerStyles]}>
+        <View style={[{ flex: 1 }, containerStyles]} testID={props.name}>
             <SignatureScreen
                 ref={ref}
                 autoClear
