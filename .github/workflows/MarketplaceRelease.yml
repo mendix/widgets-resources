@@ -32,9 +32,9 @@ jobs:
             - name: "Defining node version"
               uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 # v3
               with:
-                node-version-file: '.nvmrc'
-                cache: 'npm'
-                cache-dependency-path: '**/package-lock.json'
+                  node-version-file: ".nvmrc"
+                  cache: "npm"
+                  cache-dependency-path: "**/package-lock.json"
             - name: "Installing dependencies"
               run: npm run bootstrap
             - name: "Building native widgets and js actions"
@@ -64,8 +64,8 @@ jobs:
                   SLACK_ICON: ${{ secrets.WEBCONTENT_BOT_IMAGE }}
                   SLACK_MESSAGE:
                       "Something went wrong while uploading version ${{ steps.scope.outputs._1 }} of package ${{
-                      steps.scope.outputs._0 }} to the marketplace.
-                      <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|More info..>"
+                      steps.scope.outputs._0 }} to the marketplace. <https://github.com/${{ github.repository
+                      }}/actions/runs/${{ github.run_id }}|More info..>"
                   SLACK_TITLE: ":warning: *Automation Failed*"
                   SLACK_USERNAME: ${{ secrets.WEBCONTENT_BOT_NAME }}
                   SLACK_WEBHOOK: ${{ secrets.SLACK_MULTIXP_WEBHOOK }}

@@ -9,8 +9,8 @@ on:
     pull_request:
         branches: [master]
         paths:
-          - "packages/theming/atlas/**"
-          - "!**/*.md"
+            - "packages/theming/atlas/**"
+            - "!**/*.md"
 
 jobs:
     test:
@@ -25,9 +25,9 @@ jobs:
             - name: "Defining node version"
               uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 # v3
               with:
-                  node-version-file: '.nvmrc'
-                  cache: 'npm'
-                  cache-dependency-path: '**/package-lock.json'
+                  node-version-file: ".nvmrc"
+                  cache: "npm"
+                  cache-dependency-path: "**/package-lock.json"
             - name: "Installing dependencies"
               run: npm run bootstrap
             - name: "Running Atlas build"

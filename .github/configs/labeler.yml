@@ -1,29 +1,29 @@
 Atlas:
-  - packages/**/*atlas*/**/*
+    - packages/**/*atlas*/**/*
 documentation:
-  - all: ["*.md"]
+    - all: ["*.md"]
 Cross-Platform:
-  - packages/tools/pluggable-widgets-tools/**/*
-  - packages/tools/generator/**/*
-  - packages/modules/atlas-core/**/*
-  - .github/**/*
-  - .husky/**/*
-  - data/**/*
-  - scripts/**/*
+    - packages/tools/pluggable-widgets-tools/**/*
+    - packages/tools/generator/**/*
+    - packages/modules/atlas-core/**/*
+    - .github/**/*
+    - .husky/**/*
+    - data/**/*
+    - scripts/**/*
 Hybrid:
-  - packages/jsActions/*-hybrid/**/*
+    - packages/jsActions/*-hybrid/**/*
 Native:
-  - packages/**/*-native*/**/*
-  - packages/**/*_native*/**/*
-  - detox/**/*
+    - packages/**/*-native*/**/*
+    - packages/**/*_native*/**/*
+    - detox/**/*
 Web:
-  - packages/**/*-web*/**/*
-  - packages/shared/charts/**/*
-  - packages/**/*_web*/**/*
-  - packages/modules/data-widgets/**/*
-  - configs/e2e/**/*
+    - packages/**/*-web*/**/*
+    - packages/shared/charts/**/*
+    - packages/**/*_web*/**/*
+    - packages/modules/data-widgets/**/*
+    - configs/e2e/**/*
 PWA:
-  - packages/**/barcode-scanner-web/**/*
-  - packages/**/nanoflow-actions-web/**/*
+    - packages/**/barcode-scanner-web/**/*
+    - packages/**/nanoflow-actions-web/**/*
 test:
-  - all: ["*.spec.*"]
+    - all: ["*.spec.*"]

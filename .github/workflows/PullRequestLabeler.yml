@@ -1,12 +1,12 @@
 name: "Pull Request Labeler"
 on:
-  - pull_request_target
+    - pull_request_target
 
 jobs:
-  triage:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/labeler@69da01b8e0929f147b8943611bee75ee4175a49e # v3.0.2
-        with:
-          repo-token: ${{ secrets.GH_PAT }}
-          configuration-path: '.github/configs/labeler.yml'
+    triage:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/labeler@69da01b8e0929f147b8943611bee75ee4175a49e # v3.0.2
+              with:
+                  repo-token: ${{ secrets.GH_PAT }}
+                  configuration-path: ".github/configs/labeler.yml"

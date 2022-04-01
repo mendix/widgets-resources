@@ -12,8 +12,8 @@ jobs:
         name: "Automated tests"
         runs-on: ubuntu-latest
         permissions:
-          packages: read
-          contents: read
+            packages: read
+            contents: read
         strategy:
             # when one test fails, DO NOT cancel the other
             fail-fast: false
@@ -25,46 +25,59 @@ jobs:
             - name: "Checking changed files"
               id: files
               uses: softprops/diffset@3aeca0719d5043522e155012d3c9f7470fdd2dc6 # v1
-              if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+              if:
+                  github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name ==
+                  github.repository
               with:
-                global_files: |
-                  !{packages/**/*,configs/e2e/*.json,detox/**/*,scripts/**/*,data/**/*}
-                not_atlas_native_files: |
-                  !packages/theming/atlas/src/**/native/**
+                  global_files: |
+                      !{packages/**/*,configs/e2e/*.json,detox/**/*,scripts/**/*,data/**/*}
+                  not_atlas_native_files: |
+                      !packages/theming/atlas/src/**/native/**
               env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: "Checking-out code"
               uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
               with:
                   submodules: false
             - name: "Fetching master to compare"
-              if: github.event_name == 'pull_request' && (steps.files.outputs.global_files == '' || github.event.pull_request.head.repo.full_name != github.repository)
+              if:
+                  github.event_name == 'pull_request' && (steps.files.outputs.global_files == '' ||
+                  github.event.pull_request.head.repo.full_name != github.repository)
               run:
-                  git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
+                  git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref
+                  }}:refs/remotes/origin/${{ github.base_ref }}
             - name: "Defining environment variables"
               id: variables
               run:
-                  echo ::set-output name=arg::$(if [ "${{ steps.files.outputs.global_files }}" = "" ] && ${{ github.event_name == 'pull_request' }}; then echo '--since origin/${{ github.base_ref }}'; else echo ''; fi)
+                  echo ::set-output name=arg::$(if [ "${{ steps.files.outputs.global_files }}" = "" ] && ${{
+                  github.event_name == 'pull_request' }}; then echo '--since origin/${{ github.base_ref }}'; else echo
+                  ''; fi)
             - name: "Defining node version"
               uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 # v3
               with:
-                node-version-file: '.nvmrc'
-                cache: 'npm'
-                cache-dependency-path: '**/package-lock.json'
+                  node-version-file: ".nvmrc"
+                  cache: "npm"
+                  cache-dependency-path: "**/package-lock.json"
             - name: "Installing dependencies"
               run: npm run bootstrap
             - name: Login to GitHub Container Registry
-              if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+              if:
+                  github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name ==
+                  github.repository
               uses: docker/login-action@42d299face0c5c43a0487c477f595ac9cf22f1a7 # v1.12.0
               with:
                   registry: ghcr.io
                   username: ${{ github.actor }}
                   password: ${{ secrets.GITHUB_TOKEN }}
             - name: "Executing E2E tests"
-              if: github.event_name == 'push' || steps.files.outputs.not_atlas_native_files != '' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository)
+              if:
+                  github.event_name == 'push' || steps.files.outputs.not_atlas_native_files != '' || (github.event_name
+                  == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository)
               run: CIRCLE_NODE_INDEX=${{ matrix.containers }} npm run test:e2e -- ${{ steps.variables.outputs.arg }}
               env:
-                FORKED: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+                  FORKED:
+                      github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name ==
+                      github.repository
             - name: "Fixing files permissions"
               if: failure()
               run: |

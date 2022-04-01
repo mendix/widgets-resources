@@ -7,16 +7,18 @@ on:
 
 jobs:
     notify:
-          name: "Slack Notification"
-          runs-on: ubuntu-latest
-          steps:
-              - name: "Notifying Workflow Team on slack"
-                uses: rtCamp/action-slack-notify@12e36fc18b0689399306c2e0b3e0f2978b7f1ee7 # v2
-                env:
+        name: "Slack Notification"
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Notifying Workflow Team on slack"
+              uses: rtCamp/action-slack-notify@12e36fc18b0689399306c2e0b3e0f2978b7f1ee7 # v2
+              env:
                   SLACK_CHANNEL: ${{ secrets.SLACK_WORKFLOW_CHANNEL }}
                   SLACK_COLOR: ${{ job.status }}
                   SLACK_ICON: ${{ secrets.WEBCONTENT_BOT_IMAGE }}
-                  SLACK_MESSAGE: "A new version of Data Widgets module was released :rocket:. Please update your team's modules/starter apps."
+                  SLACK_MESSAGE:
+                      "A new version of Data Widgets module was released :rocket:. Please update your team's
+                      modules/starter apps."
                   SLACK_TITLE: "New Data Widgets release"
                   SLACK_USERNAME: ${{ secrets.WEBCONTENT_BOT_NAME }}
                   SLACK_WEBHOOK: ${{ secrets.SLACK_WORKFLOW_WEBHOOK }}

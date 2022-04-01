@@ -23,12 +23,14 @@ jobs:
             - name: "Checking changed files"
               id: files
               uses: softprops/diffset@3aeca0719d5043522e155012d3c9f7470fdd2dc6 # v1
-              if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+              if:
+                  github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name ==
+                  github.repository
               with:
-                global_files: |
-                  !{packages/**/*,configs/e2e/*.json,scripts/**/*,data/**/*}
+                  global_files: |
+                      !{packages/**/*,configs/e2e/*.json,scripts/**/*,data/**/*}
               env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: "Checking-out code"
               uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
               with:
@@ -36,7 +38,8 @@ jobs:
             - name: "Fetching master to compare"
               if: github.event_name == 'pull_request' && steps.files.outputs.global_files == ''
               run:
-                  git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
+                  git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref
+                  }}:refs/remotes/origin/${{ github.base_ref }}
             - name: "Defining environment variables"
               if: startsWith(matrix.os, 'windows')
               id: variablesWindows
@@ -50,13 +53,15 @@ jobs:
             - name: "Defining node version"
               uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 # v3
               with:
-                node-version-file: '.nvmrc'
-                cache: 'npm'
-                cache-dependency-path: '**/package-lock.json'
+                  node-version-file: ".nvmrc"
+                  cache: "npm"
+                  cache-dependency-path: "**/package-lock.json"
             - name: "Installing dependencies"
               run: npm run bootstrap
             - name: Increase number of watchers
               if: startsWith(matrix.os, 'ubuntu')
               run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
             - name: "Running PIW-Tools commands tests"
-              run: npm run test:scripts -- ${{ steps.variablesLinux.outputs.arg }} ${{ steps.variablesWindows.outputs.arg }}
+              run:
+                  npm run test:scripts -- ${{ steps.variablesLinux.outputs.arg }} ${{ steps.variablesWindows.outputs.arg
+                  }}
