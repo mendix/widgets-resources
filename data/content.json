@@ -2759,7 +2759,7 @@
         },
         {
             "name": "Signature",
-            "version": "2.1.0",
+            "version": "1.0.0",
             "items": [
                 {
                     "id": "com.mendix.widget.native.signature.Signature",
@@ -2793,7 +2793,7 @@
                     },
                     "tests": {
                         "hasUnitTests": true,
-                        "hasE2ETests": false
+                        "hasE2ETests": true
                     }
                 }
             ]
