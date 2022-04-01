@@ -54,7 +54,7 @@ jobs:
               with:
                   node-version-file: '.nvmrc'
             - name: "Installing dependencies"
-              run: npm install
+              run: npm run bootstrap
             - name: "Running release for production"
               run: npm run release -- ${{ steps.variablesLinux.outputs.arg }} ${{ steps.variablesWindows.outputs.arg }}
               env:

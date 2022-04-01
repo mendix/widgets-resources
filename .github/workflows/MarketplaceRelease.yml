@@ -34,7 +34,7 @@ jobs:
               with:
                   node-version-file: '.nvmrc'
             - name: "Installing dependencies"
-              run: npm install
+              run: npm run bootstrap
             - name: "Building native widgets and js actions"
               if: contains(steps.scope.outputs._0, '-native')
               run: npm run release:native

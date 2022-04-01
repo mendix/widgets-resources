@@ -8,7 +8,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "prepare": "npx husky install",
-    "postinstall": "lerna bootstrap --hoist --strict",
+    "bootstrap": "lerna bootstrap --hoist --strict",
     "reinstall": "git clean -dfx && npx lerna clean --yes && npm i",
     "prettier": "prettier --config \"./prettier.config.js\" --write \"**/{src,script,typings,test}/**/*.{js,jsx,ts,tsx,scss,html,xml}\"",
     "format": "pretty-quick --staged --config \"./prettier.config.js\" --pattern \"**/{src,script,typings,test,**}/**/*.{js,jsx,ts,tsx,scss,html,xml,md,json}\"",

@@ -61,10 +61,10 @@ jobs:
             - name: "Removing package-lock and installing dependencies"
               if: matrix.node == '14'
               # Because lerna doesn't handle nicely the lower version of node we need to remove the package-lock https://github.com/lerna/lerna/issues/2832
-              run: rm -f package-lock.json && npm install
+              run: rm -f package-lock.json && npm run bootstrap
             - name: "Installing dependencies"
               if: matrix.node != '14'
-              run: npm install
+              run: npm run bootstrap
             - name: Increase number of watchers
               if: startsWith(matrix.os, 'ubuntu')
               run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p

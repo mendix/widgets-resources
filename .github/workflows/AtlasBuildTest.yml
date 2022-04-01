@@ -34,7 +34,7 @@ jobs:
               with:
                   node-version-file: '.nvmrc'
             - name: "Installing dependencies"
-              run: npm install
+              run: npm run bootstrap
             - name: "Running Atlas build"
               run: |
                   cd packages/theming/atlas

@@ -22,7 +22,7 @@ jobs:
               with:
                   node-version-file: '.nvmrc'
             - name: "Installing dependencies"
-              run: npm install
+              run: npm run bootstrap
             - name: "Building ${{ github.event.inputs.widget-name }}"
               run: "npm run release -- --scope '${{ github.event.inputs.widget-name }}'"
             - name: "Creating ${{ github.event.inputs.widget-name }} widget release"

@@ -60,7 +60,7 @@ jobs:
               with:
                   node-version-file: ".nvmrc"
             - name: "Installing dependencies"
-              run: npm install
+              run: npm run bootstrap
             - name: Login to GitHub Container Registry
               if:
                   github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name ==
