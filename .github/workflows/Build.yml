@@ -42,17 +42,12 @@ jobs:
               id: variablesWindows
               run:
                 echo "::set-output name=arg::$(If ('${{ steps.files.outputs.global_files }}' -eq '' -AND '${{ github.event_name == 'pull_request' }}' -eq 'true'){ echo '--since origin/${{ github.base_ref }}' } Else { echo '' })"
-            - name: "Defining cache"
-              uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed # v2
-              env:
-                  cache-name: cache-node-modules
-              with:
-                  path: ~/.npm
-                  key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
             - name: "Defining node version"
-              uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
+              uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 # v3
               with:
-                  node-version-file: '.nvmrc'
+                node-version-file: '.nvmrc'
+                cache: 'npm'
+                cache-dependency-path: '**/package-lock.json'
             - name: "Installing dependencies"
               run: npm run bootstrap
             - name: "Running build for development"

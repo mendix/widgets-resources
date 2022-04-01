@@ -20,9 +20,11 @@ jobs:
         id: variables
         run: echo "::set-output name=tag::$(git tag --points-at HEAD)"
       - name: "Defining node version"
-        uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
+        uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 # v3
         with:
-            node-version-file: '.nvmrc'
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
       - name: "Installing dependencies"
         run: npm run bootstrap
       - name: "Targeting Pluggable Widgets Tools"
