@@ -7,7 +7,26 @@ on:
         branches: [master]
 
 jobs:
-    test:
+    lint:
+        name: "Lint"
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: "Checking-out code"
+              uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
+              with:
+                  submodules: false
+            - name: "Defining node version"
+              uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 # v3
+              with:
+                  node-version-file: ".nvmrc"
+                  cache: "npm"
+                  cache-dependency-path: "**/package-lock.json"
+            - name: "Installing dependencies"
+              run: npm run bootstrap
+            - name: "Linting code"
+              run: npm run lint -- ${{ steps.variables.outputs.arg }}
+    build:
         name: "Build (${{ matrix.os }})"
         runs-on: ${{ matrix.os }}
         strategy:
@@ -61,3 +80,44 @@ jobs:
               run: npm run build -- ${{ steps.variablesLinux.outputs.arg }} ${{ steps.variablesWindows.outputs.arg }}
               env:
                   NODE_OPTIONS: --max_old_space_size=8192
+    test:
+        name: "Unit tests"
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: "Checking changed files"
+              id: files
+              uses: softprops/diffset@3aeca0719d5043522e155012d3c9f7470fdd2dc6 # v1
+              if:
+                  github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name ==
+                  github.repository
+              with:
+                  global_files: |
+                      !{packages/**/*,configs/e2e/*.json,scripts/**/*,data/**/*}
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: "Checking-out code"
+              uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
+              with:
+                  submodules: false
+            - name: "Fetching master to compare"
+              if: github.event_name == 'pull_request' && steps.files.outputs.global_files == ''
+              run:
+                  git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref
+                  }}:refs/remotes/origin/${{ github.base_ref }}
+            - name: "Defining environment variables"
+              id: variables
+              run:
+                  echo "::set-output name=arg::$(if [ "${{ steps.files.outputs.global_files }}" = "" ] && ${{
+                  github.event_name == 'pull_request' }}; then echo '--since origin/${{ github.base_ref }}'; else echo
+                  ''; fi)"
+            - name: "Defining node version"
+              uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 # v3
+              with:
+                  node-version-file: ".nvmrc"
+                  cache: "npm"
+                  cache-dependency-path: "**/package-lock.json"
+            - name: "Installing dependencies"
+              run: npm run bootstrap
+            - name: "Running unit tests"
+              run: npm run test -- ${{ steps.variables.outputs.arg }}
