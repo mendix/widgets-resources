@@ -1,7 +1,5 @@
 import { StructurePreviewProps, Problem } from "@mendix/piw-utils-internal";
 import { BackgroundGradientPreviewProps } from "../typings/BackgroundGradientProps";
-import iconLight from "./assets/backgroundGradient_light.svg";
-import iconDark from "./assets/backgroundGradient_dark.svg";
 
 export const getPreview = (values: BackgroundGradientPreviewProps, isDarkMode: boolean): StructurePreviewProps => ({
     type: "Container",
@@ -18,34 +16,13 @@ export const getPreview = (values: BackgroundGradientPreviewProps, isDarkMode: b
                     type: "Container",
                     children: [
                         {
-                            type: "RowLayout",
-                            columnSize: "grow",
-                            children: [
-                                {
-                                    type: "Container",
-                                    padding: 3,
-                                    children: [
-                                        {
-                                            type: "Image",
-                                            document: decodeURIComponent(
-                                                (isDarkMode ? iconDark : iconLight).replace("data:image/svg+xml,", "")
-                                            ),
-                                            width: 14,
-                                            height: 14
-                                        }
-                                    ]
-                                },
-                                {
-                                    type: "Text",
-                                    fontSize: 10,
-                                    fontColor: isDarkMode ? "#DEDEDE" : "#6B707B",
-                                    content: "Background gradient"
-                                }
-                            ]
+                            type: "Text",
+                            fontSize: 10,
+                            fontColor: isDarkMode ? "#DEDEDE" : "#6B707B",
+                            content: "Background gradient"
                         }
                     ]
-                },
-                { type: "Container", grow: 2 }
+                }
             ]
         },
         {
@@ -67,7 +44,7 @@ export function check(values: BackgroundGradientPreviewProps): Problem[] {
         if (opacity > 1 || opacity < 0) {
             errors.push({
                 property: "opacity",
-                message: "Opacity should be between 0 and 1"
+                message: "Opacity should be between 0.0 and 1.0"
             });
         }
     }
@@ -83,7 +60,7 @@ export function check(values: BackgroundGradientPreviewProps): Problem[] {
     if (colorList.some(item => item.offset! > 1 || item.offset! < 0)) {
         errors.push({
             property: "colorList",
-            message: "Color offset should be between 0 and 1"
+            message: "Color offset should be between 0.0 and 1.0"
         });
     } else if (colorList.some(item => !checkTwoDecimalDigits(item.offset || 0))) {
         errors.push({
