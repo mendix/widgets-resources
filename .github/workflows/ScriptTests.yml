@@ -53,12 +53,7 @@ jobs:
                 node-version-file: '.nvmrc'
                 cache: 'npm'
                 cache-dependency-path: '**/package-lock.json'
-            - name: "Removing package-lock and installing dependencies"
-              if: matrix.node == '14'
-              # Because lerna doesn't handle nicely the lower version of node we need to remove the package-lock https://github.com/lerna/lerna/issues/2832
-              run: rm -f package-lock.json && npm run bootstrap
             - name: "Installing dependencies"
-              if: matrix.node != '14'
               run: npm run bootstrap
             - name: Increase number of watchers
               if: startsWith(matrix.os, 'ubuntu')
