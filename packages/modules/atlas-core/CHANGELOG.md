@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.2.1] Atlas Core - 2022-4-1
+
 ### Fixed
 
 -   We fixed this module to be compatible with strict CSP mode.
