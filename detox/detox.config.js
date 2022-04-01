@@ -33,7 +33,8 @@ module.exports = {
             type: "android.emulator",
             device: {
                 avdName: `NATIVE_${ANDROID_DEVICE_TYPE}_${ANDROID_SDK_VERSION}`
-            }
+            },
+            bootArgs: "-ports 5555,5556"
         }
     },
     configurations: {
