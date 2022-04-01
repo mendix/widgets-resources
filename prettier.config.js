@@ -34,6 +34,12 @@ module.exports = {
             options: {
                 printWidth: 500
             }
+        },
+        {
+            files: "*.yml",
+            options: {
+                tabWidth: 2
+            }
         }
     ]
 };

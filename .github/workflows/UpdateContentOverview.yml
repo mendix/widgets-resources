@@ -22,8 +22,8 @@ jobs:
       - name: "Setting up node"
         uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
         with:
-          node-version-file: '.nvmrc'
-          cache: 'npm'
+          node-version-file: ".nvmrc"
+          cache: "npm"
       - name: "Installing dependencies"
         run: npm ci
       - name: "Exporting data"
@@ -47,10 +47,10 @@ jobs:
           token: ${{ secrets.GH_PAT }}
           branch: build/update-widgets-data
           delete-branch: true
-          commit-message: 'chore: update content data file'
-          title: 'chore: Update content data file'
+          commit-message: "chore: update content data file"
+          title: "chore: Update content data file"
           draft: false
-          add-paths: 'data/content.json'
+          add-paths: "data/content.json"
       - name: "Enabling auto-merge for pull-request, if new"
         if: steps.cpr.outputs.pull-request-operation == 'created'
         uses: peter-evans/enable-pull-request-automerge@d2ede5636b3febc92809259995e643565e675aab # v1

@@ -8,7 +8,7 @@ on:
   pull_request:
     branches: [master]
     paths:
-      -  ".github/workflows/*.yml"
+      - ".github/workflows/*.yml"
 
 jobs:
   harden_security:
