@@ -6,7 +6,7 @@ const { toMatchImageSnapshot } = require("jest-image-snapshot");
 const { join, resolve } = require("path");
 const { execSync } = require("child_process");
 
-jest.setTimeout(300000);
+jest.setTimeout(10 * 60 * 1000);
 jasmine.getEnv().addReporter(adapter);
 jasmine.getEnv().addReporter(specReporter);
 
@@ -58,8 +58,8 @@ beforeAll(async () => {
     }
     await waitFor(element(by.id("$screen")).atIndex(0))
         .toBeVisible()
-        .withTimeout(180000);
-}, 360000);
+        .withTimeout(3 * 60 * 1000);
+}, 15 * 60 * 1000);
 
 beforeEach(async () => {
     await adapter.beforeEach();
