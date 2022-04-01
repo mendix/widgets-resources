@@ -32,7 +32,11 @@ export const getPreview = (values: WebViewPreviewProps, isDarkMode: boolean): St
                         {
                             type: "Text",
                             fontColor: isDarkMode ? "#C5C5C5" : "#6B707B",
-                            content: !values.content ? values.url || "Configure your webpage" : "HTML Content"
+                            content: !values.content
+                                ? values.url
+                                    ? `[${values.url}]`
+                                    : "Configure your webpage"
+                                : "HTML Content"
                         }
                     ]
                 },

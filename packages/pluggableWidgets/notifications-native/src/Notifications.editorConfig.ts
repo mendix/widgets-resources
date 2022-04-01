@@ -1,8 +1,5 @@
 import { StructurePreviewProps } from "@mendix/piw-utils-internal";
 
-import notificationIconSvgDark from "./assets/notification.dark.svg";
-import notificationIconSvgLight from "./assets/notification.light.svg";
-
 import { NotificationsPreviewProps } from "../typings/NotificationsProps";
 
 export const getPreview = (values: NotificationsPreviewProps, isDarkMode: boolean): StructurePreviewProps => {
@@ -49,26 +46,6 @@ export const getPreview = (values: NotificationsPreviewProps, isDarkMode: boolea
                                   content: values.body ? `{${values.body}}` : "No body"
                               }
                           ]) as StructurePreviewProps[])
-                ]
-            },
-            {
-                type: "Container",
-                grow: 1
-            },
-            {
-                type: "Container",
-                padding: 16,
-                children: [
-                    {
-                        type: "Image",
-                        document: decodeURIComponent(
-                            (isDarkMode ? notificationIconSvgDark : notificationIconSvgLight).replace(
-                                "data:image/svg+xml,",
-                                ""
-                            )
-                        ),
-                        width: 14
-                    }
                 ]
             }
         ]

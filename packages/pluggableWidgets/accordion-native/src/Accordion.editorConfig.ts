@@ -48,7 +48,7 @@ export function getPreview(values: AccordionPreviewProps, isDarkMode: boolean): 
                             { type: "Container" },
                             {
                                 type: "Text",
-                                content: "Add groups in order to place widget here",
+                                content: "Add groups in order to place widgets here",
                                 fontColor: isDarkMode ? "#A4A4A4" : "#6B707B"
                             },
                             { type: "Container" }

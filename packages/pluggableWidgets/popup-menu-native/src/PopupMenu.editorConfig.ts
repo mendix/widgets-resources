@@ -24,7 +24,7 @@ export function getPreview(values: PopupMenuPreviewProps, isDarkMode: boolean): 
                             {
                                 type: "Text",
                                 fontColor: isDarkMode ? "#DEDEDE" : "#6B707B",
-                                content: "Pop Up Menu"
+                                content: "Pop-up menu"
                             }
                         ]
                     }

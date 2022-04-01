@@ -26,7 +26,7 @@ export function getPreview(values: BottomSheetPreviewProps, isDarkMode: boolean)
                             {
                                 type: "Text",
                                 fontColor: contentFontColor,
-                                content: "Bottom Sheet"
+                                content: "Bottom sheet"
                             }
                         ]
                     }
