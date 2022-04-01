@@ -140,7 +140,7 @@
         },
         {
             "name": "Accordion",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "items": [
                 {
                     "id": "com.mendix.widget.web.accordion.Accordion",
@@ -1053,7 +1053,7 @@
         },
         {
             "name": "DatagridDropdownFilter",
-            "version": "2.2.1",
+            "version": "2.2.2",
             "items": [
                 {
                     "id": "com.mendix.widget.web.datagriddropdownfilter.DatagridDropdownFilter",
@@ -1188,7 +1188,7 @@
         },
         {
             "name": "Datagrid",
-            "version": "2.2.2",
+            "version": "2.2.3",
             "items": [
                 {
                     "id": "com.mendix.widget.web.datagrid.Datagrid",
@@ -1560,7 +1560,7 @@
         },
         {
             "name": "Image",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "items": [
                 {
                     "id": "com.mendix.widget.web.image.Image",
@@ -2476,7 +2476,7 @@
         },
         {
             "name": "StarRating",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "items": [
                 {
                     "id": "com.mendix.widget.custom.starrating.StarRating",
@@ -2608,7 +2608,7 @@
         },
         {
             "name": "SafeAreaView",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "items": [
                 {
                     "id": "com.mendix.widget.native.safeareaview.SafeAreaView",
