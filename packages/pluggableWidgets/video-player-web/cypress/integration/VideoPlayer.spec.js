@@ -102,7 +102,7 @@ describe("Video Player", () => {
 
             cy.get(".widget-video-player")
                 .wait(3000)
-                .compareSnapshot(`videoPlayerExternalPoster-${Cypress.browser.name}`, 0.15);
+                .compareSnapshot(`videoPlayerExternalPoster-${Cypress.browser.name}`, 1);
         });
     });
 

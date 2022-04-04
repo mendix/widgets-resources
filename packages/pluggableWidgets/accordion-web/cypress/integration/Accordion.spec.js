@@ -6,7 +6,7 @@ describe("Accordion", () => {
     });
     it("compares with a screenshot baseline and checks if all accordion elements are rendered as expected", () => {
         cy.wait(2000);
-        cy.get(".mx-name-container2").compareSnapshot(`accordionPageContent-${browserName}`, 0.1);
+        cy.get(".mx-name-container2").compareSnapshot(`accordionPageContent-${browserName}`, 1);
     });
     it("hides group when the visibility is false", () => {
         const accordionGroup = ".mx-name-accordion1 > section:nth-child(3)";
