@@ -7,11 +7,17 @@ describe("Background Gradient", () => {
         await tapMenuItem("Background gradient");
     });
 
-    it("should call on click when pressed", async () => {
-        await expectToMatchScreenshot();
-        await element(by.id("background-gradient-test")).tap();
+    it("should render one color", async () => {
+        const backgroundGradientWidget = "bgGradientOneColor";
+        await expectToMatchScreenshot(element(by.id(backgroundGradientWidget)));
+    });
+
+    it("should render more than one color", async () => {
+        const backgroundGradientWidget = "bgGradientTwoColors";
+        await expectToMatchScreenshot(element(by.id(backgroundGradientWidget)));
+        await element(by.id(backgroundGradientWidget)).tap();
         const alert = Alert();
-        await expect(alert.messageElement).toHaveText("pressed");
+        await expect(alert.messageElement).toHaveText("Clicked!");
         await alert.confirm();
     });
 
