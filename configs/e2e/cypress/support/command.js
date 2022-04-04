@@ -1,4 +1,5 @@
 import compareSnapshotCommand from "cypress-image-diff-js/dist/command";
+require("cypress-terminal-report/src/installLogsCollector")();
 
 compareSnapshotCommand();
 
