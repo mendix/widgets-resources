@@ -67,6 +67,8 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_CONTENT_DATA_ID }}
           aws-secret-access-key: ${{ secrets.AWS_CONTENT_DATA_SECRET }}
           aws-region: eu-central-1
+      - name: "Copy data to out folder"
+        run: cp data/content.json scripts/data/out/content.json
       - name: "Uploading to S3"
         if: >-
           (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) ||
