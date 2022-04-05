@@ -36,6 +36,12 @@ In your `package.json` scripts, use the following command with the desired task:
 -   `test:e2e` Execute end-to-end tests in your Web widget
 -   `csp` Enable or disable CSP mode in MX project. To enable CSP mode run `npx pluggable-widgets-tools csp enable`. To disable CSP run `npx pluggable-widgets-tools csp disable`.
 
+#### `csp` task
+
+1. Make sure you set `MX_PROJECT_PATH` variable ether manually or through `.env` file
+2. Run `npx pluggable-widgets-tools csp enable`. This command should copy CSP boilerplate.
+3. If your project is already running, press restart button in Studio Pro.
+
 #### Example
 
 ```json

@@ -119,5 +119,5 @@ async function main() {
 
 main().catch(e => {
     log.error(e);
-    process.exit(-1);
+    process.exit(1);
 });
