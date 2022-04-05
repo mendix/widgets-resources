@@ -70,7 +70,7 @@ function isEnabled() {
 }
 
 function enable() {
-    log.info("You asked to enable CSP...");
+    log.info("Enabling CSP...");
     sh.cd(sh.env.MX_PROJECT_PATH);
     if (isEnabled()) {
         log.info("CSP already enabled in target project.");
@@ -82,7 +82,7 @@ function enable() {
 }
 
 function disable() {
-    log.info("You asked to disable CSP...");
+    log.info("Disabling CSP...");
     sh.cd(sh.env.MX_PROJECT_PATH);
     cleanup();
     restore();
