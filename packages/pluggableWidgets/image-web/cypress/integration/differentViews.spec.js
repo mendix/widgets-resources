@@ -20,12 +20,12 @@ describe("Image viewer", () => {
         cy.get(".mx-name-image1").find("img").should("have.attr", "src", staticUrl);
     });
 
-    it("renders in a template grid", () => {
+    it("renders in a template grid", { browser: "!firefox" }, () => {
         cy.visit("/p/templateGrid");
         cy.get(".mx-name-image1").find("img").should("have.attr", "src", staticUrl);
     });
 
-    it("renders in a tab container", () => {
+    it("renders in a tab container", { browser: "!firefox" }, () => {
         cy.visit("/p/tabContainer");
         cy.get(".mx-name-tabPage2").click();
         cy.get(".mx-name-imageTabPage2").find("img").should("have.attr", "src", staticUrl);

@@ -19,7 +19,7 @@ describe("BadgeButton", () => {
         cy.get(".mx-name-badgeButtonDynamic").find(".badge").should("contain.text", "New");
     });
 
-    it("updates text value", () => {
+    it("updates text value", { browser: "!firefox" }, () => {
         cy.get(".mx-name-textBox1 input").type("\uE003\uE003\uE003", { force: true }); // Chrome is not clearing value before set new value
         cy.get(".mx-name-textBox1 input").type("Newer", { force: true });
         cy.get(".mx-name-textBox1").find(".control-label").click();
