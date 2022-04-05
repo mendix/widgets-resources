@@ -34,24 +34,27 @@ In your `package.json` scripts, use the following command with the desired task:
 -   `test:unit:web` Run unit tests for your Web widget. Accepts option `--u` to update snapshots, `--no-cache` to remove existing caches, `--ci` assumes use of a CI environment, `--coverage` to support coverage test.
 -   `test:unit:native` Run unit tests for your Native widget. Accepts option `--u` to update snapshots, `--no-cache` to remove existing caches, `--ci` assumes use of a CI environment, `--coverage` to support coverage test.
 -   `test:e2e` Execute end-to-end tests in your Web widget
+-   `csp` Enable or disable CSP mode in MX project. To enable CSP mode run `npx pluggable-widgets-tools csp enable`. To disable CSP run `npx pluggable-widgets-tools csp disable`.
 
 #### Example
 
 ```json
-  "name": "MyWidget",
-  "widgetName": "com.company.widgets.MyWidget",
-  "version": "1.0.0",
-  "config": {
-    "projectPath": "../MxTestProject/",
-    "mendixHost": "http://localhost:8080",
-    "developmentPort": "3000"
-  },
-  "scripts": {
-    "build": "pluggable-widgets-tools build:web",
-    "lint": "pluggable-widgets-tools lint",
-    "lint:fix": "pluggable-widgets-tools lint:fix",
-    "test:unit": "pluggable-widgets-tools test:unit --coverage"
-  }
+{
+    "name": "MyWidget",
+    "widgetName": "com.company.widgets.MyWidget",
+    "version": "1.0.0",
+    "config": {
+        "projectPath": "../MxTestProject/",
+        "mendixHost": "http://localhost:8080",
+        "developmentPort": "3000"
+    },
+    "scripts": {
+        "build": "pluggable-widgets-tools build:web",
+        "lint": "pluggable-widgets-tools lint",
+        "lint:fix": "pluggable-widgets-tools lint:fix",
+        "test:unit": "pluggable-widgets-tools test:unit --coverage"
+    }
+}
 ```
 
 ## Project layout
