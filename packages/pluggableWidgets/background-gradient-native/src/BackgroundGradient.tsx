@@ -29,7 +29,7 @@ export function BackgroundGradient({ name, colorList, angle, content, opacity, o
             onPress={() => {
                 executeAction(onClick);
             }}
-            testID={`background-gradient-${name}`}
+            testID={name}
             style={({ pressed }) =>
                 StyleSheet.flatten([
                     styles.container,
