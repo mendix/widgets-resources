@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Changed
+
+-   We changed the SVG file for the structure mode preview.
+
 ## [2.2.0] - 2022-2-21
 
 ### Added
