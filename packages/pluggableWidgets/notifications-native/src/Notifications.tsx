@@ -138,7 +138,8 @@ export function Notifications(props: NotificationsProps<undefined>): null {
                         action => action.onOpen,
                         messageId
                     );
-                }
+                },
+                requestPermissions: Platform.OS === 'ios'
             });
         }
     }, [loadNotifications, handleNotification]);
