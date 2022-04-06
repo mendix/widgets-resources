@@ -139,7 +139,7 @@ export function Notifications(props: NotificationsProps<undefined>): null {
                         messageId
                     );
                 },
-                requestPermissions: Platform.OS === 'ios'
+                requestPermissions: Platform.OS === "ios"
             });
         }
     }, [loadNotifications, handleNotification]);
