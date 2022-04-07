@@ -12,7 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
--   We increased the max SVG file size limit to 200 kB to accommodate SVGs of a bigger size used in structure preview mode.
+-   We increased the max SVG file size limit to 200 kB to accommodate SVGs of a bigger size used in structure preview mode for the native release build tool.
 
 ## [9.11.0] - 2022-02-25
 
