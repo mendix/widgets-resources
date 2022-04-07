@@ -10,9 +10,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 -   We fixed an issue that occured on Android devices when using the Make it Native app to preview a page containing the Notifications widget.
 
+## [3.2.0] - 2022-4-7
+
 ### Added
 
-- Structure mode preview
+-   Structure mode preview
 
 ## [3.1.1] - 2022-3-9
 
