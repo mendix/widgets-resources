@@ -132,8 +132,9 @@ async function main() {
     if (command === "enable") enable();
     else if (command === "disable") disable();
     else {
-        console.info('Usage: csp <enable|disable>')
-        throw new Error(`Unknown command: ${command}`)
+        console.error("Error: unknown command:", command);
+        console.info('Usage: csp <enable|disable>');
+        process.exit(1);
     };
 }
 
