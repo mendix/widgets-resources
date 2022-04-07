@@ -14,19 +14,6 @@ jobs:
             packages: read
             contents: read
         steps:
-            #     - name: "Checking changed files"
-            #       id: files
-            #       uses: softprops/diffset@v1
-            #       if:
-            #           github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name ==
-            #           github.repository
-            #       with:
-            #           global_files: |
-            #               !{packages/**/*,configs/e2e/*.json,detox/**/*,scripts/**/*}
-            #           not_atlas_native_files: |
-            #               !packages/theming/atlas/src/**/native/**
-            #       env:
-            #           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: "Checking-out code"
               uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
               with:
@@ -36,12 +23,6 @@ jobs:
               run:
                   git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref
                   }}:refs/remotes/origin/${{ github.base_ref }}
-            # - name: "Defining environment variables"
-            #   id: variables
-            #   run:
-            #       echo ::set-output name=arg::$(if [ "${{ steps.files.outputs.global_files }}" = "" ] && ${{
-            #       github.event_name == 'pull_request' }}; then echo '--since origin/${{ github.base_ref }}'; else echo
-            #       ''; fi)
             - name: "Defining cache"
               uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed # v2
               env:
@@ -69,20 +50,6 @@ jobs:
               run: npm run start:native-tests-ci
               env:
                   CI: true
-                  # - name: "Executing E2E tests"
-                  #   if:
-                  #       github.event_name == 'push' || (github.event_name == 'pull_request' &&
-                  #       github.event.pull_request.head.repo.full_name != github.repository)
-                  #   run: npm run test:e2e -- --since origin/${{ github.base_ref }}
-                  # env:
-                  #     FORKED:
-                  #         github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name ==
-                  #         github.repository
-                  # - name: "Fixing files permissions"
-                  #   if: failure()
-              #   run: |
-              #       sudo find ${{ github.workspace }}/packages/* -type d -exec chmod 755 {} \;
-              #       sudo find ${{ github.workspace }}/packages/* -type f -exec chmod 644 {} \;
             - name: "Archive test screenshot diff results"
               uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
               if: failure()
