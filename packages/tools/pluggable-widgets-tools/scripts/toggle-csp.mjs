@@ -23,14 +23,11 @@ function $file(...args) {
 }
 
 function boilerplate() {
-    return cspFileNames.map(
-        name => [
-            $file(themeDir, name),
-            $file(themeDir, backupName(name)),
-            $file(deploymentPublic, name),
-            name
-        ]
-    )
+    return cspFileNames.map(name => ({
+        fileAbs: $file(themeDir, name),
+        backupAbs: $file(themeDir, backupName(name)),
+        name: name
+    }));
 }
 
 function getIndexPath() {
@@ -54,19 +51,19 @@ function copy() {
 }
 
 function backup() {
-    for (const [filePath, backupPath, basename] of boilerplate()) {
-        if (sh.test("-f", filePath)) {
+    for (const { fileAbs, backupAbs, name: basename } of boilerplate()) {
+        if (sh.test("-f", fileAbs)) {
             console.info("Making backup of", basename);
-            sh.mv(filePath, backupPath);
+            sh.mv(fileAbs, backupAbs);
         }
     }
 }
 
 function restore() {
-    for (const [filePath, backupPath, basename] of boilerplate()) {
-        if (sh.test("-f", backupPath)) {
+    for (const { fileAbs, backupAbs, name: basename } of boilerplate()) {
+        if (sh.test("-f", backupAbs)) {
             console.info("Making restore from backup", basename);
-            sh.mv(backupPath, filePath);
+            sh.mv(backupAbs, fileAbs);
         }
     }
 }
