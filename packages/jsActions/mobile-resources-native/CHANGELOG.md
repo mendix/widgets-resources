@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.7.1] Native Mobile Resources - 2022-4-7
+
+## [3.2.1] Notifications
+
+### Fixed
+
+-   We fixed an issue that occured on Android devices when using the Make it Native app to preview a page containing the Notifications widget.
+
 ## [3.7.0] Native Mobile Resources - 2022-4-7
 
 ## [2.2.0] Accordion
