@@ -46,7 +46,7 @@ function done() {
 }
 
 function copy() {
-    console.info("Copying CSP boilerplate...");
+    console.info("Copying CSP boilerplate to theme directory...");
     sh.cp(join(cspFilesDir, "*"), $file(themeDir));
 }
 
@@ -70,7 +70,7 @@ function restore() {
 
 function cleanup() {
     console.info("Removing CSP boilerplate from theme...");
-    const files = boilerplate().map(([file]) => file);
+    const files = boilerplate().map(({ fileAbs }) => fileAbs);
     silent(() => sh.rm(files));
 
     console.log("Removing CSP boilerplate from deployment...");
@@ -79,7 +79,7 @@ function cleanup() {
 
 function isEnabled() {
     const index = getIndexPath();
-    const tag = `<meta http-equiv="Content-Security-Policy" content="default-src 'self';">`;
+    const tag = `http-equiv="Content-Security-Policy" content="default-src 'self';"`;
     return sh.test("-f", index) && sh.grep("-l", tag, index).length > 1;
 }
 
@@ -91,7 +91,9 @@ function enable() {
     } else {
         backup();
         copy();
+        console.info("Important: please, restart your project in studio (Rerun locally)")
     }
+
     done();
 }
 
@@ -100,6 +102,7 @@ function disable() {
     sh.cd(sh.env.MX_PROJECT_PATH);
     cleanup();
     restore();
+    console.info("Important: please, stop and run again your project in studio")
     done();
 }
 
