@@ -1,6 +1,120 @@
-import { changePropertyIn, hidePropertyIn, Properties, Problem } from "@mendix/piw-utils-internal";
+import {
+    StructurePreviewProps,
+    changePropertyIn,
+    hidePropertyIn,
+    Properties,
+    Problem,
+    ContainerProps
+} from "@mendix/piw-utils-internal";
 
 import { AccordionPreviewProps, GroupsPreviewType } from "../typings/AccordionProps";
+
+export function getPreview(values: AccordionPreviewProps, isDarkMode: boolean): StructurePreviewProps {
+    const headerBackgroundColor: string = isDarkMode ? "#454545" : "#F5F5F5";
+
+    const noGroupsContainer: ContainerProps = {
+        type: "Container",
+        borders: true,
+        children: [
+            {
+                type: "Container",
+                backgroundColor: headerBackgroundColor,
+                children: [
+                    {
+                        type: "RowLayout",
+                        padding: 8,
+                        columnSize: "grow",
+                        children: [
+                            { type: "Container" },
+                            {
+                                type: "Text",
+                                fontColor: isDarkMode ? "#A4A4A4" : "#0A1324",
+                                bold: true,
+                                content: "[No groups configured]"
+                            },
+                            { type: "Container" }
+                        ]
+                    }
+                ]
+            },
+            {
+                type: "Container",
+                children: [
+                    {
+                        type: "RowLayout",
+                        padding: 8,
+                        columnSize: "grow",
+                        children: [
+                            { type: "Container" },
+                            {
+                                type: "Text",
+                                content: "Add groups in order to place widgets here",
+                                fontColor: isDarkMode ? "#A4A4A4" : "#6B707B"
+                            },
+                            { type: "Container" }
+                        ]
+                    }
+                ]
+            }
+        ]
+    };
+
+    return {
+        type: "Container",
+        borders: true,
+        children: [
+            {
+                type: "Container",
+                backgroundColor: headerBackgroundColor,
+                children: [
+                    {
+                        type: "Container",
+                        padding: 4,
+                        borders: true,
+                        children: [
+                            {
+                                type: "Text",
+                                fontColor: isDarkMode ? "#DEDEDE" : "#6B707B",
+                                content: "Accordion"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                type: "Container",
+                children: [
+                    ...(values.groups.length === 0
+                        ? [noGroupsContainer]
+                        : values.groups
+                              .map<StructurePreviewProps[]>((group, index) =>
+                                  group.headerRenderMode === "custom"
+                                      ? [
+                                            {
+                                                type: "DropZone",
+                                                property: group.headerContent,
+                                                placeholder: `Group/${index + 1}/Header`
+                                            },
+                                            {
+                                                type: "DropZone",
+                                                property: group.content,
+                                                placeholder: `Group/${index + 1}/Content`
+                                            }
+                                        ]
+                                      : [
+                                            {
+                                                type: "DropZone",
+                                                property: group.content,
+                                                placeholder: `Group/${index + 1}/Content`
+                                            }
+                                        ]
+                              )
+                              .reduce((previousValue, currentValue) => previousValue.concat(currentValue), []))
+                ]
+            }
+        ]
+    };
+}
 
 export function getProperties(values: AccordionPreviewProps, defaultProperties: Properties): Properties {
     values.groups.forEach((group, index) => {
