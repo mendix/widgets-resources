@@ -143,8 +143,6 @@ async function main() {
         console.log("Setup for android...");
         execSync("npm run setup-android", { stdio: "inherit" });
         console.log("Android successfully setup");
-
-        execSync(`npx lerna run test:e2e:local:android --stream --concurrency 1 --scope '{${changedPackagesJoined}}'`);
     } catch (error) {
         console.error(error.message);
 
@@ -164,8 +162,8 @@ async function main() {
 
         throw error;
     } finally {
-        mxbuildContainerId && execSync(`docker rm -f ${mxbuildContainerId}`);
-        runtimeContainerId && execSync(`docker rm -f ${runtimeContainerId}`);
+        // mxbuildContainerId && execSync(`docker rm -f ${mxbuildContainerId}`);
+        // runtimeContainerId && execSync(`docker rm -f ${runtimeContainerId}`);
     }
 }
 
