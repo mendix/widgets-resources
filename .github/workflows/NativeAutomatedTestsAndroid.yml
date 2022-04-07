@@ -47,10 +47,22 @@ jobs:
               with:
                   java-version: 'openjdk8'
                   architecture: 'x64'
+              env:
+                  # https://github.com/actions/toolkit/issues/641#issuecomment-728963957
+                  ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 #            - name: Setup Android SDK
 #              uses: android-actions/setup-android@3404b45d4c43e74e30dcad1a47fb89a0573f5a7e
             - name: "Installing dependencies"
               run: npm install
+            - name: Setup emulator
+              uses: reactivecircus/android-emulator-runner@v2
+              with:
+                  api-level: 30
+                  target: google_apis
+                  arch: x86_64
+                  profile: pixel
+                  avd-name: NATIVE_pixel_30
+                  script: echo 'why is this required'
             - name: "Start Mendix Environment and run tests"
               run: npm run start:native-tests-ci
               env:
