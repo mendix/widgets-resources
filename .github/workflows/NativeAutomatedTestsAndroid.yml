@@ -42,8 +42,13 @@ jobs:
                   registry: ghcr.io
                   username: ${{ github.actor }}
                   password: ${{ secrets.GITHUB_TOKEN }}
-            - name: Setup Android SDK
-              uses: android-actions/setup-android@3404b45d4c43e74e30dcad1a47fb89a0573f5a7e
+            - name: "Use specific Java version for sdkmanager to work"
+              uses: joschi/setup-jdk@v1
+              with:
+                  java-version: 'openjdk8'
+                  architecture: 'x64'
+#            - name: Setup Android SDK
+#              uses: android-actions/setup-android@3404b45d4c43e74e30dcad1a47fb89a0573f5a7e
             - name: "Installing dependencies"
               run: npm install
             - name: "Start Mendix Environment and run tests"
