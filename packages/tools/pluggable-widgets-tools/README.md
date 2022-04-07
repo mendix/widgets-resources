@@ -39,7 +39,7 @@ In your `package.json` scripts, use the following command with the desired task:
 #### `csp` task
 
 1. Make sure you set `MX_PROJECT_PATH` variable either manually or through `.env` file
-2. Run `npx pluggable-widgets-tools csp enable`. This command should copy CSP boilerplate.
+2. Run `npx pluggable-widgets-tools csp enable`. This command should copy CSP boilerplate to `theme/web` directory.
 3. If your project is already running, press restart button in Studio Pro.
 
 #### Example

@@ -3,17 +3,36 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 
-const log = {
-    info: (...args) => console.info(...args),
-    error: (...args) => {
-        console.error("Ooops! We have a problem:", ...args);
-    }
-};
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const cspFilesDir = join(__dirname, "csp-files");
+const themeDir = 'theme/web';
 
-function $file(p) {
-    return join(sh.env.MX_PROJECT_PATH, p);
+const cspFileNames = [
+    "appSetup.js",
+    "index.html",
+    "unsupported-browser.js"
+]
+
+function backupName(name) {
+    return `backup.${name}`;
+}
+
+function $file(...args) {
+    return join(sh.env.MX_PROJECT_PATH, ...args);
+}
+
+function boilerplate() {
+    return cspFileNames.map(
+        name => [
+            $file(themeDir, name),
+            $file(themeDir, backupName(name)),
+            name
+        ]
+    )
+}
+
+function getIndexPath() {
+    return $file(themeDir, "index.html");
 }
 
 function silent(operation) {
@@ -23,57 +42,51 @@ function silent(operation) {
     sh.config.silent = silent;
 }
 
-function themeWebListing() {
-    const dir = $file("theme/web");
-    log.info(dir, "contnet:");
-    log.info(sh.ls(dir).stdout);
-}
-
 function done() {
-    log.info("Done.", "\n");
-    themeWebListing();
+    console.info("Done.", "\n");
 }
 
 function copy() {
-    log.info("Copy CSP boilerplate...");
-    sh.cp(join(cspFilesDir, "*"), $file("theme/web"));
+    console.info("Copying CSP boilerplate...");
+    sh.cp(join(cspFilesDir, "*"), $file(themeDir));
 }
 
 function backup() {
-    const backup = $file("theme/web/index.backup.html");
-    const index = $file("theme/web/index.html");
-    if (sh.test("-f", index)) {
-        log.info("Making backup for index.html...");
-        sh.mv(index, backup);
+    for (const [filePath, backupPath, basename] of boilerplate()) {
+        if (sh.test("-f", filePath)) {
+            console.info("Making backup of", basename);
+            sh.mv(filePath, backupPath);
+        }
     }
 }
 
 function restore() {
-    const backup = $file("theme/web/index.backup.html");
-    if (sh.test("-f", backup)) {
-        log.info("Restoring previous index.html...");
-        sh.mv(backup, $file("theme/web/index.html"));
+    for (const [filePath, backupPath, basename] of boilerplate()) {
+        if (sh.test("-f", backupPath)) {
+            console.info("Making restore from backup", basename);
+            sh.mv(backupPath, filePath);
+        }
     }
 }
 
 function cleanup() {
-    const files = ["theme/web/index.html", "theme/web/appSetup.js", "theme/web/unsupported-browser.js"].map($file);
-    log.info("Removing CSP boilerplate...");
+    const files = boilerplate().map(([file]) => file);
+    console.info("Removing CSP boilerplate...");
 
     silent(() => sh.rm(files));
 }
 
 function isEnabled() {
-    const index = $file("theme/web/index.html");
+    const index = getIndexPath();
     const tag = `<meta http-equiv="Content-Security-Policy" content="default-src 'self';">`;
     return sh.test("-f", index) && sh.grep("-l", tag, index).length > 1;
 }
 
 function enable() {
-    log.info("Enabling CSP...");
+    console.info("Enabling CSP...");
     sh.cd(sh.env.MX_PROJECT_PATH);
     if (isEnabled()) {
-        log.info("CSP already enabled in target project.");
+        console.info("CSP already enabled in target project.");
     } else {
         backup();
         copy();
@@ -82,7 +95,7 @@ function enable() {
 }
 
 function disable() {
-    log.info("Disabling CSP...");
+    console.info("Disabling CSP...");
     sh.cd(sh.env.MX_PROJECT_PATH);
     cleanup();
     restore();
@@ -90,10 +103,10 @@ function disable() {
 }
 
 async function main() {
-    log.info("Toggle CSP", "\n");
+    console.info("Toggle CSP", "\n");
 
     if (sh.test("-f", ".env")) {
-        log.info(".env file is found, loading vars...");
+        console.info(".env file is found, loading vars...");
         dotenv.config({ path: join(process.cwd(), ".env") });
     }
 
@@ -107,17 +120,20 @@ async function main() {
         );
     }
 
-    log.info("Your target project is:");
-    log.info(sh.env.MX_PROJECT_PATH, "\n");
+    console.info("Your target project is:");
+    console.info(sh.env.MX_PROJECT_PATH, "\n");
 
     const command = process.argv[2];
 
     if (command === "enable") enable();
     else if (command === "disable") disable();
-    else throw new Error(`Unknown command: ${command}`);
+    else {
+        console.info('Usage: csp <enable|disable>')
+        throw new Error(`Unknown command: ${command}`)
+    };
 }
 
 main().catch(e => {
-    log.error(e);
+    console.error(e);
     process.exit(1);
 });
