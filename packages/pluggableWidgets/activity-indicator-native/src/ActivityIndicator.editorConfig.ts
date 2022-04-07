@@ -1,7 +1,10 @@
 import { RowLayoutProps } from "@mendix/piw-utils-internal";
-import StructurePreviewActivityIndicatorPrimarySVG from "./assets/StructurePreviewActivityIndicatorPrimary.svg";
+import { ActivityIndicatorPreviewProps } from "../typings/ActivityIndicatorProps";
 
-export const getPreview = (): RowLayoutProps => ({
+import StructurePreviewActivityIndicatorPrimaryLightSVG from "./assets/ActivityIndicator.primary.light.svg";
+import StructurePreviewActivityIndicatorPrimaryDarkSVG from "./assets/ActivityIndicator.primary.dark.svg";
+
+export const getPreview = (_: ActivityIndicatorPreviewProps, isDarkMode: boolean): RowLayoutProps => ({
     type: "RowLayout",
     borders: false,
     padding: 8,
@@ -10,7 +13,10 @@ export const getPreview = (): RowLayoutProps => ({
         {
             type: "Image",
             document: decodeURIComponent(
-                StructurePreviewActivityIndicatorPrimarySVG.replace("data:image/svg+xml,", "")
+                (isDarkMode
+                    ? StructurePreviewActivityIndicatorPrimaryDarkSVG
+                    : StructurePreviewActivityIndicatorPrimaryLightSVG
+                ).replace("data:image/svg+xml,", "")
             ),
             width: 24,
             height: 24
