@@ -34,7 +34,7 @@ describe("Background gradient", () => {
             isExecuting: false
         };
         const component = render(<BackgroundGradient {...defaultProps} onClick={action} />);
-        const pressable = component.getByTestId("background-gradient-test");
+        const pressable = component.getByTestId("test");
         fireEvent.press(pressable);
         expect(actionExecution).toBeCalled();
     });

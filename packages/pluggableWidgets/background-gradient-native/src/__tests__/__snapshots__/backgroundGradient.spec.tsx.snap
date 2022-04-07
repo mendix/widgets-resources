@@ -19,7 +19,7 @@ exports[`Background gradient render background gradient correctly 1`] = `
       "opacity": 1,
     }
   }
-  testID="background-gradient-test"
+  testID="test"
 >
   <BVLinearGradient
     angle={0}
