@@ -13,14 +13,16 @@ async function main() {
         downloadFile("https://www.dropbox.com/s/wrhcm3ff316itip/app-debug.apk?dl=1")
     ]);
 
-    console.log(`Installing Android SDK version ${ANDROID_SDK_VERSION}...`);
-    execCommand(`sdkmanager 'system-images;android-${ANDROID_SDK_VERSION};google_apis;x86_64'`);
-    execCommand("sdkmanager --licenses");
+    if (!process.env.CI) {
+        console.log(`Installing Android SDK version ${ANDROID_SDK_VERSION}...`);
+        execCommand(`sdkmanager 'system-images;android-${ANDROID_SDK_VERSION};google_apis;x86_64'`);
+        execCommand("sdkmanager --licenses");
 
-    console.log("Creating Android emulator...");
-    execCommand(
-        `avdmanager -s create avd -n NATIVE_${ANDROID_DEVICE_TYPE}_${ANDROID_SDK_VERSION} -k 'system-images;android-${ANDROID_SDK_VERSION};google_apis;x86_64' -f -d '${ANDROID_DEVICE_TYPE}' -c 1000M`
-    );
+        console.log("Creating Android emulator...");
+        execCommand(
+            `avdmanager -s create avd -n NATIVE_${ANDROID_DEVICE_TYPE}_${ANDROID_SDK_VERSION} -k 'system-images;android-${ANDROID_SDK_VERSION};google_apis;x86_64' -f -d '${ANDROID_DEVICE_TYPE}' -c 1000M`
+        );
+    }
 
     console.log("Done!");
 }
