@@ -54,6 +54,10 @@ jobs:
 #              uses: android-actions/setup-android@3404b45d4c43e74e30dcad1a47fb89a0573f5a7e
             - name: "Installing dependencies"
               run: npm install
+            - name: "Start Mendix Environment and run tests"
+              run: npm run start:native-tests-ci
+              env:
+                  CI: true
             - name: Setup emulator
               uses: reactivecircus/android-emulator-runner@v2
               with:
@@ -62,11 +66,7 @@ jobs:
                   arch: x86_64
                   profile: pixel
                   avd-name: NATIVE_pixel_30
-                  script: echo 'why is this required'
-            - name: "Start Mendix Environment and run tests"
-              run: npm run start:native-tests-ci
-              env:
-                  CI: true
+                  script: npx lerna run test:e2e:local:android --stream --concurrency 1 --scope bar-chart-native
             - name: "Archive test screenshot diff results"
               uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
               if: failure()
