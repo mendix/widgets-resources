@@ -50,3 +50,7 @@ export async function resetDevice(): Promise<void> {
         await element(by.id("btn_launch_app")).tap();
     }
 }
+
+export async function sleep(time: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
