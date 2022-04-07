@@ -141,7 +141,7 @@ async function main() {
         await tryReach("Runtime", () => fetchUrl("http://localhost:8080"));
 
         console.log("Setup for android...");
-        execSync("npm run setup-android");
+        execSync("npm run setup-android", { stdio: "inherit" });
         console.log("Android successfully setup");
 
         execSync(`npx lerna run test:e2e:local:android --stream --concurrency 1 --scope '{${changedPackagesJoined}}'`);
