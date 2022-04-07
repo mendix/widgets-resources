@@ -91,7 +91,7 @@ function enable() {
     } else {
         backup();
         copy();
-        console.info("Important: please, restart your project in studio (Rerun locally)")
+        console.info("Important: please, restart your project in Studio Pro (Rerun locally)")
     }
 
     done();
@@ -102,7 +102,7 @@ function disable() {
     sh.cd(sh.env.MX_PROJECT_PATH);
     cleanup();
     restore();
-    console.info("Important: please, stop and run again your project in studio")
+    console.info("Important: please, stop and run again your project in Studio Pro")
     done();
 }
 
