@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const cspFilesDir = join(__dirname, "csp-files");
 const themeDir = 'theme/web';
+const deploymentPublic = 'deployment/web';
 
 const cspFileNames = [
     "appSetup.js",
@@ -26,6 +27,7 @@ function boilerplate() {
         name => [
             $file(themeDir, name),
             $file(themeDir, backupName(name)),
+            $file(deploymentPublic, name),
             name
         ]
     )
@@ -70,10 +72,12 @@ function restore() {
 }
 
 function cleanup() {
+    console.info("Removing CSP boilerplate from theme...");
     const files = boilerplate().map(([file]) => file);
-    console.info("Removing CSP boilerplate...");
-
     silent(() => sh.rm(files));
+
+    console.log("Removing CSP boilerplate from deployment...");
+    silent(() => sh.rm(cspFileNames.map(file => $file(deploymentPublic, file))))
 }
 
 function isEnabled() {
