@@ -6,25 +6,130 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.7.0] Native Mobile Resources - 2022-4-7
+
+## [2.2.0] Accordion
+
+### Added
+
+-   Structure mode preview
+
+## [2.2.0] ActivityIndicator
+
+### Added
+
+-   We added dark mode to structure mode preview.
+
+## [3.2.0] AppEvents
+
+### Added
+
+-   Structure mode preview.
+
+## [2.2.0] BarChart
+
+### Added
+
+-   Structure mode preview.
+
+## [3.2.0] BottomSheet
+
+### Added
+
+-   Structure mode preview
+
+## [2.2.0] Carousel
+
+### Added
+
+-   Structure mode preview
+
+## [3.2.0] IntroScreen
+
+### Added
+
+-   Structure mode preview.
+
+## [2.2.0] LineChart
+
+### Added
+
+-   Structure mode preview.
+
+## [3.1.1] Maps
+
+### Changed
+
+-   We changed the map image in Structure Preview.
+
+## [3.2.0] Notifications
+
+### Added
+
+-   Structure mode preview
+
+## [2.2.0] PopupMenu
+
+### Added
+
+-   Structure mode preview
+
+## [2.2.1] RangeSlider
+
+### Changed
+
+-   We changed the SVG file for the structure mode preview.
+
+## [2.2.0] Repeater
+
+### Added
+
+-   Structure mode preview
+
+## [2.2.0] SafeAreaView
+
+### Added
+
+-   Structure mode preview
+
+### Fixed
+
+-   We fixed the notch area background color.
+
+## [2.2.0] ToggleButtons
+
+### Added
+
+-   Structure mode preview.
+
+## [3.2.0] WebView
+
+### Added
+
+-   Structure mode preview
+
 ## [3.6.0] Native Mobile Resources - 2022-3-28
 
-
 ## [3.2.1] Feedback
+
 ### Changed
 
 -   Added test id
 
 ## [3.1.1] QRCode
+
 ### Added
 
 -   Added test id
 
 ## [3.3.0] VideoPlayer
+
 ### Added
 
-- Android full screen support. Full screen icon can be found on top left of the video if show controls property is set to `true`, when the icon is pressed the video will continue working on an overlay modal.
+-   Android full screen support. Full screen icon can be found on top left of the video if show controls property is set to `true`, when the icon is pressed the video will continue working on an overlay modal.
 
 ## [3.5.2] Native Mobile Resources - 2022-3-22
+
 ### Fixed
 
 -   Reduce module size by removing unused dependencies. This should speed up interaction with Team Server.
