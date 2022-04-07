@@ -19,5 +19,17 @@ export const com_mendix_widget_native_videoplayer_VideoPlayer = {
     },
     video: {
     // All ViewStyle properties are allowed
+    },
+    fullScreenVideoPlayer: {
+    // All ViewStyle properties are allowed
+    },
+    controlBtnContainerStyle: {
+    // All ViewStyle properties are allowed
+    },
+    fullScreenVideoStyle: {
+    // All ViewStyle properties are allowed
+    },
+    fullScreenActivityIndicatorStyle: {
+    // All ViewStyle properties are allowed
     }
 };
