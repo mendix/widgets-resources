@@ -19,4 +19,5 @@
 5. Run the Mendix application to check out the radio buttons.
 
 ## Custom styling
-The look and feel of the widget is fully customizable. Check out the <a href="https://docs.mendix.com/refguide/native-styling-refguide#6-7-radio-buttons">Native Mobile Styling documentation</a> for a full overview of the available style customizations.
+
+The look and feel of the widget is fully customizable. Check out the <a href="https://docs.mendix.com/refguide/native-styling-refguide/#67-radio-buttons">Native Mobile Styling documentation</a> for a full overview of the available style customizations.
