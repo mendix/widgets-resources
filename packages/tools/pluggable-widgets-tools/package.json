@@ -70,6 +70,7 @@
     "core-js": "^3.6.5",
     "cypress": "9.5.1",
     "cypress-image-diff-js": "^1.16.2",
+    "cypress-terminal-report": "^3.5.0",
     "dotenv": "^8.2.0",
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.1",
