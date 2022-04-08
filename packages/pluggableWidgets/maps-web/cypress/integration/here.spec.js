@@ -45,7 +45,7 @@ describe("Here Maps", () => {
             cy.get(".widget-leaflet-maps").should("be.visible");
         });
 
-        it("check the number of locations", () => {
+        it("check the number of locations", { browser: "!firefox" }, () => {
             cy.get(".widget-leaflet-maps").should("be.visible");
             cy.wait(1000);
             cy.get(".leaflet-marker-icon").should("have.length", 1);
@@ -61,7 +61,7 @@ describe("Here Maps", () => {
             cy.get(".widget-leaflet-maps").should("be.visible");
         });
 
-        it("check the number of locations", () => {
+        it("check the number of locations", { browser: "!firefox" }, () => {
             cy.get(".widget-leaflet-maps").should("be.visible");
             cy.wait(1000);
             cy.get(".leaflet-marker-icon").should("have.length", 2);

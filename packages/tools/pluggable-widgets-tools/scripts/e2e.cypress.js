@@ -130,13 +130,15 @@ async function main() {
             throw new Error("Runtime didn't start in time, exiting now...");
         }
         const REPO_ROOT = execSync(`git rev-parse --show-toplevel`).toString().trim();
+        const browserCypress = process.env.BROWSER_CYPRESS || "chrome";
+
         // Spin up cypress docker machine and run the test specs
         execSync(
             "docker run -t " +
                 `-v ${REPO_ROOT}:/source ` +
                 `-v ${REPO_ROOT}/node_modules:/source/node_modules:ro ` +
                 "-w /e2e --name cypress cypress/included:9.5.1 " +
-                `--browser chrome --config baseUrl=http://${ip}:${freePort},video=true,videoUploadOnPasses=false ` +
+                `--browser ${browserCypress} --config baseUrl=http://${ip}:${freePort},video=true,videoUploadOnPasses=false ` +
                 `--config-file false --project ${process.cwd().replace(REPO_ROOT, "/source")}`,
             { stdio: "inherit" }
         );
