@@ -37,11 +37,12 @@ describe("Toggle Buttons", () => {
         await expectToMatchScreenshot(toggleBtnsCustomStyle);
     });
 
-    it("triggers configured event", async () => {
-        const toggleBtnsOnChange = element(by.id("toggleButtonsOnChange").withDescendant(by.label("Satellite")));
+    fit("triggers configured event", async () => {
+        const mapsType = "Satellite";
+        const toggleBtnsOnChange = element(by.id("toggleButtonsOnChange").withDescendant(by.label(mapsType)));
         const alert = Alert();
 
         await toggleBtnsOnChange.tap();
-        await expect(alert.messageElement).toHaveText("Changed!");
+        await expect(alert.messageElement).toHaveText(mapsType);
     });
 });
