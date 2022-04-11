@@ -148,7 +148,7 @@ export default async args => {
             external: editorConfigExternal,
             treeshake: { moduleSideEffects: false },
             plugins: [
-                url({ include: ["**/*.svg"], limit: 102400 }), // SVG file size limit of 100 kB
+                url({ include: ["**/*.svg"], limit: 143360 }), // SVG file size limit of 140 kB
                 ...getCommonPlugins({
                     sourceMaps: false,
                     extensions,
