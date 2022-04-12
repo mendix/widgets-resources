@@ -3,8 +3,7 @@ import {
     Properties,
     StructurePreviewProps,
     transformGroupsIntoTabs,
-    hidePropertyIn,
-    hidePropertiesIn
+    hidePropertyIn
 } from "@mendix/piw-utils-internal";
 import { RadioButtonsPreviewProps } from "../typings/RadioButtonsProps";
 
@@ -13,13 +12,6 @@ export function getProperties(
     defaultProperties: Properties,
     platform: "web" | "desktop"
 ): Properties {
-    if (values.dataSourceType === "association") {
-        hidePropertiesIn(defaultProperties, values, ["dsAttribute", "options", "enableAutoOptions"]);
-    }
-    if (values.dataSourceType === "attribute") {
-        hidePropertiesIn(defaultProperties, values, ["dsAssociation", "labelAttrib"]);
-    }
-
     if (values.enableAutoOptions) {
         hidePropertyIn(defaultProperties, values, "options");
     }

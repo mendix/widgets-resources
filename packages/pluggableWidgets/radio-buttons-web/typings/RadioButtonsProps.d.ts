@@ -6,8 +6,6 @@
 import { ComponentType, CSSProperties, ReactNode } from "react";
 import { ActionValue, DynamicValue, EditableValue, ListValue, ListAttributeValue, ListWidgetValue } from "mendix";
 
-export type DataSourceTypeEnum = "attribute" | "association";
-
 export type OrientationEnum = "horizontal" | "vertical";
 
 export interface OptionsType {
@@ -27,16 +25,13 @@ export interface RadioButtonsContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    dataSourceType: DataSourceTypeEnum;
     ds: ListValue;
-    content?: ListWidgetValue;
     dsAttribute?: EditableValue<string | boolean>;
-    dsAssociation?: any;
-    labelAttrib?: ListAttributeValue<string>;
     orientation: OrientationEnum;
+    labelAttrib?: ListAttributeValue<string>;
+    content?: ListWidgetValue;
     enableAutoOptions: boolean;
     options: OptionsType[];
-    isEditable: boolean;
     onChange?: ActionValue;
 }
 
@@ -45,15 +40,12 @@ export interface RadioButtonsPreviewProps {
     style: string;
     styleObject?: CSSProperties;
     readOnly: boolean;
-    dataSourceType: DataSourceTypeEnum;
     ds: {} | { type: string } | null;
-    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     dsAttribute: string;
-    dsAssociation: any;
-    labelAttrib: string;
     orientation: OrientationEnum;
+    labelAttrib: string;
+    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     enableAutoOptions: boolean;
     options: OptionsPreviewType[];
-    isEditable: boolean;
     onChange: {} | null;
 }

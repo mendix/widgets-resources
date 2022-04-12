@@ -6,34 +6,28 @@
     <studioCategory>Charts</studioCategory>
     <properties>
         <propertyGroup caption="General">
-            <propertyGroup caption="General">
-                <property key="dataSourceType" type="enumeration" defaultValue="attribute">
-                    <caption>Data source type</caption>
-                    <description />
-                    <enumerationValues>
-                        <enumerationValue key="attribute">Attribute</enumerationValue>
-                        <enumerationValue key="association">Association</enumerationValue>
-                    </enumerationValues>
-                </property>
+            <propertyGroup caption="Data source">
                 <property key="ds" type="datasource" required="true" isList="true">
                     <caption>Data source</caption>
                     <description />
                 </property>
-                <property key="content" type="widgets" dataSource="ds" required="false">
-                    <caption>Content</caption>
-                    <description />
-                </property>
                 <property key="dsAttribute" type="attribute" required="false">
-                    <caption>Datasource attribute</caption>
+                    <caption>Attribute</caption>
                     <description />
                     <attributeTypes>
                         <attributeType name="Enum" />
                         <attributeType name="Boolean" />
                     </attributeTypes>
                 </property>
-                <property key="dsAssociation" type="association" required="false" universeDataSource="ds">
-                    <caption>Datasource association</caption>
+            </propertyGroup>
+            <propertyGroup caption="General">
+                <property key="orientation" type="enumeration" defaultValue="horizontal">
+                    <caption>Orientation</caption>
                     <description />
+                    <enumerationValues>
+                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
+                        <enumerationValue key="vertical">Vertical</enumerationValue>
+                    </enumerationValues>
                 </property>
                 <property key="labelAttrib" type="attribute" required="false" dataSource="ds">
                     <caption>Label attribute</caption>
@@ -42,13 +36,9 @@
                         <attributeType name="String" />
                     </attributeTypes>
                 </property>
-                <property key="orientation" type="enumeration" defaultValue="horizontal">
-                    <caption>Orientation</caption>
+                <property key="content" type="widgets" dataSource="ds" required="false">
+                    <caption>Content</caption>
                     <description />
-                    <enumerationValues>
-                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
-                        <enumerationValue key="vertical">Vertical</enumerationValue>
-                    </enumerationValues>
                 </property>
                 <property key="enableAutoOptions" type="boolean" defaultValue="false">
                     <caption>Automatic options</caption>
@@ -66,6 +56,7 @@
                             <property key="value" type="expression">
                                 <caption>Value</caption>
                                 <description />
+                                <!--                                <returnType type="Boolean" />-->
                                 <returnType type="String" />
                             </property>
                             <property key="optionContent" type="widgets" required="false">
@@ -75,10 +66,8 @@
                         </propertyGroup>
                     </properties>
                 </property>
-                <property key="isEditable" type="boolean" defaultValue="true">
-                    <caption>Editable</caption>
-                    <description />
-                </property>
+                <systemProperty key="Editability" />
+                <systemProperty key="Visibility" />
             </propertyGroup>
             <propertyGroup caption="Events">
                 <property key="onChange" type="action" required="false">

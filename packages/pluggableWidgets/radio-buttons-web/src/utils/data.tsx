@@ -10,56 +10,29 @@ type RadioButtonGroup = {
 
 export const useRadioButtonsGroups = ({
     content,
-    dataSourceType,
     ds,
-    dsAssociation,
     dsAttribute,
     enableAutoOptions,
     labelAttrib,
     options
 }: Pick<
     RadioButtonsContainerProps,
-    | "content"
-    | "dataSourceType"
-    | "ds"
-    | "dsAssociation"
-    | "dsAttribute"
-    | "enableAutoOptions"
-    | "labelAttrib"
-    | "options"
+    "content" | "ds" | "dsAttribute" | "enableAutoOptions" | "labelAttrib" | "options"
 >): RadioButtonGroup[] => {
     return useMemo(() => {
-        if (dataSourceType === "attribute") {
-            if (enableAutoOptions && dsAttribute?.universe) {
-                return dsAttribute.universe.map(value => ({
-                    label: value.toString(),
-                    value
-                }));
-            }
-            if (!enableAutoOptions) {
-                return options.map(option => ({
-                    label: option.caption.value ?? "",
-                    value: option.value.value ?? "",
-                    content: option.optionContent
-                }));
-            }
+        if (enableAutoOptions && dsAttribute?.universe) {
+            return dsAttribute.universe.map(value => ({
+                label: value.toString(),
+                value
+            }));
         }
-        if (dataSourceType === "association" && dsAssociation && ds.items !== undefined && labelAttrib) {
-            return ds.items.map(item => ({
-                label: labelAttrib.get(item).value ?? "",
-                value: item.id,
-                content: content?.get(item)
+        if (!enableAutoOptions) {
+            return options.map(option => ({
+                label: option.caption.value ?? "",
+                value: option.value.value ?? "",
+                content: option.optionContent
             }));
         }
         return [];
-    }, [
-        content,
-        dataSourceType,
-        ds.items,
-        dsAssociation,
-        dsAttribute?.universe,
-        enableAutoOptions,
-        labelAttrib,
-        options
-    ]);
+    }, [content, ds.items, dsAttribute?.universe, enableAutoOptions, labelAttrib, options]);
 };

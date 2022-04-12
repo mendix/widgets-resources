@@ -8,12 +8,9 @@ import { useRadioButtonsGroups } from "./utils/data";
 export function RadioButtons({
     class: className,
     content,
-    dataSourceType,
     ds,
-    dsAssociation,
     dsAttribute,
     enableAutoOptions,
-    isEditable,
     labelAttrib,
     name,
     onChange,
@@ -21,11 +18,10 @@ export function RadioButtons({
     orientation,
     style
 }: RadioButtonsContainerProps): ReactElement | null {
+    const isEditable = !dsAttribute?.readOnly;
     const radioGroups = useRadioButtonsGroups({
         content,
-        dataSourceType,
         ds,
-        dsAssociation,
         dsAttribute,
         enableAutoOptions,
         labelAttrib,
@@ -35,47 +31,19 @@ export function RadioButtons({
     const onRadioGroupValueChange = useCallback<RadioProps["onChange"]>(
         index => {
             const selectedValue = radioGroups[index].value;
-            switch (dataSourceType) {
-                case "attribute": {
-                    if (
-                        dsAttribute &&
-                        dsAttribute.status === ValueStatus.Available &&
-                        dsAttribute.value !== selectedValue
-                    ) {
-                        dsAttribute.setValue(selectedValue);
-                        executeAction(onChange);
-                    }
-                    break;
-                }
-                case "association": {
-                    if (
-                        ds.status === ValueStatus.Available &&
-                        dsAssociation &&
-                        dsAssociation.status === ValueStatus.Available &&
-                        dsAssociation.value?.id !== selectedValue
-                    ) {
-                        const item = ds.items?.find(item => item.id === selectedValue);
-                        if (item) {
-                            dsAssociation.setValue(item);
-                            executeAction(onChange);
-                        }
-                    }
-                    break;
-                }
-                default:
-                    break;
+            if (dsAttribute && dsAttribute.status === ValueStatus.Available && dsAttribute.value !== selectedValue) {
+                dsAttribute.setValue(selectedValue);
+                executeAction(onChange);
             }
         },
-        [dataSourceType, ds.items, ds.status, dsAssociation, dsAttribute, onChange, radioGroups]
+        [ds.items, ds.status, dsAttribute, onChange, radioGroups]
     );
+    console.log(dsAttribute);
 
     return (
         <RadioGroup
             className={className}
-            currentIndex={radioGroups.findIndex(
-                group =>
-                    group.value === (dataSourceType === "association" ? dsAssociation?.value?.id : dsAttribute?.value)
-            )}
+            currentIndex={radioGroups.findIndex(group => group.value === dsAttribute?.value)}
             name={name}
             orientation={orientation}
             numberOfItems={radioGroups.length}
