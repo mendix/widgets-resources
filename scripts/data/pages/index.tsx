@@ -53,9 +53,6 @@ const Home: NextPage<Props> = props => {
     return (
         <Container className="vh-100" fluid>
             <div className="d-flex flex-column h-100">
-                <Row>
-                    <h1>Content Overview</h1>
-                </Row>
                 <ContentGrid rows={rows} />
             </div>
         </Container>
