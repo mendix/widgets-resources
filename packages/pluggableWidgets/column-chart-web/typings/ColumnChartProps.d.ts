@@ -36,8 +36,8 @@ export interface SeriesType {
     staticTooltipHoverText?: ListExpressionValue<string>;
     dynamicTooltipHoverText?: ListExpressionValue<string>;
     barColor?: DynamicValue<string>;
-    customSeriesOptions: string;
     onClickAction?: ActionValue;
+    customSeriesOptions: string;
 }
 
 export type GridLinesEnum = "none" | "horizontal" | "vertical" | "both";
@@ -63,8 +63,8 @@ export interface SeriesPreviewType {
     staticTooltipHoverText: string;
     dynamicTooltipHoverText: string;
     barColor: string;
-    customSeriesOptions: string;
     onClickAction: {} | null;
+    customSeriesOptions: string;
 }
 
 export interface ColumnChartContainerProps {

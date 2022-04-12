@@ -1,4 +1,4 @@
-import { BarChartPreviewProps } from "../typings/BarChartProps";
+import { BarChartPreviewProps, BarmodeEnum } from "../typings/BarChartProps";
 import {
     hideNestedPropertiesIn,
     hidePropertiesIn,
@@ -6,8 +6,17 @@ import {
     Problem,
     Properties,
     StructurePreviewProps,
-    transformGroupsIntoTabs
+    transformGroupsIntoTabs,
+    ContainerProps,
+    ImageProps
 } from "@mendix/piw-utils-internal";
+
+import BarChartGroupedDark from "./assets/BarChart-grouped.dark.svg";
+import BarChartGroupedLight from "./assets/BarChart-grouped.light.svg";
+import BarChartStackedDark from "./assets/BarChart-stacked.dark.svg";
+import BarChartStackedLight from "./assets/BarChart-stacked.light.svg";
+import BarChartLegendDark from "./assets/BarChart-legend.dark.svg";
+import BarChartLegendLight from "./assets/BarChart-legend.light.svg";
 
 export function getProperties(
     values: BarChartPreviewProps,
@@ -57,8 +66,46 @@ export function getProperties(
     return defaultProperties;
 }
 
-export function getPreview(_values: BarChartPreviewProps): StructurePreviewProps | null {
-    return null;
+export function getPreview(values: BarChartPreviewProps, isDarkMode: boolean): StructurePreviewProps | null {
+    const items = {
+        group: {
+            dark: { structure: BarChartGroupedDark, legend: BarChartLegendDark },
+            light: { structure: BarChartGroupedLight, legend: BarChartLegendLight }
+        },
+        stack: {
+            dark: { structure: BarChartStackedDark, legend: BarChartLegendDark },
+            light: { structure: BarChartStackedLight, legend: BarChartLegendLight }
+        }
+    };
+
+    const getImage = (barMode: BarmodeEnum, type: "structure" | "legend") => {
+        const colorMode = isDarkMode ? "dark" : "light";
+        return items[barMode][colorMode][type];
+    };
+
+    const chartImage = {
+        type: "Image",
+        document: decodeURIComponent(getImage(values.barmode, "structure").replace("data:image/svg+xml,", "")),
+        width: 375
+    } as ImageProps;
+
+    const legendImage = {
+        type: "Image",
+        document: decodeURIComponent(getImage(values.barmode, "legend").replace("data:image/svg+xml,", "")),
+        width: 85
+    } as ImageProps;
+
+    const filler = {
+        type: "Container",
+        grow: 1,
+        children: []
+    } as ContainerProps;
+
+    return {
+        type: "RowLayout",
+        columnSize: "fixed",
+        children: values.showLegend ? [chartImage, legendImage, filler] : [chartImage, filler]
+    };
 }
 
 export function check(values: BarChartPreviewProps): Problem[] {

@@ -44,11 +44,11 @@ export interface LinesType {
     customSeriesOptions: string;
 }
 
+export type GridLinesEnum = "none" | "horizontal" | "vertical" | "both";
+
 export type WidthUnitEnum = "percentage" | "pixels";
 
 export type HeightUnitEnum = "percentageOfWidth" | "pixels" | "percentageOfParent";
-
-export type GridLinesEnum = "none" | "horizontal" | "vertical" | "both";
 
 export interface LinesPreviewType {
     dataSet: DataSetEnum;
@@ -84,11 +84,11 @@ export interface BubbleChartContainerProps {
     xAxisLabel?: DynamicValue<string>;
     yAxisLabel?: DynamicValue<string>;
     showLegend: boolean;
+    gridLines: GridLinesEnum;
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
     height: number;
-    gridLines: GridLinesEnum;
     enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
@@ -105,11 +105,11 @@ export interface BubbleChartPreviewProps {
     xAxisLabel: string;
     yAxisLabel: string;
     showLegend: boolean;
+    gridLines: GridLinesEnum;
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;
     height: number | null;
-    gridLines: GridLinesEnum;
     enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;

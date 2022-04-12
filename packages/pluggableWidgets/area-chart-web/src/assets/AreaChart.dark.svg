@@ -1,0 +1,18 @@
+<svg width="721" height="440" viewBox="0 0 721 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+<line x1="1" y1="0.5" x2="721" y2="0.5" stroke="#646464"/>
+<line x1="1" y1="63.1428" x2="721" y2="63.1428" stroke="#646464"/>
+<line x1="1" y1="125.786" x2="721" y2="125.786" stroke="#646464"/>
+<line x1="1" y1="188.429" x2="721" y2="188.429" stroke="#646464"/>
+<line x1="1" y1="251.071" x2="721" y2="251.071" stroke="#646464"/>
+<line x1="1" y1="313.714" x2="721" y2="313.714" stroke="#646464"/>
+<line x1="1" y1="376.357" x2="721" y2="376.357" stroke="#646464"/>
+<line x1="1" y1="439" x2="721" y2="439" stroke="#646464"/>
+<line x1="720.5" y1="439.5" x2="720.5" stroke="#646464"/>
+<line x1="720.5" y1="439.5" x2="720.5" stroke="#646464"/>
+<line x1="0.5" y1="439.5" x2="0.5" stroke="#646464"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1 341.855L240.667 214.032L480.333 247.266L720 122V439H1V341.855Z" fill="#FFDA70"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1 331.02L240.667 296.921L475.234 152L720 188.941V439H1V331.02Z" fill="#344BCE"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1 389.337L240.667 344.13L475.234 152L720 200.974" fill="#344BCE"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1 374.263L475.234 234L720 304.132V439H1V374.263Z" fill="#579BF9"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1 423.211L475.234 234L720 328.605" fill="#579BF9"/>
+</svg>
