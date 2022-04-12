@@ -230,7 +230,7 @@ export function Table<T extends ObjectItem>(props: TableProps<T>): ReactElement 
     }, [columnsWidth, visibleColumns, props.columnsHidable]);
 
     return (
-        <div className={props.className} style={props.styles}>
+        <div className={classNames(props.className, "widget-datagrid")} style={props.styles}>
             <div className="table" role="table">
                 <div className="table-header" role="rowgroup">
                     {props.pagingPosition === "top" && pagination}
