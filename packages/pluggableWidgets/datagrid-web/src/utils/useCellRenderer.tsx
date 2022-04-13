@@ -29,7 +29,7 @@ export function useCellRenderer({ onClick, columns }: CellRendererHookProps): Ce
                 </span>
             );
         } else {
-            content = column.content?.get(value);
+            content = <div className="td-custom-content">{column.content?.get(value)}</div>;
         }
 
         return renderWrapper(

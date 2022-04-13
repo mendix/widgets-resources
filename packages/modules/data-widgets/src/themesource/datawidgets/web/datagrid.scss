@@ -207,6 +207,10 @@ $brand-primary: #264ae5 !default;
             word-break: break-all;
         }
 
+        > .td-custom-content {
+            flex-grow: 1;
+        }
+
         > .empty-placeholder {
             width: 100%;
         }
