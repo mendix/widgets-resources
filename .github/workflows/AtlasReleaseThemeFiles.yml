@@ -1,5 +1,9 @@
 name: Create Release For Atlas Theme Folder
 
+# description: publish the latest Atlas theme files so that other teams (e.g. templates) can rely on this downstream
+# for e.g. automation. theme files are not distributed as part of Atlas_Core or other styling module. When Atlas 2
+# upgraded to Atlas 3, a migration doc included a link to a .zip file with theme files.
+
 on:
     push:
         branches: [master]
