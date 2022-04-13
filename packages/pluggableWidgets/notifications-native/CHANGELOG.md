@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.2.1] - 2022-4-13
+
 ### Fixed
 
 -   We fixed an issue that occured on Android devices when using the Make it Native app to preview a page containing the Notifications widget.
