@@ -110,3 +110,7 @@ export const excludeHelpers = false;
 // Radio Buttons
 export const excludeRadioButtons = false;
 export const excludeRadioButtonsHelper = false;
+
+// Background Gradient
+export const excludeBackgroundGradient = false;
+export const excludeBackgroundGradientHelper = false;

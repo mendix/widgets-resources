@@ -30,7 +30,8 @@ import {
     VariablesSpacing,
     VariablesTabContainer,
     VariablesCheckbox,
-    VariablesRadioButtons
+    VariablesRadioButtons,
+    VariableBackgroundGradient
 } from "./types/variables";
 //
 //
@@ -662,7 +663,6 @@ let slider: VariablesSlider = {
 };
 slider = merge(slider, custom.slider || ({} as any));
 //
-
 // Radio Buttons
 let radioButtons: VariablesRadioButtons = {
     labelTextStyle: {
@@ -705,6 +705,12 @@ let radioButtons: VariablesRadioButtons = {
 };
 radioButtons = merge(radioButtons, custom.radioButtons || ({} as any));
 //
+// Background Gradient
+let backgroundGradient: VariableBackgroundGradient = {
+    container: {}
+};
+
+backgroundGradient = merge(backgroundGradient, custom.backgroundGradient || ({} as any));
 
 export * from "../../../theme/native/custom-variables";
 export {
@@ -734,5 +740,6 @@ export {
     progressCircle,
     slider,
     rating,
-    radioButtons
+    radioButtons,
+    backgroundGradient
 };

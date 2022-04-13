@@ -76,6 +76,8 @@ import * as widgetsWebView from "./core/widgets/webview";
 import * as helperClasses from "./core/helpers/helperclasses";
 import * as radioButtons from "./core/widgets/radiobuttons";
 import * as helperRadioButtons from "./core/helpers/radiobuttons";
+import * as backgroundGradient from "./core/widgets/backgroundgradient";
+import * as helperBackgroundGradient from "./core/helpers/backgroundgradient";
 //
 //
 // ================================= CUSTOM =================================\\
@@ -162,6 +164,10 @@ module.exports = [
     !exclusionVariables.excludeHelpers ? helperClasses : {},
     !exclusionVariables.excludeRadioButtons ? radioButtons : {},
     !exclusionVariables.excludeRadioButtons && !exclusionVariables.excludeRadioButtonsHelper ? helperRadioButtons : {},
+    !exclusionVariables.excludeBackgroundGradient ? backgroundGradient : {},
+    !exclusionVariables.excludeBackgroundGradient && !exclusionVariables.excludeBackgroundGradientHelper
+        ? helperBackgroundGradient
+        : {},
     layout,
     page
 ].reduce((merged, object) => ({ ...merged, ...object }), {});

@@ -26,7 +26,8 @@ import {
     VariablesSlider,
     VariablesSpacing,
     VariablesTabContainer,
-    VariablesRadioButtons
+    VariablesRadioButtons,
+    VariableBackgroundGradient
 } from "../../themesource/atlas_core/native/types/variables";
 import "./exclusion-variables";
 /*
@@ -681,3 +682,8 @@ export const radioButtons: VariablesRadioButtons = {
     }
 };
 //
+
+// Background gradient style
+export const backgroundGradient: VariableBackgroundGradient = {
+    container: {}
+};

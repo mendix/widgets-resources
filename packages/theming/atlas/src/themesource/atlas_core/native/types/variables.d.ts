@@ -2,6 +2,7 @@
     Types
 ========================================================================== */
 
+import { ViewStyle } from "react-native";
 import { CheckBoxInputType } from "./widgets";
 
 declare type FontWeight = "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
@@ -584,4 +585,8 @@ export interface VariablesRadioButtons {
         color: string;
         fontSize: number;
     };
+}
+
+export interface VariableBackgroundGradient {
+    container: ViewStyle;
 }
