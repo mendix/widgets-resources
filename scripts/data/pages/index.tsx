@@ -12,6 +12,7 @@ import {
 } from "../schema";
 import { Container, Row } from "react-bootstrap";
 import { useMemo } from "react";
+import Head from "next/head";
 
 type Props = {
     data: z.infer<typeof OutputSchema>;
@@ -51,11 +52,16 @@ const Home: NextPage<Props> = props => {
     );
 
     return (
-        <Container className="vh-100" fluid>
-            <div className="d-flex flex-column h-100">
-                <ContentGrid rows={rows} />
-            </div>
-        </Container>
+        <>
+            <Head>
+                <title>Content Overview</title>
+            </Head>
+            <Container className="vh-100" fluid>
+                <div className="d-flex flex-column h-100">
+                    <ContentGrid rows={rows} />
+                </div>
+            </Container>
+        </>
     );
 };
 
