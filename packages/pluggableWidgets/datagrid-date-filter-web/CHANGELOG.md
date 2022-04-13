@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.3.1] - 2022-4-13
+
 ### Fixed
 
 -   We fixed a bug that was causing errors in Safari when using DateFilter in Datagrid. (Ticket #144874)
