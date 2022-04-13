@@ -164,9 +164,9 @@ async function createWebActionsModule() {
 async function commonActions(moduleInfo, widgets = [], exportWithSnippet = true, changeLogScope = "MODULE") {
     const tmpFolder = join(repoRootPath, "tmp", moduleFolderNameInRepo);
     await githubAuthentication(moduleInfo);
-    const moduleChangelogs = await (changeLogScope === "WIDGETS" ? updateChangelogs : updateModuleChangelogs)(
-        moduleInfo
-    );
+    const moduleChangelogs = await (changeLogScope === "WIDGETS"
+        ? updateChangelogs(widgets, moduleInfo)
+        : updateModuleChangelogs(moduleInfo));
     if (!moduleChangelogs) {
         throw new Error(
             `No unreleased changes found in the CHANGELOG.md for ${moduleInfo.nameWithSpace} ${moduleInfo.version}.`
