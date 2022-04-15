@@ -33,7 +33,7 @@ jobs:
             - name: "Defining node version"
               uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
               with:
-                  node-version: '16'
+                  node-version: "16"
             - name: Install docker
               uses: docker-practice/actions-setup-docker@51fd5009666ea5e3382fe125abf5d73d31386b59
             - name: Login to GitHub Container Registry
@@ -45,20 +45,19 @@ jobs:
             - name: "Use specific Java version for sdkmanager to work"
               uses: joschi/setup-jdk@v1
               with:
-                  java-version: 'openjdk8'
-                  architecture: 'x64'
+                  java-version: "openjdk8"
+                  architecture: "x64"
               env:
                   # https://github.com/actions/toolkit/issues/641#issuecomment-728963957
-                  ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-#            - name: Setup Android SDK
-#              uses: android-actions/setup-android@3404b45d4c43e74e30dcad1a47fb89a0573f5a7e
+                  ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
             - name: "Installing dependencies"
               run: npm install
-            - name: "Start Mendix Environment and run tests"
-              run: npm run start:native-tests-ci
+            - name: "Start Mendix Environment"
+              id: start_mendix_environment
+              run: npm run start:native-tests-ci && echo "::set-output name=CHANGED_PACKAGES::$CHANGED_PACKAGES"
               env:
                   CI: true
-            - name: Setup emulator
+            - name: Setup emulator & run tests
               uses: reactivecircus/android-emulator-runner@v2
               with:
                   api-level: 30
@@ -66,7 +65,8 @@ jobs:
                   arch: x86_64
                   profile: pixel
                   avd-name: NATIVE_pixel_30
-                  script: npx lerna run test:e2e:local:android --stream --concurrency 1 --scope bar-chart-native
+                  script:
+                      npx lerna run test:e2e:local:android --stream --concurrency 1 --scope ${{ steps.start_mendix_environment.CHANGED_PACKAGES }}
             - name: "Archive test screenshot diff results"
               uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
               if: failure()
