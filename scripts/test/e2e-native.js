@@ -17,7 +17,7 @@ async function main() {
     const ghcr = process.env.CI && process.env.FORKED !== "true" ? "ghcr.io/mendix/widgets-resources/" : "";
 
     const testArchivePath = await getTestProject("https://github.com/mendix/Native-Mobile-Resources", "githubactions"); // not main because trying out minimal projectz
-    const root = "/widgets-resources";
+    const root = "/mnt/widgets-resources";
     const testsDir = join(root, "tests");
     const testProjectDir = join(testsDir, "testProject");
     const repoPath = join(testsDir, "Native-Mobile-Resources-githubactions");

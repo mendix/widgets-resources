@@ -37,7 +37,7 @@ jobs:
             - name: Install podman
               run: |
                 brew install podman
-                podman machine init -v .:/widgets-resources
+                podman machine init -v .:/mnt/widgets-resources
                 podman machine start
             - name: Login to GitHub Container Registry
               run: podman login -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} ghcr.io
