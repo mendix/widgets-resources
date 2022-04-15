@@ -17,12 +17,13 @@ async function main() {
     const ghcr = process.env.CI && process.env.FORKED !== "true" ? "ghcr.io/mendix/widgets-resources/" : "";
 
     const testArchivePath = await getTestProject("https://github.com/mendix/Native-Mobile-Resources", "githubactions"); // not main because trying out minimal projectz
-    const root = "/mnt/widgets-resources";
-    const testsDir = join(root, "tests");
+    const localRoot = process.cwd();
+    const podmanRoot = "/mnt/widgets-resources";
+    const testsDir = join(localRoot, "tests");
     const testProjectDir = join(testsDir, "testProject");
     const repoPath = join(testsDir, "Native-Mobile-Resources-githubactions");
 
-    mkdir("-p", testsDir);
+    mkdir("-p", join(localRoot, "tests"));
     execSync(`unzip -o ${testArchivePath} -d ${testsDir}`);
     mv(repoPath, testProjectDir);
 
@@ -57,7 +58,7 @@ async function main() {
     }
 
     const existingImages = execSync(`podman image ls -q ${ghcr}mxbuild:${mendixVersion}`).toString().trim();
-    const scriptsPath = join(root, "packages", "tools", "pluggable-widgets-tools", "scripts");
+    const scriptsPath = join(podmanRoot, "packages", "tools", "pluggable-widgets-tools", "scripts");
 
     if (!existingImages) {
         console.log(`Creating new mxbuild docker image...`);
@@ -91,7 +92,7 @@ async function main() {
         // Build testProject via mxbuild
         const projectFile = "/source/tests/testProject/NativeComponentsTestProject.mpr";
         mxbuildContainerId = execSync(
-            `podman run -p 8083:8083 -i -td -v ${root}:/source --rm ${ghcr}mxbuild:${mendixVersion} bash`
+            `podman run -p 8083:8083 -i -td -v ${podmanRoot}:/source --rm ${ghcr}mxbuild:${mendixVersion} bash`
         )
             .toString()
             .trim();
@@ -132,7 +133,7 @@ async function main() {
 
         // Spin up the runtime and run the testProject
         runtimeContainerId = execSync(
-            `podman run -td -v ${root}:/source -v ${scriptsPath}:/shared:ro -w /source -p 8080:8080 ` +
+            `podman run -td -v ${podmanRoot}:/source -v ${scriptsPath}:/shared:ro -w /source -p 8080:8080 ` +
                 `-e MENDIX_VERSION=${mendixVersion} --entrypoint /bin/bash ` +
                 `--rm ${ghcr}mxruntime:${mendixVersion} /shared/runtime.sh`
         )
