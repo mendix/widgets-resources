@@ -32,6 +32,7 @@ async function main() {
     const output = execSync("npx lerna list --json --since origin/master --scope '*-native'");
     const changesPackages = JSON.parse(output);
     const changedPackagesJoined = changesPackages.map(p => p.name).join(",") + ","; // end comma useful when only one package is changed.
+    process.env.CHANGED_PACKAGES = changedPackagesJoined;
 
     execSync(`npx lerna run release --scope '{${changedPackagesJoined}}'`, { stdio: "inherit" });
 
