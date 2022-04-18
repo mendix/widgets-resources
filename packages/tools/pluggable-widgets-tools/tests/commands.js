@@ -113,6 +113,9 @@ async function main() {
         console.log(`[${widgetName}] Testing 'release' command...`);
         await testRelease();
 
+        console.log(`[${widgetName}] Checking dependencies files...`);
+        await checkDependenciesFiles();
+
         console.log(`[${widgetName}] Testing npm start...`);
         await testStart();
 
@@ -228,6 +231,15 @@ async function main() {
                 )
             ) {
                 throw new Error("Expected mpk file to be generated, but it wasn't.");
+            }
+        }
+
+        async function checkDependenciesFiles() {
+            if (
+                !existsSync(join(workDir, "dist", "tmp", "widgets", "dependencies.json")) ||
+                !existsSync(join(workDir, "dist", "tmp", "widgets", "dependencies.txt"))
+            ) {
+                throw new Error("Expected dependencies files to be generated, but it wasn't.");
             }
         }
 

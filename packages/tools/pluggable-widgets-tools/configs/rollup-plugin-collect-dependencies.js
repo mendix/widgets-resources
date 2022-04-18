@@ -1,12 +1,20 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+
 import fg from "fast-glob";
 import { readJson, writeJson } from "fs-extra";
-import { existsSync } from "fs";
-import { dirname, join } from "path";
+import { existsSync, readFileSync, writeFileSync } from "fs";
+import { dirname, join, parse } from "path";
 import copy from "recursive-copy";
+import { cp } from "shelljs";
 import { promisify } from "util";
 import resolve from "resolve";
+import _ from "lodash";
+import moment from "moment";
+import mkdirp from "mkdirp";
 
-export function collectDependencies({ onlyNative, outputDir, widgetName }) {
+export function collectDependencies({ onlyNative, outputDir, widgetName, licenseOptions = {} }) {
+    const plugin = new LicensePlugin(licenseOptions);
+    const dependencies = [];
     const managedDependencies = [];
     let rollupOptions;
     return {
@@ -23,21 +31,44 @@ export function collectDependencies({ onlyNative, outputDir, widgetName }) {
                 source,
                 dirname(importer ? importer : rollupOptions.input[0])
             );
-            if (resolvedPackagePath && (!onlyNative || (await hasNativeCode(resolvedPackagePath)))) {
-                if (!managedDependencies.includes(resolvedPackagePath)) {
-                    managedDependencies.push(resolvedPackagePath);
+            if (resolvedPackagePath) {
+                const checkHasNativeCode = await hasNativeCode(resolvedPackagePath);
+                if (!onlyNative || checkHasNativeCode) {
+                    if (!managedDependencies.includes(resolvedPackagePath)) {
+                        managedDependencies.push(resolvedPackagePath);
+                    }
                 }
-                return { external: true, id: source };
+                if (!dependencies.includes(resolvedPackagePath)) {
+                    dependencies.push(resolvedPackagePath);
+                }
+                return checkHasNativeCode ? { external: true, id: source } : null;
             }
             return null;
+        },
+        async generateBundle() {
+            if (!licenseOptions) {
+                return;
+            }
+            for (const dependency of dependencies) {
+                const pkg = await scanDependency(dependency);
+                if (pkg) {
+                    plugin.addDependency(pkg);
+                }
+                const transitiveDependencies = await getTransitiveDependencies(dependency, rollupOptions.external);
+                for (const transitiveDependency of transitiveDependencies) {
+                    if (!dependencies.includes(transitiveDependency)) {
+                        dependencies.push(transitiveDependency);
+                    }
+                }
+            }
+            plugin.config();
         },
         async writeBundle() {
             const nativeDependencies = new Set(
                 onlyNative ? managedDependencies : await asyncWhere(managedDependencies, hasNativeCode)
             );
 
-            for (let i = 0; i < managedDependencies.length; ++i) {
-                const dependency = managedDependencies[i];
+            for (const dependency of managedDependencies) {
                 const destinationPath = join(outputDir, "node_modules", getModuleName(dependency));
                 await copyJsModule(dependency, destinationPath);
 
@@ -154,4 +185,147 @@ async function writeNativeDependenciesJson(nativeDependencies, outputDir, widget
 
 async function asyncWhere(array, filter) {
     return (await Promise.all(array.map(async el => ((await filter(el)) ? [el] : [])))).flat();
+}
+
+async function scanDependency(dir) {
+    let pkg = null;
+    const pkgJsonPath = join(dir, "package.json");
+    const exists = existsSync(pkgJsonPath);
+    if (!exists) {
+        return null;
+    }
+    const pkgJson = JSON.parse(readFileSync(pkgJsonPath));
+    const license = pkgJson.license || pkgJson.licenses;
+    const hasLicense = license && license.length > 0;
+    const name = pkgJson.name;
+    if (!name && !hasLicense) {
+        return null;
+    }
+    pkg = pkgJson;
+    const absolutePath = join(dir, "[lL][iI][cC][eE][nN][cCsS][eE]*");
+    const licenseFile = (await fg([absolutePath], { cwd: dir }))[0];
+    if (licenseFile) {
+        pkg.licenseText = readFileSync(licenseFile, "utf-8");
+    }
+    return pkg;
+}
+
+class LicensePlugin {
+    constructor(options = {}) {
+        this._options = options;
+        this._dependencies = {};
+    }
+
+    addDependency(pkg) {
+        const name = pkg.name;
+        if (!name) {
+            console.warn("Trying to add dependency without any name, skipping it!");
+        } else if (!_.has(this._dependencies, name)) {
+            this._dependencies[name] = new Dependency(pkg);
+        }
+    }
+
+    config() {
+        const thirdParty = this._options.thirdParty;
+        if (!thirdParty) {
+            return;
+        }
+
+        const outputDependencies = _.chain(this._dependencies).values().value();
+        const output = thirdParty.output;
+
+        if (output) {
+            this._exportThirdParties(outputDependencies, output);
+        }
+
+        const updateLicense = this._options.updateLicense;
+
+        if (updateLicense) {
+            this._updateLicense(updateLicense);
+        }
+    }
+
+    _updateLicense(updateLicense) {
+        const {
+            input,
+            output: { file }
+        } = updateLicense;
+        if (!existsSync(input)) {
+            console.warn("The license file could not be found in the given path.");
+            return;
+        }
+        mkdirp.sync(parse(file).dir);
+        cp(input, file);
+    }
+
+    _exportThirdParties(dependencies, outputs) {
+        _.forEach(_.castArray(outputs), output => {
+            this._exportThirdPartiesToOutput(dependencies, output);
+        });
+    }
+
+    _exportThirdPartiesToOutput(outputDependencies, output) {
+        if (_.isFunction(output)) {
+            output(outputDependencies);
+            return;
+        }
+
+        const template = _.isString(output.template)
+            ? dependencies => _.template(output.template)({ dependencies, _, moment })
+            : output.template;
+
+        const defaultTemplate = dependencies =>
+            _.isEmpty(dependencies) ? "" : _.map(dependencies, d => d.text()).join("\n\n---\n\n");
+
+        const text = _.isFunction(template) ? template(outputDependencies) : defaultTemplate(outputDependencies);
+        const isOutputFile = _.isString(output);
+        const file = isOutputFile ? output : output.file;
+        const encoding = isOutputFile ? "utf-8" : output.encoding || "utf-8";
+        mkdirp.sync(parse(file).dir);
+        writeFileSync(file, (text || "").trim(), { encoding });
+    }
+}
+
+class Dependency {
+    constructor(pkg) {
+        this.name = pkg.name || null;
+        this.maintainers = pkg.maintainers || [];
+        this.version = pkg.version || null;
+        this.description = pkg.description || null;
+        this.repository = pkg.repository || null;
+        this.homepage = pkg.homepage || null;
+        this.private = pkg.private || false;
+        this.license = pkg.license || null;
+        this.licenseText = pkg.licenseText || null;
+    }
+
+    text() {
+        const lines = [];
+
+        lines.push(`Name: ${this.name}`);
+        lines.push(`Version: ${this.version}`);
+        lines.push(`License: ${this.license}`);
+        lines.push(`Private: ${this.private}`);
+
+        if (this.description) {
+            lines.push(`Description: ${this.description || false}`);
+        }
+
+        if (this.repository) {
+            lines.push(`Repository: ${this.repository.url}`);
+        }
+
+        if (this.homepage) {
+            lines.push(`Homepage: ${this.homepage}`);
+        }
+
+        if (this.licenseText) {
+            lines.push("License Copyright:");
+            lines.push("===");
+            lines.push("");
+            lines.push(this.licenseText);
+        }
+
+        return lines.join("\n");
+    }
 }

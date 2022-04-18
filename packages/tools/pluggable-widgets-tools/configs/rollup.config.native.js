@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+
 import { existsSync, mkdirSync } from "fs";
+import fg from "fast-glob";
 import { join, relative } from "path";
 import { getBabelInputPlugin, getBabelOutputPlugin } from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
@@ -12,7 +15,6 @@ import { red, yellow, blue } from "ansi-colors";
 import loadConfigFile from "rollup/dist/loadConfigFile";
 import clear from "rollup-plugin-clear";
 import command from "rollup-plugin-command";
-import license from "rollup-plugin-license";
 import { terser } from "rollup-plugin-terser";
 import { cp } from "shelljs";
 import { zip } from "zip-a-folder";
@@ -36,6 +38,8 @@ const mpkFile = join(mpkDir, process.env.MPKOUTPUT ? process.env.MPKOUTPUT : `${
 
 export default async args => {
     const production = Boolean(args.configProduction);
+    const mxLicensePath = process.env.MX_LICENSE_PATH;
+
     if (!production && projectPath) {
         console.info(blue(`Project Path: ${projectPath}`));
     }
@@ -62,7 +66,48 @@ export default async args => {
                 }),
                 ...(i === 0 ? getClientComponentPlugins() : []),
                 json(),
-                collectDependencies({ outputDir: outDir, onlyNative: true, widgetName }),
+                collectDependencies({
+                    outputDir: outDir,
+                    onlyNative: true,
+                    widgetName,
+                    ...(production && i === 0
+                        ? {
+                              licenseOptions: {
+                                  thirdParty: {
+                                      output: [
+                                          {
+                                              file: join(outDir, "dependencies.txt")
+                                          },
+                                          {
+                                              file: join(outDir, "dependencies.json"),
+                                              template: dependencies =>
+                                                  JSON.stringify(
+                                                      dependencies.map(dependency => ({
+                                                          [dependency.name]: {
+                                                              version: dependency.version,
+                                                              type: "test",
+                                                              transitive: false,
+                                                              url: dependency.homepage
+                                                          }
+                                                      }))
+                                                  )
+                                          }
+                                      ]
+                                  },
+                                  ...(mxLicensePath
+                                      ? {
+                                            updateLicense: {
+                                                input: mxLicensePath,
+                                                output: {
+                                                    file: sourcePath
+                                                }
+                                            }
+                                        }
+                                      : null)
+                              }
+                          }
+                        : null)
+                }),
                 ...getCommonPlugins({
                     sourceMaps: false,
                     extensions: [`.${os}.js`, ".native.js", ".js", ".jsx", ".ts", ".tsx"],
@@ -170,22 +215,22 @@ export default async args => {
                 : null,
             image(),
             production ? terser({ mangle: false }) : null,
-            config.licenses
-                ? license({
-                      thirdParty: {
-                          includePrivate: true,
-                          output: {
-                              file: join(outDir, "dependencies.txt")
-                          }
-                      }
-                  })
-                : null,
             // We need to create .mpk and copy results to test project after bundling is finished.
             // In case of a regular build is it is on `writeBundle` of the last config we define
             // (since rollup processes configs sequentially). But in watch mode rollup re-bundles only
             // configs affected by a change => we cannot know in advance which one will be "the last".
             // So we run the same logic for all configs, letting the last one win.
             command([
+                async () => {
+                    if (!config.licenses) {
+                        return;
+                    }
+                    const absolutePath = join(sourcePath, "[lL][iI][cC][eE][nN][cCsS][eE]*");
+                    const licenseFile = (await fg([absolutePath], { cwd: sourcePath }))[0];
+                    if (existsSync(licenseFile)) {
+                        cp(licenseFile, outDir);
+                    }
+                },
                 async () => {
                     mkdirSync(mpkDir, { recursive: true });
                     await zip(outDir, mpkFile);
