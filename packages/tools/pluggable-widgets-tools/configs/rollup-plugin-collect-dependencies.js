@@ -12,7 +12,7 @@ import _ from "lodash";
 import moment from "moment";
 import mkdirp from "mkdirp";
 
-export function collectDependencies({ onlyNative, outputDir, widgetName, licenseOptions = {} }) {
+export function collectDependencies({ onlyNative, outputDir, widgetName, licenseOptions = {}, copyJsModules = true }) {
     const plugin = new LicensePlugin(licenseOptions);
     const dependencies = [];
     const managedDependencies = [];
@@ -64,6 +64,9 @@ export function collectDependencies({ onlyNative, outputDir, widgetName, license
             plugin.config();
         },
         async writeBundle() {
+            if (!copyJsModules) {
+                return;
+            }
             const nativeDependencies = new Set(
                 onlyNative ? managedDependencies : await asyncWhere(managedDependencies, hasNativeCode)
             );
