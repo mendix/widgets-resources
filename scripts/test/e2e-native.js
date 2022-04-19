@@ -21,6 +21,7 @@ async function main() {
     const podmanRoot = "/mnt/widgets-resources";
     const testsDir = join(localRoot, "tests");
     const testProjectDir = join(testsDir, "testProject");
+    const testProjectDirPodman = join(podmanRoot, "tests", "testproject");
     const repoPath = join(testsDir, "Native-Mobile-Resources-githubactions");
 
     mkdir("-p", join(localRoot, "tests"));
@@ -155,7 +156,7 @@ async function main() {
         }
 
         try {
-            execSync(`cat ${testProjectDir}/deployment/log/packager.txt`, {
+            execSync(`cat ${testProjectDirPodman}/deployment/log/packager.txt`, {
                 stdio: "inherit"
             });
         } catch (_) {}
