@@ -1,4 +1,5 @@
 import { existsSync, mkdirSync } from "fs";
+import fg from "fast-glob";
 import { join, relative } from "path";
 import alias from "@rollup/plugin-alias";
 import { getBabelInputPlugin, getBabelOutputPlugin } from "@rollup/plugin-babel";
