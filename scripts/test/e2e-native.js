@@ -58,14 +58,16 @@ async function main() {
     }
 
     const existingImages = execSync(`podman image ls -q ${ghcr}mxbuild:${mendixVersion}`).toString().trim();
-    const scriptsPath = join(localRoot, "packages", "tools", "pluggable-widgets-tools", "scripts");
+    const scriptPath = join("packages", "tools", "pluggable-widgets-tools", "scripts");
+    const scriptsPathLocal = join(localRoot, scriptPath);
+    const scriptsPathPodman = join(podmanRoot, scriptPath);
 
     if (!existingImages) {
         console.log(`Creating new mxbuild docker image...`);
         execSync(
-            `podman build -f ${join(scriptsPath, "mxbuild.Dockerfile")} ` +
+            `podman build -f ${join(scriptsPathLocal, "mxbuild.Dockerfile")} ` +
                 `--build-arg MENDIX_VERSION=${mendixVersion} ` +
-                `-t mxbuild:${mendixVersion} ${scriptsPath}`,
+                `-t mxbuild:${mendixVersion} ${scriptsPathLocal}`,
             { stdio: "inherit" }
         );
     }
@@ -79,9 +81,9 @@ async function main() {
     if (!existingRuntimeImages) {
         console.log(`Creating new runtime docker image...`);
         execSync(
-            `podman build -f ${join(scriptsPath, "runtime.Dockerfile")} ` +
+            `podman build -f ${join(scriptsPathLocal, "runtime.Dockerfile")} ` +
                 `--build-arg MENDIX_VERSION=${mendixVersion} ` +
-                `-t mxruntime:${mendixVersion} ${scriptsPath}`,
+                `-t mxruntime:${mendixVersion} ${scriptsPathLocal}`,
             { stdio: "inherit" }
         );
     }
@@ -133,7 +135,7 @@ async function main() {
 
         // Spin up the runtime and run the testProject
         runtimeContainerId = execSync(
-            `podman run -td -v ${podmanRoot}:/source -v ${scriptsPath}:/shared:ro -w /source -p 8080:8080 ` +
+            `podman run -td -v ${podmanRoot}:/source -v ${scriptsPathPodman}:/shared:ro -w /source -p 8080:8080 ` +
                 `-e MENDIX_VERSION=${mendixVersion} --entrypoint /bin/bash ` +
                 `--rm ${ghcr}mxruntime:${mendixVersion} /shared/runtime.sh`
         )
