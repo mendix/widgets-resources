@@ -107,12 +107,9 @@ async function main() {
         );
 
         console.log("Building project with mxbuild...");
-        execSync(
-            `podman exec -t ${mxbuildContainerId} bash -c "mxbuild --max-sass-compile-time 120000 -o /tmp/automation.mda ${projectFile}"`,
-            {
-                stdio: "inherit"
-            }
-        );
+        execSync(`podman exec -t ${mxbuildContainerId} bash -c "mxbuild -o /tmp/automation.mda ${projectFile}"`, {
+            stdio: "inherit"
+        });
         console.log("All widgets are updated and project .mpr created.");
 
         console.log("Starting metro...");
