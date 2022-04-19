@@ -58,7 +58,7 @@ async function main() {
     }
 
     const existingImages = execSync(`podman image ls -q ${ghcr}mxbuild:${mendixVersion}`).toString().trim();
-    const scriptsPath = join(podmanRoot, "packages", "tools", "pluggable-widgets-tools", "scripts");
+    const scriptsPath = join(localRoot, "packages", "tools", "pluggable-widgets-tools", "scripts");
 
     if (!existingImages) {
         console.log(`Creating new mxbuild docker image...`);
