@@ -21,8 +21,7 @@ jobs:
             - name: "Fetching master to compare"
               if: github.event_name == 'pull_request'
               run:
-                  git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref
-                  }}:refs/remotes/origin/${{ github.base_ref }}
+                  git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
             - name: "Defining cache"
               uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed # v2
               env:
@@ -51,12 +50,14 @@ jobs:
                   ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
             - name: "Installing dependencies"
               run: npm install
+            - name: "Set changed packages"
+              id: set-changed-packages
+              run: node .github/scripts/set-changed-packages.js *-native
             - name: "Start Mendix Environment"
               id: start_mendix_environment
-              run: |
-                npm run start:native-tests-ci
-                echo "::set-output name=CHANGED_PACKAGES::$CHANGED_PACKAGES"
+              run: npm run start:native-tests-ci
               env:
+                  CHANGED_PACKAGES: ${{ steps.set-changed-packages.outputs.CHANGED_PACKAGES }}
                   CI: true
             - name: Setup emulator & run tests
               uses: reactivecircus/android-emulator-runner@76c2bf6f95ed6458fd659a1bdb680a0f8df232dc
@@ -67,7 +68,7 @@ jobs:
                   profile: pixel
                   avd-name: NATIVE_pixel_30
                   script:
-                      npx lerna run test:e2e:local:android --stream --concurrency 1 --scope ${{ steps.start_mendix_environment.CHANGED_PACKAGES }}
+                      npx lerna run test:e2e:local:android --stream --concurrency 1 --scope ${{ steps.set-changed-packages.outputs.CHANGED_PACKAGES }}
             - name: "Archive test screenshot diff results"
               uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
               if: failure()
