@@ -30,7 +30,10 @@ export function collectDependencies({ onlyNative, outputDir, widgetName, license
             const resolvedPackagePath = await resolvePackage(
                 source,
                 dirname(importer ? importer : rollupOptions.input[0])
-            );
+            ).catch(e => {
+                console.warn(e.message);
+                return null;
+            });
 
             if (resolvedPackagePath) {
                 const checkOnlyNativeAndHasNativeCode = !onlyNative || (await hasNativeCode(resolvedPackagePath));
