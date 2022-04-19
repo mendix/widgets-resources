@@ -31,14 +31,12 @@ async function main() {
     rm("-fr", repoPath);
     rm("-f", testArchivePath);
 
-    const output = execSync("npx lerna list --json --since origin/master --scope '*-native'");
-    const changesPackages = JSON.parse(output);
-    const changedPackagesJoined = changesPackages.map(p => p.name).join(",") + ","; // end comma useful when only one package is changed.
-    process.env.CHANGED_PACKAGES = changedPackagesJoined;
+    const changedPackages = JSON.parse(process.env.CHANGED_PACKAGES);
+    const changedPackagesJoined = changedPackages.map(p => p.name).join(",") + ","; // end comma useful when only one package is changed.
 
     execSync(`npx lerna run release --scope '{${changedPackagesJoined}}'`, { stdio: "inherit" });
 
-    changesPackages.forEach(({ name, location }) => {
+    changedPackages.forEach(({ name, location }) => {
         if (["mobile-resources-native", "nanoflow-actions-native"].includes(name)) {
             // for js actions
             const path = name === "mobile-resources-native" ? "nativemobileresources" : "nanoflowcommons";
