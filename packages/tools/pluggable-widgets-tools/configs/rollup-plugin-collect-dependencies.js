@@ -31,9 +31,10 @@ export function collectDependencies({ onlyNative, outputDir, widgetName, license
                 source,
                 dirname(importer ? importer : rollupOptions.input[0])
             );
+
             if (resolvedPackagePath) {
-                const checkHasNativeCode = await hasNativeCode(resolvedPackagePath);
-                if (!onlyNative || checkHasNativeCode) {
+                const checkOnlyNativeAndHasNativeCode = !onlyNative || (await hasNativeCode(resolvedPackagePath));
+                if (checkOnlyNativeAndHasNativeCode) {
                     if (!managedDependencies.includes(resolvedPackagePath)) {
                         managedDependencies.push(resolvedPackagePath);
                     }
@@ -41,7 +42,7 @@ export function collectDependencies({ onlyNative, outputDir, widgetName, license
                 if (!dependencies.includes(resolvedPackagePath)) {
                     dependencies.push(resolvedPackagePath);
                 }
-                return checkHasNativeCode ? { external: true, id: source } : null;
+                return checkOnlyNativeAndHasNativeCode ? { external: true, id: source } : null;
             }
             return null;
         },
