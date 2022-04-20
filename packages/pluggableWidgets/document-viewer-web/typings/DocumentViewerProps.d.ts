@@ -10,7 +10,7 @@ export type DataSourceTypeEnum = "file" | "url";
 
 export type WidthUnitEnum = "percentage" | "pixels";
 
-export type HeightUnitEnum = "pixels" | "percentage";
+export type HeightUnitEnum = "percentageOfWidth" | "pixels" | "percentageOfParent";
 
 export interface DocumentViewerContainerProps {
     name: string;
