@@ -19,7 +19,7 @@
                     <caption>File Entity</caption>
                     <description />
                 </property>
-                <property key="url" type="string" required="false">
+                <property key="url" type="textTemplate" required="false">
                     <caption>URI</caption>
                     <description />
                 </property>

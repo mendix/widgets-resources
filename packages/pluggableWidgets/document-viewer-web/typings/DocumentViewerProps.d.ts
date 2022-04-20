@@ -19,7 +19,7 @@ export interface DocumentViewerContainerProps {
     tabIndex?: number;
     dataSourceType: DataSourceTypeEnum;
     file?: DynamicValue<FileValue>;
-    url: string;
+    url?: DynamicValue<string>;
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
