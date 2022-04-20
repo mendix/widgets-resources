@@ -4,13 +4,13 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
-import { ActionValue, DynamicValue, EditableValue, ListValue, ListAttributeValue, ListWidgetValue } from "mendix";
+import { ActionValue, DynamicValue, EditableValue, ListValue, ListAttributeValue } from "mendix";
 
 export type OrientationEnum = "horizontal" | "vertical";
 
 export interface OptionsType {
-    caption: DynamicValue<string>;
-    value: DynamicValue<string>;
+    caption?: DynamicValue<string>;
+    value: DynamicValue<boolean>;
     optionContent?: ReactNode;
 }
 
@@ -29,7 +29,6 @@ export interface RadioButtonsContainerProps {
     dsAttribute?: EditableValue<string | boolean>;
     orientation: OrientationEnum;
     labelAttrib?: ListAttributeValue<string>;
-    content?: ListWidgetValue;
     enableAutoOptions: boolean;
     options: OptionsType[];
     onChange?: ActionValue;
@@ -44,7 +43,6 @@ export interface RadioButtonsPreviewProps {
     dsAttribute: string;
     orientation: OrientationEnum;
     labelAttrib: string;
-    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     enableAutoOptions: boolean;
     options: OptionsPreviewType[];
     onChange: {} | null;

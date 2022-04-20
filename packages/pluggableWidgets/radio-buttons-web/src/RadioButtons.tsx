@@ -7,7 +7,6 @@ import { useRadioButtonsGroups } from "./utils/data";
 
 export function RadioButtons({
     class: className,
-    content,
     ds,
     dsAttribute,
     enableAutoOptions,
@@ -18,9 +17,10 @@ export function RadioButtons({
     orientation,
     style
 }: RadioButtonsContainerProps): ReactElement | null {
+    // eslint-disable-next-line prefer-rest-params
+    console.log(...arguments);
     const isEditable = !dsAttribute?.readOnly;
     const radioGroups = useRadioButtonsGroups({
-        content,
         ds,
         dsAttribute,
         enableAutoOptions,
@@ -38,8 +38,6 @@ export function RadioButtons({
         },
         [ds.items, ds.status, dsAttribute, onChange, radioGroups]
     );
-    console.log(dsAttribute);
-
     return (
         <RadioGroup
             className={className}

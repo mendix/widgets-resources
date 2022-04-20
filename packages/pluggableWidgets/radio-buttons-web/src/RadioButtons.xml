@@ -11,6 +11,9 @@
                     <caption>Data source</caption>
                     <description />
                 </property>
+                <property key="type" type="enumeration">
+                    <caption>Attribute type</caption>
+                </property>
                 <property key="dsAttribute" type="attribute" required="false">
                     <caption>Attribute</caption>
                     <description />
@@ -36,10 +39,6 @@
                         <attributeType name="String" />
                     </attributeTypes>
                 </property>
-                <property key="content" type="widgets" dataSource="ds" required="false">
-                    <caption>Content</caption>
-                    <description />
-                </property>
                 <property key="enableAutoOptions" type="boolean" defaultValue="false">
                     <caption>Automatic options</caption>
                     <description>Create options based on the enumeration values and captions</description>
@@ -49,15 +48,14 @@
                     <description />
                     <properties>
                         <propertyGroup caption="General">
-                            <property key="caption" type="textTemplate">
+                            <property key="caption" type="textTemplate" required="false">
                                 <caption>Caption</caption>
                                 <description />
                             </property>
                             <property key="value" type="expression">
                                 <caption>Value</caption>
                                 <description />
-                                <!--                                <returnType type="Boolean" />-->
-                                <returnType type="String" />
+                                <returnType type="E" />
                             </property>
                             <property key="optionContent" type="widgets" required="false">
                                 <caption>Content</caption>

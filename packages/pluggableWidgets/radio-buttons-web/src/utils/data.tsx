@@ -9,7 +9,6 @@ type RadioButtonGroup = {
 };
 
 export const useRadioButtonsGroups = ({
-    content,
     ds,
     dsAttribute,
     enableAutoOptions,
@@ -17,7 +16,7 @@ export const useRadioButtonsGroups = ({
     options
 }: Pick<
     RadioButtonsContainerProps,
-    "content" | "ds" | "dsAttribute" | "enableAutoOptions" | "labelAttrib" | "options"
+    "ds" | "dsAttribute" | "enableAutoOptions" | "labelAttrib" | "options"
 >): RadioButtonGroup[] => {
     return useMemo(() => {
         if (enableAutoOptions && dsAttribute?.universe) {
@@ -28,11 +27,11 @@ export const useRadioButtonsGroups = ({
         }
         if (!enableAutoOptions) {
             return options.map(option => ({
-                label: option.caption.value ?? "",
-                value: option.value.value ?? "",
+                label: option.caption?.value ?? "",
+                value: option?.value?.value ?? "",
                 content: option.optionContent
             }));
         }
         return [];
-    }, [content, ds.items, dsAttribute?.universe, enableAutoOptions, labelAttrib, options]);
+    }, [ds.items, dsAttribute?.universe, enableAutoOptions, labelAttrib, options]);
 };

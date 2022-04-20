@@ -16,6 +16,7 @@ export function getProperties(
         hidePropertyIn(defaultProperties, values, "options");
     }
 
+    console.log(values.dsAttribute);
     if (platform === "web") {
         transformGroupsIntoTabs(defaultProperties);
     }
