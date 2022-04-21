@@ -16,7 +16,7 @@ async function main() {
     const mendixVersion = await getMendixVersion();
     const ghcr = process.env.CI && process.env.FORKED !== "true" ? "ghcr.io/mendix/widgets-resources/" : "";
 
-    const testArchivePath = await getTestProject("https://github.com/mendix/Native-Mobile-Resources", "githubactions"); // not main because trying out minimal projectz
+    const testArchivePath = await getTestProject("https://github.com/mendix/Native-Mobile-Resources", "main"); // not main because trying out minimal projectz
     const localRoot = process.cwd();
     const podmanRoot = "/mnt/widgets-resources";
     const testsDir = join(localRoot, "tests");
