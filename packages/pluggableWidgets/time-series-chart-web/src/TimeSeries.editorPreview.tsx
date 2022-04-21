@@ -18,10 +18,12 @@ export function preview(props: TimeSeriesPreviewProps): ReactNode {
         >
             <img
                 src={TimeSeriesImage}
-                alt="bar-chart-image"
+                alt="timeseries-chart-image"
                 style={{ objectFit: "contain", width: "300px", height: "100%" }}
             />
-            {props.showLegend ? <img src={TimeSeriesLegend} alt="bar-chart-legend" style={{ width: "85px" }} /> : null}
+            {props.showLegend ? (
+                <img src={TimeSeriesLegend} alt="timeseries-chart-legend" style={{ width: "85px" }} />
+            ) : null}
         </div>
     );
 }
