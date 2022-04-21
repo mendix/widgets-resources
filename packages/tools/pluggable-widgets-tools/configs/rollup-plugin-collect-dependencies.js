@@ -5,7 +5,6 @@ import { readJson, writeJson } from "fs-extra";
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import { dirname, join, parse } from "path";
 import copy from "recursive-copy";
-import { cp } from "shelljs";
 import { promisify } from "util";
 import resolve from "resolve";
 import _ from "lodash";
@@ -30,22 +29,17 @@ export function collectDependencies({ onlyNative, outputDir, widgetName, license
             const resolvedPackagePath = await resolvePackage(
                 source,
                 dirname(importer ? importer : rollupOptions.input[0])
-            ).catch(e => {
-                console.warn(e.message);
-                return null;
-            });
+            );
 
             if (resolvedPackagePath) {
-                const checkOnlyNativeAndHasNativeCode = !onlyNative || (await hasNativeCode(resolvedPackagePath));
-                if (checkOnlyNativeAndHasNativeCode) {
-                    if (!managedDependencies.includes(resolvedPackagePath)) {
-                        managedDependencies.push(resolvedPackagePath);
-                    }
+                const isNotOnlyNativeOrHasNativeCode = !onlyNative || (await hasNativeCode(resolvedPackagePath));
+                if (isNotOnlyNativeOrHasNativeCode && !managedDependencies.includes(resolvedPackagePath)) {
+                    managedDependencies.push(resolvedPackagePath);
                 }
-                if (!dependencies.includes(resolvedPackagePath)) {
-                    dependencies.push(resolvedPackagePath);
+                if (!dependencies.some(dependency => dependency.packagePath === resolvedPackagePath)) {
+                    dependencies.push({ packagePath: resolvedPackagePath, isTransitive: false });
                 }
-                return checkOnlyNativeAndHasNativeCode ? { external: true, id: source } : null;
+                return isNotOnlyNativeOrHasNativeCode ? { external: true, id: source } : null;
             }
             return null;
         },
@@ -54,14 +48,17 @@ export function collectDependencies({ onlyNative, outputDir, widgetName, license
                 return;
             }
             for (const dependency of dependencies) {
-                const pkg = await scanDependency(dependency);
+                const pkg = await scanDependency(dependency.packagePath);
                 if (pkg) {
-                    plugin.addDependency(pkg);
+                    plugin.addDependency(pkg, dependency);
                 }
-                const transitiveDependencies = await getTransitiveDependencies(dependency, rollupOptions.external);
+                const transitiveDependencies = await getTransitiveDependencies(
+                    dependency.packagePath,
+                    rollupOptions.external
+                );
                 for (const transitiveDependency of transitiveDependencies) {
-                    if (!dependencies.includes(transitiveDependency)) {
-                        dependencies.push(transitiveDependency);
+                    if (!dependencies.some(s => s.packagePath === transitiveDependency)) {
+                        dependencies.push({ packagePath: transitiveDependency, isTransitive: true });
                     }
                 }
             }
@@ -209,8 +206,8 @@ async function scanDependency(dir) {
         return null;
     }
     pkg = pkgJson;
-    const absolutePath = join(dir, "[lL][iI][cC][eE][nN][cCsS][eE]*");
-    const licenseFile = (await fg([absolutePath], { cwd: dir }))[0];
+    const absolutePath = join(dir, "licen[cs]e");
+    const licenseFile = (await fg([absolutePath], { cwd: dir, caseSensitiveMatch: false }))[0];
     if (licenseFile) {
         pkg.licenseText = readFileSync(licenseFile, "utf-8");
     }
@@ -223,12 +220,12 @@ class LicensePlugin {
         this._dependencies = {};
     }
 
-    addDependency(pkg) {
+    addDependency(pkg, { isTransitive }) {
         const name = pkg.name;
         if (!name) {
             console.warn("Trying to add dependency without any name, skipping it!");
         } else if (!_.has(this._dependencies, name)) {
-            this._dependencies[name] = new Dependency(pkg);
+            this._dependencies[name] = new Dependency({ ...pkg, ...{ isTransitive } });
         }
     }
 
@@ -244,25 +241,6 @@ class LicensePlugin {
         if (output) {
             this._exportThirdParties(outputDependencies, output);
         }
-
-        const updateLicense = this._options.updateLicense;
-
-        if (updateLicense) {
-            this._updateLicense(updateLicense);
-        }
-    }
-
-    _updateLicense(updateLicense) {
-        const {
-            input,
-            output: { file }
-        } = updateLicense;
-        if (!existsSync(input)) {
-            console.warn("The license file could not be found in the given path.");
-            return;
-        }
-        mkdirp.sync(parse(file).dir);
-        cp(input, file);
     }
 
     _exportThirdParties(dependencies, outputs) {
@@ -304,6 +282,8 @@ class Dependency {
         this.private = pkg.private || false;
         this.license = pkg.license || null;
         this.licenseText = pkg.licenseText || null;
+
+        this.isTransitive = pkg.isTransitive || false;
     }
 
     text() {

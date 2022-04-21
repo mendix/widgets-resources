@@ -1,5 +1,6 @@
-import { existsSync, mkdirSync } from "fs";
-import fg from "fast-glob";
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+
+import { existsSync } from "fs";
 import { join, relative } from "path";
 import alias from "@rollup/plugin-alias";
 import { getBabelInputPlugin, getBabelOutputPlugin } from "@rollup/plugin-babel";
@@ -19,7 +20,6 @@ import livereload from "rollup-plugin-livereload";
 import postcss from "rollup-plugin-postcss";
 import { terser } from "rollup-plugin-terser";
 import { cp } from "shelljs";
-import { zip } from "zip-a-folder";
 import { widgetTyping } from "./rollup-plugin-widget-typing";
 import {
     editorConfigEntry,
@@ -30,7 +30,10 @@ import {
     widgetEntry,
     widgetName,
     widgetPackage,
-    widgetVersion
+    widgetVersion,
+    copyLicenseFile,
+    createMpkFile,
+    licenseCustomTemplate
 } from "./shared";
 import url from "./rollup-plugin-assets";
 
@@ -237,17 +240,7 @@ export default async args => {
                               },
                               {
                                   file: join(outDir, "dependencies.json"),
-                                  template: dependencies =>
-                                      JSON.stringify(
-                                          dependencies.map(dependency => ({
-                                              [dependency.name]: {
-                                                  version: dependency.version,
-                                                  type: "test",
-                                                  transitive: false,
-                                                  url: dependency.homepage
-                                              }
-                                          }))
-                                      )
+                                  template: licenseCustomTemplate
                               }
                           ]
                       }
@@ -260,28 +253,12 @@ export default async args => {
             // So we run the same logic for all configs, letting the last one win.
             command([
                 async () => {
-                    if (!config.licenses) {
-                        return;
-                    }
-                    const absolutePath = join(sourcePath, "[lL][iI][cC][eE][nN][cCsS][eE]*");
-                    const licenseFile = (await fg([absolutePath], { cwd: sourcePath }))[0];
-                    if (existsSync(licenseFile)) {
-                        cp(licenseFile, outDir);
+                    if (config.licenses) {
+                        await copyLicenseFile(sourcePath, outDir);
                     }
                 },
                 async () => {
-                    mkdirSync(mpkDir, { recursive: true });
-                    await zip(outDir, mpkFile);
-                    if (!production && projectPath) {
-                        const widgetsPath = join(projectPath, "widgets");
-                        const deploymentPath = join(projectPath, `deployment/web/widgets`);
-                        // Create folder if they do not exists or directories were cleaned
-                        mkdirSync(widgetsPath, { recursive: true });
-                        mkdirSync(deploymentPath, { recursive: true });
-                        // Copy files to deployment and widgets folder
-                        cp("-r", join(outDir, "*"), deploymentPath);
-                        cp(mpkFile, widgetsPath);
-                    }
+                    await createMpkFile(mpkDir, outDir, mpkFile, production, projectPath, "deployment/web/widgets");
                 }
             ])
         ];

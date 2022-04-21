@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+
 import { red, yellow } from "colors";
 import fg from "fast-glob";
 import { mkdirSync } from "fs";
@@ -9,6 +11,7 @@ import { promisify } from "util";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
 import { collectDependencies } from "../../packages/tools/pluggable-widgets-tools/configs/rollup-plugin-collect-dependencies";
+import { licenseCustomTemplate } from "../../packages/tools/pluggable-widgets-tools/configs/shared";
 import { bigJsImportReplacer } from "./rollup-plugin-bigjs-import-replacer";
 
 const cwd = process.cwd();
@@ -60,17 +63,7 @@ export default async args => {
                                 },
                                 {
                                     file: join(outDir, "dependencies.json"),
-                                    template: dependencies =>
-                                        JSON.stringify(
-                                            dependencies.map(dependency => ({
-                                                [dependency.name]: {
-                                                    version: dependency.version,
-                                                    type: "test",
-                                                    transitive: false,
-                                                    url: dependency.homepage
-                                                }
-                                            }))
-                                        )
+                                    template: licenseCustomTemplate
                                 }
                             ]
                         }
