@@ -12,9 +12,9 @@ import _ from "lodash";
 import moment from "moment";
 import mkdirp from "mkdirp";
 
+const dependencies = [];
 export function collectDependencies({ onlyNative, outputDir, widgetName, licenseOptions = {}, copyJsModules = true }) {
     const plugin = new LicensePlugin(licenseOptions);
-    const dependencies = [];
     const managedDependencies = [];
     let rollupOptions;
     return {

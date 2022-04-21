@@ -46,13 +46,36 @@ export default async args => {
             external: nativeExternal,
             plugins: [
                 i === 0 ? clear({ targets: [outDir] }) : null,
-                !isWeb
-                    ? collectDependencies({
-                          onlyNative: false,
-                          outputDir: outDir,
-                          widgetName: fileOutput
-                      })
-                    : null,
+                collectDependencies({
+                    copyJsModules: !isWeb,
+                    onlyNative: false,
+                    outputDir: outDir,
+                    widgetName: fileOutput,
+                    licenseOptions: {
+                        thirdParty: {
+                            includePrivate: true,
+                            output: [
+                                {
+                                    file: join(outDir, "dependencies.txt")
+                                },
+                                {
+                                    file: join(outDir, "dependencies.json"),
+                                    template: dependencies =>
+                                        JSON.stringify(
+                                            dependencies.map(dependency => ({
+                                                [dependency.name]: {
+                                                    version: dependency.version,
+                                                    type: "test",
+                                                    transitive: false,
+                                                    url: dependency.homepage
+                                                }
+                                            }))
+                                        )
+                                }
+                            ]
+                        }
+                    }
+                }),
                 nodeResolvePlugin,
                 typescriptPlugin,
                 bigJsImportReplacer(),
