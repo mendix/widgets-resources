@@ -35,6 +35,7 @@ jobs:
                   node-version: "16"
             - name: Install podman
               run: |
+                brew install fuse-overlayfs
                 brew install podman
                 podman machine init -v .:/mnt/widgets-resources
                 podman machine start
