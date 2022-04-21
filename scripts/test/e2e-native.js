@@ -16,13 +16,14 @@ async function main() {
     const mendixVersion = await getMendixVersion();
     const ghcr = process.env.CI && process.env.FORKED !== "true" ? "ghcr.io/mendix/widgets-resources/" : "";
 
-    const testArchivePath = await getTestProject("https://github.com/mendix/Native-Mobile-Resources", "main"); // not main because trying out minimal projectz
+    const branch = "less-sass";
+    const testArchivePath = await getTestProject("https://github.com/mendix/Native-Mobile-Resources", branch); // not main because trying out minimal projectz
     const localRoot = process.cwd();
     const podmanRoot = "/mnt/widgets-resources";
     const testsDir = join(localRoot, "tests");
     const testProjectDir = join(testsDir, "testProject");
     const testProjectDirPodman = join(podmanRoot, "tests", "testproject");
-    const repoPath = join(testsDir, "Native-Mobile-Resources-githubactions");
+    const repoPath = join(testsDir, `Native-Mobile-Resources-${branch}`);
 
     mkdir("-p", join(localRoot, "tests"));
     execSync(`unzip -o ${testArchivePath} -d ${testsDir}`);
