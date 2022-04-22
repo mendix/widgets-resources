@@ -6,7 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+
+-   We added a new CSS class to the datagrid widget. That makes it easier to create CSS selector for the custom styling.
+
+### Fixed
+
+-   We fixed an issue with widgets not rendering on full width in datagrid cells. (Ticket #143363)
+
 ## [2.2.3] - 2022-4-13
+
+### Fixed
 
 -   We fixed an issue with column hiding behaviour. Now user can't uncheck last visible column in the datagrid. (Ticket #144500)
 
