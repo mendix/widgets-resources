@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Mendix</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    {{themecss}}
+    {{appicons}}
+
+    <!-- STARTUP IMAGES -->
+    <!-- <link href="resources/ios/startup/apple-touch-startup-image-1496x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"> -->
+    <style>
+    /* Center the loader */
+    #loader {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      width: 120px;
+      height: 120px;
+      margin: -76px 0 0 -76px;
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    </style>
+</head>
+
+<body dir="ltr">
+    <div id="content" style="display:none;"></div>
+    <div id="loader"></div>
+    <script>
+        dojoConfig = {
+            baseUrl: "mxclientsystem/dojo/",
+            cacheBust: "{{cachebust}}",
+            rtlRedirect: "index-rtl.html"
+        };
+    </script>
+    <script src="mxclientsystem/mxui/mxui.js?{{cachebust}}"></script>
+    <script>
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                  c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                  return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        function showPage() {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("content").style.display = "block";
+        }
+    </script>
+    <script>
+        if (!document.cookie || !document.cookie.match(/(^|;)originURI=/gi))
+            document.cookie = "originURI=/login.html" + (window.location.protocol === "https:" ? ";SameSite=None;Secure" : "");
+        mx.addOnLoad(function(){
+            if(mx.session.isGuest() && getCookie("triedSSO") === ""){
+                document.cookie = "triedSSO=true; max-age=5";
+                self.location="/openid/login" + window.location.search + window.location.hash;
+            }
+            else{
+                showPage();
+            }
+            });
+    </script>
+</body>
+</html>
