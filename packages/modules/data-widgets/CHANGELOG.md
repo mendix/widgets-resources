@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.4.0] Data Widgets - 2022-4-22
+
+## [2.3.0] Datagrid
+
+### Added
+
+-   We added a new CSS class to the datagrid widget. That makes it easier to create CSS selector for the custom styling.
+
+### Fixed
+
+-   We fixed an issue with widgets not rendering on full width in datagrid cells. (Ticket #143363)
+
 ## [2.3.1] Data Widgets - 2022-4-13
 
 ## [2.3.1] DatagridDateFilter
