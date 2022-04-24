@@ -23,7 +23,9 @@ export function collectDependencies({ onlyNative, outputDir, widgetName, license
             managedDependencies.length = 0;
         },
         async resolveId(source, importer) {
-            if (source.startsWith(".") || source.startsWith("/")) {
+            // eslint-disable-next-line no-control-regex
+            const sourceCleanedNullChar = source.replace(/\x00/g, "");
+            if (sourceCleanedNullChar.startsWith(".") || sourceCleanedNullChar.startsWith("/")) {
                 return null;
             }
             const resolvedPackagePath = await resolvePackage(
