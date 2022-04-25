@@ -645,3 +645,7 @@ export const radioButtons = {
     }
 };
 //
+// Background gradient style
+export const backgroundGradient = {
+    container: {}
+};
