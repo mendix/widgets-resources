@@ -116,7 +116,7 @@ async function main() {
         await testRelease();
 
         console.log(`[${widgetName}] Checking dependencies files...`);
-        await checkDependenciesFiles(isNative);
+        await checkDependenciesFiles(isNative, boilerplate);
 
         console.log(`[${widgetName}] Testing npm start...`);
         await testStart();
@@ -236,7 +236,7 @@ async function main() {
             }
         }
 
-        async function checkDependenciesFiles(isNative) {
+        async function checkDependenciesFiles(isNative, boilerplate) {
             const dependenciesJSONFile = join(workDir, "dist", "tmp", "widgets", "dependencies.json");
             const dependenciesTxtFile = join(workDir, "dist", "tmp", "widgets", "dependencies.txt");
 
@@ -244,22 +244,52 @@ async function main() {
                 throw new Error("Expected dependencies files to be generated, but it wasn't.");
             }
 
-            const packageName = "@mendix/pluggable-widgets-tools";
             const dependenciesJSON = JSON.parse(readFileSync(dependenciesJSONFile));
             const dependenciesText = readFileSync(dependenciesTxtFile);
 
-            if (
-                isNative &&
-                (!dependenciesJSON.some(dependency => Object.keys(dependency)[0].includes(packageName)) ||
-                    !dependenciesText.includes(packageName))
-            ) {
-                throw new Error(`The "${packageName}" could not be found in the dependencies files.`);
-            } else if (
-                !isNative &&
-                (dependenciesJSON.length !== 0 || !dependenciesText.includes("No third parties dependencies"))
-            ) {
-                throw new Error("Unexpected content in dependencies files.");
+            if (isNative) {
+                const packageName = "@mendix/pluggable-widgets-tools";
+                if (
+                    !dependenciesJSON.some(dependency => Object.keys(dependency)[0].includes(packageName)) ||
+                    !dependenciesText.includes(packageName)
+                ) {
+                    throw new Error(`The "${packageName}" could not be found in the dependencies files.`);
+                }
+            } else {
+                const packageName = "classnames";
+                if (
+                    boilerplate === "full" &&
+                    (!dependenciesJSON.some(dependency => Object.keys(dependency)[0].includes(packageName)) ||
+                        !dependenciesText.includes(packageName))
+                ) {
+                    throw new Error(`The "${packageName}" could not be found in the dependencies files.`);
+                } else if (
+                    boilerplate === "empty" &&
+                    (dependenciesJSON.length !== 0 || !dependenciesText.includes("No third parties dependencies"))
+                ) {
+                    throw new Error("Unexpected content in dependencies files.");
+                }
             }
+
+            // if (
+            //     isNative &&
+            //     (!dependenciesJSON.some(dependency => Object.keys(dependency)[0].includes(packageName)) ||
+            //         !dependenciesText.includes(packageName))
+            // ) {
+            //     throw new Error(`The "${packageName}" could not be found in the dependencies files.`);
+            // } else if (!isNative) {
+            //     if (
+            //         boilerplate === "full" &&
+            //         (dependenciesJSON.length !== 0 || !dependenciesText.includes("No third parties dependencies"))
+            //     ) {
+            //         throw new Error(`The "${packageName}" could not be found in the dependencies files.`);
+            //     } else if (
+            //         boilerplate === "empty" &&
+            //         (dependenciesJSON.length !== 0 || !dependenciesText.includes("No third parties dependencies"))
+            //     ) {
+            //         throw new Error("Unexpected content in dependencies files.");
+            //     }
+            // }
         }
 
         async function testStart() {
