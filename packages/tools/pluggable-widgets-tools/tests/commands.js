@@ -116,7 +116,7 @@ async function main() {
         await testRelease();
 
         console.log(`[${widgetName}] Checking dependencies files...`);
-        await checkDependenciesFiles(isNative, boilerplate);
+        await checkDependenciesFiles(isNative, boilerplate, version === "latest" ? "latest" : parseFloat(version));
 
         console.log(`[${widgetName}] Testing npm start...`);
         await testStart();
@@ -236,7 +236,7 @@ async function main() {
             }
         }
 
-        async function checkDependenciesFiles(isNative, boilerplate) {
+        async function checkDependenciesFiles(isNative, boilerplate, version) {
             const dependenciesJSONFile = join(workDir, "dist", "tmp", "widgets", "dependencies.json");
             const dependenciesTxtFile = join(workDir, "dist", "tmp", "widgets", "dependencies.txt");
 
@@ -244,52 +244,30 @@ async function main() {
                 throw new Error("Expected dependencies files to be generated, but it wasn't.");
             }
 
-            const dependenciesJSON = JSON.parse(readFileSync(dependenciesJSONFile));
-            const dependenciesText = readFileSync(dependenciesTxtFile);
+            const dependenciesJSON = JSON.parse(readFileSync(dependenciesJSONFile, "utf8"));
+            const dependenciesText = readFileSync(dependenciesTxtFile, "utf8");
 
-            if (isNative) {
-                const packageName = "@mendix/pluggable-widgets-tools";
-                if (
-                    !dependenciesJSON.some(dependency => Object.keys(dependency)[0].includes(packageName)) ||
-                    !dependenciesText.includes(packageName)
-                ) {
-                    throw new Error(`The "${packageName}" could not be found in the dependencies files.`);
-                }
-            } else {
-                const packageName = "classnames";
-                if (
-                    boilerplate === "full" &&
-                    (!dependenciesJSON.some(dependency => Object.keys(dependency)[0].includes(packageName)) ||
-                        !dependenciesText.includes(packageName))
-                ) {
-                    throw new Error(`The "${packageName}" could not be found in the dependencies files.`);
-                } else if (
-                    boilerplate === "empty" &&
-                    (dependenciesJSON.length !== 0 || !dependenciesText.includes("No third parties dependencies"))
-                ) {
-                    throw new Error("Unexpected content in dependencies files.");
-                }
+            const packageName = isNative
+                ? version === "latest"
+                    ? "@mendix/pluggable-widgets-tools"
+                    : null
+                : boilerplate === "full"
+                ? "classnames"
+                : null;
+
+            if (
+                packageName &&
+                (!dependenciesJSON.some(dependency => Object.keys(dependency)[0].includes(packageName)) ||
+                    !dependenciesText.includes(packageName))
+            ) {
+                throw new Error(`The "${packageName}" could not be found in the dependencies files.`);
+            } else if (
+                !packageName &&
+                (dependenciesJSON.length !== 0 ||
+                    !(dependenciesText.includes("No third parties dependencies") || dependenciesText === ""))
+            ) {
+                throw new Error("Unexpected content in dependencies files.");
             }
-
-            // if (
-            //     isNative &&
-            //     (!dependenciesJSON.some(dependency => Object.keys(dependency)[0].includes(packageName)) ||
-            //         !dependenciesText.includes(packageName))
-            // ) {
-            //     throw new Error(`The "${packageName}" could not be found in the dependencies files.`);
-            // } else if (!isNative) {
-            //     if (
-            //         boilerplate === "full" &&
-            //         (dependenciesJSON.length !== 0 || !dependenciesText.includes("No third parties dependencies"))
-            //     ) {
-            //         throw new Error(`The "${packageName}" could not be found in the dependencies files.`);
-            //     } else if (
-            //         boilerplate === "empty" &&
-            //         (dependenciesJSON.length !== 0 || !dependenciesText.includes("No third parties dependencies"))
-            //     ) {
-            //         throw new Error("Unexpected content in dependencies files.");
-            //     }
-            // }
         }
 
         async function testStart() {
