@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.1.2] - 2022-4-25
+
 ## Changed
 
 -   We changed the Google Maps structure and design previews
