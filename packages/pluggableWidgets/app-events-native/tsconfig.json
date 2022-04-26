@@ -3,7 +3,6 @@
     "baseUrl": "./",
     "include": ["node_modules/@mendix/pluggable-widgets-tools/typings", "./src", "./typings"],
     "compilerOptions": {
-        "typeRoots": ["node_modules/@types", "../../../node_modules/@types"],
-        "types": ["jest-image-snapshot"]
+        "typeRoots": ["node_modules/@types", "../../../node_modules/@types"]
     }
 }
