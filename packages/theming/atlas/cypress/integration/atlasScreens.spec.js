@@ -3,8 +3,9 @@ describe("Screenshots of the pages for", () => {
     const browserName = Cypress.browser.name;
 
     urls.forEach(url => {
-        it(`matches snapshot for the page ${url.replace("/p/", "")}`, () => {
+        it(`matches snapshot for the page ${url.replace("/p/", "")}`, { retries: 3 }, () => {
             cy.visit(url);
+            cy.wait(6000);
 
             cy.get(".mx-page").then($page => {
                 cy.waitUntil(() => cy.document().then(document => !!document.querySelector(".sprintrFeedback")), {
@@ -21,13 +22,13 @@ describe("Screenshots of the pages for", () => {
                                 cy.wrap($page)
                                     .should("be.visible")
                                     .wait(1000)
-                                    .compareSnapshot(`${url.replace("/p/", "")}-${browserName}`, 0.1);
+                                    .compareSnapshot(`${url.replace("/p/", "")}-${browserName}`, 0.5);
                             });
                     } else {
                         cy.wrap($page)
                             .should("be.visible")
                             .wait(1000)
-                            .compareSnapshot(`${url.replace("/p/", "")}-${browserName}`, 0.1);
+                            .compareSnapshot(`${url.replace("/p/", "")}-${browserName}`, 0.5);
                     }
                 });
             });
