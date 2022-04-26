@@ -1,13 +1,14 @@
 describe("Carousel", () => {
     before(() => {
         cy.visit("/");
+        cy.wait(2000);
     });
     it("disables the left arrow when showing the first item", () => {
         cy.get(".swiper-button-prev").should("not.exist");
     });
 
     it("enables the left arrow when it navigates from the first item", () => {
-        cy.get(".swiper-button-next").click();
+        cy.get(".swiper-button-next").click({ force: true });
         cy.get(".swiper-button-prev").should("be.visible");
     });
 
