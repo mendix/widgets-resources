@@ -26,11 +26,9 @@ import {
     widgetEntry,
     widgetName,
     widgetPackage,
-    widgetVersion,
-    copyLicenseFile,
-    createMpkFile,
-    licenseCustomTemplate
+    widgetVersion
 } from "./shared";
+import { copyLicenseFile, createMpkFile, licenseCustomTemplate } from "./helpers/rollup-helper";
 
 const outDir = join(sourcePath, "/dist/tmp/widgets/");
 const outWidgetFile = join(widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase(), `${widgetName}`);
