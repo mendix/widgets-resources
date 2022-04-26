@@ -146,5 +146,8 @@ function getSvgContent(type: DefaultFilterEnum, isDarkMode: boolean): string {
             return isDarkMode ? smallerThanIconDark : smallerThanIcon;
         case "smallerEqual":
             return isDarkMode ? smallerThanEqualIconDark : smallerThanEqualIcon;
+        // TODO: Add icons for empty and not-empty
+        default:
+            return "";
     }
 }
