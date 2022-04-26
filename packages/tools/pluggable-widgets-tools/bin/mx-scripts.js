@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 const { spawnSync } = require("child_process");
 const { existsSync } = require("fs");
-const { delimiter, dirname, join, parse } = require("path");
+const { delimiter, join, parse } = require("path");
 
 const [, , cmd, ...args] = process.argv;
 const nodeRegEx = /node_modules/g;
