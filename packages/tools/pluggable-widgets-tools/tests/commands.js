@@ -116,7 +116,7 @@ async function main() {
         await testRelease();
 
         console.log(`[${widgetName}] Checking dependencies files...`);
-        await checkDependenciesFiles(isNative, boilerplate, version === "latest" ? "latest" : parseFloat(version));
+        await checkDependenciesFiles(isNative, boilerplate, version);
 
         console.log(`[${widgetName}] Testing npm start...`);
         await testStart();
