@@ -3,10 +3,11 @@ const { spawnSync } = require("child_process");
 const { existsSync } = require("fs");
 const { delimiter, dirname, join, parse } = require("path");
 
-const [, currentScriptPath, cmd, ...args] = process.argv;
-const toolsRoot = currentScriptPath.endsWith("pluggable-widgets-tools")
-    ? join(dirname(currentScriptPath), "../@mendix/pluggable-widgets-tools")
-    : join(dirname(currentScriptPath), "..");
+const [, , cmd, ...args] = process.argv;
+const nodeRegEx = /node_modules/g;
+const mainSubDir = __dirname.search(nodeRegEx);
+const basePath = __dirname.substring(0, mainSubDir);
+const toolsRoot = join(basePath, "node_modules/@mendix/pluggable-widgets-tools");
 
 if (args.indexOf("--subprojectPath") > -1) {
     args.splice(args.indexOf("--subprojectPath"), 2);
