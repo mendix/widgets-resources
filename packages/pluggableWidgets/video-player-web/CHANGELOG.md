@@ -6,7 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [3.1.1] - 2022-3-29
+## [3.1.1] - 2022-03-29
+
+### Fixed
 
 -   We fixed the issue that when changing the URL property of the Video Player, app navigation is get broken. (Ticket #143982)
 
@@ -16,7 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 -   We added dark icons for Tile and List view.
 
-## [3.0.2] - 2021-12-3
+## [3.0.2] - 2021-12-03
 
 ### Fixed
 
@@ -61,5 +63,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 -   We renamed the video URL and Poster URL widget properties.
+
 -   We improved property rendering in Studio.
+
 -   We improved the design mode preview.

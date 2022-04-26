@@ -6,25 +6,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [2.2.0] - 2022-2-21
+## [2.2.0] - 2022-02-21
 
 ### Added
 
 -   Structure mode preview
 
-## [2.1.0] - 2022-1-24
+## [2.1.0] - 2022-01-24
 
 ### Added
 
 -   Dark theme icons for Tile and List view.
 
-## [2.0.0] - 2021-9-28
+## [2.0.0] - 2021-09-28
 
 ### Added
 
 -   We added a toolbox category and toolbox tile image for Studio & Studio Pro.
 
-## [1.1.0] - 2021-9-21
+## [1.1.0] - 2021-09-21
 
 ### Fixed
 

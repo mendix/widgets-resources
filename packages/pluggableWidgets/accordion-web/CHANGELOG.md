@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [2.1.1] - 2022-4-1
+## [2.1.1] - 2022-04-01
 
 ### Fixed
 
@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 -   We added dark mode to Structure mode preview.
+
 -   We added dark icons for Tile and List view.
 
 ### Changed
@@ -38,6 +39,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 -   We renamed the advanced options property to emphasize this property is about the advanced properties' activation.
+
 -   We made some small code improvement.
 
 ## [1.1.1] - 2021-08-16
@@ -51,8 +53,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 -   We added a widget property to configure the render mode of the header text.
+
 -   We added widget properties to influence the initial collapsed state for a group.
+
 -   We added widget properties to control the collapse state of a group via an entity attribute.
+
 -   We added a preview for Studio Pro's structure mode.
 
 ### Changed
@@ -64,9 +69,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 -   We added configuration of groups with composable content for header & body.
+
 -   We added conditional visibility for groups based on a Boolean expression.
+
 -   We added support for dynamic classes on groups to apply brand styles for instance.
+
 -   We provided controls to make accordion groups collapsible.
+
 -   We provided controls to influence the collapse behavior by allowing one or more groups to be expanded at the same time.
+
 -   We added support for header icon customization.
+
 -   We added out of the box styles, including animations.

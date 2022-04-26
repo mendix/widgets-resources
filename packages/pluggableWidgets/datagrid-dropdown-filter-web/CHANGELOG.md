@@ -6,13 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [2.2.2] - 2022-4-13
+## [2.2.2] - 2022-04-13
 
 ### Fixed
 
 -   We fixed this widget to be compatible with strict CSP mode.
 
-## [2.2.1] - 2022-1-19
+## [2.2.1] - 2022-01-19
 
 ### Fixed
 
@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 -   We added dark mode to Structure mode preview.
+
 -   We added dark icons for Tile and List view.
 
 ## [2.0.2] - 2021-10-13
@@ -30,9 +31,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 -   We added the possibility to store the filter value in an attribute and trigger an onChange event on every filter change.
+
 -   We added a "Enable advanced options" toggle for Studio users.
 
-## [2.0.1] - 2021-10-7
+## [2.0.1] - 2021-10-07
 
 ### Fixed
 
@@ -43,6 +45,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 -   We added the possibility to reuse the filter with Gallery.
+
 -   We added a toolbox category and toolbox tile image for Studio & Studio Pro.
 
 ### Changed

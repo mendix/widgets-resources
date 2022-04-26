@@ -6,13 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [2.3.1] - 2022-4-13
+## [2.3.1] - 2022-04-13
 
 ### Fixed
 
 -   We fixed a bug that was causing errors in Safari when using DateFilter in Datagrid. (Ticket #144874)
 
-## [2.3.0] - 2022-2-10
+## [2.3.0] - 2022-02-10
 
 ### Added
 
@@ -22,7 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 -   We fixed an issue with locale date format when typing it manually.
 
-## [2.2.1] - 2022-1-6
+## [2.2.1] - 2022-01-06
 
 ### Added
 
@@ -33,6 +33,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 -   We added dark mode to Structure mode preview.
+
 -   We added dark icons for Tile and List view.
 
 ## [2.1.1] - 2021-12-10
@@ -50,6 +51,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 -   We added the possibility to store the filter value in an attribute and trigger an onChange event on every filter change.
+
 -   We added a "Enable advanced options" toggle for Studio users.
 
 ## [2.0.1] - 2021-10-07
@@ -63,6 +65,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 -   We added the possibility to reuse the filter with Gallery.
+
 -   We added a toolbox category and toolbox tile image for Studio & Studio Pro.
 
 ### Changed

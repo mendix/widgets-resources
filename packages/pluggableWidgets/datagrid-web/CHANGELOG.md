@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [2.3.0] - 2022-4-22
+## [2.3.0] - 2022-04-22
 
 ### Added
 
@@ -16,19 +16,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 -   We fixed an issue with widgets not rendering on full width in datagrid cells. (Ticket #143363)
 
-## [2.2.3] - 2022-4-13
+## [2.2.3] - 2022-04-13
 
 ### Fixed
 
 -   We fixed an issue with column hiding behaviour. Now user can't uncheck last visible column in the datagrid. (Ticket #144500)
 
-## [2.2.2] - 2022-1-19
+## [2.2.2] - 2022-01-19
 
 ### Fixed
 
 -   We fixed an issue with column selector on Windows machines (Ticket #139234).
 
-## [2.2.1] - 2022-1-6
+## [2.2.1] - 2022-01-06
 
 ### Changed
 
@@ -39,10 +39,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 -   We added "Tooltip" property for column, which allow you to control text that will be seen when hovering cell.
+
 -   We added dark mode to Structure mode preview.
+
 -   We added dark icons for Tile and List view.
 
-## [2.1.0] - 2021-12-3
+## [2.1.0] - 2021-12-03
 
 ### Added
 
@@ -60,7 +62,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 -   We made the "Enable advanced options" available only for Studio users, keeping all the advanced features available by default in Studio Pro.
 
-## [2.0.1] - 2021-10-7
+## [2.0.1] - 2021-10-07
 
 ### Changed
 
@@ -75,11 +77,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 -   We added new options to allow filtering in multiple attributes. To enable it make sure you have "Show header filters" on.
+
 -   We added a toolbox category and toolbox tile image for Studio & Studio Pro.
 
 ### Changed
 
 -   We fixed the positioning of the filters when virtual scrolling was enabled and there was no data being presented.
+
 -   We renamed the advanced settings property to emphasize this property is about the advanced properties' activation.
 
 ## [1.2.1] - 2021-07-01
@@ -93,13 +97,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 -   We implemented lazy filtering and sorting. Now Data Grid v2 will not load all the data if you have sorting or filtering enabled.
+
 -   We added an option to auto-load values from enumerations in the Data Grid drop-down filter.
+
 -   We added the capability to restore filter values and filtered rows when navigating back from another page.
 
 ### Changed
 
 -   We fixed a problem combining a Text Box widget inside a column with an on leave or on change event preventing focus from being lost after triggering the events.
+
 -   We fixed an issue with headers containing attributes in the text template.
+
 -   We prevented settings' on change action to be fired continuously while resizing a column, causing performance issues.
+
 -   We prevented the settings from being overwritten when loading a new value from the settings attribute.
+
 -   We fixed a misalignment between columns when a column header was empty and a filter was placed in it.

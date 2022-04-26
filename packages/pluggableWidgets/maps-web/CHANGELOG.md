@@ -6,13 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [3.1.2] - 2022-4-25
+## [3.1.2] - 2022-04-25
 
 ## Changed
 
 -   We changed the Google Maps structure and design previews
 
-## [3.1.1] - 2022-1-31
+## [3.1.1] - 2022-01-31
 
 ### Fixed
 
@@ -27,6 +27,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 -   We changed property captions for **static** and **dynamic** markers.
+
 -   We added additional description of how to use **API key**.
 
 ## [3.0.3] - 2021-11-18
@@ -46,7 +47,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 -   We made the "Enable advanced options" available only for Studio users, keeping all the advanced features available by default in Studio Pro.
+
 -   We renamed the property `Google maps API Key` to `Geo Location API key`
+
 -   We made the property `Geo Location API key` required when using location based on Address.
 
 ## [3.0.0] - 2021-09-28
@@ -58,6 +61,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 -   We renamed the advanced options property to emphasize this property is about the advanced properties' activation.
+
 -   We made some small code improvement.
 
 ## [2.0.3] - 2021-08-04
