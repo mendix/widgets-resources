@@ -8,5 +8,6 @@ exports[`Carousel renders loading 1`] = `
       "width": "100%",
     }
   }
+  testID="carousel"
 />
 `;

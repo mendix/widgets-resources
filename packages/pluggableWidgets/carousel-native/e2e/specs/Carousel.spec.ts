@@ -11,13 +11,13 @@ describe("Carousel", () => {
         await resetDevice();
     });
 
-    it("should be able to swipe", async () => {
+    it("should be able to swipe left and right", async () => {
         const carousel = element(by.id("carousel"));
 
-        await carousel.swipe("left");
+        await carousel.swipe("left", "slow", NaN, 0.5, 0.5);
         await expectToMatchScreenshot(carousel);
 
-        await carousel.swipe("right");
+        await carousel.swipe("right", "slow", NaN, 0.5, 0.5);
         await expectToMatchScreenshot(carousel);
     });
 
