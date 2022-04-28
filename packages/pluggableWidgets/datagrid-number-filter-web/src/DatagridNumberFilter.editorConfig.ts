@@ -113,5 +113,7 @@ function getSvgContent(type: DefaultFilterEnum, isDarkMode: boolean): string {
             return isDarkMode ? smallerThanIconDark : smallerThanIcon;
         case "smallerEqual":
             return isDarkMode ? smallerThanEqualIconDark : smallerThanEqualIcon;
+        default:
+            return "";
     }
 }
