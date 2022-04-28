@@ -293,7 +293,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
             setActiveIndex(newIndex);
             onSlideChange(newIndex, lastIndex);
         },
-        [activeIndex, width]
+        [activeIndex, width, rtlSafeIndex, onSlideChange]
     );
 
     /**
