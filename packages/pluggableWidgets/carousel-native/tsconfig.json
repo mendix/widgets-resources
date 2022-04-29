@@ -1,8 +1,14 @@
 {
     "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
     "baseUrl": "./",
-    "include": ["node_modules/@mendix/pluggable-widgets-tools/typings", "./src", "./typings", "react-native-snap-carousel"],
+    "include": [
+        "node_modules/@mendix/pluggable-widgets-tools/typings",
+        "./src",
+        "./typings",
+        "react-native-snap-carousel"
+    ],
     "compilerOptions": {
-        "typeRoots": ["node_modules/@types", "../../../node_modules/@types"]
+        "typeRoots": ["node_modules/@types", "../../../node_modules/@types"],
+        "types": ["jest-image-snapshot"]
     }
 }

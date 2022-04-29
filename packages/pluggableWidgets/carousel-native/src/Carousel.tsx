@@ -126,7 +126,7 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): ReactElement => {
     };
 
     return (
-        <View style={styles.container} onLayout={onLayout}>
+        <View style={styles.container} onLayout={onLayout} testID={props.name}>
             {loading ? (
                 <ActivityIndicator color={layoutSpecificStyle.indicator!.color} size="large" />
             ) : (
@@ -138,7 +138,7 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): ReactElement => {
                 props.contentSource.items?.length > 0 && (
                     <Fragment>
                         <NativeCarousel
-                            testID={props.name}
+                            testID={`${props.name}$carousel`}
                             activeSlideAlignment={props.activeSlideAlignment}
                             layout="default"
                             firstItem={0}

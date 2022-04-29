@@ -1,7 +1,7 @@
 {
   "name": "carousel-native",
   "widgetName": "Carousel",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -16,6 +16,12 @@
     "release": "pluggable-widgets-tools release:native",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:native",
+    "test:e2e:local:android": "detox test --configuration android.emulator.developerapp",
+    "test:e2e:local:ios": "detox test --configuration ios.simulator.developerapp",
+    "debug:e2e:local:android": "detox test --record-logs all -l trace --configuration android.emulator.developerapp",
+    "debug:e2e:local:ios": "detox test --record-logs all -l trace --configuration ios.simulator.developerapp",
+    "test:e2e:android:update-snapshot": "detox test --updateSnapshot --configuration android.emulator.developerapp",
+    "test:e2e:ios:update-snapshot": "detox test --updateSnapshot --configuration ios.simulator.developerapp",
     "version": "npm run release"
   },
   "dependencies": {
@@ -26,6 +32,7 @@
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/react-native-snap-carousel": "^3.7.4",
-    "eslint": "^7.20.0"
+    "eslint": "^7.20.0",
+    "detox": "^19.5.7"
   }
 }
