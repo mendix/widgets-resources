@@ -11,6 +11,21 @@ export const associationInput = `<?xml version="1.0" encoding="utf-8"?>
                     <associationType name="Reference"/>
                 </associationTypes>
             </property>
+            <property key="referenceSet" type="association" selectableObjects="optionsSource">
+                <caption>Reference Set</caption>
+                <description/>
+                <associationTypes>
+                    <associationType name="ReferenceSet"/>
+                </associationTypes>
+            </property>
+            <property key="referenceOrSet" type="association" selectableObjects="optionsSource">
+                <caption>Reference or Set</caption>
+                <description/>
+                <associationTypes>
+                    <associationType name="Reference"/>
+                    <associationType name="ReferenceSet"/>
+                </associationTypes>
+            </property>
              <property key="optionsSource" type="datasource" isList="true" required="false">
                 <caption>Universe Data source</caption>
                 <description />
@@ -37,6 +52,21 @@ export const associationInputNative = `<?xml version="1.0" encoding="utf-8"?>
                 <description/>
                 <associationTypes>
                     <associationType name="Reference"/>
+                </associationTypes>
+            </property>
+            <property key="referenceSet" type="association" selectableObjects="optionsSource">
+                <caption>Reference Set</caption>
+                <description/>
+                <associationTypes>
+                    <associationType name="ReferenceSet"/>
+                </associationTypes>
+            </property>
+            <property key="referenceOrSet" type="association" selectableObjects="optionsSource">
+                <caption>Reference or Set</caption>
+                <description/>
+                <associationTypes>
+                    <associationType name="Reference"/>
+                    <associationType name="ReferenceSet"/>
                 </associationTypes>
             </property>
              <property key="optionsSource" type="datasource" isList="true" required="false">

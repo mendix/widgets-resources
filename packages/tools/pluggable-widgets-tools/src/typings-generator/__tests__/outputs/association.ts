@@ -4,14 +4,16 @@ export const associationWebOutput = `/**
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
-import { ListValue, ListAttributeValue, ModifiableValue } from "mendix";
+import { ListValue, ListAttributeValue, ReferenceValue, ReferenceSetValue } from "mendix";
 
 export interface MyWidgetContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    reference: ModifiableValue<ObjectItem>;
+    reference: ReferenceValue;
+    referenceSet: ReferenceSetValue;
+    referenceOrSet: ReferenceValue | ReferenceSetValue;
     optionsSource?: ListValue;
     displayValue?: ListAttributeValue<string>;
 }
@@ -22,6 +24,8 @@ export interface MyWidgetPreviewProps {
     styleObject?: CSSProperties;
     readOnly: boolean;
     reference: string;
+    referenceSet: string;
+    referenceOrSet: string;
     optionsSource: {} | { type: string } | null;
     displayValue: string;
 }
@@ -30,7 +34,9 @@ export interface MyWidgetPreviewProps {
 export const associationNativeOutput = `export interface MyWidgetProps<Style> {
     name: string;
     style: Style[];
-    reference: ModifiableValue<ObjectItem>;
+    reference: ReferenceValue;
+    referenceSet: ReferenceSetValue;
+    referenceOrSet: ReferenceValue | ReferenceSetValue;
     optionsSource?: ListValue;
     displayValue?: ListAttributeValue<string>;
 }`;

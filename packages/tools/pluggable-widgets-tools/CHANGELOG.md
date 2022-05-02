@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+
+-   We added support for the new association property introduced in Mendix 9.13.
+
+### Changed
+
+-   We updated the Mendix package to version 9.13.43286.
+
 ### Fixed
 
 -   We fixed the way assets are handled inside widgets to comply with strict Content-Security-Policy.
