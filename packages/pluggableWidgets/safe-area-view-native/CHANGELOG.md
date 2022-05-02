@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [2.2.0] - 2022-4-7
+## [2.2.0] - 2022-04-07
 
 ### Added
 
@@ -16,13 +16,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 -   We fixed the notch area background color.
 
-## [2.1.0] - 2022-1-24
+## [2.1.0] - 2022-01-24
 
 ### Added
 
 -   Dark theme icons for Tile and List view.
 
-## [2.0.0] - 2021-9-28
+## [2.0.0] - 2021-09-28
 
 ### Added
 

@@ -19,20 +19,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 -   We added compatibility with node 15+ and npm 7+.
+
 -   We added resolutions for `react`, `react-dom` and `react-native` in order to be compatible with node 15+ and npm 7+.
 
 ### Changed
 
 -   We updated version of `@wdio` and `react-native` libraries.
+
 -   We changed `eslint-plugin-react` to version `7.28.0` in order to fix this [issue](https://github.com/yannickcr/eslint-plugin-react/issues/3215).
 
 ### Removed
 
 -   We removed `@wdio/sync` from our dependency.
 
-## BREAKING CHANGES
+### Breaking changes
 
-WebDriverIO has deprecated its sync version while using node 16. E2e tests needs to be migrated to [async/await](https://webdriver.io/docs/sync-vs-async/) when using node 16 or manually add the dependency if not.
+-   WebDriverIO has deprecated its sync version while using node 16. E2e tests needs to be migrated to [async/await](https://webdriver.io/docs/sync-vs-async/) when using node 16 or manually add the dependency if not.
 
 ## [9.10.0] - 2022-02-02
 
@@ -67,6 +69,7 @@ WebDriverIO has deprecated its sync version while using node 16. E2e tests needs
 ### Fixed
 
 -   We fixed the typing generation for actions that are referenced by the `onChange` of an attribute.
+
 -   We fixed prettier configurations for `jsxBracketSameLine`.
 
 ### Added
@@ -76,6 +79,7 @@ WebDriverIO has deprecated its sync version while using node 16. E2e tests needs
 ### Changed
 
 -   We changed `wdio-image-comparison-service` from `devDependencies` to `dependencies`.
+
 -   We updated typescript and prettier versions.
 
 ## [9.8.0] - 2021-12-07
@@ -101,6 +105,7 @@ WebDriverIO has deprecated its sync version while using node 16. E2e tests needs
 ### Fixed
 
 -   We fixed the compilation of CSS/SASS files imported from libraries (node_modules) (Ticket 133343).
+
 -   We fixed an issue with `@import` and `@use` not working in CSS/SCSS files.
 
 ## [9.7.0] - 2021-10-05
@@ -108,12 +113,15 @@ WebDriverIO has deprecated its sync version while using node 16. E2e tests needs
 ### Changed
 
 -   We've updated `@rollup/plugin-typescript` dependency to 8.3.0
+
 -   We've updated `typescript` dependency to 4.4.4
+
 -   We've updated `mendix` dependency to 9.7.0
 
 ### Fixed
 
 -   We reverted the feature introduced in 9.5.4 that automatically formatted each build as this caused builds to stall in certain cases.
+
 -   We fixed an issue in Windows machine about missing dependencies (Ticket 132841).
 
 ## [9.5.4] - 2021-09-21
@@ -137,6 +145,7 @@ WebDriverIO has deprecated its sync version while using node 16. E2e tests needs
 ### Changed
 
 -   We fixed an issue where the e2e test script overrides a local test project by default. To override the existing local test project, supply the following argument when calling the script: `--update-test-project`.
+
 -   We improved error handling for e2e testing.
 
 ### Fixed
@@ -158,8 +167,11 @@ WebDriverIO has deprecated its sync version while using node 16. E2e tests needs
 ### Changed
 
 -   We fixed the formatting of Preview typings
+
 -   We fixed the Preview typings for Icon property.
+
 -   We defined a fixed version of `typescript` to 4.3.5 in order to prevent processes to be hanging after creates the widget mpk. See issue [here](https://github.com/rollup/rollup/issues/4213)
+
 -   We updated Mendix library to 9.5.0
 
 ## [9.4.3] - 2021-08-12
@@ -185,6 +197,7 @@ WebDriverIO has deprecated its sync version while using node 16. E2e tests needs
 ### Changed
 
 -   Updated Mendix package to 9.4.
+
 -   If a datasource property is optional and has not been configured by the user, any properties that are linked to that datasource property are automatically omitted from the props passed to the client component (even if they are marked as required). The generated typings have been updated to reflect this, marking such properties as optional.
 
 ## [9.3.1] - 2021-07-13
@@ -224,7 +237,9 @@ WebDriverIO has deprecated its sync version while using node 16. E2e tests needs
 ### Changed
 
 -   Update webdriverio package to version 7.
+
 -   Update Mendix package to version 9.1.
+
 -   Replaced `@rollup/plugin-replace` with `rollup-plugin-re` due to `Unexpected errors` being thrown while using Native class based libraries.
 
 ## [9.0.3] - 2021-04-26
@@ -232,6 +247,9 @@ WebDriverIO has deprecated its sync version while using node 16. E2e tests needs
 ### Changed
 
 -   Allow only SVG files to be imported in the `editorConfig.ts` file of widgets.
+
 -   Set the file size limit of an imported SVG file to 100 kB.
+
 -   Set required node version to v12 or higher.
+
 -   Note in the README file that installation with NPM v7.x.x requires the flag `--legacy-peer-deps`.

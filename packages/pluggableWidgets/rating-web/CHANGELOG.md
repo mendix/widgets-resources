@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [3.1.1] - 2022-4-1
+## [3.1.1] - 2022-04-01
 
 ### Fixed
 
@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 -   We added dark mode to Structure mode preview.
+
 -   We added dark icons for Tile and List view.
 
 ## [3.0.0] - 2021-09-28
@@ -30,13 +31,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 -   Add `Size` design-property option.
+
 -   Add `aria-label`, `aria-checked`, `role` for improved accessibility.
+
 -   Add keyboard events and tabbable elements to improve usability.
+
 -   Add `animation` when selecting an item.
 
 ### Changed
 
 -   DOM structure changed to allow usage of custom icons/images.
+
 -   Editability property converted to system property and moved to common group/tab.
 
 ### Removed

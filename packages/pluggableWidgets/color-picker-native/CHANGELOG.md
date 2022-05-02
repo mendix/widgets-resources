@@ -6,19 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [1.2.0] - 2022-2-21
+## [1.2.0] - 2022-02-21
 
 ### Added
 
 -   Structure mode preview
 
-## [1.1.0] - 2022-1-24
+## [1.1.0] - 2022-01-24
 
 ### Added
 
 -   Dark theme icons for Tile and List view.
 
-## [1.0.0] - 2021-9-28
+## [1.0.0] - 2021-09-28
 
 ### Added
 
