@@ -33,14 +33,14 @@ jobs:
               uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
               with:
                   node-version: "16"
-            - name: Install podman
-              run: |
-                brew install fuse-overlayfs
-                brew install podman
-                podman machine init -v .:/mnt/widgets-resources
-                podman machine start
+            - name: Install docker
+              uses: docker-practice/actions-setup-docker@51fd5009666ea5e3382fe125abf5d73d31386b59
             - name: Login to GitHub Container Registry
-              run: podman login -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} ghcr.io
+              uses: docker/login-action@42d299face0c5c43a0487c477f595ac9cf22f1a7 # v1.12.0
+              with:
+                  registry: ghcr.io
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
             - name: "Use specific Java version for sdkmanager to work"
               uses: joschi/setup-jdk@f37b3738b0689ff2096f2cd914d631bcdeea7cf7
               with:

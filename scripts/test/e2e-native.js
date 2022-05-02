@@ -16,13 +16,11 @@ async function main() {
     const mendixVersion = await getMendixVersion();
     const ghcr = process.env.CI && process.env.FORKED !== "true" ? "ghcr.io/mendix/widgets-resources/" : "";
 
-    const branch = "less-sass";
-    const testArchivePath = await getTestProject("https://github.com/mendix/Native-Mobile-Resources", branch); // not main because trying out minimal projectz
+    const branch = "main";
+    const testArchivePath = await getTestProject("https://github.com/mendix/Native-Mobile-Resources", branch);
     const localRoot = process.cwd();
-    const podmanRoot = "/mnt/widgets-resources";
     const testsDir = join(localRoot, "tests");
     const testProjectDir = join(testsDir, "testProject");
-    const testProjectDirPodman = join(podmanRoot, "tests", "testproject");
     const repoPath = join(testsDir, `Native-Mobile-Resources-${branch}`);
 
     mkdir("-p", join(localRoot, "tests"));
@@ -54,18 +52,16 @@ async function main() {
     // When running on CI pull the docker image from Github Container Registry
     if (ghcr) {
         console.log(`Pulling mxbuild docker image from Github Container Registry...`);
-        execSync(`podman pull ${ghcr}mxbuild:${mendixVersion}`);
+        execSync(`docker pull ${ghcr}mxbuild:${mendixVersion}`);
     }
 
-    const existingImages = execSync(`podman image ls -q ${ghcr}mxbuild:${mendixVersion}`).toString().trim();
-    const scriptPath = join("packages", "tools", "pluggable-widgets-tools", "scripts");
-    const scriptsPathLocal = join(localRoot, scriptPath);
-    const scriptsPathPodman = join(podmanRoot, scriptPath);
+    const existingImages = execSync(`docker image ls -q ${ghcr}mxbuild:${mendixVersion}`).toString().trim();
+    const scriptsPathLocal = join(localRoot, "packages", "tools", "pluggable-widgets-tools", "scripts");
 
     if (!existingImages) {
         console.log(`Creating new mxbuild docker image...`);
         execSync(
-            `podman build -f ${join(scriptsPathLocal, "mxbuild.Dockerfile")} ` +
+            `docker build -f ${join(scriptsPathLocal, "mxbuild.Dockerfile")} ` +
                 `--build-arg MENDIX_VERSION=${mendixVersion} ` +
                 `-t mxbuild:${mendixVersion} ${scriptsPathLocal}`,
             { stdio: "inherit" }
@@ -74,14 +70,14 @@ async function main() {
 
     if (ghcr) {
         console.log(`Pulling mxruntime docker image from Github Container Registry...`);
-        execSync(`podman pull ${ghcr}mxruntime:${mendixVersion}`);
+        execSync(`docker pull ${ghcr}mxruntime:${mendixVersion}`);
     }
 
-    const existingRuntimeImages = execSync(`podman image ls -q ${ghcr}mxruntime:${mendixVersion}`).toString().trim();
+    const existingRuntimeImages = execSync(`docker image ls -q ${ghcr}mxruntime:${mendixVersion}`).toString().trim();
     if (!existingRuntimeImages) {
         console.log(`Creating new runtime docker image...`);
         execSync(
-            `podman build -f ${join(scriptsPathLocal, "runtime.Dockerfile")} ` +
+            `docker build -f ${join(scriptsPathLocal, "runtime.Dockerfile")} ` +
                 `--build-arg MENDIX_VERSION=${mendixVersion} ` +
                 `-t mxruntime:${mendixVersion} ${scriptsPathLocal}`,
             { stdio: "inherit" }
@@ -94,28 +90,28 @@ async function main() {
         // Build testProject via mxbuild
         const projectFile = "/source/tests/testProject/NativeComponentsTestProject.mpr";
         mxbuildContainerId = execSync(
-            `podman run -p 8083:8083 -i -td -v ${podmanRoot}:/source --rm ${ghcr}mxbuild:${mendixVersion} bash`
+            `docker run -p 8083:8083 -i -td -v ${localRoot}:/source --rm ${ghcr}mxbuild:${mendixVersion} bash`
         )
             .toString()
             .trim();
 
         console.log("Updating widgets with mx util...");
         execSync(
-            `podman exec -t ${mxbuildContainerId} bash -c "mx update-widgets --loose-version-check ${projectFile}"`,
+            `docker exec -t ${mxbuildContainerId} bash -c "mx update-widgets --loose-version-check ${projectFile}"`,
             {
                 stdio: "inherit"
             }
         );
 
         console.log("Building project with mxbuild...");
-        execSync(`podman exec -t ${mxbuildContainerId} bash -c "mxbuild -o /tmp/automation.mda ${projectFile}"`, {
+        execSync(`docker exec -t ${mxbuildContainerId} bash -c "mxbuild -o /tmp/automation.mda ${projectFile}"`, {
             stdio: "inherit"
         });
         console.log("All widgets are updated and project .mpr created.");
 
         console.log("Starting metro...");
         execSync(
-            `podman exec -td ${mxbuildContainerId} bash -c "cd /source/tests/testProject/deployment/native && ` +
+            `docker exec -td ${mxbuildContainerId} bash -c "cd /source/tests/testProject/deployment/native && ` +
                 `/tmp/mxbuild/modeler/tools/node/node /tmp/mxbuild/modeler/tools/node/node_modules/react-native/local-cli/cli.js ` +
                 `start --port '8083' --verbose --config '/source/tests/testProject/deployment/native/metro.config.json' > /source/tests/testProject/deployment/log/packager.txt"`
         );
@@ -135,7 +131,7 @@ async function main() {
 
         // Spin up the runtime and run the testProject
         runtimeContainerId = execSync(
-            `podman run -td -v ${podmanRoot}:/source -v ${scriptsPathPodman}:/shared:ro -w /source -p 8080:8080 ` +
+            `docker run -td -v ${localRoot}:/source -v ${scriptsPathLocal}:/shared:ro -w /source -p 8080:8080 ` +
                 `-e MENDIX_VERSION=${mendixVersion} --entrypoint /bin/bash ` +
                 `--rm ${ghcr}mxruntime:${mendixVersion} /shared/runtime.sh`
         )
@@ -155,19 +151,19 @@ async function main() {
         }
 
         try {
-            execSync(`cat ${testProjectDirPodman}/deployment/log/packager.txt`, {
+            execSync(`cat ${testProjectDir}/deployment/log/packager.txt`, {
                 stdio: "inherit"
             });
         } catch (_) {}
 
-        mxbuildContainerId && execSync(`podman logs ${mxbuildContainerId}`, { stdio: "inherit" });
-        runtimeContainerId && execSync(`podman logs ${runtimeContainerId}`, { stdio: "inherit" });
+        mxbuildContainerId && execSync(`docker logs ${mxbuildContainerId}`, { stdio: "inherit" });
+        runtimeContainerId && execSync(`docker logs ${runtimeContainerId}`, { stdio: "inherit" });
         runtimeContainerId && console.log(cat("results/runtime.log").toString());
 
         throw error;
     } finally {
-        // mxbuildContainerId && execSync(`podman rm -f ${mxbuildContainerId}`);
-        // runtimeContainerId && execSync(`podman rm -f ${runtimeContainerId}`);
+        // mxbuildContainerId && execSync(`docker rm -f ${mxbuildContainerId}`);
+        // runtimeContainerId && execSync(`docker rm -f ${runtimeContainerId}`);
     }
 }
 
