@@ -6,4 +6,8 @@ declare namespace mx {
     interface data extends mx.data {
         update: (param: { guid?: string | undefined; entity?: string | undefined; callback?: () => void }) => void;
     }
+    interface session extends mx.session {
+        clearCachedSessionData: () => Promise<void>;
+    }
+    function reload(): void;
 }
