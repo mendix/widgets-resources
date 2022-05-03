@@ -1181,38 +1181,38 @@
         }
     ],
     "com.mendix.widget.web.image.Image": [
-      {
-        "name": "Align content",
-        "type": "Dropdown",
-        "description": "Align content of this element left, right or center it. Align elements inside the container as a row or as a column.",
-        "options": [
-          {
-            "name": "Left align as a row",
-            "class": "row-left"
-          },
-          {
-            "name": "Center align as a row",
-            "class": "row-center"
-          },
-          {
-            "name": "Right align as a row",
-            "class": "row-right"
-          },
-          {
-            "name": "Left align as a column",
-            "class": "col-left"
-          },
-          {
-            "name": "Center align as a column",
-            "class": "col-center"
-          },
-          {
-            "name": "Right align as a column",
-            "class": "col-right"
-          }
-        ]
-      },
-      {
+        {
+            "name": "Align content",
+            "type": "Dropdown",
+            "description": "Align content of this element left, right or center it. Align elements inside the container as a row or as a column.",
+            "options": [
+                {
+                    "name": "Left align as a row",
+                    "class": "row-left"
+                },
+                {
+                    "name": "Center align as a row",
+                    "class": "row-center"
+                },
+                {
+                    "name": "Right align as a row",
+                    "class": "row-right"
+                },
+                {
+                    "name": "Left align as a column",
+                    "class": "col-left"
+                },
+                {
+                    "name": "Center align as a column",
+                    "class": "col-center"
+                },
+                {
+                    "name": "Right align as a column",
+                    "class": "col-right"
+                }
+            ]
+        },
+        {
             "name": "Image style",
             "type": "Dropdown",
             "description": "Change the image style.",
@@ -1310,6 +1310,14 @@
             ]
         }
     ],
+    "com.mendix.widget.custom.tooltip.Tooltip": [
+        {
+            "name": "Show inline",
+            "type": "Toggle",
+            "description": "Show the widget as an inline element.",
+            "class": "widget-tooltip-inline"
+        }
+    ],
     "com.mendix.widget.custom.RangeSlider.RangeSlider": [
         {
             "name": "Style",
@@ -1335,4 +1343,5 @@
                 }
             ]
         }
-    ]}
+    ]
+}
