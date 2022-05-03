@@ -1,7 +1,10 @@
 name: Run native automated end-to-end tests for Android
-
+# todo: run different android emulators -> android version and devices
 on:
     workflow_dispatch:
+
+    push:
+        branches: [master]
 
     pull_request:
         branches: [master]
@@ -14,12 +17,17 @@ jobs:
             packages: read
             contents: read
         steps:
+            - name: "What triggered this?"
+              id: trigger
+              run: echo "::set-output name=trigger::(if ${{ github.event_name == 'pull_request' }} && ${{ github.event.pull_request.head.repo.full_name == github.repository }}; then echo 'internal-pull-request';
+                  elif ${{ github.event_name == 'pull_request' }} && ${{ github.event.pull_request.head.repo.full_name != github.repository }}; then echo 'external-pull-request';
+                  else echo 'master'; fi)"
             - name: "Checking-out code"
               uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
               with:
                   submodules: false
             - name: "Fetching master to compare"
-              if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
+              if: github.event_name == 'pull_request'
               run:
                   git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
             - name: "Defining cache"
@@ -54,6 +62,8 @@ jobs:
             - name: "Set changed packages"
               id: set-changed-packages
               run: node .github/scripts/set-changed-packages.js *-native
+              env:
+                  TRIGGER: ${{ steps.trigger.outputs.TRIGGER }}
             - name: "Start Mendix Environment"
               id: start_mendix_environment
               run: npm run start:native-tests-ci
