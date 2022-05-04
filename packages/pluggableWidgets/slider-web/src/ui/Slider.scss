@@ -4,6 +4,7 @@
 .widget-slider {
     padding: 4px 8px;
     margin-bottom: 16px;
+    flex-grow: 1;
 
     .rc-slider-disabled {
         background-color: initial;
