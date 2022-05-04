@@ -63,7 +63,7 @@ jobs:
               id: set-changed-packages
               run: node .github/scripts/set-changed-packages.js *-native
               env:
-                  TRIGGER: ${{ steps.trigger.outputs.TRIGGER }}
+                  TRIGGER: ${{ steps.trigger.outputs.trigger }}
             - name: "Start Mendix Environment"
               id: start_mendix_environment
               run: npm run start:native-tests-ci
