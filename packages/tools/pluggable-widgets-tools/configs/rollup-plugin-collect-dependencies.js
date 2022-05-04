@@ -12,8 +12,14 @@ import moment from "moment";
 import mkdirp from "mkdirp";
 
 const dependencies = [];
-export function collectDependencies({ onlyNative, outputDir, widgetName, licenseOptions = {}, copyJsModules = true }) {
-    const plugin = new LicensePlugin(licenseOptions);
+export function collectDependencies({
+    onlyNative,
+    outputDir,
+    widgetName,
+    licenseOptions = null,
+    copyJsModules = true
+}) {
+    const licensePlugin = new LicensePlugin(licenseOptions);
     const managedDependencies = [];
     let rollupOptions;
     return {
@@ -50,9 +56,9 @@ export function collectDependencies({ onlyNative, outputDir, widgetName, license
                 return;
             }
             for (const dependency of dependencies) {
-                const pkg = await scanDependency(dependency.packagePath);
-                if (pkg) {
-                    plugin.addDependency(pkg, dependency);
+                const packageJson = await scanDependency(dependency.packagePath);
+                if (packageJson) {
+                    licensePlugin.addDependency(packageJson, dependency);
                 }
                 const transitiveDependencies = await getTransitiveDependencies(
                     dependency.packagePath,
@@ -64,7 +70,7 @@ export function collectDependencies({ onlyNative, outputDir, widgetName, license
                     }
                 }
             }
-            plugin.config();
+            licensePlugin.config();
         },
         async writeBundle() {
             if (!copyJsModules) {
@@ -194,61 +200,56 @@ async function asyncWhere(array, filter) {
 }
 
 async function scanDependency(dir) {
-    let pkg = null;
-    const pkgJsonPath = join(dir, "package.json");
-    const exists = existsSync(pkgJsonPath);
-    if (!exists) {
+    const packageJsonPath = join(dir, "package.json");
+    if (!existsSync(packageJsonPath)) {
         return null;
     }
-    const pkgJson = JSON.parse(readFileSync(pkgJsonPath));
-    const license = pkgJson.license || pkgJson.licenses;
+    const packageJson = JSON.parse(readFileSync(packageJsonPath));
+    const license = packageJson.license || packageJson.licenses;
     const hasLicense = license && license.length > 0;
-    const name = pkgJson.name;
+    const name = packageJson.name;
     if (!name && !hasLicense) {
         return null;
     }
-    pkg = pkgJson;
     const absolutePath = join(dir, "licen[cs]e");
     const licenseFile = (await fg([absolutePath], { cwd: dir, caseSensitiveMatch: false }))[0];
     if (licenseFile) {
-        pkg.licenseText = readFileSync(licenseFile, "utf-8");
+        packageJson.licenseText = readFileSync(licenseFile, "utf-8");
     }
-    return pkg;
+    return packageJson;
 }
 
 class LicensePlugin {
-    constructor(options = {}) {
+    constructor(options) {
         this._options = options;
         this._dependencies = {};
     }
 
-    addDependency(pkg, { isTransitive }) {
-        const name = pkg.name;
+    addDependency(packageJson, { isTransitive }) {
+        const name = packageJson.name;
         if (!name) {
             console.warn("Trying to add dependency without any name, skipping it!");
         } else if (!_.has(this._dependencies, name)) {
-            this._dependencies[name] = new Dependency({ ...pkg, ...{ isTransitive } });
+            this._dependencies[name] = new Dependency({ ...packageJson, isTransitive });
         }
     }
 
     config() {
+        if (!this._options) {
+            return;
+        }
         const thirdParty = this._options.thirdParty;
         if (!thirdParty) {
             return;
         }
 
-        const outputDependencies = _.chain(this._dependencies).values().value();
-        const output = thirdParty.output;
+        const thirdPartyOutput = thirdParty.output;
 
-        if (output) {
-            this._exportThirdParties(outputDependencies, output);
+        if (thirdPartyOutput) {
+            _.forEach(_.castArray(thirdPartyOutput), output => {
+                this._exportThirdPartiesToOutput(_.chain(this._dependencies).values().value(), output);
+            });
         }
-    }
-
-    _exportThirdParties(dependencies, outputs) {
-        _.forEach(_.castArray(outputs), output => {
-            this._exportThirdPartiesToOutput(dependencies, output);
-        });
     }
 
     _exportThirdPartiesToOutput(outputDependencies, output) {
@@ -274,18 +275,17 @@ class LicensePlugin {
 }
 
 class Dependency {
-    constructor(pkg) {
-        this.name = pkg.name || null;
-        this.maintainers = pkg.maintainers || [];
-        this.version = pkg.version || null;
-        this.description = pkg.description || null;
-        this.repository = pkg.repository || null;
-        this.homepage = pkg.homepage || null;
-        this.private = pkg.private || false;
-        this.license = pkg.license || null;
-        this.licenseText = pkg.licenseText || null;
-
-        this.isTransitive = pkg.isTransitive || false;
+    constructor(packageJson) {
+        this.name = packageJson.name || null;
+        this.maintainers = packageJson.maintainers || [];
+        this.version = packageJson.version || null;
+        this.description = packageJson.description || null;
+        this.repository = packageJson.repository || null;
+        this.homepage = packageJson.homepage || null;
+        this.private = packageJson.private || false;
+        this.license = packageJson.license || null;
+        this.licenseText = packageJson.licenseText || null;
+        this.isTransitive = packageJson.isTransitive || false;
     }
 
     text() {

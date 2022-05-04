@@ -199,15 +199,8 @@ export default async args => {
             // configs affected by a change => we cannot know in advance which one will be "the last".
             // So we run the same logic for all configs, letting the last one win.
             command([
-                async () => {
-                    if (!config.licenses) {
-                        return;
-                    }
-                    await copyLicenseFile(sourcePath, outDir);
-                },
-                async () => {
-                    await createMpkFile(mpkDir, outDir, mpkFile, production, projectPath, "deployment/native/widgets");
-                }
+                async () => config.licenses && copyLicenseFile(sourcePath, outDir),
+                async () => createMpkFile(mpkDir, outDir, mpkFile, production, projectPath, "deployment/native/widgets")
             ])
         ];
     }
