@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.0.1] - 2022-5-4
+
 ### Fixed
 
 -   We fixed an issue with slider being rendered collapsed when "Show label" was set to "Yes" (Ticket #145543)
