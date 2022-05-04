@@ -10,6 +10,10 @@ node_modules
 mxproject
 coverage
 
+wdio/apps
+wdio/logs
+wdio/screenshots
+
 detox/apps
 detox/*.log
 **/results

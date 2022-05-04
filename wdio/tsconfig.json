@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "module": "CommonJs",
+        "types": [
+            "node",
+            "webdriverio/async",
+            "@wdio/mocha-framework",
+            "expect-webdriverio",
+            "@wdio/browserstack-service",
+            "wdio-image-comparison-service"
+        ],
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true
+    }
+}

@@ -1,45 +1,45 @@
-import { Alert } from "../../../../../detox/src/Alert";
-import { expect, element, by } from "detox";
-import { resetDevice, setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import { Alert } from "../../../../../wdio/src/Alert";
+import { resetDevice, setText, tapMenuItem } from "../../../../../wdio/src/helpers";
+import { getElementByTestId } from "../../../../../wdio/src/utils";
 
 describe("Badge", () => {
-    beforeAll(async () => {
+    before(async () => {
         await tapMenuItem("Badge");
 
-        const textBox = element(by.id("textBoxBadge"));
-        await setText(textBox, "Detox");
+        const textBox = await getElementByTestId("textBoxBadge");
+        await setText(textBox, "WDIO");
     });
 
-    afterAll(async () => {
+    after(async () => {
         await resetDevice();
     });
 
     it("renders the normal badge", async () => {
-        const badge = element(by.id("badgeNormal"));
-        const badgeText = element(by.id("badgeNormal$caption"));
+        const badge = await getElementByTestId("badgeNormal");
+        const badgeText = await getElementByTestId("badgeNormal$caption");
 
-        await expect(badge).toBeVisible();
-        await badge.tap();
+        expect(badge).toBeDisplayed();
+        await badge.click();
 
-        await expect(badgeText).toBeVisible();
-        await expect(badgeText).toHaveText("Detox");
+        expect(badgeText).toBeDisplayed();
+        expect(badgeText).toHaveText("WDIO");
     });
 
     it("does not render the badge with visibility set as false", async () => {
-        const badge = element(by.id("badgeNoVisibility"));
+        const badge = await getElementByTestId("badgeNoVisibility");
 
-        await expect(badge).not.toBeVisible();
+        expect(badge).not.toBeDisplayed();
     });
 
     it("renders the badge with actions", async () => {
-        const badge = element(by.id("badgeAction"));
-        const badgeText = element(by.id("badgeAction$caption"));
-        await expect(badge).toBeVisible();
-        await expect(badgeText).toBeVisible();
-        await expect(badgeText).toHaveText("Detox");
+        const badge = await getElementByTestId("badgeAction");
+        const badgeText = await getElementByTestId("badgeAction$caption");
+        expect(badge).toBeDisplayed();
+        expect(badgeText).toBeDisplayed();
+        expect(badgeText).toHaveText("WDIO");
 
-        await badge.tap();
+        await badge.click();
         const alert = Alert();
-        await expect(alert.messageElement).toHaveText("Action test: Detox");
+        expect(alert.messageElement).toHaveText("Action test: WDIO");
     });
 });

@@ -9,7 +9,7 @@ on:
 jobs:
     native_automated_tests_android:
         name: "Native automated tests for Android"
-        runs-on: macos-latest
+        runs-on: linux-latest
         permissions:
             packages: read
             contents: read
@@ -21,7 +21,8 @@ jobs:
             - name: "Fetching master to compare"
               if: github.event_name == 'pull_request'
               run:
-                  git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
+                  git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref
+                  }}:refs/remotes/origin/${{ github.base_ref }}
             - name: "Defining cache"
               uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed # v2
               env:
@@ -33,43 +34,19 @@ jobs:
               uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
               with:
                   node-version: "16"
-            - name: Install podman
-              run: |
-                brew install fuse-overlayfs
-                brew install podman
-                podman machine init -v .:/mnt/widgets-resources
-                podman machine start
             - name: Login to GitHub Container Registry
-              run: podman login -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} ghcr.io
-            - name: "Use specific Java version for sdkmanager to work"
-              uses: joschi/setup-jdk@f37b3738b0689ff2096f2cd914d631bcdeea7cf7
+              uses: docker/login-action@42d299face0c5c43a0487c477f595ac9cf22f1a7 # v1.12.0
               with:
-                  java-version: "openjdk8"
-                  architecture: "x64"
-              env:
-                  # https://github.com/actions/toolkit/issues/641#issuecomment-728963957
-                  ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
+                  registry: ghcr.io
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
             - name: "Installing dependencies"
               run: npm install
-            - name: "Set changed packages"
-              id: set-changed-packages
-              run: node .github/scripts/set-changed-packages.js *-native
-            - name: "Start Mendix Environment"
-              id: start_mendix_environment
-              run: npm run start:native-tests-ci
+            - name: "Start Mendix Environment & run tests"
               env:
-                  CHANGED_PACKAGES: ${{ steps.set-changed-packages.outputs.CHANGED_PACKAGES }}
-                  CI: true
-            - name: Setup emulator & run tests
-              uses: reactivecircus/android-emulator-runner@76c2bf6f95ed6458fd659a1bdb680a0f8df232dc
-              with:
-                  api-level: 30
-                  target: google_apis
-                  arch: x86_64
-                  profile: pixel
-                  avd-name: NATIVE_pixel_30
-                  script:
-                      npx lerna run test:e2e:local:android --stream --concurrency 1 --scope ${{ steps.set-changed-packages.outputs.CHANGED_PACKAGES }}
+                  BROWSERSTACK_USERNAME: ${{ secrets.BrowserstackUsername }}
+                  BROWSERSTACK_ACCESS_KEY: ${{ secrets.BrowserstackAccessKey }}
+              run: node ./scripts/test/e2e-native.js
             - name: "Archive test screenshot diff results"
               uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
               if: failure()

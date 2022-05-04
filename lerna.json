@@ -1,6 +1,6 @@
 {
     "version": "independent",
-    "packages": ["packages/*/*", "scripts/data"],
+    "packages": ["packages/*/*", "scripts/data", "wdio"],
     "command": {
         "bootstrap": {
             "npmClientArgs": ["--package-lock"]

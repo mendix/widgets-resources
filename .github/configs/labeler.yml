@@ -15,7 +15,7 @@ Hybrid:
 Native:
   - packages/**/*-native*/**/*
   - packages/**/*_native*/**/*
-  - detox/**/*
+  - wdio/**/*
 Web:
   - packages/**/*-web*/**/*
   - packages/shared/charts/**/*
