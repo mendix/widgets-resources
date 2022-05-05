@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 -   We added support for the new association property introduced in Mendix 9.13.
 
+-   We added a feature to generate required FedRAMP files.
+
 ### Changed
 
 -   We updated the Mendix package to version 9.13.43286.
