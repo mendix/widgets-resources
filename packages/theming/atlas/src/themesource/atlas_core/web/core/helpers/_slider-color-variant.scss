@@ -6,12 +6,12 @@
 
         .rc-slider-handle:focus {
             border-color: $color;
-            box-shadow: 0 0 0 5px lighten($color, 25%);
+            box-shadow: 0 0 0 5 rgba($color, 0.25); //changed from lighten($color, 25%)
             outline: none;
         }
 
         .rc-slider-handle-click-focused:focus {
-            border-color: lighten($color, 25%);
+            border-color: rgba($color, 0.25); //changed from lighten($color, 25%)
             box-shadow: unset;
         }
 
