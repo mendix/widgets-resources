@@ -14,17 +14,17 @@ export async function copyLicenseFile(sourcePath, outDir) {
     }
 }
 
-export async function createMpkFile(mpkDir, outDir, mpkFile, production, projectPath, deploymentPath) {
+export async function createMpkFile({ mpkDir, mpkFile, widgetTmpDir, isProduction, mxProjectPath, deploymentPath }) {
     mkdirSync(mpkDir, { recursive: true });
-    await zip(outDir, mpkFile);
-    if (!production && projectPath) {
-        const widgetsPath = join(projectPath, "widgets");
-        const absolutePath = join(projectPath, deploymentPath);
+    await zip(widgetTmpDir, mpkFile);
+    if (!isProduction && mxProjectPath) {
+        const widgetsPath = join(mxProjectPath, "widgets");
+        const absolutePath = join(mxProjectPath, deploymentPath);
         // Create folder if they do not exists or directories were cleaned
         mkdirSync(widgetsPath, { recursive: true });
         mkdirSync(absolutePath, { recursive: true });
         // Copy files to deployment and widgets folder
-        cp("-r", join(outDir, "*"), absolutePath);
+        cp("-r", join(widgetTmpDir, "*"), absolutePath);
         cp(mpkFile, widgetsPath);
     }
 }

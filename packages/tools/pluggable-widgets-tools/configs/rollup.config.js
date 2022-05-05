@@ -251,7 +251,15 @@ export default async args => {
             // So we run the same logic for all configs, letting the last one win.
             command([
                 async () => config.licenses && copyLicenseFile(sourcePath, outDir),
-                async () => createMpkFile(mpkDir, outDir, mpkFile, production, projectPath, "deployment/web/widgets")
+                async () =>
+                    createMpkFile({
+                        mpkDir,
+                        mpkFile,
+                        widgetTmpDir: outDir,
+                        isProduction: production,
+                        mxProjectPath: projectPath,
+                        deploymentPath: "deployment/web/widgets"
+                    })
             ])
         ];
     }
