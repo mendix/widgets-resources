@@ -15,7 +15,7 @@ $default-ios-color: rgb(100, 189, 99);
 }
 
 @mixin bootstrap-style-android($brand-style) {
-    background-color: lighten($brand-style, 10%);
+    background-color: rgba($brand-style, 0.1); //changed from lighten brand-style 10
 }
 
 @mixin style($brand-key, $brand-variable) {
