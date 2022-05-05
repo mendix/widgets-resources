@@ -296,6 +296,12 @@ Icons
 .between:before {
     content: "\e900";
 }
+.empty:before {
+    content: "\e901";
+}
+.notEmpty:before {
+    content: "\e903";
+}
 
 /**
 * Specific styles for filters inside Data Grid 2
