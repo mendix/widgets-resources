@@ -3,8 +3,8 @@ import { Dimensions } from "@mendix/piw-utils-internal";
 
 export const getMarkerSizeReference = (props: LinesType, markerSize: number[], dimensions?: Dimensions): number => {
     if (props.autosize) {
-        const width = dimensions ? dimensions.width : 0;
-        const height = dimensions ? dimensions.height : 0;
+        const width = dimensions?.width ?? 0;
+        const height = dimensions?.height ?? 0;
         let sizeRef = 1;
         const averageSize = (width + height) / 2;
         const percentageSize = averageSize / (1 / (props.sizeref / 100));

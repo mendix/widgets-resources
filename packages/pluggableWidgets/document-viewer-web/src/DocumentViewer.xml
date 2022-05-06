@@ -19,7 +19,7 @@
                     <caption>File Entity</caption>
                     <description />
                 </property>
-                <property key="url" type="string" required="false">
+                <property key="url" type="textTemplate" required="false">
                     <caption>URI</caption>
                     <description />
                 </property>
@@ -41,8 +41,9 @@
                     <caption>Height unit</caption>
                     <description>Percentage: portion of parent size. Pixels: absolute amount of pixels.</description>
                     <enumerationValues>
+                        <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
                         <enumerationValue key="pixels">Pixels</enumerationValue>
-                        <enumerationValue key="percentage">Percentage</enumerationValue>
+                        <enumerationValue key="percentageOfParent">Percentage of parent</enumerationValue>
                     </enumerationValues>
                 </property>
                 <property key="height" type="integer" defaultValue="300">

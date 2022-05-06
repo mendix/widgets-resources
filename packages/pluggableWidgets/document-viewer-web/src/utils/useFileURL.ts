@@ -64,45 +64,42 @@ function allowFileViewing(url: URL): string {
 }
 
 /**
- * Check that src is valid URL and it has correct filename.
+ * Check that src is valid URL and it has correct extension.
  *
  * @param src - File source url to check
  */
-function getPreviewUrl(src: string): [Error | null, string] {
-    let error: Error | null = null;
-    let result = "";
-
-    try {
-        const url = new URL(src);
-        if (!matchFileExtension(url, ".pdf")) {
-            error = new TypeError("unsupported file type");
-        } else {
-            result = allowFileViewing(url);
-        }
-    } catch (err) {
-        error = err;
+function ensureSupportedUrl(src: string): string {
+    const url = new URL(src);
+    if (!matchFileExtension(url, ".pdf")) {
+        throw new TypeError("unsupported file type");
     }
 
-    return [error, result];
+    return allowFileViewing(url);
 }
 
-export function useFileURL({
-    file,
-    dataSourceType,
-    url: externalUri
-}: DocumentViewerContainerProps): UseFileUrlHookResult {
-    return useMemo(() => {
-        if (dataSourceType === "file" && file?.status !== ValueStatus.Available) {
-            return hookResult("loading");
+function getOriginalUrl({ file, dataSourceType, url }: DocumentViewerContainerProps): string | undefined {
+    if (dataSourceType === "file") {
+        if (file?.status === ValueStatus.Available) {
+            return file.value.uri;
         }
+    } else {
+        if (url?.status === ValueStatus.Available) {
+            return url.value;
+        }
+    }
+}
 
-        const originalUrl = dataSourceType === "file" ? file?.value?.uri ?? "" : externalUri;
-        const [error, url] = getPreviewUrl(originalUrl);
+export function useFileURL(props: DocumentViewerContainerProps): UseFileUrlHookResult {
+    return useMemo(() => {
+        try {
+            const originalUrl = getOriginalUrl(props);
+            if (!originalUrl) {
+                return hookResult("loading");
+            }
 
-        if (error) {
+            return hookResult("ok", ensureSupportedUrl(originalUrl));
+        } catch (error) {
             return hookResult("error", `${error}`);
         }
-
-        return hookResult("ok", `${url}`);
-    }, [file, dataSourceType, externalUri]);
+    }, [props.file, props.dataSourceType, props.url]);
 }
