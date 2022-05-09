@@ -3,5 +3,6 @@
     "compilerOptions": {
         "baseUrl": "./"
     },
-    "include": ["./src", "./typings", "node_modules/@mendix/pluggable-widgets-tools/typings"]
+    "include": ["./src", "./typings", "node_modules/@mendix/pluggable-widgets-tools/typings"],
+    "exclude": ["./src/assets/plugins"]
 }

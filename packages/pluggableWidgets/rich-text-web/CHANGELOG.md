@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Changed
+
+-   We changed the behavior on clicking the links in rich text editor. CMD/CTRL + Click will open a link in new tab.
+
 ## [2.0.0] - 2022-02-25
 
 ### Added

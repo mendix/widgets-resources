@@ -1,7 +1,7 @@
 {
   "name": "rich-text-web",
   "widgetName": "RichText",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Rich inline or toolbar text editing",
   "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "repository": {
@@ -23,7 +23,7 @@
     "dev": "cross-env MPKOUTPUT=RichText.mpk pluggable-widgets-tools start:web",
     "build": "cross-env MPKOUTPUT=RichText.mpk pluggable-widgets-tools build:web",
     "format": "pluggable-widgets-tools format",
-    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "lint": "eslint --ignore-pattern src/assets/plugins --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e": "echo 'Skipping tests'",
