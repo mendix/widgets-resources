@@ -244,7 +244,19 @@ export default async args => {
 
 const extensions = [".js", ".jsx", ".tsx", ".ts"];
 
-const editorConfigExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/];
+const editorConfigExternal = [
+    // "mendix" and internals under "mendix/"
+    /^mendix($|\/)/,
+
+    // "react"
+    /^react$/,
+
+    // "react/jsx-runtime"
+    /^react\/jsx-runtime$/,
+
+    // "react-dom"
+    /^react-dom$/
+];
 
 const nativeExternal = [
     /^mendix($|\/)/,
