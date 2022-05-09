@@ -1310,7 +1310,7 @@
             ]
         }
     ],
-    "com.mendix.widget.custom.tooltip.Tooltip": [
+    "com.mendix.widget.web.tooltip.Tooltip": [
         {
             "name": "Show inline",
             "type": "Toggle",
