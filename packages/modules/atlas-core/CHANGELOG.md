@@ -1,66 +1,70 @@
 # Changelog
 
-All notable changes to this widget will be documented in this file.
+All notable changes to this module will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-## [3.2.1] Atlas Core - 2022-4-1
+### Added
+
+-   We added a new design property for Tooltip widget.
+
+## [3.2.1] Atlas Core - 2022-04-01
 
 ### Fixed
 
 -   We fixed this module to be compatible with strict CSP mode.
 
-## [3.2.0] Atlas Core - 2022-2-25
+## [3.2.0] Atlas Core - 2022-02-25
 
 ### Added
 
 -   Added support for setting variables using relative length CSS units.
 
-## [3.1.1] Atlas Core - 2022-2-18
+## [3.1.1] Atlas Core - 2022-02-18
 
 ### Fixed
 
 -   We fixed an issue with logo covering the whole login page when opening in firefox (Ticket 141170).
 
-## [3.1.0] Atlas Core - 2022-2-2
+## [3.1.0] Atlas Core - 2022-02-02
 
 ### Added
 
 -   We added design properties to add shadows in containers. Thanks Ronnie van Doorn.
 
-## [3.0.9] Atlas Core - 2022-1-24
+## [3.0.9] Atlas Core - 2022-01-24
 
 ### Fixed
 
 -   We corrected the border styling for the Floating Action Button native widget when in Dark Mode.
 
-## [3.0.8] Atlas Core - 2021-12-3
+## [3.0.8] Atlas Core - 2021-12-03
 
 ### Added
 
 -   We added a design property to align the content of the image widget.
 
-## [3.0.7] - 2021-09-28
+## [3.0.7] Atlas Core - 2021-09-28
 
 ### Changed
 
 -   We fixed a problem with the styles of groupbox widget not respecting the header mode element size (Ticket #131119).
 
-## [3.0.6] - 2021-08-12
+## [3.0.6] Atlas Core - 2021-08-12
 
 ### Changed
 
 -   We fixed the z-index (priority) of the menu bar.
 
-## [3.0.5] - 2021-07-27
+## [3.0.5] Atlas Core - 2021-07-27
 
 ### Changed
 
 -   We moved resource files from web/resources to public folder.
 
-## [3.0.4] - 2021-07-16
+## [3.0.4] Atlas Core - 2021-07-16
 
 ### Added
 
@@ -76,7 +80,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 -   We removed the restrictions to show the toggle sidebar widget only on phones.
 -   We removed San Francisco font from default font variable.
 
-## [3.0.3] - 2021-06-29
+## [3.0.3] Atlas Core - 2021-06-29
 
 ### Added
 

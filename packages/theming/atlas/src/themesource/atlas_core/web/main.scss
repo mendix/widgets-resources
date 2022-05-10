@@ -324,6 +324,11 @@
     @include timeline();
 }
 
+@import "core/widgets/tooltip";
+@if not $exclude-tooltip {
+    @include tooltip();
+}
+
 @import "core/helpers/helper-classes";
 @if not $exclude-helper-classes {
     @include helper-classes();
