@@ -69,6 +69,7 @@ jobs:
               run: npm run start:native-tests-ci
               env:
                   CHANGED_PACKAGES: ${{ steps.set-changed-packages.outputs.CHANGED_PACKAGES }}
+                  CHANGED_PACKAGES_FORMATTED_FOR_LERNA: ${{ steps.set-changed-packages.outputs.CHANGED_PACKAGES_FORMATTED_FOR_LERNA }}
                   CI: true
             - name: Setup emulator & run tests
               uses: reactivecircus/android-emulator-runner@76c2bf6f95ed6458fd659a1bdb680a0f8df232dc
@@ -79,7 +80,7 @@ jobs:
                   profile: pixel
                   avd-name: NATIVE_pixel_30
                   script:
-                      npx lerna run test:e2e:local:android --stream --concurrency 1 --scope ${{ steps.set-changed-packages.outputs.CHANGED_PACKAGES }}
+                      npx lerna run test:e2e:local:android --stream --concurrency 1 --scope ${{ steps.set-changed-packages.outputs.CHANGED_PACKAGES_FORMATTED_FOR_LERNA }}
             - name: "Archive test screenshot diff results"
               uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
               if: failure()

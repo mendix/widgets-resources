@@ -31,9 +31,8 @@ async function main() {
     rm("-f", testArchivePath);
 
     const changedPackages = JSON.parse(process.env.CHANGED_PACKAGES.replaceAll("\n", ""));
-    const changedPackagesFormattedForLerna = `'{${changedPackages.map(p => p.name).join(",")},}'`; // end comma useful when only one package is changed.
 
-    execSync(`npx lerna run release --scope ${changedPackagesFormattedForLerna}`, { stdio: "inherit" });
+    execSync(`npx lerna run release --scope ${process.env.CHANGED_PACKAGES_FORMATTED_FOR_LERNA}`, { stdio: "inherit" });
 
     changedPackages.forEach(({ name, location }) => {
         if (["mobile-resources-native", "nanoflow-actions-native"].includes(name)) {
