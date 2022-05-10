@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.2.2] Atlas Core - 2022-5-10
+
 ### Added
 
 -   We added a new design property for Tooltip widget.
