@@ -27,7 +27,6 @@ expect.extend({
         const customDiffDir = join(resolve("./"), "e2e", "images", "diffs", platform, sdk, type);
 
         return toMatchImageSnapshot.call(this, screenshot, {
-            allowSizeMismatch: true,
             customDiffConfig: { threshold: 0.15 },
             customDiffDir,
             customSnapshotsDir,
