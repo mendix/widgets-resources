@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.web.datagridnumberfilter.DatagridNumberFilter" pluginWidget="true" offlineCapable="true"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.web.datagridnumberfilter.DatagridNumberFilter" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Number filter</name>
-    <description/>
+    <description />
     <studioProCategory>Data controls</studioProCategory>
     <studioCategory>Data Controls</studioCategory>
     <helpUrl>https://docs.mendix.com/appstore/modules/data-grid-2#7-3-number-filter</helpUrl>
@@ -29,6 +27,8 @@
                         <enumerationValue key="notEqual">Not equal</enumerationValue>
                         <enumerationValue key="smaller">Smaller than</enumerationValue>
                         <enumerationValue key="smallerEqual">Smaller than or equal</enumerationValue>
+                        <enumerationValue key="empty">Empty</enumerationValue>
+                        <enumerationValue key="notEmpty">Not empty</enumerationValue>
                     </enumerationValues>
                 </property>
                 <property key="placeholder" type="textTemplate" required="false">
@@ -51,10 +51,10 @@
                     <caption>Saved attribute</caption>
                     <description>Attribute used to store the last value of the filter.</description>
                     <attributeTypes>
-                        <attributeType name="AutoNumber"/>
-                        <attributeType name="Decimal"/>
-                        <attributeType name="Integer"/>
-                        <attributeType name="Long"/>
+                        <attributeType name="AutoNumber" />
+                        <attributeType name="Decimal" />
+                        <attributeType name="Integer" />
+                        <attributeType name="Long" />
                     </attributeTypes>
                 </property>
             </propertyGroup>

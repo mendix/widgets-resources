@@ -86,7 +86,9 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                             { value: "equal", label: "Equal" },
                             { value: "notEqual", label: "Not equal" },
                             { value: "smaller", label: "Smaller than" },
-                            { value: "smallerEqual", label: "Smaller than or equal" }
+                            { value: "smallerEqual", label: "Smaller than or equal" },
+                            { value: "empty", label: "Empty" },
+                            { value: "notEmpty", label: "Not empty" }
                         ] as Array<{ value: DefaultFilterEnum; label: string }>
                     }
                 />
@@ -95,6 +97,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 adjustable={props.adjustable}
                 calendarStartDay={props.calendarStartDay}
                 dateFormat={props.dateFormat}
+                disabledInput={type === "empty" || type === "notEmpty"}
                 enableRange={type === "between"}
                 locale={props.locale}
                 id={props.id}

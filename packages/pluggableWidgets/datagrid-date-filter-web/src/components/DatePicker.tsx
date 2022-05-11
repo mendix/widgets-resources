@@ -23,6 +23,7 @@ export type RangeDateValue = [Date | undefined, Date | undefined];
 interface DatePickerProps {
     adjustable: boolean;
     dateFormat?: string;
+    disabledInput?: boolean;
     enableRange?: boolean;
     locale?: string;
     id?: string;
@@ -77,6 +78,7 @@ export const DatePicker = forwardRef(
                     calendarStartDay={props.calendarStartDay}
                     className={classNames("form-control", { "filter-input": props.adjustable })}
                     dateFormat={dateFormats}
+                    disabled={props.disabledInput ?? false}
                     disabledKeyboardNavigation={false}
                     dropdownMode="select"
                     enableTabLoop

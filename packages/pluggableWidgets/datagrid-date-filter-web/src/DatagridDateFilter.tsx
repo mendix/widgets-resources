@@ -13,11 +13,13 @@ import { addDays, isEqual } from "date-fns";
 import {
     and,
     attribute,
+    equals,
     greaterThan,
     greaterThanOrEqual,
     lessThan,
     lessThanOrEqual,
     literal,
+    notEqual,
     or
 } from "mendix/filters/builders";
 import { FilterCondition } from "mendix/filters";
@@ -192,7 +194,7 @@ function getFilterCondition(
     if (
         !listAttribute ||
         !listAttribute.filterable ||
-        (type !== "between" && !value) ||
+        (type !== "between" && type !== "empty" && type !== "notEmpty" && !value) ||
         (type === "between" && (!rangeValues || !rangeValues[0] || !rangeValues[1]))
     ) {
         return undefined;
@@ -207,6 +209,12 @@ function getFilterCondition(
             greaterThanOrEqual(filterAttribute, literal(startDate)),
             lessThanOrEqual(filterAttribute, literal(new Date(addDays(endDate, 1).getTime() - 1)))
         );
+    }
+    if (type === "empty") {
+        return equals(filterAttribute, literal(undefined));
+    }
+    if (type === "notEmpty") {
+        return notEqual(filterAttribute, literal(undefined));
     }
 
     const dateValue = changeTimeToMidnight(value!);

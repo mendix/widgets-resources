@@ -136,7 +136,7 @@ function getFilterCondition(
     value: string,
     type: DefaultFilterEnum
 ): FilterCondition | undefined {
-    if (!listAttribute || !listAttribute.filterable || !value) {
+    if (!listAttribute || !listAttribute.filterable || (type !== "empty" && type !== "notEmpty" && !value)) {
         return undefined;
     }
 
@@ -149,8 +149,13 @@ function getFilterCondition(
         equal: equals,
         notEqual,
         smaller: lessThan,
-        smallerEqual: lessThanOrEqual
+        smallerEqual: lessThanOrEqual,
+        empty: equals,
+        notEmpty: notEqual
     };
 
-    return filters[type](attribute(listAttribute.id), literal(value));
+    return filters[type](
+        attribute(listAttribute.id),
+        literal(type === "empty" || type === "notEmpty" ? undefined : value)
+    );
 }

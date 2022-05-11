@@ -6,16 +6,7 @@
 import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue } from "mendix";
 
-export type DefaultFilterEnum =
-    | "contains"
-    | "startsWith"
-    | "endsWith"
-    | "greater"
-    | "greaterEqual"
-    | "equal"
-    | "notEqual"
-    | "smaller"
-    | "smallerEqual";
+export type DefaultFilterEnum = "contains" | "startsWith" | "endsWith" | "greater" | "greaterEqual" | "equal" | "notEqual" | "smaller" | "smallerEqual" | "empty" | "notEmpty";
 
 export interface DatagridTextFilterContainerProps {
     name: string;
