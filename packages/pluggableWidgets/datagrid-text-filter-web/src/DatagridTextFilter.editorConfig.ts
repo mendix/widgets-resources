@@ -3,6 +3,7 @@ import {
     containsIcon,
     containsIconDark,
     emptyIcon,
+    emptyIconDark,
     endsWithIcon,
     endsWithIconDark,
     equalsIcon,
@@ -15,6 +16,7 @@ import {
     hidePropertyIn,
     ImageProps,
     notEmptyIcon,
+    notEmptyIconDark,
     notEqualIcon,
     notEqualIconDark,
     Properties,
@@ -128,8 +130,8 @@ function getSvgContent(type: DefaultFilterEnum, isDarkMode: boolean): string {
         case "startsWith":
             return isDarkMode ? startsWithIconDark : startsWithIcon;
         case "empty":
-            return emptyIcon;
+            return isDarkMode ? emptyIconDark : emptyIcon;
         case "notEmpty":
-            return notEmptyIcon;
+            return isDarkMode ? notEmptyIconDark : notEmptyIcon;
     }
 }

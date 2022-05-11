@@ -5,6 +5,7 @@ import {
     datePickerIcon,
     datePickerIconDark,
     emptyIcon,
+    emptyIconDark,
     equalsIcon,
     equalsIconDark,
     greaterThanEqualIcon,
@@ -15,6 +16,7 @@ import {
     hidePropertyIn,
     ImageProps,
     notEmptyIcon,
+    notEmptyIconDark,
     notEqualIcon,
     notEqualIconDark,
     Properties,
@@ -149,8 +151,8 @@ function getSvgContent(type: DefaultFilterEnum, isDarkMode: boolean): string {
         case "smallerEqual":
             return isDarkMode ? smallerThanEqualIconDark : smallerThanEqualIcon;
         case "empty":
-            return emptyIcon;
+            return isDarkMode ? emptyIconDark : emptyIcon;
         case "notEmpty":
-            return notEmptyIcon;
+            return isDarkMode ? notEmptyIconDark : notEmptyIcon;
     }
 }
