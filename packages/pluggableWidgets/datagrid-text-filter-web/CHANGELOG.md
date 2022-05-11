@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.3.0] - 2022-5-11
+
 ### Added
 
 -   We added the options to filter for empty and non-empty values.

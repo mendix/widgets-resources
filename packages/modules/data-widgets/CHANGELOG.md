@@ -6,6 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.5.0] Data Widgets - 2022-5-11
+
+## [2.4.0] DatagridDateFilter
+
+### Added
+
+-   We added the options to filter for empty and non-empty values.
+
+## [2.3.0] DatagridNumberFilter
+
+### Added
+
+-   We added the options to filter for empty and non-empty values.
+
+## [2.3.0] DatagridTextFilter
+
+### Added
+
+-   We added the options to filter for empty and non-empty values.
+
 ## [2.4.0] Data Widgets - 2022-4-22
 
 ## [2.3.0] Datagrid
