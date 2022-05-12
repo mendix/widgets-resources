@@ -1,5 +1,20 @@
 describe("RichText", () => {
     const browserName = Cypress.browser.name;
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    const getIframeBody = () => {
+        // get the iframe > document > body
+        // and retry until the body element is not empty
+        return (
+            cy
+                .get("#cke_1_contents > iframe")
+                .its("0.contentDocument.body")
+                .should("not.be.empty")
+                // wraps "body" DOM element to allow
+                // chaining more Cypress commands, like ".find(...)"
+                // https://on.cypress.io/wrap
+                .then(cy.wrap)
+        );
+    };
 
     it("compares with a screenshot baseline and checks if inline basic mode are rendered as expected", () => {
         cy.visit("/p/basic");
@@ -62,5 +77,10 @@ describe("RichText", () => {
     it("compares with a screenshot baseline and checks if read-only bordered toolbar are rendered as expected", () => {
         cy.get(".mx-name-richText4").should("be.visible");
         cy.get(".mx-name-richText4").compareSnapshot(`readOnlyBorderedToolbar-${browserName}`, 0.4);
+    });
+
+    it("opens a link in the read-only mode", () => {
+        getIframeBody().contains("Clickable Link").click({ ctrlKey: true });
+        cy.url().should("contain", "mendix.com");
     });
 });
