@@ -97,7 +97,7 @@
         },
         {
             "name": "Accordion",
-            "version": "2.1.1",
+            "version": "2.2.0",
             "items": [
                 {
                     "id": "com.mendix.widget.native.accordion.Accordion",
@@ -109,7 +109,7 @@
                     "offlineCapable": true,
                     "requirements": {
                         "isPluginWidget": true,
-                        "hasStructureModePreview": false,
+                        "hasStructureModePreview": true,
                         "hasAllTileIcons": true,
                         "hasAllDarkIcons": true
                     },
@@ -185,7 +185,7 @@
         },
         {
             "name": "ActivityIndicator",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "items": [
                 {
                     "id": "com.mendix.widget.native.activityindicator.ActivityIndicator",
@@ -271,7 +271,7 @@
         },
         {
             "name": "AppEvents",
-            "version": "3.1.0",
+            "version": "3.2.0",
             "items": [
                 {
                     "id": "com.mendix.widget.native.appevents.AppEvents",
@@ -283,7 +283,7 @@
                     "offlineCapable": true,
                     "requirements": {
                         "isPluginWidget": true,
-                        "hasStructureModePreview": false,
+                        "hasStructureModePreview": true,
                         "hasAllTileIcons": true,
                         "hasAllDarkIcons": true
                     },
@@ -307,7 +307,7 @@
                     },
                     "tests": {
                         "hasUnitTests": true,
-                        "hasE2ETests": false
+                        "hasE2ETests": true
                     }
                 }
             ]
@@ -344,6 +344,49 @@
                     "tests": {
                         "hasUnitTests": true,
                         "hasE2ETests": false
+                    }
+                }
+            ]
+        },
+        {
+            "name": "BackgroundGradient",
+            "version": "1.0.0",
+            "items": [
+                {
+                    "id": "com.mendix.widget.native.backgroundgradient.BackgroundGradient",
+                    "name": "Background gradient",
+                    "description": "",
+                    "studioCategory": "Structure",
+                    "studioProCategory": "Structure",
+                    "supportedPlatform": "native",
+                    "offlineCapable": true,
+                    "requirements": {
+                        "isPluginWidget": true,
+                        "hasStructureModePreview": true,
+                        "hasAllTileIcons": true,
+                        "hasAllDarkIcons": true
+                    },
+                    "icons": {
+                        "icon": {
+                            "name": "BackgroundGradient.icon",
+                            "image": "iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEASURBVHgB7doxTgJRFIXhw+gC7GyNvYmVjY2x0c6oCzAxcQEW9rgDtsACCDsgNLMPdgArmAskVCRzedDAcP4vISF5l5e8f8hUTwIAAAAs9bLFx6fPL1XNYPX1St00U1P16+lo2DZQZb+Oqumru4dfu9k8wFZpgN56g+5LH2AawMHlPsP1/V/R3N3rg0r93F4Uzb1cq9j320fxrP0/gAAyRwCZI4DMEUDmCCBzBJA5AsgcAWSOADJHAJkjgMwRQOYIIHMEkDkCyBwXJHQmIkKHyG+JPb8ftuuJqSfj1nPyDkhXQwt1XWiWLef3BCN+Y8cGRxQ7P6H56gz/AgAAALBtCZDwMEHqvpdxAAAAAElFTkSuQmCC"
+                        },
+                        "iconDark": {
+                            "name": "BackgroundGradient.icon.dark",
+                            "image": "iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADOSURBVHgB7dohDsIwGIbhrwg0AkuyBEHQJBhuwQVweG4wbrArcLM5JJygZZ6E9ReEhe99krq/W/aushIAAABgKUWGD+f7qeTcDbsWn+ZW+6Vq7bbzqrl13SP7lNQeN+mmSjMF5JLbsY//saZIXWRDKMBwXBpNXYn9oFCAf0QAmSOAzBFA5gggcwSQOQLIHAFkjgAyRwCZI4DMEUDmCCBzBJA5AsgcAWSOADJHAJkjgMxFAzw1fX1kOHZPUOVSgi/4ovK2ih7DugoAAADAmBek3B5FzWKMJgAAAABJRU5ErkJggg=="
+                        },
+                        "tile": {
+                            "name": "BackgroundGradient.tile",
+                            "image": "iVBORw0KGgoAAAANSUhEUgAAAPwAAADACAYAAAAgEw6xAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAALWSURBVHgB7dehjp1FGIDh+c+poqYoBIIGVUPSIAgJBhQkmCXcAYQLgITr4A5Ao1pugKxpUleLXIHuVrfZMz2papqKzbbJbuZ9Hvf/6hvxZr4ZAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA928bi/ry65O7+23763jC+8fPOwMuYY7tweFw+O3x6cOzsaAlg38V+257MoTO1ZxfHObnK0a/Gwva7XZ/DLFzdR/u99ufY0FLBr+NeTLgXcxXT8Hl3BoBj+7/Pq7bZ999MW6aXz7dj+v27UfjRphzjp9Pfnz915Ib4pI3PPB2gocQwUOI4CFE8BAieAgRPIQIHkIEDyGChxDBQ4jgIUTwECJ4CBE8hAgeQgQPIYKHEMFDiOAhRPAQIngIETyECB5CBA8hgocQwUOI4CFE8BAieAgRPIQIHkIEDyGChxDBQ4jgIUTwECJ4CBE8hAgeQgQPIYKHEMFDiOAhRPAQIngIETyECB5CBA8hgocQwUOI4CFE8BAieAgRPIQIHkIEDyGChxDBQ4jgIUTwECJ4CBE8hAgeQgQPIYKHEMFDiOAhRPAQIngIETyECB5CBA8hgocQwUOI4CFE8BAieAgRPIQIHkIEDyGChxDBQ4jgIUTwECJ4CBE8hAgeQgQPIYKHEMFDiOAhRPAQIngIETyECB5CBA8hgocQwUOI4CFE8BAieAgRPIQIHkIEDyGChxDBQ4jgIUTwECJ4CBE8hAgeQgQPIYKHEMFDiOAhRPAQIngIETyECB5CBA8hgoeQWyNhjut3E2Z4w7z+mW7ACCnbWNBX3/xwfjzZnQFXNx/9+2C5DXjVlf7JgHcw5/xnLGjJ4C/m/Om4QZ8PuIo5nh7m+HUsaD8W9P/Zf88+vnvv723bfXJ8s9wbcAkf3L49Xjx/fnoxx/ePTx+eDQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAuJSXId9GJPtdhCcAAAAASUVORK5CYII="
+                        },
+                        "tileDark": {
+                            "name": "BackgroundGradient.tile.dark",
+                            "image": "iVBORw0KGgoAAAANSUhEUgAAAPwAAADACAYAAAAgEw6xAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAJLSURBVHgB7dYxSh4BEEDh2RBSp0gbMKQIqQNpcotcIF0O4AFET6BX8GTaWXqDXcXGRhBE+HXf991gBh4zMwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvL5ldu7P/5t/27pe3E/6eQ7k6+8v89b8+vlpDu3721nL1bLM2d8fy+Xs3IfZuXVbTw8ZO+/Ct23mfAJ2H/z9C3M08JytcRR2HzzwSPAQIngIETyECB5CBA8hgocQwUOI4CFE8BAieAgRPIQIHkIEDyGChxDBQ4jgIUTwECJ4CBE8hAgeQgQPIYKHEMFDiOAhRPAQIngIETyECB5CBA8hgocQwUOI4CFE8BAieAgRPIQIHkIEDyGChxDBQ4jgIUTwECJ4CBE8hAgeQgQPIYKHEMFDiOAhRPAQIngIETyECB5CBA8hgocQwUOI4CFE8BAieAgRPIQIHkIEDyGChxDBQ4jgIUTwECJ4CBE8hAgeQgQPIYKHEMFDiOAhRPAQIngIETyECB5CBA8hgocQwUOI4CFE8BAieAgRPIQIHkIEDyGChxDBQ4jgIUTwECJ4CBE8hAgeQgQPIYKHEMFDiOAhRPAQIngIETyECB5CBA8hgocQwUOI4CFE8BAieAgRPIQIHkIEDyGChxDBQ4jgIUTwECJ4CBE8hAgeQgQPIYKHEMFDiOAhRPAQIngIETyECB5CBA8hgoeQQvC3A8+7noCPs3PrbMfLLCfLzNHAU7aHo3A2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwInfKOhfDgu1BlAAAAABJRU5ErkJggg=="
+                        }
+                    },
+                    "tests": {
+                        "hasUnitTests": true,
+                        "hasE2ETests": true
                     }
                 }
             ]
@@ -526,7 +569,7 @@
         },
         {
             "name": "BarChart",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "items": [
                 {
                     "id": "com.mendix.widget.native.barchart.BarChart",
@@ -538,7 +581,7 @@
                     "offlineCapable": true,
                     "requirements": {
                         "isPluginWidget": true,
-                        "hasStructureModePreview": false,
+                        "hasStructureModePreview": true,
                         "hasAllTileIcons": true,
                         "hasAllDarkIcons": true
                     },
@@ -702,7 +745,7 @@
         },
         {
             "name": "BottomSheet",
-            "version": "3.1.0",
+            "version": "3.2.0",
             "items": [
                 {
                     "id": "com.mendix.widget.native.bottomsheet.BottomSheet",
@@ -714,7 +757,7 @@
                     "offlineCapable": true,
                     "requirements": {
                         "isPluginWidget": true,
-                        "hasStructureModePreview": false,
+                        "hasStructureModePreview": true,
                         "hasAllTileIcons": true,
                         "hasAllDarkIcons": true
                     },
@@ -789,7 +832,7 @@
         },
         {
             "name": "Carousel",
-            "version": "2.1.0",
+            "version": "2.2.1",
             "items": [
                 {
                     "id": "com.mendix.widget.native.carousel.Carousel",
@@ -801,7 +844,7 @@
                     "offlineCapable": true,
                     "requirements": {
                         "isPluginWidget": true,
-                        "hasStructureModePreview": false,
+                        "hasStructureModePreview": true,
                         "hasAllTileIcons": true,
                         "hasAllDarkIcons": true
                     },
@@ -825,7 +868,7 @@
                     },
                     "tests": {
                         "hasUnitTests": true,
-                        "hasE2ETests": false
+                        "hasE2ETests": true
                     }
                 }
             ]
@@ -869,7 +912,7 @@
                     },
                     "tests": {
                         "hasUnitTests": true,
-                        "hasE2ETests": false
+                        "hasE2ETests": true
                     }
                 }
             ]
@@ -956,7 +999,7 @@
                     },
                     "tests": {
                         "hasUnitTests": true,
-                        "hasE2ETests": false
+                        "hasE2ETests": true
                     }
                 }
             ]
@@ -1001,14 +1044,14 @@
                     },
                     "tests": {
                         "hasUnitTests": true,
-                        "hasE2ETests": false
+                        "hasE2ETests": true
                     }
                 }
             ]
         },
         {
             "name": "DatagridDateFilter",
-            "version": "2.3.0",
+            "version": "2.4.0",
             "items": [
                 {
                     "id": "com.mendix.widget.web.datagriddatefilter.DatagridDateFilter",
@@ -1046,7 +1089,7 @@
                     },
                     "tests": {
                         "hasUnitTests": true,
-                        "hasE2ETests": false
+                        "hasE2ETests": true
                     }
                 }
             ]
@@ -1098,7 +1141,7 @@
         },
         {
             "name": "DatagridNumberFilter",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "items": [
                 {
                     "id": "com.mendix.widget.web.datagridnumberfilter.DatagridNumberFilter",
@@ -1143,7 +1186,7 @@
         },
         {
             "name": "DatagridTextFilter",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "items": [
                 {
                     "id": "com.mendix.widget.web.datagridtextfilter.DatagridTextFilter",
@@ -1188,7 +1231,7 @@
         },
         {
             "name": "Datagrid",
-            "version": "2.2.3",
+            "version": "2.3.0",
             "items": [
                 {
                     "id": "com.mendix.widget.web.datagrid.Datagrid",
@@ -1510,7 +1553,7 @@
                     },
                     "tests": {
                         "hasUnitTests": true,
-                        "hasE2ETests": false
+                        "hasE2ETests": true
                     }
                 }
             ]
@@ -1605,7 +1648,7 @@
         },
         {
             "name": "IntroScreen",
-            "version": "3.1.0",
+            "version": "3.2.1",
             "items": [
                 {
                     "id": "com.mendix.widget.native.introscreen.IntroScreen",
@@ -1617,7 +1660,7 @@
                     "offlineCapable": true,
                     "requirements": {
                         "isPluginWidget": true,
-                        "hasStructureModePreview": false,
+                        "hasStructureModePreview": true,
                         "hasAllTileIcons": true,
                         "hasAllDarkIcons": true
                     },
@@ -1641,14 +1684,14 @@
                     },
                     "tests": {
                         "hasUnitTests": true,
-                        "hasE2ETests": false
+                        "hasE2ETests": true
                     }
                 }
             ]
         },
         {
             "name": "LineChart",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "items": [
                 {
                     "id": "com.mendix.widget.native.linechart.LineChart",
@@ -1660,7 +1703,7 @@
                     "offlineCapable": true,
                     "requirements": {
                         "isPluginWidget": true,
-                        "hasStructureModePreview": false,
+                        "hasStructureModePreview": true,
                         "hasAllTileIcons": true,
                         "hasAllDarkIcons": true
                     },
@@ -1778,7 +1821,7 @@
         },
         {
             "name": "Maps",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "items": [
                 {
                     "id": "com.mendix.widget.native.maps.Maps",
@@ -1814,14 +1857,14 @@
                     },
                     "tests": {
                         "hasUnitTests": true,
-                        "hasE2ETests": false
+                        "hasE2ETests": true
                     }
                 }
             ]
         },
         {
             "name": "Maps",
-            "version": "3.1.1",
+            "version": "3.1.2",
             "items": [
                 {
                     "id": "com.mendix.widget.custom.Maps.Maps",
@@ -1866,7 +1909,7 @@
         },
         {
             "name": "Notifications",
-            "version": "3.1.1",
+            "version": "3.2.1",
             "items": [
                 {
                     "id": "com.mendix.widget.native.notifications.Notifications",
@@ -1878,7 +1921,7 @@
                     "offlineCapable": true,
                     "requirements": {
                         "isPluginWidget": true,
-                        "hasStructureModePreview": false,
+                        "hasStructureModePreview": true,
                         "hasAllTileIcons": true,
                         "hasAllDarkIcons": true
                     },
@@ -1989,14 +2032,14 @@
                     },
                     "tests": {
                         "hasUnitTests": true,
-                        "hasE2ETests": false
+                        "hasE2ETests": true
                     }
                 }
             ]
         },
         {
             "name": "PopupMenu",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "items": [
                 {
                     "id": "com.mendix.widget.native.popupmenu.PopupMenu",
@@ -2008,7 +2051,7 @@
                     "offlineCapable": true,
                     "requirements": {
                         "isPluginWidget": true,
-                        "hasStructureModePreview": false,
+                        "hasStructureModePreview": true,
                         "hasAllTileIcons": true,
                         "hasAllDarkIcons": true
                     },
@@ -2346,7 +2389,7 @@
         },
         {
             "name": "RangeSlider",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "items": [
                 {
                     "id": "com.mendix.widget.native.rangeslider.RangeSlider",
@@ -2521,7 +2564,7 @@
         },
         {
             "name": "Repeater",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "items": [
                 {
                     "id": "com.mendix.widget.native.repeater.Repeater",
@@ -2533,7 +2576,7 @@
                     "offlineCapable": true,
                     "requirements": {
                         "isPluginWidget": true,
-                        "hasStructureModePreview": false,
+                        "hasStructureModePreview": true,
                         "hasAllTileIcons": true,
                         "hasAllDarkIcons": true
                     },
@@ -2564,7 +2607,7 @@
         },
         {
             "name": "RichText",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "items": [
                 {
                     "id": "com.mendix.widget.custom.richtext.RichText",
@@ -2608,7 +2651,7 @@
         },
         {
             "name": "SafeAreaView",
-            "version": "2.1.1",
+            "version": "2.2.0",
             "items": [
                 {
                     "id": "com.mendix.widget.native.safeareaview.SafeAreaView",
@@ -2620,7 +2663,7 @@
                     "offlineCapable": true,
                     "requirements": {
                         "isPluginWidget": true,
-                        "hasStructureModePreview": false,
+                        "hasStructureModePreview": true,
                         "hasAllTileIcons": true,
                         "hasAllDarkIcons": true
                     },
@@ -2988,7 +3031,7 @@
                     "offlineCapable": true,
                     "requirements": {
                         "isPluginWidget": true,
-                        "hasStructureModePreview": false,
+                        "hasStructureModePreview": true,
                         "hasDesignModePreview": true,
                         "hasAllTileIcons": false,
                         "hasAllDarkIcons": false
@@ -3005,7 +3048,7 @@
                     },
                     "tests": {
                         "hasUnitTests": false,
-                        "hasE2ETests": false
+                        "hasE2ETests": true
                     }
                 }
             ]
@@ -3057,7 +3100,7 @@
         },
         {
             "name": "ToggleButtons",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "items": [
                 {
                     "id": "com.mendix.widget.native.togglebuttons.ToggleButtons",
@@ -3069,7 +3112,7 @@
                     "offlineCapable": true,
                     "requirements": {
                         "isPluginWidget": true,
-                        "hasStructureModePreview": false,
+                        "hasStructureModePreview": true,
                         "hasAllTileIcons": true,
                         "hasAllDarkIcons": true
                     },
@@ -3093,14 +3136,14 @@
                     },
                     "tests": {
                         "hasUnitTests": true,
-                        "hasE2ETests": false
+                        "hasE2ETests": true
                     }
                 }
             ]
         },
         {
             "name": "Tooltip",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "items": [
                 {
                     "id": "com.mendix.widget.web.tooltip.Tooltip",
@@ -3278,7 +3321,7 @@
         },
         {
             "name": "WebView",
-            "version": "3.1.1",
+            "version": "3.2.0",
             "items": [
                 {
                     "id": "com.mendix.widget.native.webview.WebView",
@@ -3290,7 +3333,7 @@
                     "offlineCapable": true,
                     "requirements": {
                         "isPluginWidget": true,
-                        "hasStructureModePreview": false,
+                        "hasStructureModePreview": true,
                         "hasAllTileIcons": true,
                         "hasAllDarkIcons": true
                     },
@@ -3323,7 +3366,7 @@
     "jsActionPackages": [
         {
             "name": "mobile-resources-native",
-            "version": "3.6.0",
+            "version": "3.8.0",
             "items": [
                 {
                     "id": "mobile-resources-native/authentication/BiometricAuthentication",
