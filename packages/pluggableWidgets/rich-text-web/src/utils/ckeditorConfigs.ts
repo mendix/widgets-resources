@@ -5,6 +5,14 @@ import { createPreset, TOOLBAR_GROUP, ToolbarGroup, ToolbarItems } from "./ckedi
 export type PluginName = "codesnippet";
 
 const PLUGIN_CONFIGS = {
+    openlink: {
+        extraPlugins: "openlink",
+        name: "OpenLink",
+        config: {
+            openlink_enableReadOnly: true,
+            openlink_target: "_blank"
+        }
+    },
     codesnippet: {
         extraPlugins: "codesnippet",
         name: "CodeSnippet",
@@ -52,6 +60,7 @@ export function addPlugin(name: PluginName, config: CKEditorConfig): CKEditorCon
         } else {
             config.extraPlugins = plugin.extraPlugins;
         }
+        Object.assign(config, plugin.config);
     }
     return config;
 }
