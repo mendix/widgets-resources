@@ -3,7 +3,7 @@ import { expect, element, by } from "detox";
 
 describe("Activity indicator", () => {
     beforeAll(async () => {
-        await tapMenuItem("Activity indicator");
+        await tapMenuItem("Activity Indicator");
     });
 
     afterAll(async () => {
