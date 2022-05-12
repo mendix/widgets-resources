@@ -26,10 +26,14 @@ jobs:
               uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
               with:
                   submodules: false
-            - name: "Fetching master to compare"
+            - name: "Fetching master to compare (pull request)"
               if: github.event_name == 'pull_request'
               run:
                   git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
+            - name: "Fetching master to compare (master or dispatch)"
+              if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+              run:
+                  git fetch --no-tags --prune --depth=1 origin +refs/heads/master:refs/remotes/origin/master
             - name: "Defining cache"
               uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed # v2
               env:
