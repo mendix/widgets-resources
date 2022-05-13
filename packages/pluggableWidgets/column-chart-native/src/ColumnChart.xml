@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.native.columnchart.ColumnChart" supportedPlatform="Native" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+    <name>Column chart</name>
+    <description />
+    <studioProCategory>Charts</studioProCategory>
+    <studioCategory>Charts</studioCategory>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Presentation">
+                <property key="presentation" type="enumeration" defaultValue="grouped">
+                    <caption>Presentation</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="grouped">Grouped</enumerationValue>
+                        <enumerationValue key="stacked">Stacked</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Data source">
+                <property key="columnSeries" type="object" isList="true">
+                    <caption>Column series</caption>
+                    <description>Add one or more column series. The top-down order of static data sets and the order of data returned by grouped dynamic data sets influences the sequential order of columns in stacked presentation mode and the order of columns rendered in the Z-plane (where data sets lower in the order are rendered lowest in the Z-plane) in grouped presentation mode.</description>
+                    <properties>
+                        <propertyGroup caption="General">
+                            <property key="dataSet" type="enumeration" defaultValue="static">
+                                <caption>Data set</caption>
+                                <description />
+                                <enumerationValues>
+                                    <enumerationValue key="static">Static</enumerationValue>
+                                    <enumerationValue key="dynamic">Dynamic</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="staticDataSource" type="datasource" required="false" isList="true">
+                                <caption>Data source</caption>
+                                <description>Data points for individual series.</description>
+                            </property>
+                            <property key="dynamicDataSource" type="datasource" required="false" isList="true">
+                                <caption>Data source</caption>
+                                <description>Data points which may be divided into separate series based on the "Group by" attribute value.</description>
+                            </property>
+                            <property key="groupByAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
+                                <caption>Group by</caption>
+                                <description>Data points within the same group are grouped together and presented either in groups or stacks.</description>
+                                <attributeTypes>
+                                    <attributeType name="String" />
+                                    <attributeType name="Boolean" />
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Enum" />
+                                    <attributeType name="HashString" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                </attributeTypes>
+                            </property>
+                            <property key="staticSeriesName" type="textTemplate" required="false" multiline="false">
+                                <caption>Name</caption>
+                                <description>The series name displayed in the legend.</description>
+                            </property>
+                            <property key="dynamicSeriesName" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
+                                <caption>Name</caption>
+                                <description>The series name displayed in the legend.</description>
+                            </property>
+                            <property key="staticXAttribute" type="attribute" required="false" dataSource="staticDataSource">
+                                <caption>X attribute</caption>
+                                <description />
+                                <attributeTypes>
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                    <attributeType name="AutoNumber" />
+                                    <attributeType name="String" />
+                                    <attributeType name="Enum" />
+                                </attributeTypes>
+                            </property>
+                            <property key="dynamicXAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
+                                <caption>X attribute</caption>
+                                <description />
+                                <attributeTypes>
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                    <attributeType name="AutoNumber" />
+                                    <attributeType name="String" />
+                                    <attributeType name="Enum" />
+                                </attributeTypes>
+                            </property>
+                            <property key="staticYAttribute" type="attribute" required="false" dataSource="staticDataSource">
+                                <caption>Y attribute</caption>
+                                <description />
+                                <attributeTypes>
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                    <attributeType name="AutoNumber" />
+                                    <attributeType name="String" />
+                                    <attributeType name="Enum" />
+                                </attributeTypes>
+                            </property>
+                            <property key="dynamicYAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
+                                <caption>Y attribute</caption>
+                                <description />
+                                <attributeTypes>
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                    <attributeType name="AutoNumber" />
+                                    <attributeType name="String" />
+                                    <attributeType name="Enum" />
+                                </attributeTypes>
+                            </property>
+                        </propertyGroup>
+                        <propertyGroup caption="Appearance">
+                            <property key="staticCustomColumnStyle" type="string" required="false" multiline="false">
+                                <caption>Custom column style</caption>
+                                <description>Link a column style defined in the styles of this widget.</description>
+                            </property>
+                            <property key="dynamicCustomColumnStyle" type="attribute" required="false" dataSource="dynamicDataSource">
+                                <caption>Custom column style</caption>
+                                <description>Link a column style defined in the styles of this widget.</description>
+                                <attributeTypes>
+                                    <attributeType name="String" />
+                                </attributeTypes>
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
+                <property key="sortOrder" type="enumeration" defaultValue="ascending">
+                    <caption>Sort order</caption>
+                    <description>Applicable only to X axis attributes.</description>
+                    <enumerationValues>
+                        <enumerationValue key="ascending">Ascending</enumerationValue>
+                        <enumerationValue key="descending">Descending</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Chart settings">
+                <property key="showLabels" type="boolean" defaultValue="true">
+                    <caption>Show column labels</caption>
+                    <description />
+                </property>
+                <property key="showLegend" type="boolean" defaultValue="true">
+                    <caption>Show legend</caption>
+                    <description />
+                </property>
+                <property key="xAxisLabel" type="textTemplate" required="false" multiline="false">
+                    <caption>X axis label</caption>
+                    <description />
+                </property>
+                <property key="yAxisLabel" type="textTemplate" required="false" multiline="false">
+                    <caption>Y axis label</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name" />
+                <systemProperty key="Visibility" />
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>
