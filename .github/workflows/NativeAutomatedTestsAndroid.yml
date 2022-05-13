@@ -46,7 +46,7 @@ jobs:
               with:
                   node-version: "16"
             - name: Install docker
-              uses: docker-practice/actions-setup-docker@51fd5009666ea5e3382fe125abf5d73d31386b59
+              uses: docker-practice/actions-setup-docker@9fafeb38361d5d48e5afc207293715e023b6cfe0
             - name: Login to GitHub Container Registry
               uses: docker/login-action@42d299face0c5c43a0487c477f595ac9cf22f1a7 # v1.12.0
               with:
