@@ -1,4 +1,4 @@
-import { border, brand, font, spacing } from "../../variables";
+import { columnChart } from "./../../../../../theme/native/custom-variables";
 import { ColumnChartType } from "../../types/widgets";
 /*
 
@@ -15,15 +15,15 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const com_mendix_widget_native_columnchart_ColumnChart: ColumnChartType = {
     container: {
         // All ViewStyle properties are allowed
+        ...columnChart.container
     },
     errorMessage: {
         // All TextStyle properties are allowed
-        fontFamily: font.family,
-        fontSize: font.sizeSmall,
-        fontWeight: font.weightNormal
+        ...columnChart.errorMessage
     },
     chart: {
         // All ViewStyle properties are allowed
+        ...columnChart.chart
     },
     grid: {
         /*
@@ -40,11 +40,7 @@ export const com_mendix_widget_native_columnchart_ColumnChart: ColumnChartType =
               -  paddingVertical (number)
               -  width (number)
         */
-        lineColor: border.color,
-        paddingBottom: 32,
-        paddingLeft: 32,
-        paddingRight: 8,
-        paddingTop: 8
+        ...columnChart.grid
     },
     xAxis: {
         /*
@@ -57,25 +53,10 @@ export const com_mendix_widget_native_columnchart_ColumnChart: ColumnChartType =
               -  fontWeight ("normal" or "bold" or "100" or "200" or "300" or "400" or "500" or "600" or "700" or "800" or "900")
               -  lineColor (string)
               -  width (number)
+              -  label: All TextStyle properties are allowed and:
+                    -relativePositionGrid ("bottom" or "right")
         */
-        color: font.colorTitle,
-        fontFamily: font.family,
-        fontSize: font.sizeSmall,
-        fontWeight: font.weightNormal,
-        label: {
-            /*
-                All TextStyle properties are allowed and:
-                  -  relativePositionGrid ("bottom" or "right")
-            */
-            color: font.colorParagraph,
-            alignSelf: "center",
-            marginHorizontal: 0,
-            marginVertical: 8,
-            fontFamily: font.family,
-            fontSize: font.sizeSmall,
-            fontWeight: font.weightNormal
-        },
-        lineColor: border.color
+        ...columnChart.xAxis
     },
     yAxis: {
         /*
@@ -88,80 +69,51 @@ export const com_mendix_widget_native_columnchart_ColumnChart: ColumnChartType =
               -  fontWeight ("normal" or "bold" or "100" or "200" or "300" or "400" or "500" or "600" or "700" or "800" or "900")
               -  lineColor (string)
               -  width (number)
-        */
-        color: font.colorTitle,
-        fontFamily: font.family,
-        fontSize: font.sizeSmall,
-        fontWeight: font.weightNormal,
-        label: {
-            /*
-               All TextStyle properties are allowed and:
+              - label: All TextStyle properties are allowed and:
                  -  relativePositionGrid ("top" or "left")
-           */
-            color: font.colorParagraph,
-            marginHorizontal: 0,
-            marginVertical: 8,
-            fontFamily: font.family,
-            fontSize: font.sizeSmall,
-            fontWeight: font.weightNormal
-        },
-        lineColor: border.color
+        */
+        ...columnChart.yAxis
     },
     columns: {
         /*
             Allowed properties:
                 -  columnColorPalette (string with array of colors separated by ';')
                 -  columnsOffset (number)
-
-        */
-        columnColorPalette: Object.entries(brand)
-            .reduce((accumulator, [key, value]) => (key.endsWith("Light") ? accumulator : [...accumulator, value]), [])
-            .join(";"),
-        columnsOffset: 20,
-        customColumnStyles: {
-            your_static_or_dynamic_attribute_value: {
-                column: {
-                    /*
-                    Allowed properties:
+                - customColumnStyles:{
+                    your_static_or_dynamic_attribute_value:{
+                        column:
+                            Allowed properties:
                       -  ending (number)
                       -  columnColor (string)
                       -  width (number)
-                */
-                },
-                label: {
-                    /*
-                    Allowed properties:
+                        label:
+                        Allowed properties:
                       -  fontFamily (string)
                       -  fontSize (number)
                       -  fontStyle ("normal" or "italic")
                       -  fontWeight ("normal" or "bold" or "100" or "200" or "300" or "400" or "500" or "600" or "700" or "800" or "900")
-                    */
+
+                    }
                 }
-            }
-        }
+        */
+        ...columnChart.columns
     },
     legend: {
         container: {
             // All ViewStyle properties are allowed
-            justifyContent: "flex-start",
-            marginHorizontal: 0,
-            marginVertical: spacing.small
+            ...columnChart.legend?.container
         },
         item: {
             // All ViewStyle properties are allowed
-            padding: 0,
-            paddingRight: spacing.regular
+            ...columnChart.legend?.item
         },
         indicator: {
             // All ViewStyle properties are allowed
-            marginRight: spacing.small
+            ...columnChart.legend?.indicator
         },
         label: {
             // All TextStyle properties are allowed
-            color: font.colorTitle,
-            fontFamily: font.family,
-            fontSize: font.sizeSmall,
-            fontWeight: font.weightNormal
+            ...columnChart.legend?.label
         }
     }
 };

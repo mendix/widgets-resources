@@ -9,16 +9,16 @@
 <line x1="1" y1="224" x2="275" y2="224" stroke="#D9DBDD"/>
 <line x1="0.5" y1="224.5" x2="0.5" stroke="#D9DBDD"/>
 <line x1="274.5" y1="224.5" x2="274.5" stroke="#D9DBDD"/>
-<rect width="18.8333" height="100" transform="matrix(-1 0 0 1 27.8334 124)" fill="#264AE5"/>
-<rect width="18.8333" height="150" transform="matrix(-1 0 0 1 47.6666 74)" fill="#F2B42A"/>
-<rect width="18.8333" height="200" transform="matrix(-1 0 0 1 67.5 24)" fill="#2DBAFC"/>
-<rect width="18.8333" height="100" transform="matrix(-1 0 0 1 94.3334 124)" fill="#264AE5"/>
-<rect width="18.8333" height="50" transform="matrix(-1 0 0 1 114.167 174)" fill="#F2B42A"/>
-<rect width="18.8333" height="150" transform="matrix(-1 0 0 1 134 74)" fill="#2DBAFC"/>
-<rect width="18.8333" height="180" transform="matrix(-1 0 0 1 160.833 44)" fill="#264AE5"/>
-<rect width="18.8333" height="100" transform="matrix(-1 0 0 1 180.667 124)" fill="#F2B42A"/>
-<rect width="18.8333" height="130" transform="matrix(-1 0 0 1 200.5 94)" fill="#2DBAFC"/>
-<rect width="18.8333" height="80" transform="matrix(-1 0 0 1 227.333 144)" fill="#264AE5"/>
-<rect width="18.8333" height="200" transform="matrix(-1 0 0 1 247.167 24)" fill="#F2B42A"/>
-<rect width="18.8333" height="150" transform="matrix(-1 0 0 1 267 74)" fill="#2DBAFC"/>
+<rect width="58.5" height="64" transform="matrix(-1 0 0 1 67.5 33)" fill="#2DBAFC"/>
+<rect width="58.5" height="75" transform="matrix(-1 0 0 1 67.5 98)" fill="#F2B42A"/>
+<rect width="58.5" height="50" transform="matrix(-1 0 0 1 67.5 174)" fill="#264AE5"/>
+<rect width="58.5" height="75" transform="matrix(-1 0 0 1 134 72)" fill="#2DBAFC"/>
+<rect width="58.5" height="25" transform="matrix(-1 0 0 1 134 148)" fill="#F2B42A"/>
+<rect width="58.5" height="50" transform="matrix(-1 0 0 1 134 174)" fill="#264AE5"/>
+<rect width="58.5" height="65" transform="matrix(-1 0 0 1 200.5 17)" fill="#2DBAFC"/>
+<rect width="58.5" height="50" transform="matrix(-1 0 0 1 200.5 83)" fill="#F2B42A"/>
+<rect width="58.5" height="90" transform="matrix(-1 0 0 1 200.5 134)" fill="#264AE5"/>
+<rect width="58.5" height="75" transform="matrix(-1 0 0 1 267 7)" fill="#2DBAFC"/>
+<rect width="58.5" height="100" transform="matrix(-1 0 0 1 267 83)" fill="#F2B42A"/>
+<rect width="58.5" height="40" transform="matrix(-1 0 0 1 267 184)" fill="#264AE5"/>
 </svg>

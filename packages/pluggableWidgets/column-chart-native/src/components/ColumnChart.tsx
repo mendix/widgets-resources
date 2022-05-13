@@ -89,7 +89,7 @@ export function ColumnChart({
         });
     }, [series, style]);
 
-    const sortProps = useMemo(() => ({ sortOrder, sortKey: "x" }), [sortOrder]);
+    const sortProps = useMemo(() => ({ sortOrder, sortKey: "y" }), [sortOrder]);
 
     const groupedOrStacked = useMemo(() => {
         if (!dataTypesResult || dataTypesResult instanceof Error) {
@@ -119,7 +119,7 @@ export function ColumnChart({
                         }
                     }}
                     {...sortProps}
-                    {...(showLabels ? { labels: ({ datum }: { datum: BarProps["datum"] }) => datum.x } : undefined)}
+                    {...(showLabels ? { labels: ({ datum }: { datum: BarProps["datum"] }) => datum.y } : undefined)}
                 />
             );
         });
@@ -218,8 +218,9 @@ export function ColumnChart({
                                 {chartDimensions ? (
                                     <VictoryChart
                                         domainPadding={{ x: style.domain?.padding?.x, y: style.domain?.padding?.y }}
-                                        height={chartDimensions?.height}
-                                        width={chartDimensions?.width}
+                                        // width and height can't be zero
+                                        height={chartDimensions?.height || undefined}
+                                        width={chartDimensions?.width || undefined}
                                         padding={aggregateGridPadding(style.grid)}
                                         scale={
                                             dataTypesResult

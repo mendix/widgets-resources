@@ -1,4 +1,4 @@
-import { Problem, StructurePreviewProps } from "@mendix/piw-utils-internal";
+import { hideNestedPropertiesIn, Problem, Properties, StructurePreviewProps } from "@mendix/piw-utils-internal";
 
 import { ColumnChartPreviewProps } from "../typings/ColumnChartProps";
 import columnChartGroupedSvgDark from "./assets/ColumnChart.Grouped.dark.svg";
@@ -46,6 +46,31 @@ export function getPreview(values: ColumnChartPreviewProps, isDarkMode: boolean)
                 : [{ type: "Container" }]) as StructurePreviewProps[])
         ]
     };
+}
+
+export function getProperties(values: ColumnChartPreviewProps, defaultProperties: Properties): Properties {
+    values.columnSeries.forEach((series, index) => {
+        if (series.dataSet === "static") {
+            hideNestedPropertiesIn(defaultProperties, values, "columnSeries", index, [
+                "dynamicDataSource",
+                "groupByAttribute",
+                "dynamicSeriesName",
+                "dynamicXAttribute",
+                "dynamicYAttribute",
+                "dynamicCustomColumnStyle"
+            ]);
+        } else {
+            hideNestedPropertiesIn(defaultProperties, values, "columnSeries", index, [
+                "staticDataSource",
+                "staticSeriesName",
+                "staticXAttribute",
+                "staticYAttribute",
+                "staticCustomColumnStyle"
+            ]);
+        }
+    });
+
+    return defaultProperties;
 }
 
 export function check(values: ColumnChartPreviewProps): Problem[] {
