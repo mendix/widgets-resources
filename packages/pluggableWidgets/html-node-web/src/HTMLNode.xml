@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.web.htmlnode.HTMLNode" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>HTMLNode</name>
+    <description>Displays custom HTML</description>
+    <icon />
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Tag">
+                <property key="tagName" type="enumeration" defaultValue="div" required="true">
+                    <!-- TODO: sudo make me a list-->
+                    <caption>Tag name</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="div">div</enumerationValue>
+                        <enumerationValue key="span">span</enumerationValue>
+                        <enumerationValue key="p">p</enumerationValue>
+                        <enumerationValue key="ul">ul</enumerationValue>
+                        <enumerationValue key="ol">ol</enumerationValue>
+                        <enumerationValue key="li">li</enumerationValue>
+                        <enumerationValue key="a">a</enumerationValue>
+                        <enumerationValue key="img">img</enumerationValue>
+                        <enumerationValue key="h1">h1</enumerationValue>
+                        <enumerationValue key="h2">h2</enumerationValue>
+                        <enumerationValue key="h3">h3</enumerationValue>
+                        <enumerationValue key="h4">h4</enumerationValue>
+                        <enumerationValue key="h5">h5</enumerationValue>
+                        <enumerationValue key="h6">h6</enumerationValue>
+                        <enumerationValue key="__customTag__">Use custom name</enumerationValue>
+                    </enumerationValues>
+                </property>
+
+                <property key="tagNameCustom" type="string" defaultValue="div" required="false">
+                    <caption>Custom tag</caption>
+                    <description />
+                </property>
+                <!-- **************************** TAG ATTRIBUTES ****************************** -->
+                <property key="attributes" type="object" isList="true" required="false">
+                    <caption>Attributes</caption>
+                    <description />
+                    <properties>
+                        <propertyGroup caption="Html node attributes">
+                            <property key="attributeName" type="string" required="true">
+                                <caption>Name</caption>
+                                <description />
+                            </property>
+
+                            <property key="attributeValueType" type="enumeration" defaultValue="expression">
+                                <caption>Value based on</caption>
+                                <description />
+                                <enumerationValues>
+                                    <enumerationValue key="expression">Expression</enumerationValue>
+                                    <enumerationValue key="template">Text template</enumerationValue>
+                                </enumerationValues>
+                            </property>
+
+                            <property key="attributeValueTemplate" type="textTemplate" required="false">
+                                <caption>Value</caption>
+                                <description />
+                            </property>
+                            <property key="attributeValueExpression" type="expression" required="false">
+                                <caption>Value</caption>
+                                <description />
+                                <returnType type="String" />
+                            </property>
+                            <property key="attributeValueTemplateRepeat" type="textTemplate" dataSource="../tagContentRepeatDataSource" required="false">
+                                <caption>Value</caption>
+                                <description />
+                            </property>
+                            <property key="attributeValueExpressionRepeat" type="expression" dataSource="../tagContentRepeatDataSource" required="false">
+                                <caption>Value</caption>
+                                <description />
+                                <returnType type="String" />
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
+                <!-- **************************** END TAG ATTRIBUTES ****************************** -->
+            </propertyGroup>
+            <propertyGroup caption="Repeat">
+                <property key="tagUseRepeat" type="boolean" defaultValue="false">
+                    <caption>Repeat node</caption>
+                    <description>Repeat node for each item in data source.</description>
+                </property>
+
+                <!-- Data source for repeating content -->
+                <property key="tagContentRepeatDataSource" type="datasource" required="false" isList="true">
+                    <caption>Data source</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Content">
+                <property key="tagContentMode" type="enumeration" defaultValue="container">
+                    <caption>Content</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="container">Container for widgets</enumerationValue>
+                        <enumerationValue key="innerHTML">HTML</enumerationValue>
+                    </enumerationValues>
+                </property>
+
+                <!-- **************************** TAG CONTENT ****************************** -->
+                <!-- HTML content, non-repeating -->
+                <property key="tagContentHTML" type="textTemplate" required="false">
+                    <caption>HTML</caption>
+                    <description />
+                </property>
+
+                <!-- Container content, non-repeating -->
+                <property key="tagContentContainer" type="widgets" required="false">
+                    <caption>Content</caption>
+                    <description />
+                </property>
+
+                <!-- HTML content, repeating -->
+                <property key="tagContentRepeatHTML" type="textTemplate" required="false" dataSource="tagContentRepeatDataSource">
+                    <caption>HTML</caption>
+                    <description />
+                </property>
+
+                <!-- Container content, repeating -->
+                <property key="tagContentRepeatContainer" type="widgets" required="false" dataSource="tagContentRepeatDataSource">
+                    <caption>Content</caption>
+                    <description />
+                </property>
+                <!-- **************************** END TAG CONTENT ****************************** -->
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <property key="events" type="object" isList="true" required="false">
+                <caption>Events</caption>
+                <description />
+                <properties>
+                    <propertyGroup caption="Event">
+                        <property key="eventName" type="enumeration" required="true" defaultValue="onClick">
+                            <caption>Name</caption>
+                            <description />
+                            <enumerationValues>
+                                <!-- BEGIN REACT EVENTS -->
+                                <enumerationValue key="onClick">onClick</enumerationValue>
+                                <enumerationValue key="onChange">onChange</enumerationValue>
+                                <enumerationValue key="onFocus">onFocus</enumerationValue>
+                                <enumerationValue key="onLeave">onLeave</enumerationValue>
+                                <enumerationValue key="onSubmit">onSubmit</enumerationValue>
+                                <enumerationValue key="onKeyDown">onKeyDown</enumerationValue>
+                                <enumerationValue key="onKeyUp">onKeyUp</enumerationValue>
+                                <enumerationValue key="onCopy">onCopy</enumerationValue>
+                                <enumerationValue key="onCopyCapture">onCopyCapture</enumerationValue>
+                                <enumerationValue key="onCut">onCut</enumerationValue>
+                                <enumerationValue key="onCutCapture">onCutCapture</enumerationValue>
+                                <enumerationValue key="onPaste">onPaste</enumerationValue>
+                                <enumerationValue key="onPasteCapture">onPasteCapture</enumerationValue>
+                                <enumerationValue key="onCompositionEnd">onCompositionEnd</enumerationValue>
+                                <enumerationValue key="onCompositionEndCapture">onCompositionEndCapture</enumerationValue>
+                                <enumerationValue key="onCompositionStart">onCompositionStart</enumerationValue>
+                                <enumerationValue key="onCompositionStartCapture">onCompositionStartCapture</enumerationValue>
+                                <enumerationValue key="onCompositionUpdate">onCompositionUpdate</enumerationValue>
+                                <enumerationValue key="onCompositionUpdateCapture">onCompositionUpdateCapture</enumerationValue>
+                                <enumerationValue key="onFocusCapture">onFocusCapture</enumerationValue>
+                                <enumerationValue key="onBlur">onBlur</enumerationValue>
+                                <enumerationValue key="onBlurCapture">onBlurCapture</enumerationValue>
+                                <enumerationValue key="onChangeCapture">onChangeCapture</enumerationValue>
+                                <enumerationValue key="onBeforeInput">onBeforeInput</enumerationValue>
+                                <enumerationValue key="onBeforeInputCapture">onBeforeInputCapture</enumerationValue>
+                                <enumerationValue key="onInput">onInput</enumerationValue>
+                                <enumerationValue key="onInputCapture">onInputCapture</enumerationValue>
+                                <enumerationValue key="onReset">onReset</enumerationValue>
+                                <enumerationValue key="onResetCapture">onResetCapture</enumerationValue>
+                                <enumerationValue key="onSubmitCapture">onSubmitCapture</enumerationValue>
+                                <enumerationValue key="onInvalid">onInvalid</enumerationValue>
+                                <enumerationValue key="onInvalidCapture">onInvalidCapture</enumerationValue>
+                                <enumerationValue key="onLoad">onLoad</enumerationValue>
+                                <enumerationValue key="onLoadCapture">onLoadCapture</enumerationValue>
+                                <enumerationValue key="onError">onError</enumerationValue>
+                                <enumerationValue key="onErrorCapture">onErrorCapture</enumerationValue>
+                                <enumerationValue key="onKeyDownCapture">onKeyDownCapture</enumerationValue>
+                                <enumerationValue key="onKeyPress">onKeyPress</enumerationValue>
+                                <enumerationValue key="onKeyPressCapture">onKeyPressCapture</enumerationValue>
+                                <enumerationValue key="onKeyUpCapture">onKeyUpCapture</enumerationValue>
+                                <enumerationValue key="onAbort">onAbort</enumerationValue>
+                                <enumerationValue key="onAbortCapture">onAbortCapture</enumerationValue>
+                                <enumerationValue key="onCanPlay">onCanPlay</enumerationValue>
+                                <enumerationValue key="onCanPlayCapture">onCanPlayCapture</enumerationValue>
+                                <enumerationValue key="onCanPlayThrough">onCanPlayThrough</enumerationValue>
+                                <enumerationValue key="onCanPlayThroughCapture">onCanPlayThroughCapture</enumerationValue>
+                                <enumerationValue key="onDurationChange">onDurationChange</enumerationValue>
+                                <enumerationValue key="onDurationChangeCapture">onDurationChangeCapture</enumerationValue>
+                                <enumerationValue key="onEmptied">onEmptied</enumerationValue>
+                                <enumerationValue key="onEmptiedCapture">onEmptiedCapture</enumerationValue>
+                                <enumerationValue key="onEncrypted">onEncrypted</enumerationValue>
+                                <enumerationValue key="onEncryptedCapture">onEncryptedCapture</enumerationValue>
+                                <enumerationValue key="onEnded">onEnded</enumerationValue>
+                                <enumerationValue key="onEndedCapture">onEndedCapture</enumerationValue>
+                                <enumerationValue key="onLoadedData">onLoadedData</enumerationValue>
+                                <enumerationValue key="onLoadedDataCapture">onLoadedDataCapture</enumerationValue>
+                                <enumerationValue key="onLoadedMetadata">onLoadedMetadata</enumerationValue>
+                                <enumerationValue key="onLoadedMetadataCapture">onLoadedMetadataCapture</enumerationValue>
+                                <enumerationValue key="onLoadStart">onLoadStart</enumerationValue>
+                                <enumerationValue key="onLoadStartCapture">onLoadStartCapture</enumerationValue>
+                                <enumerationValue key="onPause">onPause</enumerationValue>
+                                <enumerationValue key="onPauseCapture">onPauseCapture</enumerationValue>
+                                <enumerationValue key="onPlay">onPlay</enumerationValue>
+                                <enumerationValue key="onPlayCapture">onPlayCapture</enumerationValue>
+                                <enumerationValue key="onPlaying">onPlaying</enumerationValue>
+                                <enumerationValue key="onPlayingCapture">onPlayingCapture</enumerationValue>
+                                <enumerationValue key="onProgress">onProgress</enumerationValue>
+                                <enumerationValue key="onProgressCapture">onProgressCapture</enumerationValue>
+                                <enumerationValue key="onRateChange">onRateChange</enumerationValue>
+                                <enumerationValue key="onRateChangeCapture">onRateChangeCapture</enumerationValue>
+                                <enumerationValue key="onSeeked">onSeeked</enumerationValue>
+                                <enumerationValue key="onSeekedCapture">onSeekedCapture</enumerationValue>
+                                <enumerationValue key="onSeeking">onSeeking</enumerationValue>
+                                <enumerationValue key="onSeekingCapture">onSeekingCapture</enumerationValue>
+                                <enumerationValue key="onStalled">onStalled</enumerationValue>
+                                <enumerationValue key="onStalledCapture">onStalledCapture</enumerationValue>
+                                <enumerationValue key="onSuspend">onSuspend</enumerationValue>
+                                <enumerationValue key="onSuspendCapture">onSuspendCapture</enumerationValue>
+                                <enumerationValue key="onTimeUpdate">onTimeUpdate</enumerationValue>
+                                <enumerationValue key="onTimeUpdateCapture">onTimeUpdateCapture</enumerationValue>
+                                <enumerationValue key="onVolumeChange">onVolumeChange</enumerationValue>
+                                <enumerationValue key="onVolumeChangeCapture">onVolumeChangeCapture</enumerationValue>
+                                <enumerationValue key="onWaiting">onWaiting</enumerationValue>
+                                <enumerationValue key="onWaitingCapture">onWaitingCapture</enumerationValue>
+                                <enumerationValue key="onAuxClick">onAuxClick</enumerationValue>
+                                <enumerationValue key="onAuxClickCapture">onAuxClickCapture</enumerationValue>
+                                <enumerationValue key="onClickCapture">onClickCapture</enumerationValue>
+                                <enumerationValue key="onContextMenu">onContextMenu</enumerationValue>
+                                <enumerationValue key="onContextMenuCapture">onContextMenuCapture</enumerationValue>
+                                <enumerationValue key="onDoubleClick">onDoubleClick</enumerationValue>
+                                <enumerationValue key="onDoubleClickCapture">onDoubleClickCapture</enumerationValue>
+                                <enumerationValue key="onDrag">onDrag</enumerationValue>
+                                <enumerationValue key="onDragCapture">onDragCapture</enumerationValue>
+                                <enumerationValue key="onDragEnd">onDragEnd</enumerationValue>
+                                <enumerationValue key="onDragEndCapture">onDragEndCapture</enumerationValue>
+                                <enumerationValue key="onDragEnter">onDragEnter</enumerationValue>
+                                <enumerationValue key="onDragEnterCapture">onDragEnterCapture</enumerationValue>
+                                <enumerationValue key="onDragExit">onDragExit</enumerationValue>
+                                <enumerationValue key="onDragExitCapture">onDragExitCapture</enumerationValue>
+                                <enumerationValue key="onDragLeave">onDragLeave</enumerationValue>
+                                <enumerationValue key="onDragLeaveCapture">onDragLeaveCapture</enumerationValue>
+                                <enumerationValue key="onDragOver">onDragOver</enumerationValue>
+                                <enumerationValue key="onDragOverCapture">onDragOverCapture</enumerationValue>
+                                <enumerationValue key="onDragStart">onDragStart</enumerationValue>
+                                <enumerationValue key="onDragStartCapture">onDragStartCapture</enumerationValue>
+                                <enumerationValue key="onDrop">onDrop</enumerationValue>
+                                <enumerationValue key="onDropCapture">onDropCapture</enumerationValue>
+                                <enumerationValue key="onMouseDown">onMouseDown</enumerationValue>
+                                <enumerationValue key="onMouseDownCapture">onMouseDownCapture</enumerationValue>
+                                <enumerationValue key="onMouseEnter">onMouseEnter</enumerationValue>
+                                <enumerationValue key="onMouseLeave">onMouseLeave</enumerationValue>
+                                <enumerationValue key="onMouseMove">onMouseMove</enumerationValue>
+                                <enumerationValue key="onMouseMoveCapture">onMouseMoveCapture</enumerationValue>
+                                <enumerationValue key="onMouseOut">onMouseOut</enumerationValue>
+                                <enumerationValue key="onMouseOutCapture">onMouseOutCapture</enumerationValue>
+                                <enumerationValue key="onMouseOver">onMouseOver</enumerationValue>
+                                <enumerationValue key="onMouseOverCapture">onMouseOverCapture</enumerationValue>
+                                <enumerationValue key="onMouseUp">onMouseUp</enumerationValue>
+                                <enumerationValue key="onMouseUpCapture">onMouseUpCapture</enumerationValue>
+                                <enumerationValue key="onSelect">onSelect</enumerationValue>
+                                <enumerationValue key="onSelectCapture">onSelectCapture</enumerationValue>
+                                <enumerationValue key="onTouchCancel">onTouchCancel</enumerationValue>
+                                <enumerationValue key="onTouchCancelCapture">onTouchCancelCapture</enumerationValue>
+                                <enumerationValue key="onTouchEnd">onTouchEnd</enumerationValue>
+                                <enumerationValue key="onTouchEndCapture">onTouchEndCapture</enumerationValue>
+                                <enumerationValue key="onTouchMove">onTouchMove</enumerationValue>
+                                <enumerationValue key="onTouchMoveCapture">onTouchMoveCapture</enumerationValue>
+                                <enumerationValue key="onTouchStart">onTouchStart</enumerationValue>
+                                <enumerationValue key="onTouchStartCapture">onTouchStartCapture</enumerationValue>
+                                <enumerationValue key="onPointerDown">onPointerDown</enumerationValue>
+                                <enumerationValue key="onPointerDownCapture">onPointerDownCapture</enumerationValue>
+                                <enumerationValue key="onPointerMove">onPointerMove</enumerationValue>
+                                <enumerationValue key="onPointerMoveCapture">onPointerMoveCapture</enumerationValue>
+                                <enumerationValue key="onPointerUp">onPointerUp</enumerationValue>
+                                <enumerationValue key="onPointerUpCapture">onPointerUpCapture</enumerationValue>
+                                <enumerationValue key="onPointerCancel">onPointerCancel</enumerationValue>
+                                <enumerationValue key="onPointerCancelCapture">onPointerCancelCapture</enumerationValue>
+                                <enumerationValue key="onPointerEnter">onPointerEnter</enumerationValue>
+                                <enumerationValue key="onPointerEnterCapture">onPointerEnterCapture</enumerationValue>
+                                <enumerationValue key="onPointerLeave">onPointerLeave</enumerationValue>
+                                <enumerationValue key="onPointerLeaveCapture">onPointerLeaveCapture</enumerationValue>
+                                <enumerationValue key="onPointerOver">onPointerOver</enumerationValue>
+                                <enumerationValue key="onPointerOverCapture">onPointerOverCapture</enumerationValue>
+                                <enumerationValue key="onPointerOut">onPointerOut</enumerationValue>
+                                <enumerationValue key="onPointerOutCapture">onPointerOutCapture</enumerationValue>
+                                <enumerationValue key="onGotPointerCapture">onGotPointerCapture</enumerationValue>
+                                <enumerationValue key="onGotPointerCaptureCapture">onGotPointerCaptureCapture</enumerationValue>
+                                <enumerationValue key="onLostPointerCapture">onLostPointerCapture</enumerationValue>
+                                <enumerationValue key="onLostPointerCaptureCapture">onLostPointerCaptureCapture</enumerationValue>
+                                <enumerationValue key="onScroll">onScroll</enumerationValue>
+                                <enumerationValue key="onScrollCapture">onScrollCapture</enumerationValue>
+                                <enumerationValue key="onWheel">onWheel</enumerationValue>
+                                <enumerationValue key="onWheelCapture">onWheelCapture</enumerationValue>
+                                <enumerationValue key="onAnimationStart">onAnimationStart</enumerationValue>
+                                <enumerationValue key="onAnimationStartCapture">onAnimationStartCapture</enumerationValue>
+                                <enumerationValue key="onAnimationEnd">onAnimationEnd</enumerationValue>
+                                <enumerationValue key="onAnimationEndCapture">onAnimationEndCapture</enumerationValue>
+                                <enumerationValue key="onAnimationIteration">onAnimationIteration</enumerationValue>
+                                <enumerationValue key="onAnimationIterationCapture">onAnimationIterationCapture</enumerationValue>
+                                <enumerationValue key="onTransitionEnd">onTransitionEnd</enumerationValue>
+                                <enumerationValue key="onTransitionEndCapture">onTransitionEndCapture</enumerationValue>
+                                <!-- END REACT EVENTS -->
+                            </enumerationValues>
+                        </property>
+                        <property key="eventAction" type="action" required="false">
+                            <caption>Action</caption>
+                            <description />
+                        </property>
+                        <property key="eventActionRepeat" type="action" required="false" dataSource="../tagContentRepeatDataSource">
+                            <caption>Action</caption>
+                            <description />
+                        </property>
+                    </propertyGroup>
+                    <propertyGroup caption="Advanced">
+                        <property key="eventStopPropagation" type="boolean" defaultValue="true">
+                            <caption>Stop propagation</caption>
+                            <description />
+                        </property>
+                        <property key="eventPreventDefault" type="boolean" defaultValue="true">
+                            <caption>Prevent default</caption>
+                            <description />
+                        </property>
+                    </propertyGroup>
+                </properties>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>

@@ -1,0 +1,45 @@
+{
+  "name": "html-node-web",
+  "widgetName": "HTMLNode",
+  "version": "1.0.0",
+  "description": "Displays custom HTML",
+  "copyright": "© Mendix Technology BV 2022. All rights reserved.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "config": {
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000
+  },
+  "marketplace": {
+    "minimumMXVersion": "9.12.0",
+    "marketplaceId": 0
+  },
+  "testProject": {
+    "githubUrl": "https://github.com/mendix/testProjects",
+    "branchName": "html-node-web"
+  },
+  "packagePath": "com.mendix.widget.web",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:server",
+    "dev": "pluggable-widgets-tools start:web",
+    "build": "pluggable-widgets-tools build:web",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "prerelease": "npm run lint",
+    "release": "pluggable-widgets-tools release:web",
+    "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
+  },
+  "devDependencies": {
+    "@mendix/piw-utils-internal": "^1.0.0",
+    "@mendix/pluggable-widgets-tools": "^9.0.0",
+    "@types/big.js": "^6.0.2",
+    "@types/react": "~17.0.1",
+    "@types/react-dom": "~17.0.1",
+    "@types/react-test-renderer": "~17.0.1"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6"
+  }
+}
