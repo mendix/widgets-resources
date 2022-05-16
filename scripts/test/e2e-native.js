@@ -32,7 +32,9 @@ async function main() {
 
     const changedPackages = JSON.parse(process.env.CHANGED_PACKAGES.replaceAll("\n", ""));
 
-    execSync(`npx lerna run release --scope ${process.env.CHANGED_PACKAGES_FORMATTED_FOR_LERNA}`, { stdio: "inherit" });
+    execSync(`npx lerna run release --scope "${process.env.CHANGED_PACKAGES_FORMATTED_FOR_LERNA}"`, {
+        stdio: "inherit"
+    });
 
     changedPackages.forEach(({ name, location }) => {
         if (["mobile-resources-native", "nanoflow-actions-native"].includes(name)) {

@@ -85,7 +85,7 @@ jobs:
                   avd-name: NATIVE_pixel_30
                   emulator-options: -skin 1080x1920
                   script:
-                      npx lerna run test:e2e:local:android --stream --concurrency 1 --scope ${{ steps.set-changed-packages.outputs.CHANGED_PACKAGES_FORMATTED_FOR_LERNA }}
+                      npx lerna run test:e2e:local:android --stream --concurrency 1 --scope "${{ steps.set-changed-packages.outputs.CHANGED_PACKAGES_FORMATTED_FOR_LERNA }}"
             - name: "Archive test screenshot diff results"
               uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
               if: failure()
