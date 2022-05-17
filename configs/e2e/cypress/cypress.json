@@ -3,5 +3,6 @@
     "video": false,
     "videoUploadOnPasses": false,
     "viewportHeight": 1080,
-    "viewportWidth": 1280
+    "viewportWidth": 1280,
+    "chromeWebSecurity": false
 }
