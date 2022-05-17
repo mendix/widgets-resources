@@ -1,4 +1,3 @@
-import { VariablesColumnChart } from "./../../themesource/atlas_core/native/types/variables.d";
 import { Appearance, Platform } from "react-native";
 import { adjustFont, anyColorToRgbString, setContrastScale } from "../../themesource/atlas_core/native/api";
 import {
@@ -28,7 +27,8 @@ import {
     VariablesSpacing,
     VariablesTabContainer,
     VariablesRadioButtons,
-    VariableBackgroundGradient
+    VariableBackgroundGradient,
+    VariablesColumnChart
 } from "../../themesource/atlas_core/native/types/variables";
 import "./exclusion-variables";
 /*
