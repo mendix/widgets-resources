@@ -23,7 +23,7 @@ describe("RichText", () => {
     it("compares with a screenshot baseline and checks if inline basic mode are rendered as expected", () => {
         cy.visit("/#/basic");
         cy.wait(3000);
-        cy.get(".mx-name-richText1").should("be.visible");
+        cy.get(".mx-name-richText1").scrollIntoView().should("be.visible");
         cy.get(".mx-name-richText1").compareSnapshot(`inlineBasicMode-${browserName}`, 0.4);
     });
 
