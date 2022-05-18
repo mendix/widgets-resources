@@ -1,12 +1,25 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+
 import fg from "fast-glob";
 import { readJson, writeJson } from "fs-extra";
-import { existsSync } from "fs";
-import { dirname, join } from "path";
+import { existsSync, readFileSync, writeFileSync } from "fs";
+import { dirname, join, parse } from "path";
 import copy from "recursive-copy";
 import { promisify } from "util";
 import resolve from "resolve";
+import _ from "lodash";
+import moment from "moment";
+import mkdirp from "mkdirp";
 
-export function collectDependencies({ onlyNative, outputDir, widgetName }) {
+const dependencies = [];
+export function collectDependencies({
+    onlyNative,
+    outputDir,
+    widgetName,
+    licenseOptions = null,
+    copyJsModules = true
+}) {
+    const licensePlugin = new LicensePlugin(licenseOptions);
     const managedDependencies = [];
     let rollupOptions;
     return {
@@ -16,28 +29,58 @@ export function collectDependencies({ onlyNative, outputDir, widgetName }) {
             managedDependencies.length = 0;
         },
         async resolveId(source, importer) {
-            if (source.startsWith(".") || source.startsWith("/")) {
+            // eslint-disable-next-line no-control-regex
+            const sourceCleanedNullChar = source.replace(/\x00/g, "");
+            if (sourceCleanedNullChar.startsWith(".") || sourceCleanedNullChar.startsWith("/")) {
                 return null;
             }
             const resolvedPackagePath = await resolvePackage(
                 source,
                 dirname(importer ? importer : rollupOptions.input[0])
             );
-            if (resolvedPackagePath && (!onlyNative || (await hasNativeCode(resolvedPackagePath)))) {
-                if (!managedDependencies.includes(resolvedPackagePath)) {
+
+            if (resolvedPackagePath) {
+                const isNotOnlyNativeOrHasNativeCode = !onlyNative || (await hasNativeCode(resolvedPackagePath));
+                if (isNotOnlyNativeOrHasNativeCode && !managedDependencies.includes(resolvedPackagePath)) {
                     managedDependencies.push(resolvedPackagePath);
                 }
-                return { external: true, id: source };
+                if (!dependencies.some(dependency => dependency.packagePath === resolvedPackagePath)) {
+                    dependencies.push({ packagePath: resolvedPackagePath, isTransitive: false });
+                }
+                return isNotOnlyNativeOrHasNativeCode ? { external: true, id: source } : null;
             }
             return null;
         },
+        async generateBundle() {
+            if (!licenseOptions) {
+                return;
+            }
+            for (const dependency of dependencies) {
+                const packageJson = await scanDependency(dependency.packagePath);
+                if (packageJson) {
+                    licensePlugin.addDependency(packageJson, dependency);
+                }
+                const transitiveDependencies = await getTransitiveDependencies(
+                    dependency.packagePath,
+                    rollupOptions.external
+                );
+                for (const transitiveDependency of transitiveDependencies) {
+                    if (!dependencies.some(s => s.packagePath === transitiveDependency)) {
+                        dependencies.push({ packagePath: transitiveDependency, isTransitive: true });
+                    }
+                }
+            }
+            licensePlugin.config();
+        },
         async writeBundle() {
+            if (!copyJsModules) {
+                return;
+            }
             const nativeDependencies = new Set(
                 onlyNative ? managedDependencies : await asyncWhere(managedDependencies, hasNativeCode)
             );
 
-            for (let i = 0; i < managedDependencies.length; ++i) {
-                const dependency = managedDependencies[i];
+            for (const dependency of managedDependencies) {
                 const destinationPath = join(outputDir, "node_modules", getModuleName(dependency));
                 await copyJsModule(dependency, destinationPath);
 
@@ -154,4 +197,124 @@ async function writeNativeDependenciesJson(nativeDependencies, outputDir, widget
 
 async function asyncWhere(array, filter) {
     return (await Promise.all(array.map(async el => ((await filter(el)) ? [el] : [])))).flat();
+}
+
+async function scanDependency(dir) {
+    const packageJsonPath = join(dir, "package.json");
+    if (!existsSync(packageJsonPath)) {
+        return null;
+    }
+    const packageJson = JSON.parse(readFileSync(packageJsonPath));
+    const license = packageJson.license || packageJson.licenses;
+    const hasLicense = license && license.length > 0;
+    const name = packageJson.name;
+    if (!name && !hasLicense) {
+        return null;
+    }
+    const absolutePath = join(dir, "licen[cs]e");
+    const licenseFile = (await fg([absolutePath], { cwd: dir, caseSensitiveMatch: false }))[0];
+    if (licenseFile) {
+        packageJson.licenseText = readFileSync(licenseFile, "utf-8");
+    }
+    return packageJson;
+}
+
+class LicensePlugin {
+    constructor(options) {
+        this._options = options;
+        this._dependencies = {};
+    }
+
+    addDependency(packageJson, { isTransitive }) {
+        const name = packageJson.name;
+        if (!name) {
+            console.warn("Trying to add dependency without any name, skipping it!");
+        } else if (!_.has(this._dependencies, name)) {
+            this._dependencies[name] = new Dependency({ ...packageJson, isTransitive });
+        }
+    }
+
+    config() {
+        if (!this._options) {
+            return;
+        }
+        const thirdParty = this._options.thirdParty;
+        if (!thirdParty) {
+            return;
+        }
+
+        const thirdPartyOutput = thirdParty.output;
+
+        if (thirdPartyOutput) {
+            _.forEach(_.castArray(thirdPartyOutput), output => {
+                this._exportThirdPartiesToOutput(_.chain(this._dependencies).values().value(), output);
+            });
+        }
+    }
+
+    _exportThirdPartiesToOutput(outputDependencies, output) {
+        if (_.isFunction(output)) {
+            output(outputDependencies);
+            return;
+        }
+
+        const template = _.isString(output.template)
+            ? dependencies => _.template(output.template)({ dependencies, _, moment })
+            : output.template;
+
+        const defaultTemplate = dependencies =>
+            _.isEmpty(dependencies) ? "" : _.map(dependencies, d => d.text()).join("\n\n---\n\n");
+
+        const text = _.isFunction(template) ? template(outputDependencies) : defaultTemplate(outputDependencies);
+        const isOutputFile = _.isString(output);
+        const file = isOutputFile ? output : output.file;
+        const encoding = isOutputFile ? "utf-8" : output.encoding || "utf-8";
+        mkdirp.sync(parse(file).dir);
+        writeFileSync(file, (text || "").trim(), { encoding });
+    }
+}
+
+class Dependency {
+    constructor(packageJson) {
+        this.name = packageJson.name || null;
+        this.maintainers = packageJson.maintainers || [];
+        this.version = packageJson.version || null;
+        this.description = packageJson.description || null;
+        this.repository = packageJson.repository || null;
+        this.homepage = packageJson.homepage || null;
+        this.private = packageJson.private || false;
+        this.license = packageJson.license || null;
+        this.licenseText = packageJson.licenseText || null;
+        this.isTransitive = packageJson.isTransitive || false;
+    }
+
+    text() {
+        const lines = [];
+
+        lines.push(`Name: ${this.name}`);
+        lines.push(`Version: ${this.version}`);
+        lines.push(`License: ${this.license}`);
+        lines.push(`Private: ${this.private}`);
+
+        if (this.description) {
+            lines.push(`Description: ${this.description || false}`);
+        }
+
+        if (this.repository) {
+            lines.push(`Repository: ${this.repository.url}`);
+        }
+
+        if (this.homepage) {
+            lines.push(`Homepage: ${this.homepage}`);
+        }
+
+        if (this.licenseText) {
+            lines.push("License Copyright:");
+            lines.push("===");
+            lines.push("");
+            lines.push(this.licenseText);
+        }
+
+        return lines.join("\n");
+    }
 }

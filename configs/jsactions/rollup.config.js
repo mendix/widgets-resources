@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+
 import { red, yellow } from "colors";
 import fg from "fast-glob";
 import { mkdirSync } from "fs";
@@ -9,6 +11,10 @@ import { promisify } from "util";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
 import { collectDependencies } from "../../packages/tools/pluggable-widgets-tools/configs/rollup-plugin-collect-dependencies";
+import {
+    licenseCustomTemplate,
+    copyLicenseFile
+} from "../../packages/tools/pluggable-widgets-tools/configs/helpers/rollup-helper";
 import { bigJsImportReplacer } from "./rollup-plugin-bigjs-import-replacer";
 
 const cwd = process.cwd();
@@ -46,18 +52,32 @@ export default async args => {
             external: nativeExternal,
             plugins: [
                 i === 0 ? clear({ targets: [outDir] }) : null,
-                !isWeb
-                    ? collectDependencies({
-                          onlyNative: false,
-                          outputDir: outDir,
-                          widgetName: fileOutput
-                      })
-                    : null,
+                collectDependencies({
+                    copyJsModules: !isWeb,
+                    onlyNative: false,
+                    outputDir: outDir,
+                    widgetName: fileOutput,
+                    licenseOptions: {
+                        thirdParty: {
+                            includePrivate: true,
+                            output: [
+                                {
+                                    file: join(outDir, "dependencies.txt")
+                                },
+                                {
+                                    file: join(outDir, "dependencies.json"),
+                                    template: licenseCustomTemplate
+                                }
+                            ]
+                        }
+                    }
+                }),
                 nodeResolvePlugin,
                 typescriptPlugin,
                 bigJsImportReplacer(),
                 i === files.length - 1
                     ? command([
+                          async () => copyLicenseFile(cwd, outDir),
                           async () => {
                               if (!isWeb) {
                                   if (args.configProject === "nativemobileresources") {

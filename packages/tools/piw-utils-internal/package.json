@@ -2,6 +2,13 @@
   "name": "@mendix/piw-utils-internal",
   "version": "1.0.0",
   "description": "Tools and helper functions for PIW",
+  "license": "Apache-2.0",
+  "copyright": "© Mendix Technology BV 2022. All rights reserved.",
+  "homepage": "https://github.com/mendix/widgets-resources/tree/master/packages/tools/piw-utils-internal",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources/"
+  },
   "private": true,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -12,6 +12,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 -   We added support for the new association property introduced in Mendix 9.13.
 
+-   To meet the requirements of the FedRAMP regulation, we added a feature to generate `dependencies.txt` and `dependencies.json` files in the release phase of a widget. `dependencies.txt` file contains the license texts of all (transitive) dependencies and the `dependencies.json` file contains all (transitive) dependencies and their versions for automated scanning purposes.
+
+-   We added a new feature to copy the `LICENSE` file if it exists in the widget source folder.
+
 ### Changed
 
 -   We updated the Mendix package to version 9.13.43286.
