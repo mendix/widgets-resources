@@ -14,6 +14,7 @@ main().catch(e => {
 
 async function main() {
     const mendixVersion = await getMendixVersion();
+    // todo: there is no FORKED envvar. consider using `external-pull-request`.
     const ghcr = process.env.CI && process.env.FORKED !== "true" ? "ghcr.io/mendix/widgets-resources/" : "";
 
     const branch = "githubactions";
