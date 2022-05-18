@@ -138,7 +138,7 @@ async function main() {
                 `-v ${REPO_ROOT}:/source ` +
                 `-v ${REPO_ROOT}/node_modules:/source/node_modules:ro ` +
                 "-w /e2e --name cypress cypress/included:9.6.1 " +
-                `--browser ${browserCypress} --config baseUrl=http://${ip}:${freePort},video=true,videoUploadOnPasses=false,viewportWidth=1280,viewportHeight=1080 ` +
+                `--browser ${browserCypress} --config baseUrl=http://${ip}:${freePort},video=true,videoUploadOnPasses=false,viewportWidth=1280,viewportHeight=1080,chromeWebSecurity=false ` +
                 `--config-file false --project ${process.cwd().replace(REPO_ROOT, "/source")}`,
             { stdio: "inherit" }
         );
