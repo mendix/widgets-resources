@@ -219,6 +219,7 @@ export function ColumnChart({
                                     <VictoryChart
                                         domainPadding={{ x: style.domain?.padding?.x, y: style.domain?.padding?.y }}
                                         // width and height can't be zero
+                                        // TODO: this needs to be checked for bar chart
                                         height={chartDimensions?.height || undefined}
                                         width={chartDimensions?.width || undefined}
                                         padding={aggregateGridPadding(style.grid)}

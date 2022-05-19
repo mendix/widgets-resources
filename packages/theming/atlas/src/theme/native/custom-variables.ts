@@ -769,3 +769,5 @@ export const columnChart: VariablesColumnChart = {
         }
     }
 };
+
+// TODO add bar chart styles
