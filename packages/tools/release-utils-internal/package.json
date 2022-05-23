@@ -1,0 +1,26 @@
+{
+  "name": "@mendix/release-utils-internal",
+  "version": "1.0.0",
+  "description": "Set of helpers for release processes",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "tsc --watch",
+    "prebuild": "rimraf ./dist",
+    "build": "tsc",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "build:parser:widget": "peggy -o ./dist/changelog-parser/parser/module/module.js ./src/changelog-parser/parser/module/module.pegjs",
+    "build:parser:module": "peggy -o ./dist/changelog-parser/parser/widget/widget.js ./src/changelog-parser/parser/widget/widget.pegjs",
+    "prepare": "npm run build && npm run build:parser:widget && npm run build:parser:module"
+  },
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "peggy": "^1.2.0",
+    "rimraf": "^2.7.1",
+    "typescript": "^4.5.4"
+  },
+  "files": [
+    "dist"
+  ]
+}
