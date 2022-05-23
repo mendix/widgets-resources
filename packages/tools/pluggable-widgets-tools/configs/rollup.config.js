@@ -315,11 +315,25 @@ const imagesAndFonts = [
     "**/*.eot"
 ];
 
-const webExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/, /^big.js$/];
+const commonExternalLibs = [
+    // "mendix" and internals under "mendix/"
+    /^mendix($|\/)/,
 
-const editorPreviewExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/];
+    // "react"
+    /^react$/,
 
-const editorConfigExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/];
+    // "react/jsx-runtime"
+    /^react\/jsx-runtime$/,
+
+    // "react-dom"
+    /^react-dom$/
+];
+
+const webExternal = commonExternalLibs.concat(/^big.js$/);
+
+const editorPreviewExternal = commonExternalLibs;
+
+const editorConfigExternal = commonExternalLibs;
 
 export function postCssPlugin(outputFormat, production, postcssPlugins = []) {
     return postcss({
