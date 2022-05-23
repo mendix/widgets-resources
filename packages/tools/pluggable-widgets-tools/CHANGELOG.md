@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [9.13.1] - 2022-05-23
+
 ### Fixed
 
 -   We fixed an issue with some packages were wrongly assumed to be externally available.
