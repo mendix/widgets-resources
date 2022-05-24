@@ -671,5 +671,10 @@ let radioButtons = {
 };
 radioButtons = merge(radioButtons, custom.radioButtons || {});
 //
+// Background Gradient
+let backgroundGradient = {
+    container: {}
+};
+backgroundGradient = merge(backgroundGradient, custom.backgroundGradient || {});
 export * from "../../../theme/native/custom-variables";
-export { accordion, brand, backgroundDefaults, background, border, button, contrast, checkbox, fontDefaults, font, input, image, layoutGrid, listView, navigation, spacing, container, tabContainer, badge, floatingActionButton, introScreen, listViewSwipe, progressBar, progressCircle, slider, rating, radioButtons };
+export { accordion, brand, backgroundDefaults, background, border, button, contrast, checkbox, fontDefaults, font, input, image, layoutGrid, listView, navigation, spacing, container, tabContainer, badge, floatingActionButton, introScreen, listViewSwipe, progressBar, progressCircle, slider, rating, radioButtons, backgroundGradient };
