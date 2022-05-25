@@ -1,4 +1,4 @@
-import nodefetch from "node-fetch";
+import nodefetch, { BodyInit, RequestInit } from "node-fetch";
 
 const config = {
     appStoreUrl: "https://appstore.home.mendix.com/rest/packagesapi/v2"
@@ -7,7 +7,7 @@ const config = {
 export async function fetchMarketplace<T extends object>(
     method: "GET" | "POST" | "PUT" | "DELETE",
     url: string,
-    body: object
+    body: BodyInit
 ): Promise<Promise<T>> {
     return fetch<T>(method, `${config.appStoreUrl}/${url}`, body, {
         "Mendix-Username": process.env.MARKETPLACE_USERNAME,
@@ -18,11 +18,11 @@ export async function fetchMarketplace<T extends object>(
 export async function fetch<T extends object>(
     method: "GET" | "POST" | "PUT" | "DELETE",
     url: string,
-    body?: object,
+    body?: BodyInit,
     additionalHeaders?: object
 ): Promise<Promise<T>> {
     let response;
-    const httpsOptions = {
+    const httpsOptions: RequestInit = {
         method,
         redirect: "follow",
         headers: {
