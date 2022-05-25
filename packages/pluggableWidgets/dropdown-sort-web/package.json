@@ -28,9 +28,9 @@
     "format": "pluggable-widgets-tools format",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
-    "pretest:e2e": "echo 'Skipped'",
-    "test:e2e": "echo 'Skipped'",
-    "test:e2e:dev": "echo 'Skipped'",
+    "pretest:e2e": "npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web:cypress --remove-atlas-files",
+    "test:e2e:local": "npx cypress open --browser chrome --config-file ../../../configs/e2e/cypress/cypress.json",
     "release": "pluggable-widgets-tools release:ts"
   },
   "dependencies": {
