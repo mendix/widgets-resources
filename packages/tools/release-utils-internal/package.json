@@ -22,5 +22,8 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "zod": "^3.17.3"
+  }
 }
