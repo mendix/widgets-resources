@@ -20,7 +20,7 @@ export function execShellCommand(cmd: string | string[], workingDirectory: strin
 }
 
 export async function zip(src: string, fileName: string): Promise<string> {
-    return execShellCommand(`cd "${src}" && zip -r ../${fileName} .`);
+    return execShellCommand(`cd "${src}" && zip -r ${fileName} .`);
 }
 
 export async function unzip(src: string, dest: string): Promise<string> {

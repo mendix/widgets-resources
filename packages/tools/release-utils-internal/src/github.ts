@@ -53,7 +53,7 @@ export class GitHub {
         const repoArgument = repo ? `-R "${repo}"` : "";
         const filesArgument = filesToRelease ? `"${filesToRelease}"` : "";
 
-        const targetHash = await execShellCommand(`git rev-parse --verify ${target}`);
+        const targetHash = (await execShellCommand(`git rev-parse --verify ${target}`)).trim();
 
         await execShellCommand(
             `gh release create --title "${title}" --notes "${notes}" ${draftArgument} ${repoArgument} "${tag}" --target ${targetHash}  ${filesArgument}`

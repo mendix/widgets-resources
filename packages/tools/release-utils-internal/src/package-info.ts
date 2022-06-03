@@ -1,7 +1,9 @@
 import { join } from "path";
 import { access } from "fs/promises";
 import { Version, VersionString } from "./version";
-import { WidgetChangelogFileWrapper } from "./changelog-parser";
+// FIXME: Uncomment when md parser is 100% ready.
+// Disable changelog parser for now
+// import { WidgetChangelogFileWrapper } from "./changelog-parser";
 
 export interface PackageJsonFileContent {
     name?: string;
@@ -35,22 +37,35 @@ export interface PackageInfo {
 
     repositoryUrl: string;
 
-    changelog: WidgetChangelogFileWrapper;
+    changelog: string;
 }
 
 export interface WidgetPackageInfo extends PackageInfo {
     packageFullName: string;
-
     minimumMXVersion: Version;
     repositoryUrl: string;
-    changelog: WidgetChangelogFileWrapper;
     testProjectUrl: string | undefined;
     testProjectBranchName: string | undefined;
 }
 
 export interface ModuleInfo extends WidgetPackageInfo {
+    testProjectUrl: string;
+    testProjectBranchName: string;
     moduleNameInModeler: string;
     moduleFolderNameInModeler: string;
+}
+
+export async function getPackageFileContent(dirPath: string): Promise<PackageJsonFileContent> {
+    const pkgPath = join(dirPath, `package.json`);
+    try {
+        await access(pkgPath);
+        const result = (await import(pkgPath)) as PackageJsonFileContent;
+        return result;
+    } catch (error) {
+        console.log(error);
+        console.error(`ERROR: Path does not exist: ${pkgPath}`);
+        throw new Error("Error while reading package info at " + dirPath);
+    }
 }
 
 export async function getPackageInfo(path: string): Promise<PackageInfo> {
@@ -65,7 +80,9 @@ export async function getPackageInfo(path: string): Promise<PackageInfo> {
 
             repositoryUrl: ensureString(repository?.url, "repository.url"),
 
-            changelog: WidgetChangelogFileWrapper.fromFile(`${path}/CHANGELOG.md`)
+            // FIXME: Uncomment when md parser is 100% ready.
+            // changelog: WidgetChangelogFileWrapper.fromFile(`${path}/CHANGELOG.md`)
+            changelog: "[Parsed Changelog]"
         };
     } catch (error) {
         console.log(error);
@@ -89,8 +106,8 @@ export async function getWidgetPackageInfo(path: string): Promise<WidgetPackageI
 
             minimumMXVersion: ensureVersion(marketplace?.minimumMXVersion),
             repositoryUrl: ensureString(repository?.url, "repository.url"),
-
-            changelog: WidgetChangelogFileWrapper.fromFile(`${path}/CHANGELOG.md`),
+            // FIXME: Replace with md parser when md parser is 100% ready.
+            changelog: "[Parsed Changelog]",
 
             testProjectUrl: testProject?.githubUrl,
             testProjectBranchName: testProject?.branchName
@@ -100,6 +117,31 @@ export async function getWidgetPackageInfo(path: string): Promise<WidgetPackageI
         console.error(`ERROR: Path does not exist: ${pkgPath}`);
         throw new Error("Error while reading widget info at " + path);
     }
+}
+
+export async function getModulePackageInfo(pkgDir: string): Promise<ModuleInfo> {
+    const {
+        name,
+        moduleName: moduleNameRaw,
+        version,
+        marketplace,
+        testProject,
+        repository
+    } = await getPackageFileContent(pkgDir);
+    const moduleName = ensureString(moduleNameRaw, "moduleName");
+    return {
+        packageName: ensureString(name, "name"),
+        packageFullName: moduleName,
+        moduleNameInModeler: moduleName,
+        moduleFolderNameInModeler: moduleName.toLowerCase(),
+        version: ensureVersion(version),
+        minimumMXVersion: ensureVersion(marketplace?.minimumMXVersion),
+        repositoryUrl: ensureString(repository?.url, "repository.url"),
+        // FIXME: Replace with md parser when md parser is 100% ready.
+        changelog: "[Parsed Changelog]",
+        testProjectUrl: ensureString(testProject?.githubUrl, "testProject.githubUrl"),
+        testProjectBranchName: ensureString(testProject?.branchName, "testProject.branchName")
+    };
 }
 
 function ensureString(str: string | undefined, fieldName: string): string {

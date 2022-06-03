@@ -1,3 +1,4 @@
+import { execSync } from "child_process";
 import { mkdir, rm } from "fs/promises";
 import { execShellCommand } from "./shell";
 
@@ -15,13 +16,20 @@ export async function cloneRepo(githubUrl: string, localFolder: string): Promise
     await mkdir(localFolder, { recursive: true });
 
     // clone and set local credentials
-    await execShellCommand(`git clone ${getGHRepoAuthUrl(githubUrl)} ${localFolder}`);
+    await execSync(`git clone ${getGHRepoAuthUrl(githubUrl)} ${localFolder}`, { stdio: "inherit" });
 
     // set credentials
     await setLocalGitUserInfo(localFolder);
 }
 
-async function setLocalGitUserInfo(workingDirectory?: string): Promise<void> {
+export async function cloneRepoShallow(remoteUrl: string, branch: string, localFolder: string) {
+    await execSync(
+        `git clone ${getGHRepoAuthUrl(remoteUrl)} --branch=${branch} --depth=1 --single-branch ${localFolder}`,
+        { stdio: "inherit" }
+    );
+}
+
+export async function setLocalGitUserInfo(workingDirectory?: string): Promise<void> {
     await execShellCommand(`git config user.name "${process.env.GH_NAME}"`, workingDirectory);
     await execShellCommand(`git config user.email "${process.env.GH_EMAIL}"`, workingDirectory);
 }
