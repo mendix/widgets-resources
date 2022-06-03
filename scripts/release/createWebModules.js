@@ -26,7 +26,7 @@ main().catch(e => {
 });
 
 async function main() {
-    const modules = ["data-widgets", "atlas-web-content", "atlas-core", "web-actions", "charts"];
+    const modules = ["data-widgets", "atlas-web-content", "atlas-core", "web-actions", "charts", "chart-widgets"];
     if (!modules.includes(moduleFolderNameInRepo)) {
         return;
     }
@@ -47,6 +47,10 @@ async function main() {
         case "web-actions":
             await createWebActionsModule();
             break;
+        case "chart-widgets": {
+            await execShellCommand(`npx lerna run release:module --scope chart-widgets`);
+            break;
+        }
     }
 }
 
