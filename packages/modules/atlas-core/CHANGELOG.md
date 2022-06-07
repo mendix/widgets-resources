@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+-   We fixed hover issue for dropdown menu in navigation bar.
+
 ## [3.2.2] Atlas Core - 2022-5-10
 
 ### Added
