@@ -46,6 +46,34 @@ export interface ColumnDataPoint<X extends number | Date | string, Y extends num
     y: Y;
 }
 
+function sortSeriesDataPoints(series: ColumnChartSeries[], sortingOrder: string): ColumnChartSeries[] {
+    const keysSum: { [key: string]: number } = {};
+    series.forEach(({ dataPoints }) => {
+        dataPoints.forEach(({ x, y }) => {
+            const key = x.toString();
+            if (key in keysSum) {
+                keysSum[key] += Number(y);
+            } else {
+                keysSum[key] = Number(y);
+            }
+        });
+    });
+
+    return series.map(seriesItem => {
+        const dataPoints = seriesItem.dataPoints as Array<ColumnDataPoint<string, number>>;
+        seriesItem.dataPoints = Object.keys(keysSum)
+            .sort((key1, key2) => {
+                return sortingOrder === "descending" ? keysSum[key2] - keysSum[key1] : keysSum[key1] - keysSum[key2];
+            })
+            .map(key => ({
+                x: key,
+                y: dataPoints.find((point: ColumnDataPoint<string, number>) => point.x === key)?.y || 0
+            }));
+
+        return seriesItem;
+    });
+}
+
 export function ColumnChart({
     name,
     presentation,
@@ -58,11 +86,18 @@ export function ColumnChart({
     style,
     warningPrefix
 }: ColumnChartProps): ReactElement | null {
+    const sortedSeries = useMemo(() => {
+        const isNotSortable = series.some(({ dataPoints }) =>
+            dataPoints.some(({ x, y }) => typeof x !== "string" || typeof y !== "number")
+        );
+        return isNotSortable ? series : sortSeriesDataPoints(series, sortOrder);
+    }, [sortOrder, series]);
+
     const [chartDimensions, setChartDimensions] = useState<{ height: number; width: number }>();
 
     const warningMessagePrefix = useMemo(() => (warningPrefix ? warningPrefix + "i" : "I"), [warningPrefix]);
 
-    const dataTypesResult = useMemo(() => getDataTypes(series), [series]);
+    const dataTypesResult = useMemo(() => getDataTypes(sortedSeries), [sortedSeries]);
 
     // Column Chart user-styling may be missing for certain series. A palette is passed, any missing colours
     // fallback to a colour from the palette.
@@ -70,7 +105,7 @@ export function ColumnChart({
         const ColumnColorPalette = style.columns?.columnColorPalette?.split(";");
         let index = 0;
 
-        return series.map(_series => {
+        return sortedSeries.map(_series => {
             const configuredStyle = !_series.customColumnStyle
                 ? null
                 : style.columns?.customColumnStyles?.[_series.customColumnStyle]?.column?.columnColor;
@@ -87,16 +122,18 @@ export function ColumnChart({
 
             return configuredStyle;
         });
-    }, [series, style]);
-
-    const sortProps = useMemo(() => ({ sortOrder, sortKey: "y" }), [sortOrder]);
+    }, [sortedSeries, style]);
 
     const groupedOrStacked = useMemo(() => {
         if (!dataTypesResult || dataTypesResult instanceof Error) {
             return null;
         }
 
-        const Columns = series.map(({ customColumnStyle, dataPoints }, index) => {
+        const Columns = sortedSeries.map(({ customColumnStyle, dataPoints }, index) => {
+            if (!dataPoints.length) {
+                return null;
+            }
+
             const seriesStyle =
                 style.columns?.customColumnStyles && customColumnStyle
                     ? style.columns.customColumnStyles[customColumnStyle]
@@ -118,7 +155,6 @@ export function ColumnChart({
                             ...ColumnStyles.labels
                         }
                     }}
-                    {...sortProps}
                     {...(showLabels ? { labels: ({ datum }: { datum: BarProps["datum"] }) => datum.y } : undefined)}
                 />
             );
@@ -133,18 +169,9 @@ export function ColumnChart({
         }
 
         return <VictoryStack colorScale={normalizedColumnColors}>{Columns}</VictoryStack>;
-    }, [
-        dataTypesResult,
-        series,
-        style,
-        warningMessagePrefix,
-        sortProps,
-        showLabels,
-        normalizedColumnColors,
-        presentation
-    ]);
+    }, [dataTypesResult, series, style, warningMessagePrefix, showLabels, normalizedColumnColors, presentation]);
 
-    const [firstSeries] = series;
+    const [firstSeries] = sortedSeries;
 
     const axisLabelStyles = useMemo(() => {
         const [extractedXAxisLabelStyle, xAxisLabelStyle] = extractStyles(style.xAxis?.label, ["relativePositionGrid"]);
@@ -258,7 +285,7 @@ export function ColumnChart({
                             : null}
                     </View>
                     {showLegend ? (
-                        <Legend style={style.legend} series={series} seriesColors={normalizedColumnColors} />
+                        <Legend style={style.legend} series={sortedSeries} seriesColors={normalizedColumnColors} />
                     ) : null}
                 </View>
             )}

@@ -19,7 +19,7 @@
             <propertyGroup caption="Data source">
                 <property key="columnSeries" type="object" isList="true">
                     <caption>Column series</caption>
-                    <description>Add one or more column series. The top-down order of static data sets and the order of data returned by grouped dynamic data sets influences the sequential order of columns in stacked presentation mode and the order of columns rendered in the Z-plane (where data sets lower in the order are rendered lowest in the Z-plane) in grouped presentation mode.</description>
+                    <description>Add one or more column series. The descending order of static data sets and the order of data returned by grouped dynamic data sets influence the sequential order of columns in stacked presentation mode. This descending order also influences the order of columns rendered in the Z-plane in grouped presentation mode.​</description>
                     <properties>
                         <propertyGroup caption="General">
                             <property key="dataSet" type="enumeration" defaultValue="static">
