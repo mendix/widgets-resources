@@ -1,5 +1,10 @@
 import { DocumentViewerPreviewProps } from "../typings/DocumentViewerProps";
-import { hidePropertyIn, Problem, Properties } from "@mendix/piw-utils-internal";
+import { hidePropertyIn, Problem, Properties, StructurePreviewProps } from "@mendix/piw-utils-internal";
+
+import DocumentViewerURLPreviewSVGDark from "./assets/document-viewer-url-preview.dark.svg";
+import DocumentViewerURLPreviewSVGLight from "./assets/document-viewer-url-preview.light.svg";
+import DocumentViewerEntityPreviewSVGDark from "./assets/document-viewer-entity-preview.dark.svg";
+import DocumentViewerEntityPreviewSVGLight from "./assets/document-viewer-entity-preview.light.svg";
 
 export function getProperties(props: DocumentViewerPreviewProps, defaultProperties: Properties): Properties {
     hidePropertyIn(defaultProperties, props, props.dataSourceType === "file" ? "url" : "file");
@@ -37,4 +42,17 @@ const urlSourceCheck: Checker = ({ dataSourceType, url }) => {
 
 export function check(props: DocumentViewerPreviewProps): Problem[] {
     return [fileSourceCheck, urlSourceCheck].map(checker => checker(props)).flat();
+}
+
+export function getPreview(props: DocumentViewerPreviewProps, isDarkMode: boolean): StructurePreviewProps {
+    const urlImage = isDarkMode ? DocumentViewerURLPreviewSVGDark : DocumentViewerURLPreviewSVGLight;
+    const entityImage = isDarkMode ? DocumentViewerEntityPreviewSVGDark : DocumentViewerEntityPreviewSVGLight;
+
+    return {
+        type: "Image",
+        document:
+            props.dataSourceType === "url"
+                ? decodeURIComponent(urlImage.replace("data:image/svg+xml,", ""))
+                : decodeURIComponent(entityImage.replace("data:image/svg+xml,", ""))
+    };
 }
