@@ -3,7 +3,7 @@
     "packages": ["packages/*/*", "scripts/data"],
     "command": {
         "bootstrap": {
-            "npmClientArgs": ["--package-lock"]
+            "npmClientArgs": ["--package-lock", "--legacy-peer-deps"]
         },
         "version": {
             "ignoreChanges": ["*.md"],
