@@ -35,6 +35,7 @@ export function preview(props: GalleryPreviewProps): ReactElement {
                     </props.filtersPlaceholder.renderer>
                 ) : null
             }
+            hasFilters={!!props.filterList.length}
             hasMoreItems={false}
             items={items}
             itemRenderer={useCallback(

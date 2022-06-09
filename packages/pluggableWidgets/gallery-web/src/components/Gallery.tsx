@@ -10,6 +10,7 @@ export interface GalleryProps<T extends ObjectItem> {
     emptyMessageTitle?: string;
     filters?: ReactNode;
     filtersTitle?: string;
+    hasFilters: boolean;
     hasMoreItems: boolean;
     items: T[];
     itemRenderer: (
@@ -47,9 +48,11 @@ export function Gallery<T extends ObjectItem>(props: GalleryProps<T>): ReactElem
     return (
         <div className={classNames("widget-gallery", props.className)} data-focusindex={props.tabIndex || 0}>
             {props.paginationPosition === "above" && pagination}
-            <div className="widget-gallery-filter" role="section" aria-label={props.filtersTitle}>
-                {props.filters}
-            </div>
+            {props.hasFilters ? (
+                <div className="widget-gallery-filter" role="section" aria-label={props.filtersTitle}>
+                    {props.filters}
+                </div>
+            ) : null}
 
             {props.items.length > 0 && props.itemRenderer && (
                 <InfiniteBody
