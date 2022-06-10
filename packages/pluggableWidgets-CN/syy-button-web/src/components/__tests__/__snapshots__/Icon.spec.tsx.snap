@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Icon doesn't render an icon with an unknown icon data type 1`] = `
+<div
+  class="falltext"
+/>
+`;
+
+exports[`Icon renders a default icon 1`] = `
+<div
+  class="falltext"
+/>
+`;
+
+exports[`Icon renders glyph icons 1`] = `
+<span
+  aria-hidden="true"
+  class="glyphicon rating-icon animate icon-class"
+/>
+`;
+
+exports[`Icon renders image icons 1`] = `
+<img
+  alt=""
+  aria-hidden="true"
+  class="rating-image animate"
+  src="icon.url"
+/>
+`;
