@@ -12,7 +12,7 @@ jest.mock("react-native-device-info", () => ({
     getDeviceId: jest.fn().mockReturnValue("iPhone10,6")
 }));
 
-jest.mock("@react-native-community/async-storage", () => ({
+jest.mock("@react-native-async-storage/async-storage", () => ({
     getItem: jest.fn().mockResolvedValue("gone"),
     setValue: jest.fn().mockResolvedValue(null)
 }));

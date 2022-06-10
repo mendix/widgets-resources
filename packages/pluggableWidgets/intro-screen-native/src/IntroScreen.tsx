@@ -4,7 +4,7 @@ import { IntroScreenProps } from "../typings/IntroScreenProps";
 import { Modal, View } from "react-native";
 import { DynamicValue, ValueStatus } from "mendix";
 import { SwipeableContainer } from "./SwipeableContainer";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import deepmerge from "deepmerge";
 import { executeAction } from "@mendix/piw-utils-internal";
 

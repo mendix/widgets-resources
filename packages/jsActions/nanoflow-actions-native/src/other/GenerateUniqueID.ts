@@ -21,7 +21,7 @@ async function initializeCounter(): Promise<void> {
 
 async function getItem(key: string): Promise<any> {
     if (navigator && navigator.product === "ReactNative") {
-        const AsyncStorage = (await import("@react-native-community/async-storage")).default;
+        const AsyncStorage = (await import("@react-native-async-storage/async-storage")).default;
         return AsyncStorage.getItem(key);
     }
     if (window) {
@@ -32,7 +32,7 @@ async function getItem(key: string): Promise<any> {
 }
 async function setItem(key: string, value: string): Promise<void> {
     if (navigator && navigator.product === "ReactNative") {
-        const AsyncStorage = (await import("@react-native-community/async-storage")).default;
+        const AsyncStorage = (await import("@react-native-async-storage/async-storage")).default;
         return AsyncStorage.setItem(key, value);
     }
     if (window) {
