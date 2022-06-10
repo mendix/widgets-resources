@@ -11,7 +11,7 @@ async function main(): Promise<void> {
     const args = process.argv.slice(2);
     const target = args[0];
     const bumpVersionType: BumpVersionType = args[1];
-    const packages = ["packages/pluggableWidgets"];
+    const packages = ["packages/pluggableWidgets-CN"];
     const path = await findPath(packages, target);
     const currentVersion = await getCurrentVersion(path);
     const newVersion = getNewVersion(bumpVersionType, currentVersion);

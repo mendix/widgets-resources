@@ -65,7 +65,7 @@ async function createDataWidgetsModule() {
         "dropdown-sort-web",
         "gallery-web",
         "tree-node-web"
-    ].map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
+    ].map(folder => join(repoRootPath, "packages/pluggableWidgets-CN", folder));
     const moduleInfo = {
         ...(await getPackageInfo(moduleFolder)),
         moduleNameInModeler: "DataWidgets",
@@ -83,7 +83,7 @@ async function createAtlasWebContentModule() {
         cwd: join(repoRootPath, "packages/modules", "atlas-web-content")
     });
     const widgets = ["badge-web", "maps-web", "progress-bar-web", "progress-circle-web", "timeline-web"].map(folder =>
-        join(repoRootPath, "packages/pluggableWidgets", folder)
+        join(repoRootPath, "packages/pluggableWidgets-CN", folder)
     );
     const moduleInfo = {
         ...(await getPackageInfo(moduleFolder)),
@@ -97,7 +97,7 @@ async function createAtlasWebContentModule() {
 async function createAtlasCoreModule() {
     console.log("Creating the Atlas Core module.");
     execSync("npm run release:module", { stdio: "inherit", cwd: join(repoRootPath, "packages/modules", "atlas-core") });
-    const widgets = ["feedback-native"].map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
+    const widgets = ["feedback-native"].map(folder => join(repoRootPath, "packages/pluggableWidgets-CN", folder));
     const moduleInfo = {
         ...(await getPackageInfo(moduleFolder)),
         moduleNameInModeler: "Atlas_Core",
@@ -119,7 +119,7 @@ async function createChartsModule() {
         "line-chart-web",
         "pie-doughnut-chart-web",
         "time-series-chart-web"
-    ].map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
+    ].map(folder => join(repoRootPath, "packages/pluggableWidgets-CN", folder));
     const moduleInfo = {
         ...(await getPackageInfo(moduleFolder)),
         moduleNameInModeler: "Charts",

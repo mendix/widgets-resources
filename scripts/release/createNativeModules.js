@@ -47,10 +47,10 @@ async function createNativeMobileResourcesModule() {
     console.log("Creating the Native Mobile Resource module.");
     const moduleFolder = join(repoRootPath, "packages/jsActions", moduleFolderNameInRepo);
     const tmpFolder = join(repoRootPath, "tmp", moduleFolderNameInRepo);
-    const widgetFolders = await readdir(join(repoRootPath, "packages/pluggableWidgets"));
+    const widgetFolders = await readdir(join(repoRootPath, "packages/pluggableWidgets-CN"));
     const nativeWidgetFolders = widgetFolders
         .filter(folder => folder.includes("-native"))
-        .map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
+        .map(folder => join(repoRootPath, "packages/pluggableWidgets-CN", folder));
     let moduleInfo = {
         ...(await getPackageInfo(moduleFolder)),
         moduleNameInModeler: "NativeMobileResources",

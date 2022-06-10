@@ -292,7 +292,7 @@ export default async args => {
         // Many rollup warnings are indication of some critical issue, so we should treat them as errors,
         // except a short white-list which we know is safe _and_ not easily fixable.
         if (["CIRCULAR_DEPENDENCY", "THIS_IS_UNDEFINED", "UNUSED_EXTERNAL_IMPORT"].includes(warning.code)) {
-            console.warn(yellow(description));
+            // console.warn(yellow(description));
         } else if (args.watch) {
             // Do not break watch mode because of an error. Also don't use console.error, since it is overwritten by rollup
             console.warn(red(description));
