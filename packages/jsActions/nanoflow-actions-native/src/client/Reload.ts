@@ -12,7 +12,8 @@ export async function reload(): Promise<void> {
     // BEGIN USER CODE
     mx.reload();
     return new Promise(() => {
-        /** never resolve **/
+        // Never resolve this pormise to ensure that the next action in the nanoflow (if any)
+        // will not be executed before the actual reload is happended.
     });
     // END USER CODE
 }
