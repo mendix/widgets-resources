@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="runjian.buttonweb.ButtonWeb" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>SYY Button Web</name>
+    <description>My widget description</description>
+    <icon />
+    <properties>
+        <propertyGroup caption="General">
+            <property key="text" type="string" required="true">
+                <caption>Text</caption>
+                <description>Button text.</description>
+            </property>
+            <property key="block" type="boolean" defaultValue="false">
+                <caption>Block</caption>
+                <description>Option to adjust button width to its parent width.</description>
+            </property>
+            <property key="danger" type="expression" defaultValue="false">
+                <caption>Danger</caption>
+                <description>Set the danger button.</description>
+                <returnType type="Boolean" />
+            </property>
+            <property key="disabled" type="expression" defaultValue="false">
+                <caption>Disabled</caption>
+                <description>Button invalid state.</description>
+                <returnType type="Boolean" />
+            </property>
+            <property key="ghost" type="boolean" defaultValue="false">
+                <caption>Ghost</caption>
+                <description>Ghost property to make the button background transparent.</description>
+            </property>
+
+            <property key="icon" type="icon" required="false">
+                <caption>Icon</caption>
+                <description>Set the icon of the button.</description>
+            </property>
+            <property key="loading" type="expression" defaultValue="false">
+                <caption>Loading</caption>
+                <description>Set button loading state.</description>
+                <returnType type="Boolean" />
+            </property>
+            <property key="shape" type="enumeration" defaultValue="default">
+                <caption>Shape</caption>
+                <description>Set the button shape.</description>
+                <enumerationValues>
+                    <enumerationValue key="default">default</enumerationValue>
+                    <enumerationValue key="circle">circle</enumerationValue>
+                    <enumerationValue key="round">round</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="size" type="enumeration" defaultValue="middle">
+                <caption>Size</caption>
+                <description>Set button size.</description>
+                <enumerationValues>
+                    <enumerationValue key="large">large</enumerationValue>
+                    <enumerationValue key="middle">middle</enumerationValue>
+                    <enumerationValue key="small">small</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="type" type="enumeration" defaultValue="default">
+                <caption>Type</caption>
+                <description>Set button type.</description>
+                <enumerationValues>
+                    <enumerationValue key="primary">primary</enumerationValue>
+                    <enumerationValue key="ghost">ghost</enumerationValue>
+                    <enumerationValue key="dashed">dashed</enumerationValue>
+                    <enumerationValue key="link">link</enumerationValue>
+                    <enumerationValue key="text">text</enumerationValue>
+                    <enumerationValue key="default">default</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="href" type="string" required="false">
+                <caption>Href</caption>
+                <description>Click on the redirected address and specify this attribute. The behavior of button is the same as that of 'a'.</description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Confirm">
+            <property key="openconfirm" type="boolean" defaultValue="false">
+                <caption>Need popup</caption>
+                <description />
+            </property>
+            <property key="confirmType" type="enumeration" defaultValue="pop">
+                <caption>Pop-up's type</caption>
+                <description />
+                <enumerationValues>
+                    <enumerationValue key="pop">pop</enumerationValue>
+                    <enumerationValue key="modal">modal</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="confirmtitle" type="textTemplate" required="false">
+                <caption>Confirm title</caption>
+                <description />
+            </property>
+            <property key="confirmokText" type="string" defaultValue="confirm">
+                <caption>Confirm text</caption>
+                <description />
+            </property>
+            <property key="confirmcancelText" type="string" defaultValue="cancel">
+                <caption>Cancel text</caption>
+                <description />
+            </property>
+            <property key="confirmokType" type="enumeration" defaultValue="primary">
+                <caption>Confirm type</caption>
+                <description />
+                <enumerationValues>
+                    <enumerationValue key="primary">primary</enumerationValue>
+                    <enumerationValue key="ghost">ghost</enumerationValue>
+                    <enumerationValue key="dashed">dashed</enumerationValue>
+                    <enumerationValue key="link">link</enumerationValue>
+                    <enumerationValue key="text">text</enumerationValue>
+                    <enumerationValue key="default">default</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="onConfirm" type="action">
+                <caption>Click confirm</caption>
+                <description />
+            </property>
+            <property key="onCancel" type="action">
+                <caption>Click cancel</caption>
+                <description />
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <property key="onClickAction" type="action">
+                <caption>On click</caption>
+                <description>Callback when clicked.</description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Auth">
+            <property key="authPath" type="string" required="false" defaultValue="">
+                <caption>Permission path</caption>
+                <description>Corresponding to the path of the menu, after setting, it will be hidden if there is no permission.</description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Advanced">
+            <property key="advanced" type="boolean" defaultValue="false">
+                <caption>Advanced</caption>
+                <description>Open advanced configuration</description>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
