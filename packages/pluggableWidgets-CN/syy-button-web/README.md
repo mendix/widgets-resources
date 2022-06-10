@@ -1,5 +1,9 @@
 Please see [Button](https://ant.design/components/button/) in the ant-design documentation for details.
 
+Demo URL [Demo URL](https://mendix-ui.runjian.com/p/button)
+
+Github Code [Code URL](https://github.com/runjiangufen/widgets-resources)
+
 本控件基于 Ant Design 进行封装, 皆在打造一套基于 antd 设计的 Mendix 控件
 
 # button
