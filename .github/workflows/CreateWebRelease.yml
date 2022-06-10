@@ -25,6 +25,8 @@ jobs:
               run: npm install
             - name: "Building ${{ github.event.inputs.widget-name }}"
               run: "npm run release -- --scope '${{ github.event.inputs.widget-name }}'"
+              env:
+                NODE_OPTIONS: --max_old_space_size=8192
             - name: "Creating ${{ github.event.inputs.widget-name }} widget release"
               if: ${{ endsWith(github.event.inputs.widget-name, '-web') }}
               run: "npm run release-github:widget '${{ github.event.inputs.widget-name }}'"
