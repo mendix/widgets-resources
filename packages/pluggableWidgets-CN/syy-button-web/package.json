@@ -1,0 +1,50 @@
+{
+  "name": "syy-button-web",
+  "widgetName": "ButtonWeb",
+  "version": "1.1.2",
+  "description": "My widget description",
+  "copyright": "2020 Mendix Technology BV",
+  "author": "songzhengxu",
+  "engines": {
+    "node": ">=12"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/runjiangufen/widgets-resources.git"
+  },
+  "marketplace": {
+    "minimumMXVersion": "9.6.0",
+    "marketplaceId": 118168
+  },
+  "config": {
+    "projectPath": "D:\\work\\antd-web-docs-main",
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": "3000"
+  },
+  "packagePath": "runjian",
+  "scripts": {
+    "start": "cross-env MPKOUTPUT=ButtonWeb.mpk pluggable-widgets-tools start:server",
+    "dev": "cross-env MPKOUTPUT=ButtonWeb.mpk pluggable-widgets-tools start:web",
+    "build": "cross-env MPKOUTPUT=ButtonWeb.mpk pluggable-widgets-tools build:web",
+    "format": "pluggable-widgets-tools format",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "pluggable-widgets-tools test:unit:web",
+    "pretest:e2e": "npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web:cypress",
+    "test:e2e:local": "npx cypress open --browser chrome --config-file ../../../configs/e2e/cypress/cypress.json",
+    "release": "cross-env MPKOUTPUT=ButtonWeb.mpk pluggable-widgets-tools release:web",
+    "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "@types/classnames": "^2.2.6",
+    "cross-env": "^7.0.2",
+    "eslint": "^7.20.0"
+  },
+  "dependencies": {
+    "@mendix/piw-utils-internal": "^1.0.0",
+    "classnames": "^2.2.6",
+    "antd": "^4.16.3",
+    "@ant-design/icons": "4.6.3"
+  }
+}
