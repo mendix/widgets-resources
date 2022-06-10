@@ -36,6 +36,8 @@
     "release:native": "npm run release -- --scope '*-native'",
     "release:web": "npm run release -- --scope '*-web'",
     "release-github:widget": "node ./scripts/release/createWidgetRelease.js",
+    "release-github:widget:ts": "ts-node --project ./scripts/tsconfig.json ./scripts/release/createWidgetReleaseV2.ts",
+    "release:pwt:ts": "ts-node --project ./scripts/tsconfig.json ./scripts/release/createPWTRelease.ts",
     "create-modules:native": "node ./scripts/release/createNativeModules.js",
     "create-modules:web": "node ./scripts/release/createWebModules.js",
     "version": "ts-node --project ./scripts/tsconfig.json ./scripts/release/BumpVersion.ts",
