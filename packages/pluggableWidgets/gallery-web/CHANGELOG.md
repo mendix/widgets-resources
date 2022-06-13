@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [1.2.0] - 2022-6-13
+
 ### Fixed
 
 -   We removed "widget-gallery-filter" element from DOM if no filters has been provided.
