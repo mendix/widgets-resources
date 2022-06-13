@@ -1,6 +1,9 @@
 import { execSync } from "child_process";
 import { mkdir, rm } from "fs/promises";
 import { execShellCommand } from "./shell";
+import sh from "shelljs";
+
+const commitMessageRegEx = /^"[^"]+"$/i;
 
 function getGHRepoAuthUrl(repoUrl: string): string {
     const url = new URL(repoUrl);
@@ -38,4 +41,38 @@ export async function addRemoteWithAuthentication(repoUrl: string, remoteName: s
     await setLocalGitUserInfo();
 
     await execShellCommand(`git remote add "${remoteName}" "${getGHRepoAuthUrl(repoUrl)}"`);
+}
+
+export function noChanges(): boolean {
+    return /nothing to commit/i.test(sh.exec("git commit --dry-run -uno", { silent: true }));
+}
+
+export function commit(msg: string): void {
+    if (commitMessageRegEx.test(msg)) {
+        sh.exec(`git commit -m ${msg}`);
+    } else {
+        throw new Error("Invalid commit message: Please use quotest for commit message");
+    }
+}
+
+export function push(remoteName = "origin") {
+    sh.exec(`git push ${remoteName}`);
+}
+
+export function add(path = ".") {
+    sh.exec(`git add ${path}`);
+}
+
+export async function updateTestProjectRepo(testProjectDir: string, msg: string): Promise<void> {
+    // Change cwd to repo root
+    sh.pushd(testProjectDir);
+    await setLocalGitUserInfo();
+    add();
+    if (noChanges()) {
+        console.warn("Nothing to commit");
+    } else {
+        commit(msg);
+        push();
+    }
+    sh.popd();
 }

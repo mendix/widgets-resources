@@ -42,6 +42,7 @@ export interface ModuleBuildConfig extends DepsBuildConfig {
             dir: string;
             widgets: string;
             themesource: string;
+            versionFile: string;
         };
     };
 }
@@ -108,6 +109,8 @@ export async function getBuildConfig({
 
     const dockerMpkOutputFile = join(testProjectDir, mpkName);
 
+    const versionFile = join(testProjectDir, "themesource", moduleFolderNameInModeler, ".version");
+
     const result = {
         moduleInfo,
         repoRootPath,
@@ -123,7 +126,8 @@ export async function getBuildConfig({
             testProject: {
                 dir: testProjectDir,
                 themesource: stylesOut,
-                widgets: widgetsOut
+                widgets: widgetsOut,
+                versionFile: versionFile
             }
         }
     };

@@ -1,9 +1,10 @@
 import { execSync } from "node:child_process";
 import { dirname, join, relative } from "node:path";
-import { cp, mkdir, mv, popd, pushd, rm } from "shelljs";
+import { cp, mkdir, mv, popd, pushd, rm, echo } from "shelljs";
 import { BuildOptions, BuildParams, DepsBuildConfig, getBuildConfig, getDepsConfig, ModuleBuildConfig } from "./config";
-import { cloneRepoShallow } from "./git";
+import { cloneRepoShallow, updateTestProjectRepo } from "./git";
 import { createMPK, exportModuleWithWidgets } from "./mpk";
+import { skipDepsBuild } from "./vars";
 
 export async function cleanup(config: ModuleBuildConfig): Promise<void> {
     console.info("Removing dist...");
@@ -25,13 +26,18 @@ export async function updateTestProjectStyles(config: ModuleBuildConfig): Promis
     cp("-Rf", source, dest);
 }
 
+export async function updateModuleVersion(config: ModuleBuildConfig): Promise<void> {
+    console.info("Updating .version...");
+    echo(config.moduleInfo.version.format()).to(config.dist.testProject.versionFile);
+}
+
 export async function updateTestProject(config: ModuleBuildConfig): Promise<void> {
     console.info("Updating testProject...");
     // This still a big question should we update testProject before doing export
     // or not. But, this is how it was before, so we preserve same flow.
     // Also, updating testProject on this stage smiplifyes next step with commiting
     // updates to testProject.
-    await Promise.all([updateTestProjectWidgets(config), updateTestProjectStyles(config)]);
+    await Promise.all([updateTestProjectWidgets(config), updateTestProjectStyles(config), updateModuleVersion(config)]);
 }
 
 // Build module dependencies.
@@ -39,8 +45,13 @@ export async function updateTestProject(config: ModuleBuildConfig): Promise<void
 export async function stepBuildDeps(config: DepsBuildConfig): Promise<void> {
     console.info("Changing cwd...");
     pushd(config.repoRootPath);
-    console.info("Start building dependencies...");
-    execSync(`npm run release -- ${config.scope} --include-dependencies --concurrency 1`, { stdio: "inherit" });
+    if (!skipDepsBuild()) {
+        console.info("Start building dependencies...");
+
+        execSync(`npm run release -- ${config.scope} --include-dependencies --concurrency 1`, { stdio: "inherit" });
+    } else {
+        console.info("Skipping building dependencies...");
+    }
     console.info("Changing cwd...");
     popd();
 }
@@ -91,6 +102,7 @@ export async function buildModuleMpk(params: BuildParams, options?: BuildOptions
     await stepBuildDeps(depsConfig);
     const buildConfig = await getBuildConfig(depsConfig);
     await stepBuildModuleMpk(buildConfig);
+    await updateTestProjectRepo(buildConfig.dist.testProject.dir, '"Update widgets and styles"');
 }
 
 // Top level build-content command that generate module content
