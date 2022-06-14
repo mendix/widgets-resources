@@ -8,7 +8,13 @@ import { Version, VersionString } from "./version";
 export interface PackageJsonFileContent {
     name?: string;
     widgetName?: string;
+    // User friendly name. This will be included in release title.
     moduleName?: string;
+    // Module name in Studio Pro (visible in App Explorer)
+    moduleNameInModeler?: string;
+    // Module folder name under themesources
+    moduleFolderNameInModeler?: string;
+
     version?: VersionString;
 
     repository?: {
@@ -46,6 +52,8 @@ export interface WidgetPackageInfo extends PackageInfo {
     repositoryUrl: string;
     testProjectUrl: string | undefined;
     testProjectBranchName: string | undefined;
+    releaseTag: string;
+    releaseTitle: string;
 }
 
 export interface ModuleInfo extends WidgetPackageInfo {
@@ -53,6 +61,18 @@ export interface ModuleInfo extends WidgetPackageInfo {
     testProjectBranchName: string;
     moduleNameInModeler: string;
     moduleFolderNameInModeler: string;
+}
+
+function releaseTag(name: string, version: Version): string {
+    return `${name}-v${version.format()}`;
+}
+
+function releaseTitle(name: string, version: Version): string {
+    return `${name} - Marketplace Release v${version.format()}`;
+}
+
+function widgetReleaseTitle(name: string, version: Version): string {
+    return releaseTitle(`${name} (Web)`, version);
 }
 
 export async function getPackageFileContent(dirPath: string): Promise<PackageJsonFileContent> {
@@ -95,22 +115,26 @@ export async function getWidgetPackageInfo(path: string): Promise<WidgetPackageI
     const pkgPath = join(path, `package.json`);
     try {
         await access(pkgPath);
-        const { name, widgetName, moduleName, version, marketplace, testProject, repository } = (await import(
+        const { name, widgetName, version, marketplace, testProject, repository } = (await import(
             pkgPath
         )) as PackageJsonFileContent;
+        const packageName = ensureString(name, "name");
+        const packageFullName = ensureString(widgetName, "moduleName or widgetName");
+        const packageVersion = ensureVersion(version);
+
         return {
-            packageName: ensureString(name, "name"),
-            packageFullName: ensureString(moduleName ?? widgetName, "moduleName or widgetName"),
-
-            version: ensureVersion(version),
-
+            packageName,
+            packageFullName,
+            version: packageVersion,
             minimumMXVersion: ensureVersion(marketplace?.minimumMXVersion),
             repositoryUrl: ensureString(repository?.url, "repository.url"),
             // FIXME: Replace with md parser when md parser is 100% ready.
             changelog: "[Parsed Changelog]",
 
             testProjectUrl: testProject?.githubUrl,
-            testProjectBranchName: testProject?.branchName
+            testProjectBranchName: testProject?.branchName,
+            releaseTag: releaseTitle(packageName, packageVersion),
+            releaseTitle: widgetReleaseTitle(packageFullName, packageVersion)
         };
     } catch (error) {
         console.log(error);
@@ -120,28 +144,40 @@ export async function getWidgetPackageInfo(path: string): Promise<WidgetPackageI
 }
 
 export async function getModulePackageInfo(pkgDir: string): Promise<ModuleInfo> {
-    const {
-        name,
-        moduleName: moduleNameRaw,
-        version,
-        marketplace,
-        testProject,
-        repository
-    } = await getPackageFileContent(pkgDir);
-    const moduleName = ensureString(moduleNameRaw, "moduleName");
+    const pkgMeta = await getPackageFileContent(pkgDir);
+    const packageName = ensureString(pkgMeta.name, "name");
+    const packageFullName = ensureString(pkgMeta.moduleName, "moduleName");
+    const packageVersion = ensureVersion(pkgMeta.version);
+    const moduleNameInModeler = ensureString(pkgMeta.moduleNameInModeler, "moduleNameInModeler");
+
     return {
-        packageName: ensureString(name, "name"),
-        packageFullName: moduleName,
-        moduleNameInModeler: moduleName,
-        moduleFolderNameInModeler: moduleName.toLowerCase(),
-        version: ensureVersion(version),
-        minimumMXVersion: ensureVersion(marketplace?.minimumMXVersion),
-        repositoryUrl: ensureString(repository?.url, "repository.url"),
+        packageName,
+        packageFullName,
+        moduleNameInModeler,
+        moduleFolderNameInModeler: ensureModuleFolderName(
+            moduleNameInModeler,
+            pkgMeta.moduleFolderNameInModeler,
+            "moduleFolderNameInModeler"
+        ),
+        version: packageVersion,
+        minimumMXVersion: ensureVersion(pkgMeta.marketplace?.minimumMXVersion),
+        repositoryUrl: ensureString(pkgMeta.repository?.url, "repository.url"),
         // FIXME: Replace with md parser when md parser is 100% ready.
         changelog: "[Parsed Changelog]",
-        testProjectUrl: ensureString(testProject?.githubUrl, "testProject.githubUrl"),
-        testProjectBranchName: ensureString(testProject?.branchName, "testProject.branchName")
+        testProjectUrl: ensureString(pkgMeta.testProject?.githubUrl, "testProject.githubUrl"),
+        testProjectBranchName: ensureString(pkgMeta.testProject?.branchName, "testProject.branchName"),
+        releaseTag: releaseTag(packageName, packageVersion),
+        releaseTitle: releaseTitle(packageFullName, packageVersion)
     };
+}
+
+function ensureModuleFolderName(name: string, str: string | undefined, fieldName): string {
+    const folderName = ensureString(str, fieldName);
+    if (folderName !== name.toLowerCase()) {
+        throw new Error(`Expectd ${fieldName} to be equal to lowercase variant of modeler name, but got: ${str}`);
+    }
+
+    return folderName;
 }
 
 function ensureString(str: string | undefined, fieldName: string): string {

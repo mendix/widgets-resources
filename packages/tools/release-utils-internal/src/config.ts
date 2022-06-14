@@ -1,6 +1,5 @@
 import { join } from "node:path";
 import { find } from "shelljs";
-import { string } from "zod";
 import { getModulePackageInfo, ModuleInfo } from "./package-info";
 
 export interface DepsBuildConfig {
@@ -127,7 +126,7 @@ export async function getBuildConfig({
                 dir: testProjectDir,
                 themesource: stylesOut,
                 widgets: widgetsOut,
-                versionFile: versionFile
+                versionFile
             }
         }
     };
