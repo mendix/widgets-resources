@@ -1,8 +1,8 @@
-import { moduleGithubRelease } from "@mendix/release-utils-internal";
+import { releaseModuleOnGithub } from "@mendix/release-utils-internal";
 import { widgetFolderNames } from "./common";
 
 async function main(): Promise<void> {
-    await moduleGithubRelease({
+    await releaseModuleOnGithub({
         packagePath: process.cwd(),
         widgetFolderNames
     });

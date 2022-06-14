@@ -1,25 +1,28 @@
 {
   "name": "chart-widgets",
-  "moduleName": "ChartWidgets",
-  "version": "1.0.0",
+  "moduleName": "Chart Widgets",
+  "moduleNameInModeler": "ChartWidgets",
+  "moduleFolderNameInModeler": "chartwidgets",
+  "version": "0.1.0",
   "license": "Apache-2.0",
   "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mendix/widgets-resources.git"
+    "url": "https://github.com/iobuhov/widgets-resources.git"
   },
   "marketplace": {
     "minimumMXVersion": "9.6.0.27784",
     "marketplaceId": 999999
   },
   "testProject": {
-    "githubUrl": "https://github.com/mendix/Charts-module",
+    "githubUrl": "https://github.com/iobuhov/Charts-module-dev.git",
     "branchName": "main"
   },
   "scripts": {
     "build:module": "ts-node ./scripts/build.ts",
     "build:content-only": "ts-node ./scripts/build-content.ts",
-    "release:module": "ts-node ./scripts/release.ts"
+    "release:module": "ts-node ./scripts/release.ts",
+    "showconfig": "ts-node ./scripts/showconfig.ts"
   },
   "dependencies": {
     "@mendix/release-utils-internal": ">=1.0.0",
