@@ -60,7 +60,7 @@ export function ColumnChart({
 }: ColumnChartProps): ReactElement | null {
     const dataTypesResult = useMemo(() => getDataTypes(series), [series]);
     const sortedSeries = useMemo(() => {
-        if (typeof dataTypesResult === "undefined" || dataTypesResult instanceof Error) {
+        if (dataTypesResult === undefined || dataTypesResult instanceof Error) {
             return series;
         }
         return sortSeriesDataPoints(series, sortOrder, dataTypesResult);
@@ -142,7 +142,7 @@ export function ColumnChart({
 
     const [firstSeries] = sortedSeries;
 
-    const axisLabelStyles = useMemo(() => getAxisLabelStyles(style, warningPrefix), [style, warningPrefix]);
+    const axisLabelStyles = useMemo(() => getAxisLabelStyles(style, warningPrefix!), [style, warningPrefix]);
 
     const xAxisLabelComponent = <Text style={axisLabelStyles.xAxisLabelStyle}>{xAxisLabel}</Text>;
     const yAxisLabelComponent = <Text style={axisLabelStyles.yAxisLabelStyle}>{yAxisLabel}</Text>;
@@ -275,7 +275,7 @@ type ExtractedAxisLabelStyle = Pick<
 
 function getAxisLabelStyles(
     style: ColumnChartStyle,
-    warningPrefix?: string
+    warningPrefix: string
 ): {
     extractedXAxisLabelStyle: ExtractedAxisLabelStyle;
     xAxisLabelStyle: AxisLabelStyle;
@@ -284,27 +284,9 @@ function getAxisLabelStyles(
 } {
     const [extractedXAxisLabelStyle, xAxisLabelStyle] = extractStyles(style.xAxis?.label, ["relativePositionGrid"]);
     const [extractedYAxisLabelStyle, yAxisLabelStyle] = extractStyles(style.yAxis?.label, ["relativePositionGrid"]);
-    const { relativePositionGrid: xAxisRelativePositionGrid } = extractedXAxisLabelStyle;
-    const { relativePositionGrid: yAxisRelativePositionGrid } = extractedYAxisLabelStyle;
-    if (!(xAxisRelativePositionGrid === "bottom" || xAxisRelativePositionGrid === "right")) {
-        if (xAxisRelativePositionGrid !== undefined) {
-            console.warn(
-                `${warningPrefix}Invalid value for X axis label style property, relativePositionGrid, valid values are "bottom" and "right".`
-            );
-        }
 
-        extractedXAxisLabelStyle.relativePositionGrid = "bottom";
-    }
-
-    if (!(yAxisRelativePositionGrid === "top" || yAxisRelativePositionGrid === "left")) {
-        if (yAxisRelativePositionGrid !== undefined) {
-            console.warn(
-                `${warningPrefix}Invalid value for Y axis label style property, relativePositionGrid, valid values are "top" and "left".`
-            );
-        }
-
-        extractedYAxisLabelStyle.relativePositionGrid = "top";
-    }
+    validateRelativePositionGrid(extractedXAxisLabelStyle, "X", warningPrefix, "bottom", "right");
+    validateRelativePositionGrid(extractedYAxisLabelStyle, "Y", warningPrefix, "top", "left");
 
     return {
         extractedXAxisLabelStyle,
@@ -312,6 +294,24 @@ function getAxisLabelStyles(
         extractedYAxisLabelStyle,
         yAxisLabelStyle
     };
+}
+
+function validateRelativePositionGrid(
+    style: { relativePositionGrid?: string },
+    axis: "X" | "Y",
+    warningPrefix: string,
+    ...validValues: string[]
+): void {
+    const position = style.relativePositionGrid;
+    if (!validValues.some(value => value === position)) {
+        if (position !== undefined) {
+            const joinedValidValues = validValues.join(", ");
+            console.warn(
+                `${warningPrefix}Invalid value for ${axis} axis label style property relativePositionGrid, valid values are: ${joinedValidValues}`
+            );
+        }
+        style.relativePositionGrid = validValues[0];
+    }
 }
 
 function sortSeriesDataPoints(
