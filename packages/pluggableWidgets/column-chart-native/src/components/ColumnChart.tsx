@@ -1,5 +1,5 @@
 import { createElement, ReactElement, useCallback, useMemo, useState } from "react";
-import { LayoutChangeEvent, Text, View } from "react-native";
+import { LayoutChangeEvent, Text, TextStyle, View } from "react-native";
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryGroup, VictoryStack } from "victory-native";
 import { BarProps } from "victory-bar";
 import { extractStyles } from "@mendix/pluggable-widgets-tools";
@@ -46,34 +46,6 @@ export interface ColumnDataPoint<X extends number | Date | string, Y extends num
     y: Y;
 }
 
-function sortSeriesDataPoints(series: ColumnChartSeries[], sortingOrder: string): ColumnChartSeries[] {
-    const keysSum: { [key: string]: number } = {};
-    series.forEach(({ dataPoints }) => {
-        dataPoints.forEach(({ x, y }) => {
-            const key = x.toString();
-            if (key in keysSum) {
-                keysSum[key] += Number(y);
-            } else {
-                keysSum[key] = Number(y);
-            }
-        });
-    });
-
-    return series.map(seriesItem => {
-        const dataPoints = seriesItem.dataPoints as Array<ColumnDataPoint<string, number>>;
-        seriesItem.dataPoints = Object.keys(keysSum)
-            .sort((key1, key2) => {
-                return sortingOrder === "descending" ? keysSum[key2] - keysSum[key1] : keysSum[key1] - keysSum[key2];
-            })
-            .map(key => ({
-                x: key,
-                y: dataPoints.find((point: ColumnDataPoint<string, number>) => point.x === key)?.y || 0
-            }));
-
-        return seriesItem;
-    });
-}
-
 export function ColumnChart({
     name,
     presentation,
@@ -86,23 +58,18 @@ export function ColumnChart({
     style,
     warningPrefix
 }: ColumnChartProps): ReactElement | null {
+    const dataTypesResult = useMemo(() => getDataTypes(series), [series]);
     const sortedSeries = useMemo(() => {
-        const isNotSortable = series.some(({ dataPoints }) =>
-            dataPoints.some(({ x, y }) => typeof x !== "string" || typeof y !== "number")
-        );
-        return isNotSortable ? series : sortSeriesDataPoints(series, sortOrder);
-    }, [sortOrder, series]);
+        const seriesDataType = dataTypesResult as DataTypeResult | undefined;
+        return sortSeriesDataPoints(series, sortOrder, seriesDataType);
+    }, [sortOrder, series, dataTypesResult]);
 
     const [chartDimensions, setChartDimensions] = useState<{ height: number; width: number }>();
-
-    const warningMessagePrefix = useMemo(() => (warningPrefix ? warningPrefix + "i" : "I"), [warningPrefix]);
-
-    const dataTypesResult = useMemo(() => getDataTypes(sortedSeries), [sortedSeries]);
 
     // Column Chart user-styling may be missing for certain series. A palette is passed, any missing colours
     // fallback to a colour from the palette.
     const normalizedColumnColors: string[] = useMemo(() => {
-        const ColumnColorPalette = style.columns?.columnColorPalette?.split(";");
+        const columnColorPalette = style.columns?.columnColorPalette?.split(";");
         let index = 0;
 
         return sortedSeries.map(_series => {
@@ -111,13 +78,13 @@ export function ColumnChart({
                 : style.columns?.customColumnStyles?.[_series.customColumnStyle]?.column?.columnColor;
 
             if (typeof configuredStyle !== "string") {
-                const ColumnColor = ColumnColorPalette?.[index] || "black";
+                const columnColor = columnColorPalette?.[index] || "black";
 
-                if (ColumnColorPalette) {
-                    index = index + 1 === ColumnColorPalette.length ? 0 : index + 1;
+                if (columnColorPalette) {
+                    index = index + 1 === columnColorPalette.length ? 0 : index + 1;
                 }
 
-                return ColumnColor;
+                return columnColor;
             }
 
             return configuredStyle;
@@ -169,51 +136,11 @@ export function ColumnChart({
         }
 
         return <VictoryStack colorScale={normalizedColumnColors}>{Columns}</VictoryStack>;
-    }, [dataTypesResult, series, style, warningMessagePrefix, showLabels, normalizedColumnColors, presentation]);
+    }, [dataTypesResult, sortedSeries, style, showLabels, normalizedColumnColors, presentation]);
 
     const [firstSeries] = sortedSeries;
 
-    const axisLabelStyles = useMemo(() => {
-        const [extractedXAxisLabelStyle, xAxisLabelStyle] = extractStyles(style.xAxis?.label, ["relativePositionGrid"]);
-        const [extractedYAxisLabelStyle, yAxisLabelStyle] = extractStyles(style.yAxis?.label, ["relativePositionGrid"]);
-
-        if (
-            !(
-                extractedXAxisLabelStyle.relativePositionGrid === "bottom" ||
-                extractedXAxisLabelStyle.relativePositionGrid === "right"
-            )
-        ) {
-            if (extractedXAxisLabelStyle.relativePositionGrid !== undefined) {
-                console.warn(
-                    `${warningMessagePrefix}nvalid value for X axis label style property, relativePositionGrid, valid values are "bottom" and "right".`
-                );
-            }
-
-            extractedXAxisLabelStyle.relativePositionGrid = "bottom";
-        }
-
-        if (
-            !(
-                extractedYAxisLabelStyle.relativePositionGrid === "top" ||
-                extractedYAxisLabelStyle.relativePositionGrid === "left"
-            )
-        ) {
-            if (extractedYAxisLabelStyle.relativePositionGrid !== undefined) {
-                console.warn(
-                    `${warningMessagePrefix}nvalid value for Y axis label style property, relativePositionGrid, valid values are "top" and "left".`
-                );
-            }
-
-            extractedYAxisLabelStyle.relativePositionGrid = "top";
-        }
-
-        return {
-            extractedXAxisLabelStyle,
-            xAxisLabelStyle,
-            extractedYAxisLabelStyle,
-            yAxisLabelStyle
-        };
-    }, [style, warningMessagePrefix]);
+    const axisLabelStyles = useMemo(() => getAxisLabelStyles(style, warningPrefix), [style, warningPrefix]);
 
     const xAxisLabelComponent = <Text style={axisLabelStyles.xAxisLabelStyle}>{xAxisLabel}</Text>;
     const yAxisLabelComponent = <Text style={axisLabelStyles.yAxisLabelStyle}>{yAxisLabel}</Text>;
@@ -326,3 +253,115 @@ const getScale = (dataTypesResult: string): "linear" | "time" | undefined => {
 
     return undefined;
 };
+
+type AxisLabelStyle = Omit<
+    TextStyle & {
+        relativePositionGrid?: "bottom" | "right" | "left" | "top" | undefined;
+    },
+    "relativePositionGrid"
+>;
+
+type ExtractedAxisLabelStyle = Pick<
+    TextStyle & {
+        relativePositionGrid?: "bottom" | "right" | "left" | "top" | undefined;
+    },
+    "relativePositionGrid"
+>;
+
+function getAxisLabelStyles(
+    style: ColumnChartStyle,
+    warningPrefix?: string
+): {
+    extractedXAxisLabelStyle: ExtractedAxisLabelStyle;
+    xAxisLabelStyle: AxisLabelStyle;
+    extractedYAxisLabelStyle: ExtractedAxisLabelStyle;
+    yAxisLabelStyle: AxisLabelStyle;
+} {
+    const [extractedXAxisLabelStyle, xAxisLabelStyle] = extractStyles(style.xAxis?.label, ["relativePositionGrid"]);
+    const [extractedYAxisLabelStyle, yAxisLabelStyle] = extractStyles(style.yAxis?.label, ["relativePositionGrid"]);
+
+    if (
+        !(
+            extractedXAxisLabelStyle.relativePositionGrid === "bottom" ||
+            extractedXAxisLabelStyle.relativePositionGrid === "right"
+        )
+    ) {
+        if (extractedXAxisLabelStyle.relativePositionGrid !== undefined) {
+            console.warn(
+                `${warningPrefix} Invalid value for X axis label style property, relativePositionGrid, valid values are "bottom" and "right".`
+            );
+        }
+
+        extractedXAxisLabelStyle.relativePositionGrid = "bottom";
+    }
+
+    if (
+        !(
+            extractedYAxisLabelStyle.relativePositionGrid === "top" ||
+            extractedYAxisLabelStyle.relativePositionGrid === "left"
+        )
+    ) {
+        if (extractedYAxisLabelStyle.relativePositionGrid !== undefined) {
+            console.warn(
+                `${warningPrefix} Invalid value for Y axis label style property, relativePositionGrid, valid values are "top" and "left".`
+            );
+        }
+
+        extractedYAxisLabelStyle.relativePositionGrid = "top";
+    }
+
+    return {
+        extractedXAxisLabelStyle,
+        xAxisLabelStyle,
+        extractedYAxisLabelStyle,
+        yAxisLabelStyle
+    };
+}
+
+function sortSeriesDataPoints(
+    series: ColumnChartSeries[],
+    sortingOrder: string,
+    seriesDataType: DataTypeResult | undefined
+): ColumnChartSeries[] {
+    if (!seriesDataType) {
+        return series;
+    }
+    // number and date keys need to be sorted ascending otherwise the library will mis-represent them
+    if (seriesDataType.x !== "string") {
+        return series.map(seriesItem => {
+            const { dataPoints } = seriesItem;
+            const sortedDataPoints = dataPoints.sort((p1, p2) => Number(p1.x) - Number(p2.x));
+            return { ...seriesItem, dataPoints: sortedDataPoints };
+        });
+    }
+    // string values are not sortable
+    if (seriesDataType.y === "string") {
+        return series;
+    }
+    const keysSum: { [key: string]: number } = {};
+    series.forEach(({ dataPoints }) => {
+        dataPoints.forEach(({ x, y }) => {
+            const key = x as string;
+            if (key in keysSum) {
+                keysSum[key] += Number(y);
+            } else {
+                keysSum[key] = Number(y);
+            }
+        });
+    });
+
+    return series.map(seriesItem => {
+        const dataPoints = seriesItem.dataPoints as Array<ColumnDataPoint<string, number>>;
+
+        const sortedDataPoints = Object.keys(keysSum)
+            .sort((key1, key2) => {
+                return sortingOrder === "descending" ? keysSum[key2] - keysSum[key1] : keysSum[key1] - keysSum[key2];
+            })
+            .map(key => ({
+                x: key,
+                y: dataPoints.find((point: ColumnDataPoint<string, number>) => point.x === key)?.y || 0
+            }));
+
+        return { ...seriesItem, dataPoints: sortedDataPoints };
+    });
+}
