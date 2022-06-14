@@ -1,15 +1,15 @@
-import { basename, join, parse, format } from "path";
-import { z } from "zod";
 import { XMLBuilder, XMLParser } from "fast-xml-parser";
-import { cp, rm, mkdir } from "shelljs";
-
-import { execShellCommand, getFiles, unzip, zip } from "./shell";
-import { ModuleInfo } from "./package-info";
-import { Version } from "./version";
-import { readFile, writeFile } from "fs/promises";
+import { basename, format, join, parse } from "path";
+import { cp, mkdir, rm } from "shelljs";
+import { z } from "zod";
 import { execSync } from "child_process";
+import { readFile, writeFile } from "fs/promises";
+import { ModuleInfo } from "./package-info";
+import { execShellCommand, getFiles, unzip, zip } from "./shell";
+import { mxutilExcludeFilesRegEx } from "./vars";
+import { Version } from "./version";
 
-async function ensureMxBuildDockerImageExists(mendixVersion: Version) {
+async function ensureMxBuildDockerImageExists(mendixVersion: Version): Promise<void> {
     const version = mendixVersion.format(true);
 
     const existingImages = (await execShellCommand(`docker image ls -q mxbuild:${version}`)).toString().trim();
@@ -63,7 +63,7 @@ export async function createModuleMpkInDocker(
 export async function createMPK(
     tmpFolder: string,
     moduleInfo: ModuleInfo,
-    excludeFilesRegExp: string
+    excludeFilesRegExp = mxutilExcludeFilesRegEx()
 ): Promise<string> {
     await createModuleMpkInDocker(
         tmpFolder,

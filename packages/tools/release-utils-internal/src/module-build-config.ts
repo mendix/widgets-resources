@@ -1,6 +1,7 @@
 import { join } from "node:path";
 import { find } from "shelljs";
 import { getModulePackageInfo, ModuleInfo } from "./package-info";
+import { isDebug } from "./vars";
 
 export interface DepsBuildConfig {
     // Widget dirs
@@ -80,9 +81,9 @@ export async function getBuildConfig({
 }: DepsBuildConfig): Promise<ModuleBuildConfig> {
     console.info("Reading package.json...");
     const moduleInfo = await getModulePackageInfo(packagePath);
-    const { version, moduleNameInModeler, moduleFolderNameInModeler } = moduleInfo;
+    const { version, moduleNameInModeler, moduleFolderNameInModeler, packageFullName } = moduleInfo;
 
-    console.info(`Creating build config for ${moduleNameInModeler}...`);
+    console.info(`Creating build config for ${packageFullName}...`);
 
     const stylesPath = join(packagePath, "src/themesource", moduleFolderNameInModeler);
 
@@ -131,8 +132,10 @@ export async function getBuildConfig({
         }
     };
 
-    console.info("Config:");
-    console.info(result);
+    if (isDebug()) {
+        console.info("Config:");
+        console.info(result);
+    }
 
     return result;
 }
