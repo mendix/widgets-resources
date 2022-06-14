@@ -11,3 +11,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: "Notifying Workflow Team on WorkWeiXin"
+            - run: "echo hello world"
