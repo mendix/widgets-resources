@@ -12,8 +12,8 @@ jobs:
         name: "Automated tests"
         runs-on: ubuntu-latest
         permissions:
-          packages: read
-          contents: read
+            packages: read
+            contents: read
         strategy:
             # when one test fails, DO NOT cancel the other
             fail-fast: false
@@ -27,24 +27,22 @@ jobs:
               uses: softprops/diffset@3aeca0719d5043522e155012d3c9f7470fdd2dc6 # v1
               if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
               with:
-                global_files: |
-                  !{packages/**/*,configs/e2e/*.json,detox/**/*,scripts/**/*,data/**/*}
-                not_atlas_native_files: |
-                  !packages/theming/atlas/src/**/native/**
+                  global_files: |
+                      !{packages/**/*,configs/e2e/*.json,detox/**/*,scripts/**/*,data/**/*}
+                  not_atlas_native_files: |
+                      !packages/theming/atlas/src/**/native/**
               env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: "Checking-out code"
               uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
               with:
                   submodules: false
             - name: "Fetching master to compare"
               if: github.event_name == 'pull_request' && (steps.files.outputs.global_files == '' || github.event.pull_request.head.repo.full_name != github.repository)
-              run:
-                  git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
+              run: git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
             - name: "Defining environment variables"
               id: variables
-              run:
-                  echo ::set-output name=arg::$(if [ "${{ steps.files.outputs.global_files }}" = "" ] && ${{ github.event_name == 'pull_request' }}; then echo '--since origin/${{ github.base_ref }}'; else echo ''; fi)
+              run: echo ::set-output name=arg::$(if [ "${{ steps.files.outputs.global_files }}" = "" ] && ${{ github.event_name == 'pull_request' }}; then echo '--since origin/${{ github.base_ref }}'; else echo ''; fi)
             - name: "Defining cache"
               uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed # v2
               env:
@@ -55,7 +53,7 @@ jobs:
             - name: "Defining node version"
               uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
               with:
-                  node-version-file: '.nvmrc'
+                  node-version-file: ".nvmrc"
             - name: "Installing dependencies"
               run: npm install
             - name: Login to GitHub Container Registry
@@ -69,7 +67,8 @@ jobs:
               if: github.event_name == 'push' || steps.files.outputs.not_atlas_native_files != '' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository)
               run: CIRCLE_NODE_INDEX=${{ matrix.containers }} npm run test:e2e -- ${{ steps.variables.outputs.arg }}
               env:
-                FORKED: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+                  NODE_OPTIONS: --max_old_space_size=8192
+                  FORKED: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
             - name: "Fixing files permissions"
               if: failure()
               run: |
