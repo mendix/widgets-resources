@@ -203,8 +203,10 @@ $brand-primary: #264ae5 !default;
 
         > .td-text,
         * {
-            white-space: normal;
-            word-break: break-all;
+            white-space: nowrap;
+            word-break: break-word;
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
 
         > .td-custom-content {
@@ -221,9 +223,7 @@ $brand-primary: #264ae5 !default;
 
             > .td-text,
             > .mx-text {
-                text-overflow: ellipsis;
-                overflow: hidden;
-                white-space: nowrap;
+                white-space: normal;
             }
         }
     }
