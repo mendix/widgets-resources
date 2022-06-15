@@ -43,10 +43,6 @@
                         <enumerationValue key="custom">Custom</enumerationValue>
                     </enumerationValues>
                 </property>
-                <systemProperty key="Label" />
-            </propertyGroup>
-            <propertyGroup caption="Editability">
-                <systemProperty key="Editability" />
                 <property key="readOnlyStyle" type="enumeration" defaultValue="text">
                     <caption>Read-only style</caption>
                     <description>How the rich text editor will appear in read-only mode.</description>
@@ -56,6 +52,10 @@
                         <enumerationValue key="borderedToolbar">Bordered toolbar</enumerationValue>
                     </enumerationValues>
                 </property>
+                <systemProperty key="Label" />
+            </propertyGroup>
+            <propertyGroup caption="Editability">
+                <systemProperty key="Editability" />
             </propertyGroup>
             <propertyGroup caption="Visibility">
                 <systemProperty key="Visibility" />

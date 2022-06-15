@@ -10,6 +10,7 @@ import RichTextPreviewSVGDark from "./assets/rich-text-preview-dark.svg";
 import RichTextPreviewSVGLight from "./assets/rich-text-preview-light.svg";
 
 const advancedModeItems: Array<keyof RichTextPreviewProps> = [
+    "sanitizeContent",
     "enterMode",
     "shiftEnterMode",
     "spellChecker",
