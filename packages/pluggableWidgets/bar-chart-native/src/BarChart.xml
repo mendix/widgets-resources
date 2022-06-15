@@ -19,12 +19,12 @@
             <propertyGroup caption="Data source">
                 <property key="barSeries" type="object" isList="true">
                     <caption>Bar series</caption>
-                    <description>Add one or more bar series. The top-down order of static data sets and the order of data returned by grouped dynamic data sets influences the sequential order of bars in stacked presentation mode and the order of bars rendered in the Z-plane (where data sets lower in the order are rendered lowest in the Z-plane) in grouped presentation mode.</description>
+                    <description>Add one or more bar series. The descending order of static data sets and the order of data returned by grouped dynamic data sets influence the sequential order of bars in stacked presentation mode. This descending order also influences the order of bars rendered in the Z-plane in stacked presentation mode.​</description>
                     <properties>
                         <propertyGroup caption="General">
                             <property key="dataSet" type="enumeration" defaultValue="static">
                                 <caption>Data set</caption>
-                                <description/>
+                                <description />
                                 <enumerationValues>
                                     <enumerationValue key="static">Static</enumerationValue>
                                     <enumerationValue key="dynamic">Dynamic</enumerationValue>
@@ -69,8 +69,8 @@
                                     <attributeType name="Integer" />
                                     <attributeType name="Long" />
                                     <attributeType name="AutoNumber" />
-                                    <attributeType name="String"/>
-                                    <attributeType name="Enum"/>
+                                    <attributeType name="String" />
+                                    <attributeType name="Enum" />
                                 </attributeTypes>
                             </property>
                             <property key="dynamicXAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
@@ -82,9 +82,8 @@
                                     <attributeType name="Integer" />
                                     <attributeType name="Long" />
                                     <attributeType name="AutoNumber" />
-                                    <attributeType name="String"/>
-                                    <attributeType name="Enum"/>
-
+                                    <attributeType name="String" />
+                                    <attributeType name="Enum" />
                                 </attributeTypes>
                             </property>
                             <property key="staticYAttribute" type="attribute" required="false" dataSource="staticDataSource">
@@ -96,9 +95,8 @@
                                     <attributeType name="Integer" />
                                     <attributeType name="Long" />
                                     <attributeType name="AutoNumber" />
-                                    <attributeType name="String"/>
-                                    <attributeType name="Enum"/>
-
+                                    <attributeType name="String" />
+                                    <attributeType name="Enum" />
                                 </attributeTypes>
                             </property>
                             <property key="dynamicYAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
@@ -110,8 +108,8 @@
                                     <attributeType name="Integer" />
                                     <attributeType name="Long" />
                                     <attributeType name="AutoNumber" />
-                                    <attributeType name="String"/>
-                                    <attributeType name="Enum"/>
+                                    <attributeType name="String" />
+                                    <attributeType name="Enum" />
                                 </attributeTypes>
                             </property>
                         </propertyGroup>
@@ -134,7 +132,7 @@
                     <caption>Sort order</caption>
                     <description>Applicable only to X axis attributes.</description>
                     <enumerationValues>
-                        <enumerationValue key="ascending" >Ascending</enumerationValue>
+                        <enumerationValue key="ascending">Ascending</enumerationValue>
                         <enumerationValue key="descending">Descending</enumerationValue>
                     </enumerationValues>
                 </property>
@@ -158,7 +156,7 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
+                <systemProperty key="Name" />
                 <systemProperty key="Visibility" />
             </propertyGroup>
         </propertyGroup>
