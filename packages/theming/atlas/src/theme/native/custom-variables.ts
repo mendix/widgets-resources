@@ -699,11 +699,7 @@ export const columnChart: VariablesColumnChart = {
     },
     chart: {},
     grid: {
-        lineColor: border.color,
-        paddingBottom: 32,
-        paddingLeft: 32,
-        paddingRight: 8,
-        paddingTop: 8
+        lineColor: border.color
     },
     xAxis: {
         color: font.colorTitle,

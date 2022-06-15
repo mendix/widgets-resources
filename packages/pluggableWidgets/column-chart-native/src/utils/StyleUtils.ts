@@ -83,10 +83,17 @@ export function aggregateGridPadding(gridStyle?: ColumnChartGridStyle): VictoryC
     const { padding, paddingHorizontal, paddingVertical, paddingTop, paddingRight, paddingBottom, paddingLeft } =
         gridStyle;
 
+    const defaultGridPadding = {
+        bottom: 30,
+        left: 30,
+        right: 10,
+        top: 10
+    };
+
     return {
-        top: paddingTop ?? paddingVertical ?? padding,
-        right: paddingRight ?? paddingHorizontal ?? padding,
-        bottom: paddingBottom ?? paddingVertical ?? padding,
-        left: paddingLeft ?? paddingHorizontal ?? padding
+        top: paddingTop ?? paddingVertical ?? padding ?? defaultGridPadding.top,
+        right: paddingRight ?? paddingHorizontal ?? padding ?? defaultGridPadding.right,
+        bottom: paddingBottom ?? paddingVertical ?? padding ?? defaultGridPadding.bottom,
+        left: paddingLeft ?? paddingHorizontal ?? padding ?? defaultGridPadding.left
     };
 }
