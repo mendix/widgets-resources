@@ -124,7 +124,9 @@ export function ColumnChart({
                             ...columnStyles.labels
                         }
                     }}
-                    {...(showLabels ? { labels: ({ datum }: { datum: BarProps["datum"] }) => datum.y } : undefined)}
+                    {...(showLabels
+                        ? { labels: ({ datum }: { datum: BarProps["datum"] }) => datum.y || "" }
+                        : undefined)}
                 />
             );
         });
