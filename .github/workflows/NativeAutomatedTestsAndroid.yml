@@ -26,9 +26,41 @@ jobs:
         run: mx update-widgets --loose-version-check Native-Mobile-Resources-main/NativeComponentsTestProject.mpr
       - name: Build test project
         run: mxbuild -o automation.mda Native-Mobile-Resources-main/NativeComponentsTestProject.mpr
-      - name: Archive MDA
+      - run: mkdir -p android/assets && mkdir -p ios/assets
+      - name: Bundle Android
+        run: |
+          cd Native-Mobile-Resources-main/deployment/native && \
+          NODE_OPTIONS="--max-old-space-size=6144" /tmp/mxbuild/modeler/tools/node/node \
+          /tmp/mxbuild/modeler/tools/node/node_modules/react-native/local-cli/cli.js \
+          bundle --verbose --platform android --dev false \
+          --config "$PWD/metro.config.json" \
+          --bundle-output $GITHUB_WORKSPACE/android/android.bundle \
+          --assets-dest $GITHUB_WORKSPACE/android/assets/ \
+          --entry-file ./index.js
+      - name: Bundle iOS
+        run: |
+          cd Native-Mobile-Resources-main/deployment/native && \
+          NODE_OPTIONS="--max-old-space-size=6144" /tmp/mxbuild/modeler/tools/node/node \
+          /tmp/mxbuild/modeler/tools/node/node_modules/react-native/local-cli/cli.js \
+          bundle --platform ios --dev true \
+          --config "$PWD/metro.config.json" \
+          --bundle-output $GITHUB_WORKSPACE/ios/ios.bundle \
+          --assets-dest $GITHUB_WORKSPACE/ios/assets/ \
+          --entry-file ./index.js
+      - name: Upload artifacts
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         with:
           name: mda
           path: automation.mda
-          if-no-files-found: ignore
+      - uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
+        with:
+          name: mda
+          path: automation.mda
+      - uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
+        with:
+          name: android
+          path: android
+      - uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
+        with:
+          name: ios
+          path: ios
