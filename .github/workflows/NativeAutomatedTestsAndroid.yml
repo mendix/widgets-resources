@@ -9,7 +9,41 @@ on:
     branches: [ master ]
 
 jobs:
+  widgets:
+    runs-on: ubuntu-22.04
+    permissions:
+      packages: read
+      contents: read
+    steps:
+      - name: "Checking-out code"
+        uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v3
+        with:
+          fetch-depth: 0
+      - name: "Set up node"
+        uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 # v3
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+      - name: "Installing dependencies"
+        run: npm ci --legacy-peer-deps
+      - name: "Running build for development (MR)"
+        if: github.event_name == 'pull_request'
+        run: npm run build:native -- --since origin/${{ github.base_ref }}
+        env:
+          NODE_OPTIONS: --max_old_space_size=8192
+      - name: "Running build for development"
+        if: github.event_name != 'pull_request'
+        run: npm run build:native
+        env:
+          NODE_OPTIONS: --max_old_space_size=8192
+      - name: Upload widgets
+        uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
+        with:
+          name: widgets
+          path: packages/pluggableWidgets/**/dist/*/*.mpk
   project:
+    needs: widgets
     runs-on: ubuntu-22.04
     container: ghcr.io/mendix/widgets-resources/mxbuild:9.13.0.43286
     steps:
@@ -76,7 +110,7 @@ jobs:
         MENDIX_VERSION: 9.13.0.43286
     steps:
       - name: "Checking-out code"
-        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
+        uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v3
         with:
           submodules: false
       - uses: actions/download-artifact@master
