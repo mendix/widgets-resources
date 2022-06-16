@@ -11,6 +11,11 @@ on:
       - master
     paths:
       - scripts/data/**/*
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   publish-data:
     runs-on: ubuntu-latest

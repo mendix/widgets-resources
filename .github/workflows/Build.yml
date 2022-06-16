@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [master]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   scope:
     name: Set scope
@@ -15,7 +19,7 @@ jobs:
     steps:
       - id: since
         if: github.event_name == 'pull_request'
-        run: echo "::set-output name=since:: -- --since origin/${{ github.base_ref }}"
+        run: echo "::set-output name=since::-- --since origin/${{ github.base_ref }}"
   harden_security:
     name: Check SHA in GH Actions
     runs-on: ubuntu-latest
