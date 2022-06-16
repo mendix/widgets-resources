@@ -590,3 +590,75 @@ export interface VariablesRadioButtons {
 export interface VariableBackgroundGradient {
     container: ViewStyle;
 }
+
+interface ColumnChartGridStyle {
+    backgroundColor?: string;
+    dashArray?: string;
+    lineColor?: string;
+    padding?: number;
+    paddingBottom?: number;
+    paddingHorizontal?: number;
+    paddingLeft?: number;
+    paddingRight?: number;
+    paddingTop?: number;
+    paddingVertical?: number;
+    width?: number;
+}
+
+interface ColumnChartAxisStyle<T extends "X" | "Y"> {
+    color?: string;
+    dashArray?: string;
+    fontFamily?: string;
+    fontSize?: number;
+    fontStyle?: "normal" | "italic";
+    fontWeight?: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
+    label?: TextStyle & {
+        relativePositionGrid?: T extends "X" ? "bottom" | "right" : "top" | "left";
+    };
+    lineColor?: string;
+    width?: number;
+}
+
+interface ColumnChartColumnStyle {
+    ending?: number;
+    columnColor?: string;
+    width?: number;
+}
+
+interface ColumnChartColumnLabelStyle {
+    // color is the same as column color
+    fontFamily?: string;
+    fontSize?: number;
+    fontStyle?: "normal" | "italic";
+    fontWeight?: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
+}
+
+export interface ColumnChartLegendStyle {
+    container?: ViewStyle;
+    item?: ViewStyle;
+    indicator?: ViewStyle;
+    label?: TextStyle;
+}
+
+export interface VariablesColumnChart {
+    container?: ViewStyle;
+    errorMessage?: TextStyle;
+    chart?: ViewStyle;
+    grid?: ColumnChartGridStyle;
+    xAxis?: ColumnChartAxisStyle<"X">;
+    yAxis?: ColumnChartAxisStyle<"Y">;
+    legend?: ColumnChartLegendStyle;
+    columns?: {
+        columnColorPalette?: string;
+        columnsOffset?: number; // only applicable to Grouped presentation mode
+        customColumnStyles?: {
+            [key: string]: {
+                column?: ColumnChartColumnStyle;
+                label?: ColumnChartColumnLabelStyle;
+            };
+        };
+    };
+    domain?: {
+        padding?: { x: number; y: number };
+    };
+}
