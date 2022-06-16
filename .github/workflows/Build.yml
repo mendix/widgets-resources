@@ -7,6 +7,15 @@ on:
     branches: [master]
 
 jobs:
+  scope:
+    name: Set scope
+    runs-on: ubuntu-latest
+    outputs:
+      since: ${{ steps.since.outputs.since }}
+    steps:
+      - id: since
+        if: github.event_name == 'pull_request'
+        run: echo "::set-output name=since:: -- --since origin/${{ github.base_ref }}"
   harden_security:
     name: Check SHA in GH Actions
     runs-on: ubuntu-latest
@@ -18,6 +27,7 @@ jobs:
   lint:
     name: "Lint"
     runs-on: ubuntu-latest
+    needs: scope
 
     steps:
       - name: "Checking-out code"
@@ -32,15 +42,12 @@ jobs:
           cache-dependency-path: "**/package-lock.json"
       - name: "Installing dependencies"
         run: npm run bootstrap
-      - name: "Linting code (MR)"
-        if: github.event_name == 'pull_request'
-        run: npm run lint -- --since origin/${{ github.base_ref }}
       - name: "Linting code"
-        if: github.event_name != 'pull_request'
-        run: npm run lint
+        run: npm run lint ${{ needs.scope.outputs.since }}
   test:
     name: "Unit tests"
     runs-on: ubuntu-latest
+    needs: scope
 
     steps:
       - name: "Checking-out code"
@@ -55,15 +62,13 @@ jobs:
           cache-dependency-path: "**/package-lock.json"
       - name: "Installing dependencies"
         run: npm run bootstrap
-      - name: "Running unit tests (MR)"
-        if: github.event_name == 'pull_request'
-        run: npm run test -- --since origin/${{ github.base_ref }}
       - name: "Running unit tests"
-        if: github.event_name != 'pull_request'
-        run: npm run test
+        run: npm run test ${{ needs.scope.outputs.since }}
   build:
     name: "Build for ${{ matrix.target }} target on ${{ matrix.os }}"
     runs-on: ${{ matrix.os }}
+    needs: scope
+
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
@@ -82,19 +87,14 @@ jobs:
           cache-dependency-path: "**/package-lock.json"
       - name: "Installing dependencies"
         run: npm run bootstrap
-      - name: "Running build for development (MR)"
-        if: github.event_name == 'pull_request'
-        run: npm run build -- --since origin/${{ github.base_ref }}
-        env:
-          NODE_OPTIONS: --max_old_space_size=8192
       - name: "Running build for development"
-        if: github.event_name != 'pull_request'
-        run: npm run ${{ matrix.target }}
+        run: npm run build ${{ needs.scope.outputs.since }}
         env:
           NODE_OPTIONS: --max_old_space_size=8192
   script-tests:
     name: "Script tests (Node ${{ matrix.node }}, ${{ matrix.os }})"
     runs-on: ${{ matrix.os }}
+    needs: scope
     strategy:
       matrix:
         node: [16]
@@ -119,9 +119,5 @@ jobs:
       - name: Increase number of watchers
         if: startsWith(matrix.os, 'ubuntu')
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-      - name: "Running build for development (MR)"
-        if: github.event_name == 'pull_request'
-        run: npm run test:scripts -- --since origin/${{ github.base_ref }}
       - name: "Running build for development"
-        if: github.event_name != 'pull_request'
-        run: npm run test:scripts
+        run: npm run test:scripts ${{ needs.scope.outputs.since }}
