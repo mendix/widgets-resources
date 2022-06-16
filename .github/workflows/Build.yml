@@ -77,6 +77,12 @@ jobs:
               run: npm run build ${{ needs.scope.outputs.since }}
               env:
                   NODE_OPTIONS: --max_old_space_size=8192
+            - name: Upload widgets
+              if: matrix.os == 'ubuntu-latest' && matrix.target == 'release'
+              uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8 # v3
+              with:
+                  name: widgets
+                  path: packages/pluggableWidgets/**/dist/*/*.mpk
     script-tests:
         name: "Script tests (Node ${{ matrix.node }}, ${{ matrix.os }})"
         runs-on: ${{ matrix.os }}
