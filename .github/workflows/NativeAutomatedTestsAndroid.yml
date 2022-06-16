@@ -9,12 +9,9 @@ on:
     branches: [ master ]
 
 jobs:
-  mxbuild:
+  project:
     runs-on: ubuntu-22.04
-    container:
-      image: ghcr.io/mendix/widgets-resources/mxbuild:9.13.0.43286
-      ports:
-        - 8083
+    container: ghcr.io/mendix/widgets-resources/mxbuild:9.13.0.43286
     steps:
       - name: Download test project
         run: curl -L -o project.zip https://github.com/mendix/Native-Mobile-Resources/archive/refs/heads/main.zip
@@ -26,41 +23,45 @@ jobs:
         run: mx update-widgets --loose-version-check Native-Mobile-Resources-main/NativeComponentsTestProject.mpr
       - name: Build test project
         run: mxbuild -o automation.mda Native-Mobile-Resources-main/NativeComponentsTestProject.mpr
-      - run: mkdir -p android/assets && mkdir -p ios/assets
-      - name: Bundle Android
-        run: |
-          cd Native-Mobile-Resources-main/deployment/native && \
-          NODE_OPTIONS="--max-old-space-size=6144" /tmp/mxbuild/modeler/tools/node/node \
-          /tmp/mxbuild/modeler/tools/node/node_modules/react-native/local-cli/cli.js \
-          bundle --verbose --platform android --dev false \
-          --config "$PWD/metro.config.json" \
-          --bundle-output $GITHUB_WORKSPACE/android/android.bundle \
-          --assets-dest $GITHUB_WORKSPACE/android/assets/ \
-          --entry-file ./index.js
-      - name: Bundle iOS
-        run: |
-          cd Native-Mobile-Resources-main/deployment/native && \
-          NODE_OPTIONS="--max-old-space-size=6144" /tmp/mxbuild/modeler/tools/node/node \
-          /tmp/mxbuild/modeler/tools/node/node_modules/react-native/local-cli/cli.js \
-          bundle --platform ios --dev true \
-          --config "$PWD/metro.config.json" \
-          --bundle-output $GITHUB_WORKSPACE/ios/ios.bundle \
-          --assets-dest $GITHUB_WORKSPACE/ios/assets/ \
-          --entry-file ./index.js
-      - name: Upload artifacts
+      - name: Upload MDA
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         with:
           name: mda
           path: automation.mda
-      - uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
+  bundle:
+    needs: project
+    runs-on: ubuntu-22.04
+    container: ghcr.io/mendix/widgets-resources/mxbuild:9.13.0.43286
+    strategy:
+      matrix:
+        platform: [ 'android', 'ios' ]
+    steps:
+      - name: Download test project
+        run: curl -L -o project.zip https://github.com/mendix/Native-Mobile-Resources/archive/refs/heads/main.zip
+      - name: Extract test project
+        uses: montudor/action-zip@0852c26906e00f8a315c704958823928d8018b28
+        with:
+          args: unzip -qq project.zip
+      - uses: actions/download-artifact@master
         with:
           name: mda
-          path: automation.mda
-      - uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
+      - name: Extract test project
+        uses: montudor/action-zip@0852c26906e00f8a315c704958823928d8018b28
         with:
-          name: android
-          path: android
-      - uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
+          args: unzip -qq automation.mda -d Native-Mobile-Resources-main/deployment
+      - run: mkdir -p ${{ matrix.platform }}/assets
+      - name: Bundle ${{ matrix.platform }}
+        run: |
+          cd Native-Mobile-Resources-main/deployment/native && \
+          NODE_OPTIONS="--max-old-space-size=6144" /tmp/mxbuild/modeler/tools/node/node \
+          /tmp/mxbuild/modeler/tools/node/node_modules/react-native/local-cli/cli.js \
+          bundle --verbose --platform ${{ matrix.platform }} --dev false \
+          --config "$PWD/metro.config.json" \
+          --bundle-output $GITHUB_WORKSPACE/${{ matrix.platform }}/${{ matrix.platform }}.bundle \
+          --assets-dest $GITHUB_WORKSPACE/${{ matrix.platform }}/assets/ \
+          --entry-file ./index.js
+      - name: Upload ${{ matrix.platform }} bundle
+        uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         with:
-          name: ios
-          path: ios
+          name: ${{ matrix.platform }}
+          path: ${{ matrix.platform }}
