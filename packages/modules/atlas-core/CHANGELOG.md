@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.3.0] Atlas Core - 2022-6-16
+
 ### Added
 
 -   We added styles for column chart native widget.
