@@ -65,3 +65,30 @@ jobs:
         with:
           name: ${{ matrix.platform }}
           path: ${{ matrix.platform }}
+  runtime:
+    needs: project
+    runs-on: ubuntu-22.04
+    container:
+      image: ghcr.io/mendix/widgets-resources/mxruntime:9.13.0.43286
+      ports:
+        - 8080
+      env:
+        MENDIX_VERSION: 9.13.0.43286
+    steps:
+      - name: "Checking-out code"
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
+        with:
+          submodules: false
+      - uses: actions/download-artifact@master
+        with:
+          name: mda
+      - run: mkdir -p /project/runtimes/ /project/data/database /project/data/files /project/data/tmp
+      - name: Extract test project
+        uses: montudor/action-zip@0852c26906e00f8a315c704958823928d8018b28
+        with:
+          args: unzip -qq automation.mda -d deployment
+      - run: mv deployment/* /project/
+      - name: "Start runtime"
+        run: |
+          printf "c\nc\n" | m2ee -c .github/configs/m2ee-native.yml --yolo start
+      #          while true; do tail -f /dev/null & wait ${!}; done
