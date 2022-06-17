@@ -49,6 +49,16 @@ jobs:
                   cache-dependency-path: "**/package-lock.json"
             - name: "Installing dependencies"
               run: npm run bootstrap
+            - name: Cache Nx
+              uses: actions/cache@v2
+              with:
+                  path: node_modules/.cache/nx
+                  key:
+                      cache-nx-${{ hashFiles('yarn.lock') }}-${{ matrix.target }}-${{ matrix.jobIndex }}-${{ github.sha
+                      }}
+                  restore-keys: |
+                      cache-nx-${{ hashFiles('yarn.lock') }}-${{ matrix.target }}-${{ matrix.jobIndex }}-
+                      cache-nx-${{ hashFiles('yarn.lock') }}-
             - name: Login to GitHub Container Registry
               if:
                   github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name ==
