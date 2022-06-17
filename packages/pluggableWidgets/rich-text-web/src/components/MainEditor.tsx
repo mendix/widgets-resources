@@ -5,7 +5,8 @@ export interface MainEditoProps {
     editorRef?: (editor: CKEditorInstance | null) => void;
 }
 export const MainEditor = ({ config, editorRef }: MainEditoProps): null => {
-    Object.assign(config.config, {
+    config.config = {
+        ...config.config,
         on: {
             instanceReady() {
                 if (editorRef) {
@@ -18,7 +19,7 @@ export const MainEditor = ({ config, editorRef }: MainEditoProps): null => {
                 }
             }
         }
-    });
+    };
     useCKEditor(config);
     return null;
 };
