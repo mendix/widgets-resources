@@ -78,6 +78,8 @@ import * as radioButtons from "./core/widgets/radiobuttons";
 import * as helperRadioButtons from "./core/helpers/radiobuttons";
 import * as backgroundGradient from "./core/widgets/backgroundgradient";
 import * as helperBackgroundGradient from "./core/helpers/backgroundgradient";
+import * as widgetsColumnChart from "./core/widgets/columnchart";
+import * as helpersColumnChart from "./core/helpers/columnchart";
 //
 //
 // ================================= CUSTOM =================================\\
@@ -168,6 +170,8 @@ module.exports = [
     !exclusionVariables.excludeBackgroundGradient && !exclusionVariables.excludeBackgroundGradientHelper
         ? helperBackgroundGradient
         : {},
+    !exclusionVariables.excludeColumnChart ? widgetsColumnChart : {},
+    !exclusionVariables.excludeColumnChart && !exclusionVariables.excludeColumnChartHelper ? helpersColumnChart : {},
     layout,
     page
 ].reduce((merged, object) => ({ ...merged, ...object }), {});

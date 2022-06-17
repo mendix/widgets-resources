@@ -8,6 +8,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Fixed
 
+-   We fixed custom styles issue for column chart native widget.
+
+## [3.3.0] Atlas Core - 2022-6-16
+
+### Added
+
+-   We added styles for column chart native widget.
+
+## [3.2.3] Atlas Core - 2022-6-15
+
+### Fixed
+
 -   We fixed hover issue for dropdown menu in navigation bar.
 
 ## [3.2.2] Atlas Core - 2022-5-10
