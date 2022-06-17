@@ -1,5 +1,5 @@
 {
-    "main": "../dist/hooks/index.js",
-    "types": "../dist/hooks/index.d.ts"
-  }
-  
+  "name": "@mendix/shared-charts-hooks",
+  "main": "../dist/hooks/index.js",
+  "types": "../dist/hooks/index.d.ts"
+}

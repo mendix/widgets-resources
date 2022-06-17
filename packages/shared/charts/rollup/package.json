@@ -1,3 +1,4 @@
 {
+  "name": "@mendix/shared-charts-rollup",
   "main": "../dist/rollup/index.js"
 }
