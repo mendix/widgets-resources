@@ -1,5 +1,5 @@
-import { columnChart } from "./../../../../../theme/native/custom-variables";
 import { ColumnChartType } from "../../types/widgets";
+import { columnChart } from "../../variables";
 /*
 
 DISCLAIMER:
