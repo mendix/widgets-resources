@@ -47,6 +47,13 @@ jobs:
           cache-dependency-path: "**/package-lock.json"
       - name: "Installing dependencies"
         run: npm run bootstrap
+      - name: Cache Nx
+        uses: actions/cache@c3f1317a9e7b1ef106c153ac8c0f00fed3ddbc0d
+        with:
+          path: node_modules/.cache/nx
+          key: cache-nx-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
+          restore-keys: |
+            cache-nx-${{ hashFiles('package-lock.json') }}-
       - name: Login to GitHub Container Registry
         if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
         uses: docker/login-action@42d299face0c5c43a0487c477f595ac9cf22f1a7 # v1.12.0

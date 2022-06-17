@@ -35,6 +35,13 @@ jobs:
           cache-dependency-path: "**/package-lock.json"
       - name: "Installing dependencies"
         run: npm run bootstrap
+      - name: Cache Nx
+        uses: actions/cache@c3f1317a9e7b1ef106c153ac8c0f00fed3ddbc0d
+        with:
+          path: node_modules/.cache/nx
+          key: cache-nx-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
+          restore-keys: |
+            cache-nx-${{ hashFiles('package-lock.json') }}-
       - name: "Building native widgets and js actions"
         if: contains(steps.scope.outputs._0, '-native')
         run: npm run release:native
