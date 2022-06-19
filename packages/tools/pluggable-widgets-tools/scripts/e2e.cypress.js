@@ -125,6 +125,8 @@ async function main() {
         await new Promise(resolve => setTimeout(resolve, 3000));
     }
 
+    execSync(`sudo chmod -R 777 ${join(process.cwd(), "tests/testProject/deployment")}`);
+
     try {
         if (attempts === 0) {
             throw new Error("Runtime didn't start in time, exiting now...");
