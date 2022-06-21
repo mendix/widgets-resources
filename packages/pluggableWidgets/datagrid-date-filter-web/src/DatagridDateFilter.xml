@@ -38,6 +38,8 @@
                         <enumerationValue key="notEqual">Not equal</enumerationValue>
                         <enumerationValue key="smaller">Smaller than</enumerationValue>
                         <enumerationValue key="smallerEqual">Smaller than or equal</enumerationValue>
+                        <enumerationValue key="empty">Empty</enumerationValue>
+                        <enumerationValue key="notEmpty">Not empty</enumerationValue>
                     </enumerationValues>
                 </property>
                 <property key="placeholder" type="textTemplate" required="false">

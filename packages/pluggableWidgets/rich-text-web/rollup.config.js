@@ -6,11 +6,16 @@ import through from "through2";
 
 export default args => {
     const outDir = join(__dirname, "dist/tmp/widgets/ckeditor");
+    const customPluginsPath = join(__dirname, "src/assets/plugins");
     const result = args.configDefaultConfig;
     return result.map((config, index) => {
         // Copying only on first step is enough
         if (index === 0) {
-            config.plugins.push(copyCKEditorDirToDist(outDir));
+            config.plugins = [
+                ...config.plugins,
+                copyCKEditorDirToDist(outDir),
+                copyCustomPlugins(customPluginsPath, outDir)
+            ];
         }
 
         /* this step is required by sanitize-html library */
@@ -18,6 +23,10 @@ export default args => {
         return config;
     });
 };
+
+function copyCustomPlugins(pluginsPath, outDir) {
+    return command([async () => copy(dirname(pluginsPath), outDir, { overwrite: true })]);
+}
 
 function copyCKEditorDirToDist(outDir) {
     return command([

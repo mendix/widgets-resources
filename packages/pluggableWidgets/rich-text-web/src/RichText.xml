@@ -101,15 +101,15 @@
                     </enumerationValues>
                 </property>
                 <property key="documentGroup" type="boolean" defaultValue="true">
-                    <caption>Document Group</caption>
+                    <caption>Document group</caption>
                     <description />
                 </property>
                 <property key="clipboardGroup" type="boolean" defaultValue="true">
-                    <caption>Clipboard Group</caption>
+                    <caption>Clipboard group</caption>
                     <description />
                 </property>
                 <property key="editingGroup" type="boolean" defaultValue="true">
-                    <caption>Editing Group</caption>
+                    <caption>Editing group</caption>
                     <description />
                 </property>
                 <property key="formsGroup" type="boolean" defaultValue="true">

@@ -1,5 +1,8 @@
 {
-  "baseUrl": "http://localhost:8080",
-  "video": false,
-  "videoUploadOnPasses": false
+    "baseUrl": "http://localhost:8080",
+    "video": false,
+    "videoUploadOnPasses": false,
+    "viewportHeight": 1080,
+    "viewportWidth": 1280,
+    "chromeWebSecurity": false
 }

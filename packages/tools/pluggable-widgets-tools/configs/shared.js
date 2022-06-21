@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+
 import { existsSync, readdirSync, promises as fs } from "fs";
 import { join } from "path";
 import { config } from "dotenv";

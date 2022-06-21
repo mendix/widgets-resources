@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+
 const { Mutex, Semaphore } = require("async-mutex");
 const { exec } = require("child_process");
 const { readFileSync, writeFileSync } = require("fs");
@@ -112,6 +114,9 @@ async function main() {
 
         console.log(`[${widgetName}] Testing 'release' command...`);
         await testRelease();
+
+        console.log(`[${widgetName}] Checking dependencies files...`);
+        await checkDependenciesFiles(isNative, boilerplate, version);
 
         console.log(`[${widgetName}] Testing npm start...`);
         await testStart();
@@ -228,6 +233,40 @@ async function main() {
                 )
             ) {
                 throw new Error("Expected mpk file to be generated, but it wasn't.");
+            }
+        }
+
+        async function checkDependenciesFiles(isNative, boilerplate, version) {
+            const dependenciesJSONFile = join(workDir, "dist", "tmp", "widgets", "dependencies.json");
+            const dependenciesTxtFile = join(workDir, "dist", "tmp", "widgets", "dependencies.txt");
+
+            if (!existsSync(dependenciesJSONFile) || !existsSync(dependenciesTxtFile)) {
+                throw new Error("Expected dependencies files to be generated, but it wasn't.");
+            }
+
+            const dependenciesJSON = JSON.parse(readFileSync(dependenciesJSONFile, "utf8"));
+            const dependenciesText = readFileSync(dependenciesTxtFile, "utf8");
+
+            const packageName = isNative
+                ? version === "latest"
+                    ? "@mendix/pluggable-widgets-tools"
+                    : null
+                : boilerplate === "full"
+                ? "classnames"
+                : null;
+
+            if (
+                packageName &&
+                (!dependenciesJSON.some(dependency => Object.keys(dependency)[0].includes(packageName)) ||
+                    !dependenciesText.includes(packageName))
+            ) {
+                throw new Error(`The "${packageName}" could not be found in the dependencies files.`);
+            } else if (
+                !packageName &&
+                (dependenciesJSON.length !== 0 ||
+                    !(dependenciesText.includes("No third parties dependencies") || dependenciesText === ""))
+            ) {
+                throw new Error("Unexpected content in dependencies files.");
             }
         }
 

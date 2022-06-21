@@ -1,5 +1,5 @@
 {
-  "name": "pie-chart-web",
+  "name": "pie-doughnut-chart-web",
   "widgetName": "PieChart",
   "version": "3.0.0",
   "description": "Shows data in a pie format graph.",

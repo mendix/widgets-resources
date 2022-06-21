@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <package xmlns="http://www.mendix.com/package/1.0/">
-    <clientModule name="RichText" version="2.0.0" xmlns="http://www.mendix.com/clientModule/1.0/">
+    <clientModule name="RichText" version="2.0.1" xmlns="http://www.mendix.com/clientModule/1.0/">
         <widgetFiles>
-            <widgetFile path="RichText.xml"/>
+            <widgetFile path="RichText.xml" />
         </widgetFiles>
         <files>
-            <file path="com/mendix/widget/custom/richtext"/>
+            <file path="com/mendix/widget/custom/richtext" />
         </files>
     </clientModule>
 </package>

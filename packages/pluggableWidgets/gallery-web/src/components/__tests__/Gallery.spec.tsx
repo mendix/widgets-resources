@@ -24,7 +24,9 @@ const defaultProps: GalleryProps<ObjectItem> = {
     desktopItems: 4,
     className: "",
     items: [{ id: "11" as GUID }, { id: "22" as GUID }, { id: "33" as GUID }],
-    itemRenderer: itemWrapperFunction({})
+    itemRenderer: itemWrapperFunction({}),
+    hasFilters: true,
+    filters: <input />
 };
 
 describe("Gallery", () => {
@@ -175,6 +177,15 @@ describe("Gallery", () => {
                     emptyPlaceholderRenderer={renderWrapper => renderWrapper(<span>No items found</span>)}
                 />
             );
+
+            expect(gallery).toMatchSnapshot();
+        });
+    });
+
+    describe("without filters", () => {
+        it("renders structure without filters container", () => {
+            const filters = { ...defaultProps, hasFilters: false, filters: undefined };
+            const gallery = render(<Gallery {...filters} />);
 
             expect(gallery).toMatchSnapshot();
         });

@@ -3,10 +3,20 @@
 exports[`DocumentViewer renders correctly the structure 1`] = `
 <div
   className="widget-document-viewer"
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
 >
   <object
     className="widget-document-viewer-content"
     data="http://localhost/sample.pdf"
+    style={
+      Object {
+        "position": "absolute",
+      }
+    }
     type="application/pdf"
   >
     <p>

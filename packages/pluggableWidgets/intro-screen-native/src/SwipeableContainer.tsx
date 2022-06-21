@@ -163,14 +163,17 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
         );
     };
 
-    const onSlideChange = (newIndex: number, lastIndex: number): void => {
-        if (props.activeSlide && !props.activeSlide.readOnly) {
-            props.activeSlide.setValue(new Big(newIndex + 1));
-        }
-        if (props.onSlideChange) {
-            props.onSlideChange(newIndex, lastIndex);
-        }
-    };
+    const onSlideChange = useCallback(
+        (newIndex: number, lastIndex: number): void => {
+            if (props.activeSlide && !props.activeSlide.readOnly) {
+                props.activeSlide.setValue(new Big(newIndex + 1));
+            }
+            if (props.onSlideChange) {
+                props.onSlideChange(newIndex, lastIndex);
+            }
+        },
+        [props]
+    );
 
     const renderNextButton = ({ showNextButton, nextLabel, nextIcon, styles }: SwipeableContainerProps): ReactNode =>
         showNextButton &&
@@ -280,7 +283,10 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
         );
     };
 
-    const rtlSafeIndex = (i: number): number => (isAndroidRTL ? props.slides.length - 1 - i : i);
+    const rtlSafeIndex = useCallback(
+        (i: number): number => (isAndroidRTL ? props.slides.length - 1 - i : i),
+        [props.slides.length]
+    );
 
     const onMomentumScrollEnd = useCallback(
         (event: NativeSyntheticEvent<any>) => {
@@ -293,7 +299,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
             setActiveIndex(newIndex);
             onSlideChange(newIndex, lastIndex);
         },
-        [activeIndex, width]
+        [activeIndex, width, rtlSafeIndex, onSlideChange]
     );
 
     /**

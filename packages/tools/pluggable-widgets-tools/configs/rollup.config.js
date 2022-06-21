@@ -1,4 +1,6 @@
-import { existsSync, mkdirSync } from "fs";
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+
+import { existsSync } from "fs";
 import { join, relative } from "path";
 import alias from "@rollup/plugin-alias";
 import { getBabelInputPlugin, getBabelOutputPlugin } from "@rollup/plugin-babel";
@@ -18,7 +20,6 @@ import livereload from "rollup-plugin-livereload";
 import postcss from "rollup-plugin-postcss";
 import { terser } from "rollup-plugin-terser";
 import { cp } from "shelljs";
-import { zip } from "zip-a-folder";
 import { widgetTyping } from "./rollup-plugin-widget-typing";
 import {
     editorConfigEntry,
@@ -31,6 +32,7 @@ import {
     widgetPackage,
     widgetVersion
 } from "./shared";
+import { copyLicenseFile, createMpkFile, licenseCustomTemplate } from "./helpers/rollup-helper";
 import url from "./rollup-plugin-assets";
 
 const outDir = join(sourcePath, "/dist/tmp/widgets/");
@@ -230,9 +232,15 @@ export default async args => {
                 ? license({
                       thirdParty: {
                           includePrivate: true,
-                          output: {
-                              file: join(outDir, "dependencies.txt")
-                          }
+                          output: [
+                              {
+                                  file: join(outDir, "dependencies.txt")
+                              },
+                              {
+                                  file: join(outDir, "dependencies.json"),
+                                  template: licenseCustomTemplate
+                              }
+                          ]
                       }
                   })
                 : null,
@@ -242,20 +250,16 @@ export default async args => {
             // configs affected by a change => we cannot know in advance which one will be "the last".
             // So we run the same logic for all configs, letting the last one win.
             command([
-                async () => {
-                    mkdirSync(mpkDir, { recursive: true });
-                    await zip(outDir, mpkFile);
-                    if (!production && projectPath) {
-                        const widgetsPath = join(projectPath, "widgets");
-                        const deploymentPath = join(projectPath, `deployment/web/widgets`);
-                        // Create folder if they do not exists or directories were cleaned
-                        mkdirSync(widgetsPath, { recursive: true });
-                        mkdirSync(deploymentPath, { recursive: true });
-                        // Copy files to deployment and widgets folder
-                        cp("-r", join(outDir, "*"), deploymentPath);
-                        cp(mpkFile, widgetsPath);
-                    }
-                }
+                async () => config.licenses && copyLicenseFile(sourcePath, outDir),
+                async () =>
+                    createMpkFile({
+                        mpkDir,
+                        mpkFile,
+                        widgetTmpDir: outDir,
+                        isProduction: production,
+                        mxProjectPath: projectPath,
+                        deploymentPath: "deployment/web/widgets"
+                    })
             ])
         ];
     }
@@ -311,11 +315,25 @@ const imagesAndFonts = [
     "**/*.eot"
 ];
 
-const webExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/, /^big.js$/];
+const commonExternalLibs = [
+    // "mendix" and internals under "mendix/"
+    /^mendix($|\/)/,
 
-const editorPreviewExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/];
+    // "react"
+    /^react$/,
 
-const editorConfigExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/];
+    // "react/jsx-runtime"
+    /^react\/jsx-runtime$/,
+
+    // "react-dom"
+    /^react-dom$/
+];
+
+const webExternal = commonExternalLibs.concat(/^big.js$/);
+
+const editorPreviewExternal = commonExternalLibs;
+
+const editorConfigExternal = commonExternalLibs;
 
 export function postCssPlugin(outputFormat, production, postcssPlugins = []) {
     return postcss({

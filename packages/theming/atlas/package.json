@@ -1,6 +1,6 @@
 {
   "name": "@mendix/atlas-ui",
-  "version": "3.1.1",
+  "version": "3.2.2",
   "description": "Mendix Atlas UI is the foundation of making beautiful apps with Mendix. For more information about the framework go to https://atlas.mendix.com.",
   "testProject": {
     "githubUrl": "https://github.com/mendix/Atlas-Design-System",

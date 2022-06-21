@@ -157,6 +157,7 @@ export function Gallery(props: GalleryContainerProps): ReactElement {
                 ]
             )}
             filtersTitle={props.filterSectionTitle?.value}
+            hasFilters={!!props.filterList.length}
             hasMoreItems={props.datasource.hasMoreItems ?? false}
             items={props.datasource.items ?? []}
             itemRenderer={useCallback(

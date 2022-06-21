@@ -1,7 +1,7 @@
 {
   "name": "datagrid-text-filter-web",
   "widgetName": "DatagridTextFilter",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "",
   "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "repository": {

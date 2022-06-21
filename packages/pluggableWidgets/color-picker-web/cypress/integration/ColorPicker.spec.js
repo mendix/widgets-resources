@@ -47,10 +47,10 @@ describe("color-picker-web", () => {
             cy.get(".mx-name-colorPicker35 .hue-picker").should("be.visible", true);
         });
         it("slider", () => {
-            cy.get(".mx-name-colorPicker37 .slider-picker").should("be.visible", true);
+            cy.get(".mx-name-colorPicker37 .slider-picker").scrollIntoView().should("be.visible", true);
         });
         it("compact", () => {
-            cy.get(".mx-name-colorPicker26 .compact-picker").should("be.visible", true);
+            cy.get(".mx-name-colorPicker26 .compact-picker").scrollIntoView().should("be.visible", true);
         });
     });
     describe("renders with color format as", () => {

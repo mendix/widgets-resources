@@ -79,7 +79,9 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                             { value: "equal", label: "Equal" },
                             { value: "notEqual", label: "Not equal" },
                             { value: "smaller", label: "Smaller than" },
-                            { value: "smallerEqual", label: "Smaller than or equal" }
+                            { value: "smallerEqual", label: "Smaller than or equal" },
+                            { value: "empty", label: "Empty" },
+                            { value: "notEmpty", label: "Not empty" }
                         ] as Array<{ value: DefaultFilterEnum; label: string }>
                     }
                 />
@@ -87,6 +89,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
             <input
                 aria-label={props.screenReaderInputCaption}
                 className={classNames("form-control", { "filter-input": props.adjustable })}
+                disabled={type === "empty" || type === "notEmpty"}
                 onChange={e => {
                     const value = e.target.value;
                     if (value && !isNaN(Number(value))) {

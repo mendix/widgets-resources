@@ -6,6 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [9.13.1] - 2022-05-23
+
+### Fixed
+
+-   We fixed an issue with some packages were wrongly assumed to be externally available.
+
+## [9.13.0] - 2022-05-04
+
+### Added
+
+-   We added support for the new association property introduced in Mendix 9.13.
+
+-   To meet the requirements of the FedRAMP regulation, we added a feature to generate `dependencies.txt` and `dependencies.json` files in the release phase of a widget. `dependencies.txt` file contains the license texts of all (transitive) dependencies and the `dependencies.json` file contains all (transitive) dependencies and their versions for automated scanning purposes.
+
+-   We added a new feature to copy the `LICENSE` file if it exists in the widget source folder.
+
+### Changed
+
+-   We updated the Mendix package to version 9.13.43286.
+
 ### Fixed
 
 -   We fixed the way assets are handled inside widgets to comply with strict Content-Security-Policy.
