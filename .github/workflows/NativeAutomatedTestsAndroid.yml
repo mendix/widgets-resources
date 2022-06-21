@@ -3,10 +3,10 @@ on:
   workflow_dispatch:
 
   push:
-    branches: [ master ]
+    branches: [master]
 
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   widgets:
@@ -53,6 +53,14 @@ jobs:
         uses: montudor/action-zip@0852c26906e00f8a315c704958823928d8018b28
         with:
           args: unzip -qq project.zip
+      - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
+        with:
+          name: widgets
+          path: packages/pluggableWidgets
+      - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
+        with:
+          name: widgets
+          path: packages/pluggableWidgets
       - name: update-widgets
         run: mx update-widgets --loose-version-check Native-Mobile-Resources-main/NativeComponentsTestProject.mpr
       - name: Build test project
@@ -68,7 +76,7 @@ jobs:
     container: ghcr.io/mendix/widgets-resources/mxbuild:9.13.0.43286
     strategy:
       matrix:
-        platform: [ 'android', 'ios' ]
+        platform: [ "android", "ios" ]
     steps:
       - name: Download test project
         run: curl -L -o project.zip https://github.com/mendix/Native-Mobile-Resources/archive/refs/heads/main.zip
@@ -76,7 +84,7 @@ jobs:
         uses: montudor/action-zip@0852c26906e00f8a315c704958823928d8018b28
         with:
           args: unzip -qq project.zip
-      - uses: actions/download-artifact@master
+      - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
         with:
           name: mda
       - name: Extract test project
@@ -113,7 +121,7 @@ jobs:
         uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v3
         with:
           submodules: false
-      - uses: actions/download-artifact@master
+      - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
         with:
           name: mda
       - run: mkdir -p /project/runtimes/ /project/data/database /project/data/files /project/data/tmp
