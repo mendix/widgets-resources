@@ -3,12 +3,47 @@ on:
   workflow_dispatch:
 
   push:
-    branches: [master]
+    branches: [ master ]
 
   pull_request:
-    branches: [master]
+    branches: [ master ]
 
 jobs:
+  mendix-version:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: "Checking-out code"
+        uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v3
+      - id: get-mendix-version
+        uses: notiz-dev/github-action-json-property@7c8cf5cc36eb85d8d287a8086a39dac59628eb31
+        with: 
+          path: "configs/e2e/mendix-versions.json"
+          prop_path: "latest"
+    outputs:
+      mendix-version: ${{ steps.get-mendix-version.outputs.prop }}
+  docker-images:
+    needs: mendix-version
+    runs-on: ubuntu-22.04
+    env:
+      MENDIX_VERSION: ${{ needs.mendix-version.outputs.mendix-version }}
+    strategy:
+      matrix:
+        container: [ "mxbuild", "mxruntime" ]
+    steps:
+      - run: |
+          docker manifest inspect ghcr.io/mendix/widgets-resources/${{ matrix.container }}:${{ env.MENDIX_VERSION }} > /dev/null
+          echo "IMAGE_MISSING=$?" >> $GITHUB_ENV
+      - name: "${{ matrix.container }}"
+        if: ${{ env.GITHUB_ENV.IMAGE_MISSING == 1 }}
+        uses: docker/build-push-action@e551b19e49efd4e98792db7592c17c09b89db8d8
+        with:
+          file: ./packages/tools/pluggable-widgets-tools/scripts/${{ matrix.container }}.Dockerfile
+          context: ./packages/tools/pluggable-widgets-tools/scripts
+          build-args: |
+            MENDIX_VERSION=${{ env.MENDIX_VERSION }}
+          push: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+          tags: ${{ matrix.container }}:${{ env.MENDIX_VERSION }}
+          secrets: GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
   widgets:
     runs-on: ubuntu-22.04
     permissions:
@@ -43,9 +78,9 @@ jobs:
           name: widgets
           path: packages/pluggableWidgets/**/dist/*/*.mpk
   project:
-    needs: widgets
+    needs: [ widgets, mendix-version ]
     runs-on: ubuntu-22.04
-    container: ghcr.io/mendix/widgets-resources/mxbuild:9.13.0.43286
+    container: ghcr.io/mendix/widgets-resources/mxbuild:${{ needs.mendix-version.outputs.mendix-version }}
     steps:
       - name: Download test project
         run: curl -L -o project.zip https://github.com/mendix/Native-Mobile-Resources/archive/refs/heads/main.zip
@@ -71,12 +106,12 @@ jobs:
           name: mda
           path: automation.mda
   bundle:
-    needs: project
+    needs: [ project, mendix-version ]
     runs-on: ubuntu-22.04
-    container: ghcr.io/mendix/widgets-resources/mxbuild:9.13.0.43286
+    container: ghcr.io/mendix/widgets-resources/mxbuild:${{ needs.mendix-version.outputs.mendix-version }}
     strategy:
       matrix:
-        platform: [ "android", "ios" ]
+        platform: [ 'android', 'ios' ]
     steps:
       - name: Download test project
         run: curl -L -o project.zip https://github.com/mendix/Native-Mobile-Resources/archive/refs/heads/main.zip
@@ -110,14 +145,12 @@ jobs:
           name: ${{ matrix.platform }}
           path: ${{ matrix.platform }}
   runtime:
-    needs: project
+    needs: [ project, mendix-version ]
     runs-on: ubuntu-22.04
     container:
-      image: ghcr.io/mendix/widgets-resources/mxruntime:9.13.0.43286
+      image: ghcr.io/mendix/widgets-resources/mxruntime:${{ needs.mendix-version.outputs.mendix-version }}
       ports:
         - 8080
-      env:
-        MENDIX_VERSION: 9.13.0.43286
     steps:
       - name: "Checking-out code"
         uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v3

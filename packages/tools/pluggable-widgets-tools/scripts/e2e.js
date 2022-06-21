@@ -85,7 +85,7 @@ async function main() {
     if (!existingRuntimeImages) {
         console.log(`Creating new runtime docker image...`);
         execSync(
-            `docker build -f ${join(__dirname, "runtime.Dockerfile")} ` +
+            `docker build -f ${join(__dirname, "mxruntime.Dockerfile")} ` +
                 `--build-arg MENDIX_VERSION=${mendixVersion} ` +
                 `-t mxruntime:${mendixVersion} ${__dirname}`,
             { stdio: "inherit" }
@@ -242,7 +242,9 @@ async function getTestProject(repository, branch) {
 
     try {
         await promisify(pipeline)(
-            (await fetch(`${repository}/archive/refs/heads/${branch}.zip`)).body,
+            (
+                await fetch(`${repository}/archive/refs/heads/${branch}.zip`)
+            ).body,
             createWriteStream(downloadedArchivePath)
         );
         return downloadedArchivePath;
