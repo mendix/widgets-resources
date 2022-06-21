@@ -31,12 +31,12 @@ jobs:
         if: github.event_name == 'pull_request'
         run: npm run build:native -- --since origin/${{ github.base_ref }}
         env:
-          NODE_OPTIONS: --max_old_space_size=8192
+          NODE_OPTIONS: --max_old_space_size=6144
       - name: "Running build for development"
         if: github.event_name != 'pull_request'
         run: npm run build:native
         env:
-          NODE_OPTIONS: --max_old_space_size=8192
+          NODE_OPTIONS: --max_old_space_size=6144
       - name: Upload widgets
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         with:
@@ -95,13 +95,15 @@ jobs:
       - name: Bundle ${{ matrix.platform }}
         run: |
           cd Native-Mobile-Resources-main/deployment/native && \
-          NODE_OPTIONS="--max-old-space-size=6144" /tmp/mxbuild/modeler/tools/node/node \
+          /tmp/mxbuild/modeler/tools/node/node \
           /tmp/mxbuild/modeler/tools/node/node_modules/react-native/local-cli/cli.js \
           bundle --verbose --platform ${{ matrix.platform }} --dev false \
           --config "$PWD/metro.config.json" \
           --bundle-output $GITHUB_WORKSPACE/${{ matrix.platform }}/${{ matrix.platform }}.bundle \
           --assets-dest $GITHUB_WORKSPACE/${{ matrix.platform }}/assets/ \
           --entry-file ./index.js
+        env:
+          NODE_OPTIONS: --max_old_space_size=6144
       - name: Upload ${{ matrix.platform }} bundle
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         with:
