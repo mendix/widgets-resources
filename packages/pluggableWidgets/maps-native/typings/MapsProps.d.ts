@@ -38,9 +38,25 @@ export interface DynamicMarkersType {
     iconColor: string;
 }
 
-export type DefaultZoomLevelEnum = "world" | "continent" | "country" | "city" | "town" | "streets" | "building";
+export type DefaultZoomLevelEnum =
+    | "allthewayout"
+    | "world"
+    | "continent"
+    | "country"
+    | "city"
+    | "town"
+    | "streets"
+    | "building";
 
-export type MinZoomLevelEnum = "world" | "continent" | "country" | "city" | "town" | "streets" | "building";
+export type MinZoomLevelEnum =
+    | "allthewayout"
+    | "world"
+    | "continent"
+    | "country"
+    | "city"
+    | "town"
+    | "streets"
+    | "building";
 
 export type MaxZoomLevelEnum = "world" | "continent" | "country" | "city" | "town" | "streets" | "building";
 

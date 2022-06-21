@@ -289,6 +289,8 @@ function onMarkerPress(action?: ActionValue): void {
 
 function toZoomValue(level: DefaultZoomLevelEnum): number {
     switch (level) {
+        case "allthewayout":
+            return 0;
         case "world":
             return 3;
         case "continent":
@@ -308,6 +310,8 @@ function toZoomValue(level: DefaultZoomLevelEnum): number {
 
 function toAltitude(level: DefaultZoomLevelEnum): number {
     switch (level) {
+        case "allthewayout":
+            return 128000000;
         case "world":
             return 16026161;
         case "continent":
