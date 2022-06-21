@@ -80,7 +80,7 @@ async function main() {
     if (!existingRuntimeImages) {
         console.log(`Creating new runtime docker image...`);
         execSync(
-            `docker build -f ${join(scriptsPath, "runtime.Dockerfile")} ` +
+            `docker build -f ${join(scriptsPath, "mxruntime.Dockerfile")} ` +
                 `--build-arg MENDIX_VERSION=${mendixVersion} ` +
                 `-t mxruntime:${mendixVersion} ${scriptsPath}`,
             { stdio: "inherit" }
