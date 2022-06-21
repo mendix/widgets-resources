@@ -53,7 +53,7 @@ export function ButtonWeb(props: ButtonWebContainerProps): ReactNode {
         confirmcancelText,
         confirmokText,
         confirmokType,
-        confirmtitle?.value,
+        confirmtitle,
         onCancel,
         onClickAction,
         onConfirm,
@@ -88,6 +88,7 @@ export function ButtonWeb(props: ButtonWebContainerProps): ReactNode {
         <div className={props.class} style={props.style} tabIndex={props.tabIndex}>
             {openconfirm && confirmType === "pop" ? (
                 <PopConpemnet
+                    confirmtitle={confirmtitle}
                     confirmokText={confirmokText}
                     confirmcancelText={confirmcancelText}
                     confirmokType={confirmokType}
