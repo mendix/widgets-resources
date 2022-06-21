@@ -1,10 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.native.accordion.Accordion" supportedPlatform="Native" needsEntityContext="true"
-        offlineCapable="true"
-        pluginWidget="true"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
-    <name>Accordion</name>
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.native.accordion.Accordion" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+    <name>Accordion Test</name>
     <description>Toggle the display of sections of content</description>
     <studioProCategory>Input elements</studioProCategory>
     <studioCategory>Input elements</studioCategory>
@@ -13,12 +9,12 @@
             <propertyGroup caption="General">
                 <property key="groups" type="object" isList="true" required="true">
                     <caption>Groups</caption>
-                    <description/>
+                    <description />
                     <properties>
                         <propertyGroup caption="General">
                             <property key="headerRenderMode" type="enumeration" defaultValue="text">
                                 <caption>Header type</caption>
-                                <description/>
+                                <description />
                                 <enumerationValues>
                                     <enumerationValue key="text">Text</enumerationValue>
                                     <enumerationValue key="custom">Custom</enumerationValue>
@@ -26,7 +22,7 @@
                             </property>
                             <property key="headerTextRenderMode" type="enumeration" defaultValue="heading5">
                                 <caption>Render mode</caption>
-                                <description/>
+                                <description />
                                 <enumerationValues>
                                     <enumerationValue key="heading1">Heading 1</enumerationValue>
                                     <enumerationValue key="heading2">Heading 2</enumerationValue>
@@ -38,7 +34,7 @@
                             </property>
                             <property key="headerText" type="textTemplate">
                                 <caption>Text</caption>
-                                <description/>
+                                <description />
                                 <translations>
                                     <translation lang="en_US">Header</translation>
                                     <translation lang="nl_NL">Koptekst</translation>
@@ -46,20 +42,20 @@
                             </property>
                             <property key="headerContent" type="widgets" required="false">
                                 <caption>Header</caption>
-                                <description/>
+                                <description />
                             </property>
                             <property key="content" type="widgets" required="false">
                                 <caption>Content</caption>
-                                <description/>
+                                <description />
                             </property>
                             <property key="visible" type="expression" defaultValue="true">
                                 <caption>Visible</caption>
-                                <description/>
-                                <returnType type="Boolean"/>
+                                <description />
+                                <returnType type="Boolean" />
                             </property>
                             <property key="groupCollapsed" type="enumeration" defaultValue="groupStartExpanded">
                                 <caption>Start as</caption>
-                                <description/>
+                                <description />
                                 <enumerationValues>
                                     <enumerationValue key="groupStartExpanded">Expanded</enumerationValue>
                                     <enumerationValue key="groupStartCollapsed">Collapsed</enumerationValue>
@@ -68,21 +64,21 @@
                             </property>
                             <property key="groupCollapsedDynamic" type="expression" required="false">
                                 <caption>Collapsed expression</caption>
-                                <description/>
-                                <returnType type="Boolean"/>
+                                <description />
+                                <returnType type="Boolean" />
                             </property>
                         </propertyGroup>
                         <propertyGroup caption="Events">
                             <property key="groupCollapsedAttribute" type="attribute" required="false">
                                 <caption>Collapsed attribute</caption>
-                                <description/>
+                                <description />
                                 <attributeTypes>
-                                    <attributeType name="Boolean"/>
+                                    <attributeType name="Boolean" />
                                 </attributeTypes>
                             </property>
                             <property key="groupOnChange" type="action" required="false">
                                 <caption>On change</caption>
-                                <description/>
+                                <description />
                             </property>
                         </propertyGroup>
                     </properties>
@@ -91,7 +87,7 @@
             <propertyGroup caption="Behavior">
                 <property key="collapsible" type="boolean" defaultValue="true">
                     <caption>Collapsible</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="collapseBehavior" type="enumeration" defaultValue="singleExpanded">
                     <caption>Expanded groups</caption>
@@ -106,7 +102,7 @@
         <propertyGroup caption="Visualization">
             <property key="icon" type="enumeration" defaultValue="right">
                 <caption>Show Icon</caption>
-                <description/>
+                <description />
                 <enumerationValues>
                     <enumerationValue key="right">Right</enumerationValue>
                     <enumerationValue key="left">Left</enumerationValue>
@@ -115,11 +111,11 @@
             </property>
             <property key="iconCollapsed" type="icon" required="false">
                 <caption>Icon collapsed</caption>
-                <description/>
+                <description />
             </property>
             <property key="iconExpanded" type="icon" required="false">
                 <caption>Icon expanded</caption>
-                <description/>
+                <description />
             </property>
         </propertyGroup>
     </properties>
