@@ -26,6 +26,6 @@
     "@mendix/pluggable-widgets-tools": ">=9.13.1",
     "ts-node": "^9.0.0",
     "typescript": "^4.5.4",
-    "shelljs": "^0.8.4"
+    "shelljs": "^0.8.5"
   }
 }
