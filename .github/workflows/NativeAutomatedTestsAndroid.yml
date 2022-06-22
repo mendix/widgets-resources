@@ -30,7 +30,14 @@ jobs:
       matrix:
         container: [ "mxbuild", "mxruntime" ]
     steps:
-      - run: |
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@49ed152c8eca782a232dede0303416e8f356c37b
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check if docker image already exists
+        run: |
           docker manifest inspect ghcr.io/mendix/widgets-resources/${{ matrix.container }}:${{ env.MENDIX_VERSION }} > /dev/null
           echo "IMAGE_MISSING=$?" >> $GITHUB_ENV
       - name: "${{ matrix.container }}"
@@ -41,7 +48,7 @@ jobs:
           context: ./packages/tools/pluggable-widgets-tools/scripts
           build-args: |
             MENDIX_VERSION=${{ env.MENDIX_VERSION }}
-          push: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+          push: true
           tags: ${{ matrix.container }}:${{ env.MENDIX_VERSION }}
           secrets: GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
   widgets:
