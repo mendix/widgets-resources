@@ -10,6 +10,10 @@
  */
 export async function clearCachedSessionData(): Promise<void> {
     // BEGIN USER CODE
+    if (mx.session && mx.session.clearCachedSessionData === undefined) {
+        throw new Error('`mx.session.clearCachedSessionData` is not supported prior to Mendix client v9.14');
+    }
+
     await mx.session.clearCachedSessionData();
     // END USER CODE
 }
