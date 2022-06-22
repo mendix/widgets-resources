@@ -4,19 +4,13 @@ const { nodeResolve } = require("@rollup/plugin-node-resolve");
 const { getBabelInputPlugin, getBabelOutputPlugin } = require("@rollup/plugin-babel");
 const commonjs = require("@rollup/plugin-commonjs");
 const { terser } = require("rollup-plugin-terser");
-const command = require("rollup-plugin-command");
-const { cp, ls, mkdir } = require("shelljs");
-const { existsSync } = require("fs");
-const { yellow, green } = require("ansi-colors");
+const { yellow } = require("ansi-colors");
 
 function sharedChardConfig(args, chartName) {
     const production = Boolean(args.configProduction);
     const outDir = join(process.cwd(), "dist/tmp/widgets/com/mendix/shared");
     const result = args.configDefaultConfig;
     const [jsConfig, mJsConfig] = result;
-    const rootDir = join(process.cwd(), "../../../");
-    const chartsCacheDir = join(rootDir, "packages/shared/charts/dist/cache");
-    const existsCache = existsSync(join(chartsCacheDir, "plotly.js"));
 
     // We define the new library externals for the entry points
     const libraryExternals = [
@@ -72,51 +66,34 @@ function sharedChardConfig(args, chartName) {
                 }
             ]
         }),
-        production ? terser() : null,
-        command([
-            () => {
-                const workerFilePath = join(rootDir, `node_modules/ace-builds/src-min-noconflict/worker-json.js`);
-                cp(workerFilePath, outDir);
-                console.info(green("Creating cache files for plotly and ace libraries in " + chartsCacheDir));
-                mkdir("-p", chartsCacheDir);
-                cp(ls(join(outDir, "*")), chartsCacheDir);
-            }
-        ])
+        production ? terser() : null
     ];
 
-    // If plotly was already build, lets use the cached version
-    if (existsCache) {
-        console.info(green("Re-using cached files for plotly and ace libraries"));
-        mkdir("-p", outDir);
-        cp(join(rootDir, "node_modules/ace-builds/src-min-noconflict/worker-json.js"), outDir);
-        cp(join(chartsCacheDir, "plotly.js"), outDir);
-        cp(join(chartsCacheDir, "ace.js"), outDir);
-    } else {
-        console.info(yellow("Creating new bundles for plotly and ace libraries"));
-        // We add the library bundling (ES output) as the first item for rollup
-        result.unshift(
-            {
-                input: require.resolve("react-plotly.js"),
-                output: {
-                    format: "amd",
-                    file: join(outDir, "plotly.js"),
-                    sourcemap: false
-                },
-                external: externals,
-                plugins
+    console.info(yellow("Creating new bundles for plotly and ace libraries"));
+    // We add the library bundling (ES output) as the first item for rollup
+    result.unshift(
+        {
+            input: require.resolve("react-plotly.js"),
+            output: {
+                format: "amd",
+                file: join(outDir, "plotly.js"),
+                sourcemap: false
             },
-            {
-                input: require.resolve("react-ace"),
-                output: {
-                    format: "amd",
-                    file: join(outDir, "ace.js"),
-                    sourcemap: false
-                },
-                external: externals,
-                plugins
-            }
-        );
-    }
+            external: externals,
+            plugins
+        },
+        {
+            input: require.resolve("react-ace"),
+            output: {
+                format: "amd",
+                file: join(outDir, "ace.js"),
+                sourcemap: false
+            },
+            external: externals,
+            plugins
+        }
+    );
+    // }
 
     // We change the output because chart widget packages were wrongly named with uppercase first letter in the past.
     jsConfig.output.file = join(
