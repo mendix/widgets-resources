@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v3
       - id: get-mendix-version
         uses: notiz-dev/github-action-json-property@7c8cf5cc36eb85d8d287a8086a39dac59628eb31
-        with: 
+        with:
           path: "configs/e2e/mendix-versions.json"
           prop_path: "latest"
     outputs:
@@ -169,3 +169,45 @@ jobs:
         run: |
           printf "c\nc\n" | m2ee -c .github/configs/m2ee-native.yml --yolo start
       #          while true; do tail -f /dev/null & wait ${!}; done
+  android-app:
+    needs: [ bundle ]
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out Native Template for Native Components Test Project
+        uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 #v3
+        with:
+          repository: 'mendix/native-content-test-app'
+          ref: 'main'
+          ssh-key: ${{ secrets.NATIVE_CONTENT_TEST_APP }}
+      - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
+        with:
+          name: android
+          path: bundles/android
+      - name: "Copy files to the right location"
+        run: |
+          mv bundles/android/android.bundle android/app/src/main/assets
+          cp -r bundles/android/assets/* android/app/src/main/res/
+      - name: "Set up node"
+        uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 # v3
+        with:
+          node-version: 14
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+      - name: "Installing dependencies"
+        run: |
+          npm ci
+          npm run configure
+      - name: Setup JDK 11
+        uses: actions/setup-java@16cca5479d7c6b6843f6a6515640ba33c6501543 #v3.4.0
+        with:
+          java-version: 11
+          distribution: 'temurin'
+          cache: 'gradle'
+      - name: Build with Gradle
+        run: ./gradlew assembleAppstoreRelease assembleAndroidTest -DtestBuildType=release
+        working-directory: ./android
+      - name: Archive apk
+        uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
+        with:
+          name: android-app
+          path: android/app/build/outputs/apk/**/*.apk
