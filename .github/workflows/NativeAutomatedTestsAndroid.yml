@@ -40,7 +40,7 @@ jobs:
         container: [ "mxbuild", "mxruntime" ]
     steps:
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@49ed152c8eca782a232dede0303416e8f356c37b
+        uses: docker/login-action@49ed152c8eca782a232dede0303416e8f356c37b #v1.12.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -224,6 +224,14 @@ jobs:
           name: mda
       - name: Extract test project
         run: unzip -qq automation.mda -d deployment
+      - name: Install docker
+        uses: docker-practice/actions-setup-docker@2d1d86c7fd8177d36a51a328528c79aae2bcb1fe #v1.0.10
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@42d299face0c5c43a0487c477f595ac9cf22f1a7 #v1.12.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Start runtime
         uses: addnab/docker-run-action@4f65fabd2431ebc8d299f8e5a018d79a769ae185
         with:
