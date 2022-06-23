@@ -223,9 +223,7 @@ jobs:
         with:
           name: mda
       - name: Extract test project
-        uses: montudor/action-zip@0852c26906e00f8a315c704958823928d8018b28
-        with:
-          args: unzip -qq automation.mda -d deployment
+        run: unzip -qq automation.mda -d deployment
       - name: Start runtime
         uses: addnab/docker-run-action@4f65fabd2431ebc8d299f8e5a018d79a769ae185
         with:
