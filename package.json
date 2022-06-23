@@ -71,7 +71,7 @@
     "@types/xml2js": "^0.4.5",
     "cross-env": "^7.0.2",
     "deepmerge": "^4.2.2",
-    "detox": "^19.5.7",
+    "detox": "^19.7.1",
     "husky": "^7.0.0",
     "identity-obj-proxy": "^3.0.0",
     "image-js": "^0.33.0",

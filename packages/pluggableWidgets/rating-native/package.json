@@ -35,7 +35,7 @@
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/react-native-button": "^3.0.1",
     "@types/react-native-star-rating": "^1.1.2",
-    "detox": "^19.5.7",
+    "detox": "^19.7.1",
     "eslint": "^7.20.0"
   }
 }

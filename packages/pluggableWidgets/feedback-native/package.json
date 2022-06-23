@@ -36,6 +36,6 @@
     "@types/querystringify": "^2.0.0",
     "@types/react-native-dialog": "^5.5.0",
     "eslint": "^7.20.0",
-    "detox": "^19.5.7"
+    "detox": "^19.7.1"
   }
 }
