@@ -237,11 +237,11 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Start runtime
         run: |
-          docker run --name runtime -d -it -p 8080 -v ${{ github.workspace }}/deployment:/project \
+          docker run --name runtime -d -it -p 8080 -v ${{ github.workspace }}/deployment:/project -v ${{ github.workspace }}/.github/configs/m2ee-native.yml:/configs/m2ee-native.yml \
           ghcr.io/mendix/widgets-resources/mxruntime:${{ needs.mendix-version.outputs.mendix-version }} bash 
-          docker exec -d runtime mkdir -p /project/runtimes /project/data/database /project/data/files /project/data/tmp
-          docker exec -d runtime printf "c\nc\n" | m2ee -c .github/configs/m2ee-native.yml --yolo start
-          docker exec -d runtime while true; do tail -f /dev/null & wait ${!}; done
+          docker exec -d runtime 'mkdir -p /project/runtimes /project/data/database /project/data/files /project/data/tmp'
+          docker exec -d runtime 'printf "c\nc\n" | m2ee -c /configs/m2ee-native.yml --yolo start'
+          docker exec -d runtime 'while true; do tail -f /dev/null & wait ${!}; done'
       - name: Wait for runtime
         uses: nev7n/wait_for_response@7fef3c1a6e8939d0b09062f14fec50d3c5d15fa1
         with:
