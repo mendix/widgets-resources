@@ -256,3 +256,12 @@ jobs:
           echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name NATIVE_pixel_31 --device "pixel" -k 'system-images;android-31;google_apis;x86'
       - name: Run tests
         run: npm run test:e2e:${{ matrix.platform }} ${{ needs.scope.outputs.since }}
+      - name: "Archive test screenshot diff results"
+        uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
+        if: failure()
+        with:
+          name: test-screenshot-results
+          path: |
+            ${{ github.workspace }}/packages/**/e2e/images/diffs/**/*.png
+            ${{ github.workspace }}/packages/**/e2e/images/actual/**/*.png
+          if-no-files-found: ignore
