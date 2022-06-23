@@ -238,6 +238,13 @@ jobs:
             mkdir -p /project/runtimes/ /project/data/database /project/data/files /project/data/tmp
             printf "c\nc\n" | m2ee -c .github/configs/m2ee-native.yml --yolo start
             while true; do tail -f /dev/null & wait ${!}; done
+      - name: Wait for runtime
+        uses: nev7n/wait_for_response@7fef3c1a6e8939d0b09062f14fec50d3c5d15fa1
+        with:
+          url: 'http://localhost:8080/'
+          responseCode: '200'
+          timeout: 600000
+          interval: 10000
       - name: Install dependencies
         run: npm ci --force
       - name: "Download Android Emulator Resources"
