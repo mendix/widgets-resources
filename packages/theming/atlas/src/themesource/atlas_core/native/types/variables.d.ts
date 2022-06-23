@@ -587,8 +587,16 @@ export interface VariablesRadioButtons {
     };
 }
 
+interface GradientColorList {
+    color: string;
+    offset: number;
+}
+
 export interface VariableBackgroundGradient {
     container: ViewStyle;
+    angle?: number;
+    colorList?: GradientColorList[];
+    opacity?: number;
 }
 
 interface ColumnChartGridStyle {

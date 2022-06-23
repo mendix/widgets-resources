@@ -13,3 +13,39 @@ import { BackgroundGradientStyles } from "../../types/widgets";
 export const backgroundGradient: BackgroundGradientStyles = {
     container: {}
 };
+
+export const opacity0: BackgroundGradientStyles = {
+    opacity: 0
+};
+
+export const opacity25: BackgroundGradientStyles = {
+    opacity: 0.25
+};
+
+export const opacity50: BackgroundGradientStyles = {
+    opacity: 0.5
+};
+
+export const opacity75: BackgroundGradientStyles = {
+    opacity: 0.75
+};
+
+export const opacity100: BackgroundGradientStyles = {
+    opacity: 1
+};
+
+export const angle0: BackgroundGradientStyles = {
+    angle: 0
+};
+
+export const angle45: BackgroundGradientStyles = {
+    angle: 45
+};
+
+export const angle90: BackgroundGradientStyles = {
+    angle: 90
+};
+
+export const angle135: BackgroundGradientStyles = {
+    angle: 135
+};

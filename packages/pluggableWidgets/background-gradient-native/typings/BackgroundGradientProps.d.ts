@@ -21,8 +21,6 @@ export interface BackgroundGradientProps<Style> {
     name: string;
     style: Style[];
     colorList: ColorListType[];
-    angle: number;
-    opacity: Big;
     content: ReactNode;
     onClick?: ActionValue;
 }
@@ -33,8 +31,6 @@ export interface BackgroundGradientPreviewProps {
     styleObject?: CSSProperties;
     readOnly: boolean;
     colorList: ColorListPreviewType[];
-    angle: number | null;
-    opacity: number | null;
     content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     onClick: {} | null;
 }
