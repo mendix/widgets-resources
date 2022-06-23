@@ -17,8 +17,8 @@ module.exports = {
         },
         "android.developerapp": {
             type: "android.apk",
-            binaryPath: `${__dirname}/apps/app-debug.apk`,
-            testBinaryPath: `${__dirname}/apps/app-debug-androidTest.apk`
+            binaryPath: `${__dirname}/apps/app-detox-debug.apk`,
+            testBinaryPath: `${__dirname}/apps/app-detox-debug-androidTest.apk`
         }
     },
     devices: {
