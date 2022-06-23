@@ -61,6 +61,7 @@ jobs:
           tags: ${{ matrix.container }}:${{ env.MENDIX_VERSION }}
           secrets: GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
   widgets:
+    needs: scope
     runs-on: ubuntu-22.04
     permissions:
       packages: read
@@ -80,7 +81,7 @@ jobs:
         run: npm ci --legacy-peer-deps
       - name: "Running build for development (MR)"
         if: github.event_name == 'pull_request'
-        run: npm run build:native -- --since origin/${{ github.base_ref }}
+        run: npm run build:native ${{ needs.scope.outputs.since }}
         env:
           NODE_OPTIONS: --max_old_space_size=6144
       - name: "Running build for development"
