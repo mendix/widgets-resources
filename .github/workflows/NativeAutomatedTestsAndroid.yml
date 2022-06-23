@@ -206,16 +206,10 @@ jobs:
         with:
           name: ${{ matrix.platform }}-app
           path: ${{ matrix.platform }}-app
-      - name: Move android apps to correct location
-        if: ${{ matrix.platform }} == android
+      - name: Move ${{ matrix.platform }} apps to correct location
         run: |
           mkdir -p detox/apps
-          find android-app -type f -iname "*.apk" -exec mv {} detox/apps/ \;
-      - name: Move iOS app to correct location
-        if: ${{ matrix.platform }} == ios
-        run: |
-          mkdir -p detox/apps
-          find ios-app -type f -iname "*.app" -exec mv {} detox/apps/ \;
+          find ${{ matrix.platform }}-app -type f -iname "*.ap*" -exec mv {} detox/apps/ \;
       - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
         with:
           name: mda
