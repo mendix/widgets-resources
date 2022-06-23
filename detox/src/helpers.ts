@@ -44,11 +44,6 @@ export async function resetDevice(): Promise<void> {
 
     await device.terminateApp();
     await device.launchApp();
-    if (device.getPlatform() === "ios") {
-        // TODO: Investigate why the request is pending.
-        await device.setURLBlacklist([`http://localhost:8080/components.json`]);
-        await element(by.id("btn_launch_app")).tap();
-    }
 }
 
 export async function sleep(time: number): Promise<void> {

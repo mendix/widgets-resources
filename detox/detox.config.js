@@ -1,4 +1,4 @@
-const ANDROID_SDK_VERSION = "30"; // Set to 30 because: https://github.com/wix/Detox/issues/3071
+const ANDROID_SDK_VERSION = "31"; // Set to 30 because: https://github.com/wix/Detox/issues/3071
 const ANDROID_DEVICE_TYPE = "pixel";
 const IOS_SDK_VERSION = "15.5";
 const IOS_DEVICE_TYPE = "iPhone 13";
@@ -17,8 +17,8 @@ module.exports = {
         },
         "android.developerapp": {
             type: "android.apk",
-            binaryPath: `${__dirname}/apps/app-detox-debug.apk`,
-            testBinaryPath: `${__dirname}/apps/app-detox-debug-androidTest.apk`
+            binaryPath: `${__dirname}/apps/app-appstore-release-unsigned.apk`,
+            testBinaryPath: `${__dirname}/apps/app-appstore-release-androidTest.apk`
         }
     },
     devices: {

@@ -151,31 +151,6 @@ jobs:
         with:
           name: ${{ matrix.platform }}
           path: ${{ matrix.platform }}
-  runtime:
-    needs: [ project, mendix-version ]
-    runs-on: ubuntu-22.04
-    container:
-      image: ghcr.io/mendix/widgets-resources/mxruntime:${{ needs.mendix-version.outputs.mendix-version }}
-      ports:
-        - 8080
-    steps:
-      - name: "Checking-out code"
-        uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v3
-        with:
-          submodules: false
-      - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
-        with:
-          name: mda
-      - run: mkdir -p /project/runtimes/ /project/data/database /project/data/files /project/data/tmp
-      - name: Extract test project
-        uses: montudor/action-zip@0852c26906e00f8a315c704958823928d8018b28
-        with:
-          args: unzip -qq automation.mda -d deployment
-      - run: mv deployment/* /project/
-      - name: "Start runtime"
-        run: |
-          printf "c\nc\n" | m2ee -c .github/configs/m2ee-native.yml --yolo start
-      #          while true; do tail -f /dev/null & wait ${!}; done
   android-app:
     needs: [ bundle ]
     runs-on: ubuntu-22.04
@@ -218,3 +193,54 @@ jobs:
         with:
           name: android-app
           path: android/app/build/outputs/apk/**/*.apk
+  tests:
+    needs: [ project, mendix-version, android-app ]
+    runs-on: macos-12
+    strategy:
+      matrix:
+        platform: [ 'android' ]
+    steps:
+      - name: "Checking-out code"
+        uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v3
+      - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
+        with:
+          name: ${{ matrix.platform }}-app
+          path: ${{ matrix.platform }}-app
+      - name: Move android apps to correct location
+        if: ${{ matrix.platform }} == android
+        run: |
+          mkdir -p detox/apps
+          find android-app -type f -iname "*.apk" -exec mv {} detox/apps/ \;
+      - name: Move iOS app to correct location
+        if: ${{ matrix.platform }} == ios
+        run: |
+          mkdir -p detox/apps
+          find ios-app -type f -iname "*.app" -exec mv {} detox/apps/ \;
+      - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
+        with:
+          name: mda
+      - name: Extract test project
+        uses: montudor/action-zip@0852c26906e00f8a315c704958823928d8018b28
+        with:
+          args: unzip -qq automation.mda -d deployment
+      - name: Start runtime
+        uses: addnab/docker-run-action@4f65fabd2431ebc8d299f8e5a018d79a769ae185
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
+          image: mendix/widgets-resources/mxruntime:${{ needs.mendix-version.outputs.mendix-version }}
+          options: -d -p 8080 -v ${{ github.workspace }}/deployment:/project
+          run: |
+            mkdir -p /project/runtimes/ /project/data/database /project/data/files /project/data/tmp
+            printf "c\nc\n" | m2ee -c .github/configs/m2ee-native.yml --yolo start
+            while true; do tail -f /dev/null & wait ${!}; done
+      - name: Install dependencies
+        run: npm ci --force
+      - name: "Download Android Emulator Resources"
+        if: ${{ matrix.platform }} == android
+        run: |
+          # echo "y" | $ANDOID_HOME/tools/bin/sdkmanager --install "system-images;android-30;google_apis;x86"
+          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name NATIVE_pixel_31 --device "pixel" -k 'system-images;android-31;google_apis;x86'
+      - name: Run tests
+        run: npm run test:e2e:${{ matrix.platform }}
