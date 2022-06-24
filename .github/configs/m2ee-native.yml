@@ -1,20 +1,26 @@
 m2ee:
     app_name: Test App
-    app_base: /project
+    app_base: $PROJECT_PATH
     admin_port: 8090
     admin_pass: Password1!
     runtime_port: 8080
     runtime_listen_addresses: "*"
     javaopts:
-        ["-Dfile.encoding=UTF-8", "-XX:MaxPermSize=128M", "-Xmx512M", "-Xms512M", "-Djava.io.tmpdir=/project/data/tmp"]
+        ["-Dfile.encoding=UTF-8", "-XX:MaxPermSize=128M", "-Xmx512M", "-Xms512M", "-Djava.io.tmpdir=$PROJECT_PATH/data/tmp"]
     javabin: /usr/bin/java
-    pidfile: /var/run/m2ee.pid
+    pidfile: $ROOT_PATH/var/run/m2ee.pid
 mxruntime:
     DTAPMode: T
     ApplicationRootUrl: http://runtime:8080/
     DatabaseType: HSQLDB
     DatabaseName: default
     DatabasePassword: ""
-    BuiltInDatabasePath: /project/data/database
+    BuiltInDatabasePath: $PROJECT_PATH/data/database
 mxnode:
-    mxjar_repo: /var/opt/runtime
+    mxjar_repo: $PROJECT_PATH/runtimes
+logging:
+    -
+        type: file
+        name: FileSubscriber
+        autosubscribe: INFO
+        filename: $ROOT_PATH/log/runtime.log
