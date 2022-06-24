@@ -16,6 +16,8 @@ To prepare your environment for running the e2e tests (or when you changed the d
 
 To be able to use Detox, it is required to build an app that contains the Detox instrumentation. It is important that both the app under test with the instrumentation and the tests use a similar (preferably same) version of Detox. They need to talk to each other using the same dialect. Once they differ too much, instead of telling you these versions are not compatible, certain commands will stop working.
 
+Note: The below setup is only required whenever we change the detox version in package.json in `widgets-resources`.
+
 Steps:
 
 1. In the `appdev` repo, go to the `developerapp` folder. Install the version of Detox that you want to use with the `npm i -D detox@<version>` command.
