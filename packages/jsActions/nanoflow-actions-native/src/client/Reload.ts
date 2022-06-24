@@ -8,7 +8,7 @@
 /**
  * @returns {Promise.<void>}
  */
-export async function reload(): Promise<void> {
+export async function Reload(): Promise<void> {
     // BEGIN USER CODE
     mx.reload();
     return new Promise(() => {
