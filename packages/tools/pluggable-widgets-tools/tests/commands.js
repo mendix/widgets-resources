@@ -181,7 +181,7 @@ async function main() {
 
             await writeJson(join(workDir, "package.json"), widgetPackageJson);
 
-            await execAsync("npm install --legacy-peer-deps --loglevel=error", workDir);
+            await execAsync("npm install --loglevel=error", workDir);
         }
 
         async function testLint() {
