@@ -97,7 +97,8 @@
   },
   "overrides": {
     "@testing-library/react-native": {
-      "react-test-renderer": "17.0.2"
+      "react-test-renderer": "17.0.2",
+      "react-native": "0.68.2"
     },
     "react-native": {
       "use-subscription": "1.5.1"
