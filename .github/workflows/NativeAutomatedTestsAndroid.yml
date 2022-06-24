@@ -243,13 +243,39 @@ jobs:
           docker exec -t runtime m2ee -c /configs/m2ee-native.yml --yolo start
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
-      - name: "Download Android Emulator Resources"
+      - name: AVD cache
         if: ${{ matrix.platform }} == android
-        run: |
-          echo "y" | $ANDOID_HOME/tools/bin/sdkmanager --install "system-images;android-31;google_apis;x86"
-          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name NATIVE_pixel_31 --device "pixel" -k 'system-images;android-31;google_apis;x86'
+        uses: actions/cache@c3f1317a9e7b1ef106c153ac8c0f00fed3ddbc0d #v3.0.4
+        id: avd-cache
+        with:
+          path: |
+            /Users/runner/.android/avd/*
+            /Users/runner/.android/adb*
+          key: avd-31
+      - name: create AVD and generate snapshot for caching
+        if: ${{ matrix.platform }} == android && steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@e790971012b979513b4e2fe70d4079bc0ca8a1ae #v2.24.0
+        with:
+          api-level: 31
+          target: google_apis
+          arch: x86_64
+          avd-name: NATIVE_pixel_31
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: echo "AVD created"
       - name: Run tests
-        run: npm run test:e2e:${{ matrix.platform }} ${{ needs.scope.outputs.since }}
+        if: ${{ matrix.platform }} == android
+        uses: reactivecircus/android-emulator-runner@e790971012b979513b4e2fe70d4079bc0ca8a1ae #v2.24.0
+        with:
+          api-level: 31
+          target: google_apis
+          arch: x86_64
+          avd-name: NATIVE_pixel_31
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: npm run test:e2e:local:${{ matrix.platform }} ${{ needs.scope.outputs.since }}
       - name: "Archive test screenshot diff results"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         if: failure()
