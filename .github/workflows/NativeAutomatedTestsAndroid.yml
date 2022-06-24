@@ -242,7 +242,7 @@ jobs:
           docker exec -t runtime mkdir -p /project/runtimes /project/data/database /project/data/files /project/data/tmp
           docker exec -t runtime m2ee -c /configs/m2ee-native.yml --yolo start
       - name: Install dependencies
-        run: npm ci --force
+        run: npm ci --legacy-peer-deps
       - name: "Download Android Emulator Resources"
         if: ${{ matrix.platform }} == android
         run: |
