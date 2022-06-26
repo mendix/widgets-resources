@@ -227,11 +227,8 @@ jobs:
         run: |
           mkdir project
           unzip -qq automation.mda -d project
-      - name: Replace project path
-        uses: datamonsters/replace-action@54f8e7be24769a843c1c60a0cc9fa3c1aaa906ca #v2
-        with:
-          files: '.github/configs/m2ee-native.yml'
-          replacements: '$PROJECT_PATH=${{ github.workspace }}/project,$ROOT_PATH=${{ github.workspace }}'
+          cp .github/configs/m2ee-native.yml project/m2ee-native.yml
+          sed -i -- 's=$ROOT_PATH=${{ github.workspace }}=g' project/m2ee-native.yml
       - uses: actions/setup-python@v4
         with:
           python-version: '3.x'
@@ -258,7 +255,7 @@ jobs:
           tar xfz tmp/runtime.tar.gz --directory ${{ github.workspace }}/project/runtimes
           rm tmp/runtime.tar.gz
       - name: Start mxruntime
-        run: bin/m2ee -c ${{ github.workspace }}/.github/configs/m2ee-native.yml --verbose --yolo start
+        run: bin/m2ee -c ${{ github.workspace }}/project/m2ee-native.yml --verbose --yolo start
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
       - name: AVD cache
