@@ -33,6 +33,6 @@
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/react-native-snap-carousel": "^3.7.4",
     "eslint": "^7.20.0",
-    "detox": "^19.5.7"
+    "detox": "^19.7.1"
   }
 }

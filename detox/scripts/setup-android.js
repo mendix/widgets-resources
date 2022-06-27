@@ -9,8 +9,8 @@ main().catch(e => {
 async function main() {
     console.log("Downloading Android apps...");
     await Promise.all([
-        downloadFile("https://www.dropbox.com/s/3m4i4tiflncvriw/app-debug-androidTest.apk?dl=1"),
-        downloadFile("https://www.dropbox.com/s/wrhcm3ff316itip/app-debug.apk?dl=1")
+        downloadFile("https://www.dropbox.com/s/4hel4yki6vl1et5/app-detox-debug-androidTest.apk?dl=1"),
+        downloadFile("https://www.dropbox.com/s/qu4z1kpy8abnyr3/app-detox-debug.apk?dl=1")
     ]);
 
     console.log(`Installing Android SDK version ${ANDROID_SDK_VERSION}...`);
