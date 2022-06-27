@@ -177,7 +177,7 @@ jobs:
           path: bundles/android
       - name: "Copy files to the right location"
         run: |
-          mv bundles/android/android.bundle android/app/src/main/assets
+          mv bundles/android/android.bundle android/app/src/main/assets/index.android.bundle
           cp -r bundles/android/assets/* android/app/src/main/res/
       - name: "Set up node"
         uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 # v3
