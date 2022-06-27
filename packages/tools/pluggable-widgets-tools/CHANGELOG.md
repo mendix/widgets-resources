@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
+-   We updated required Node.js version to the current LTS version.
+
 -   Update `rollup` and `@rollup/plugin-commonjs`
 
 ## [9.13.1] - 2022-05-23

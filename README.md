@@ -93,14 +93,13 @@ See [CONTRIBUTING.md](https://github.com/mendix/widgets-resources/blob/master/CO
 
 ## Developing
 
-In order to use our mono repo, please make sure you are using [Node.JS v14](https://nodejs.org/download/release/latest-v14.x/) and NPM v6 (Use `npm i -g npm@latest-6`) or latest versions.
+### Prerequisites
 
-As we are using node-gyp in our dependencies, please make sure to install the requirements for this library according to your OS.
-- [Windows](https://github.com/nodejs/node-gyp#on-windows)
-- [Mac OS](https://github.com/nodejs/node-gyp#on-macos)
-- [Linux/Unix](https://github.com/nodejs/node-gyp#on-unix)
+In order to use our mono repo, please make sure you are using the LTS version of [Node.js](https://nodejs.org/en/download/).
 
-- Execute `npm install` on root
+As we are using [`node-gyp`](https://github.com/nodejs/node-gyp) in our dependencies, please make sure to [install the required dependencies](https://github.com/nodejs/node-gyp#installation) for this library according to your OS.
+
+Execute `npm install` on the root folder of this repo.
 
 ### For developing native widgets in `packages/pluggableWidgets`:
 
@@ -145,36 +144,39 @@ means:
 ## Manually releasing Native Mobile Resources (NMR)
 
 Note: for an automated approach (preferred), see `scripts/release/README.md`.
-Note: this applies to NMR for latest Studio Pro (currently 9.X) 
+Note: this applies to NMR for latest Studio Pro (currently 9.X)
 
-- With correct node version (see `.nvmrc`) in repo root, run `lerna clean -y && npm i`.
-- Ensure your current git branch includes all changes intended to be released.
-  - Including updates to widgets' changelogs and semver version in `package.json` and `package.xml`.
-- Build all widgets in release mode; in root of repo run `npm run release:native`.
-- Copy each widgets' `.mpk` to the NMR project's `/widgets` directory, overriding any existing `.mpk`s.
-- (conditional) If the widget is new, it needs to be listed on the NMR project page `NativeModileResources._WidgetExport`.
-  - Configure the widget with basic minimum requirements (e.g. datasource), enough to avoid any project errors.
-- Ensure monorepo's `mobile-resources-native` package has correct changelog and `package.json` version.
-- cd to `packages/jsActions/mobile-resources-native` and run `npm run release`.
-- Delete contents of NMR project's `javascriptsource/nativemobileresources/actions`.
-- Copy-and-paste files and folders inside monorepo `packages/jsActions/mobile-resources-native/dist/` to NMR project's `javascriptsource/nativemobileresources/actions/`.
-- Update the version in NMR project's `themesource/nativemobileresources/.version`.
-- Commit any changes to NMR project and push using git.
-- Export the NMR project's module called "NativeMobileResources"; right-click the module then "export module package".
-  - Exclude everything inside `userlib/` and `resources/`.
-- Create a GitHub release (see previous releases for example release notes and title, etc.) and add the exported `.mpk`.
-  - By aggregating the widgets' changelogs and the `mobile-resources-native` package's changelog, you can create detailed release notes.
-- Create a Mendix Marketplace release and add the exported `.mpk`; follow the release-wizard, ensuring each field is correct.
-  - Make sure the target Mendix version is correct.
-  - Most of the time you just need to update the module's version, attach a `.mpk` and add release notes.
+-   With correct node version (see `.nvmrc`) in repo root, run `lerna clean -y && npm i`.
+-   Ensure your current git branch includes all changes intended to be released.
+    -   Including updates to widgets' changelogs and semver version in `package.json` and `package.xml`.
+-   Build all widgets in release mode; in root of repo run `npm run release:native`.
+-   Copy each widgets' `.mpk` to the NMR project's `/widgets` directory, overriding any existing `.mpk`s.
+-   (conditional) If the widget is new, it needs to be listed on the NMR project page `NativeModileResources._WidgetExport`.
+    -   Configure the widget with basic minimum requirements (e.g. datasource), enough to avoid any project errors.
+-   Ensure monorepo's `mobile-resources-native` package has correct changelog and `package.json` version.
+-   cd to `packages/jsActions/mobile-resources-native` and run `npm run release`.
+-   Delete contents of NMR project's `javascriptsource/nativemobileresources/actions`.
+-   Copy-and-paste files and folders inside monorepo `packages/jsActions/mobile-resources-native/dist/` to NMR project's `javascriptsource/nativemobileresources/actions/`.
+-   Update the version in NMR project's `themesource/nativemobileresources/.version`.
+-   Commit any changes to NMR project and push using git.
+-   Export the NMR project's module called "NativeMobileResources"; right-click the module then "export module package".
+    -   Exclude everything inside `userlib/` and `resources/`.
+-   Create a GitHub release (see previous releases for example release notes and title, etc.) and add the exported `.mpk`.
+    -   By aggregating the widgets' changelogs and the `mobile-resources-native` package's changelog, you can create detailed release notes.
+-   Create a Mendix Marketplace release and add the exported `.mpk`; follow the release-wizard, ensuring each field is correct.
+    -   Make sure the target Mendix version is correct.
+    -   Most of the time you just need to update the module's version, attach a `.mpk` and add release notes.
 
-To release NMR for Studio Pro 8.X, most of the steps are the same, except take note of: `https://paper.dropbox.com/doc/Native-Content-Wiki--Bbd0Jfqo9nAEbmkpowVg5n3bAg-3h3CBZeVHXw8dJ1IY9xhJ#:uid=742445305119695634661853&h2=Update-NativeComponentsTestPro`.  
+To release NMR for Studio Pro 8.X, most of the steps are the same, except take note of: `https://paper.dropbox.com/doc/Native-Content-Wiki--Bbd0Jfqo9nAEbmkpowVg5n3bAg-3h3CBZeVHXw8dJ1IY9xhJ#:uid=742445305119695634661853&h2=Update-NativeComponentsTestPro`.
 
 ## Raising problems/issues
+
 -   We encourage everyone to open a Support ticket on [Mendix Support](https://support.mendix.com) in case of problems with widgets or scaffolding tools (Pluggable Widgets Generator or Pluggable Widgets Tools)
 
 ## Troubleshooting
+
 1. If you are having problems with the GIT hooks, where it says that the command `npm` can not be found, try adding this file to the root of your user folder.
+
 ```bash
 # ~/.huskyrc
 # This loads nvm.sh and sets the correct PATH before running hook
