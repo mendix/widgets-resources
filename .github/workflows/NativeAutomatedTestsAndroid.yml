@@ -242,7 +242,7 @@ jobs:
       - name: Setup m2ee
         run: |
           mkdir -p var/log var/opt/m2ee var/run bin tmp
-          git clone https://github.com/mendix/m2ee-tools.git tmp/m2ee
+          git clone https://github.com/KevinVlaanderen/m2ee-tools.git tmp/m2ee
           mv tmp/m2ee/src/* var/opt/m2ee
           chmod a=rwx var/log/ var/run/
           echo "#!/bin/bash -x" > bin/m2ee
