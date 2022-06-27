@@ -8,10 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
--   We introduced a new `Clear cached session data` action to clear the cahced session data from local storage.
+-   We introduced a new `Clear cached session data` action to clear the cached session data from local storage.
 -   We introdcued a new `Reload` action that reloads the app.
 
 ## [2.3.1] Nanoflow Commons - 2022-3-22
+
 ### Fixed
 
 -   Reduce module size by removing unused dependencies. This should speed up interaction with Team Server.
