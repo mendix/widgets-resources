@@ -7,6 +7,7 @@ m2ee:
     runtime_listen_addresses: "*"
     javaopts:
         ["-Dfile.encoding=UTF-8", "-Xmx512M", "-Xms512M", "-Djava.io.tmpdir=$ROOT_PATH/project/data/tmp"]
+    javabin: $JAVA_HOME/bin/java
     pidfile: $ROOT_PATH/var/run/m2ee.pid
 mxruntime:
     DTAPMode: T

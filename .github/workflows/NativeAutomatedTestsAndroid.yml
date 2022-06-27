@@ -223,22 +223,24 @@ jobs:
       - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
         with:
           name: mda
-      - name: Extract test project
-        run: |
-          mkdir project
-          unzip -qq automation.mda -d project
-          cp .github/configs/m2ee-native.yml project/m2ee-native.yml
-          sed -i -- 's=$ROOT_PATH=${{ github.workspace }}=g' project/m2ee-native.yml
       - uses: actions/setup-python@v4
         with:
           python-version: '3.x'
       - name: Install Python dependencies
         run: pip install pyaml httplib2
       - name: Setup Java 11
+        id: setup-java
         uses: actions/setup-java@16cca5479d7c6b6843f6a6515640ba33c6501543 #3.4.0
         with:
           distribution: 'temurin'
           java-version: '11'
+      - name: Extract test project
+        run: |
+          mkdir project
+          unzip -qq automation.mda -d project
+          cp .github/configs/m2ee-native.yml project/m2ee-native.yml
+          sed -i -- 's=$ROOT_PATH=${{ github.workspace }}=g' project/m2ee-native.yml
+          sed -i -- 's=$JAVA_HOME=${{ steps.setup-java.outputs.path }}=g' project/m2ee-native.yml
       - name: Setup m2ee
         run: |
           mkdir -p var/log var/opt/m2ee var/run bin tmp
