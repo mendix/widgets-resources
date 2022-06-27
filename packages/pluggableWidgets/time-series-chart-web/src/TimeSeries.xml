@@ -165,14 +165,6 @@
                         </propertyGroup>
                     </properties>
                 </property>
-                <property key="xAxisLabel" type="textTemplate" required="false" multiline="false">
-                    <caption>X axis label</caption>
-                    <description />
-                </property>
-                <property key="yAxisLabel" type="textTemplate" required="false" multiline="false">
-                    <caption>Y axis label</caption>
-                    <description />
-                </property>
             </propertyGroup>
             <propertyGroup caption="General">
                 <property key="enableAdvancedOptions" type="boolean" defaultValue="false">
@@ -181,6 +173,14 @@
                 </property>
                 <property key="enableDeveloperMode" type="boolean" defaultValue="false">
                     <caption>Enable developer mode</caption>
+                    <description />
+                </property>
+                <property key="xAxisLabel" type="textTemplate" required="false" multiline="false">
+                    <caption>X axis label</caption>
+                    <description />
+                </property>
+                <property key="yAxisLabel" type="textTemplate" required="false" multiline="false">
+                    <caption>Y axis label</caption>
                     <description />
                 </property>
                 <property key="showLegend" type="boolean" defaultValue="true">
