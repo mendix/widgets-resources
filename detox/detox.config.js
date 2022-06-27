@@ -17,7 +17,7 @@ module.exports = {
         },
         "android.developerapp": {
             type: "android.apk",
-            binaryPath: `${__dirname}/apps/app-appstore-release-unsigned.apk`,
+            binaryPath: `${__dirname}/apps/app-appstore-release.apk`,
             testBinaryPath: `${__dirname}/apps/app-appstore-release-androidTest.apk`
         }
     },
