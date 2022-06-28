@@ -29,6 +29,8 @@ export function BackgroundGradient({ name, colorList, content, onClick, style }:
 
     const colors = sortedColorList.map(colorsObject => colorsObject.color.toLowerCase());
     const offsets = sortedColorList.map(colorsObject => Number(colorsObject.offset));
+    const opacity = Number(styles.opacity ?? defaultStyle.opacity);
+
     return (
         <Pressable
             onPress={() => {
@@ -39,10 +41,7 @@ export function BackgroundGradient({ name, colorList, content, onClick, style }:
                 StyleSheet.flatten([
                     styles.container,
                     {
-                        opacity:
-                            onClick?.canExecute && pressed
-                                ? Number(styles.opacity ?? defaultStyle.opacity) * 0.3
-                                : Number(styles.opacity ?? defaultStyle.opacity)
+                        opacity: onClick?.canExecute && pressed ? opacity * 0.3 : opacity
                     }
                 ])
             }
