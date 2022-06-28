@@ -306,6 +306,6 @@ jobs:
         with:
           name: test-screenshot-results
           path: |
-            ${{ github.workspace }}/packages/**/e2e/images/diffs/**/*.png
-            ${{ github.workspace }}/packages/**/e2e/images/actual/**/*.png
+            ${{ github.workspace }}/packages/**/e2e/diffs/**/*.png
+            ${{ github.workspace }}/packages/**/e2e/actual/**/*.png
           if-no-files-found: ignore
