@@ -274,19 +274,19 @@ jobs:
         uses: reactivecircus/android-emulator-runner@e790971012b979513b4e2fe70d4079bc0ca8a1ae #v2.24.0
         with:
           api-level: 31
-          target: google_apis
+          target: default
           arch: x86_64
           avd-name: NATIVE_pixel_31
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: false
+          disable-animations: true
           script: echo "AVD created"
       - name: Run tests
         if: ${{ matrix.platform }} == android
         uses: reactivecircus/android-emulator-runner@e790971012b979513b4e2fe70d4079bc0ca8a1ae #v2.24.0
         with:
           api-level: 31
-          target: google_apis
+          target: default
           arch: x86_64
           avd-name: NATIVE_pixel_31
           force-avd-creation: false
