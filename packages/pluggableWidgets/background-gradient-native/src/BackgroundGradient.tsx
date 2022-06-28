@@ -14,7 +14,7 @@ export function BackgroundGradient({ name, colorList, content, onClick, style }:
     }
 
     const styles = all<CustomStyle>([defaultStyle, ...style]);
-    let sortedColorList = (styles.colorList && !colorList ? styles.colorList : colorList).sort(
+    let sortedColorList = (styles.colorList && colorList.length === 0 ? styles.colorList : colorList).sort(
         (a, b) => Number(a.offset) - Number(b.offset)
     );
 
