@@ -1,4 +1,5 @@
 describe("datagrid-web", () => {
+    const browserName = Cypress.browser.name;
     const cleanMendixSession = () => {
         cy.window().then(window => {
             // Cypress opens a new session for every test, so it exceeds mendix license limit of 5 sessions, we need to logout after each test.
@@ -75,11 +76,11 @@ describe("datagrid-web", () => {
 
     describe("capabilities: hiding", () => {
         it("hides a selected column", () => {
-            cy.get(".mx-name-datagrid1 .column-header").first().should("be.visible");
+            cy.get(".mx-name-datagrid1 .column-header").first().contains("Age");
             cy.get(".mx-name-datagrid1 .column-selector-button").click();
             cy.get(".column-selectors > li").first().click();
             cy.wait(1000);
-            cy.get(".mx-name-datagrid1 .column-header").first().should("not.be.visible");
+            cy.get(".mx-name-datagrid1 .column-header").first().contains("First Name");
         });
 
         it("do not allow to hide last visible column", () => {
@@ -106,6 +107,13 @@ describe("datagrid-web", () => {
             cy.get(".mx-name-datagrid1 .td").first().click();
             cy.wait(1000);
             cy.get(".mx-name-AgeTextBox input").should("have.value", "12");
+        });
+    });
+
+    describe("manual column width", () => {
+        it("compares with a screenshot baseline and checks the column width is with correct size", () => {
+            cy.wait(4000);
+            cy.get(".mx-name-datagrid7").scrollIntoView().compareSnapshot(`dataGridColumnContent-${browserName}`, 0.2);
         });
     });
 });
