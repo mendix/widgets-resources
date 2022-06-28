@@ -18,7 +18,7 @@
   },
   "testProject": {
     "githubUrl": "https://github.com/mendix/testProjects",
-    "branchName": "documentviewer"
+    "branchName": "document-viewer-web"
   },
   "packagePath": "com.mendix.widget.web",
   "scripts": {
@@ -29,7 +29,7 @@
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
-    "test:e2e": "echo 'test not implemented'",
+    "test:e2e": "HEADED_MODE=--headed pluggable-widgets-tools test:e2e:web:cypress",
     "test:e2e:local": "npx cypress open --browser chrome --config-file ../../../configs/e2e/cypress/cypress.json",
     "release": "pluggable-widgets-tools release:web"
   },
