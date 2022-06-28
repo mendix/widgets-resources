@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.web.dropdown.Dropdown"
+        needsEntityContext="true"
+        pluginWidget="true"
+        offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+    <name>Dropdown</name>
+    <description/>
+    <studioProCategory>Display</studioProCategory>
+    <studioCategory>Display</studioCategory>
+    <helpUrl>https://docs.mendix.com/appstore/widgets/dropdown</helpUrl>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="attrValue" type="attribute" required="false">
+                    <caption>As enum</caption>
+                    <description />
+                    <attributeTypes>
+                        <attributeType name="Enum" />
+                    </attributeTypes>
+                </property>
+                <property key="associationValue" type="association" selectableObjects="associationOptions" required="false">
+                    <caption>Reference</caption>
+                    <description/>
+                    <associationTypes>
+                        <associationType name="Reference"/>
+                        <associationType name="ReferenceSet"/>
+                    </associationTypes>
+                </property>
+                <property key="associationOptions" type="datasource" isList="true" required="false">
+                    <caption>Pick from</caption>
+                    <description />
+                </property>
+                <property key="multiselect" type="boolean" defaultValue="false">
+                    <caption>Multiple selection</caption>
+                    <description />
+                </property>
+                <!-- <property key="myattr" type="attribute" dataSource="associationOptions">
+                    <caption>attr</caption>
+                    <description />
+                    <attributeTypes>
+                        <attributeType name="String" />
+                        <attributeType name="Enum" />
+                        <attributeType name="DateTime" />
+                        <attributeType name="Decimal" />
+                        <attributeType name="Integer" />
+                        <attributeType name="Long" />
+                        <attributeType name="AutoNumber" />
+                    </attributeTypes>
+                </property> -->
+                <property key="optionLabel" type="textTemplate" dataSource="associationOptions" required="false">
+                    <caption>Display name</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

@@ -1,0 +1,1 @@
+Please see [dropdown](https://docs.mendix.com/appstore/widgets/dropdown) in the Mendix documentation for details.
