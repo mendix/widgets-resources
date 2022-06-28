@@ -292,7 +292,7 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          script: npm run test:e2e:local:${{ matrix.platform }} ${{ needs.scope.outputs.since }}
+          script: adb reverse tcp:8080 tcp:8080 && npm run test:e2e:local:${{ matrix.platform }} ${{ needs.scope.outputs.since }}
       - name: "Archive runtime logs"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         if: always()
