@@ -276,6 +276,7 @@ jobs:
           api-level: 31
           target: default
           arch: x86_64
+          profile: pixel
           avd-name: NATIVE_pixel_31
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
@@ -288,6 +289,7 @@ jobs:
           api-level: 31
           target: default
           arch: x86_64
+          profile: pixel
           avd-name: NATIVE_pixel_31
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
