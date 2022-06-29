@@ -220,7 +220,7 @@ jobs:
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         with:
           name: ios-app
-          path: ios/builds/internal/output/*.app
+          path: ios/build/Build/Products/**/*.app
   android-avd:
     runs-on: macos-12
     steps:

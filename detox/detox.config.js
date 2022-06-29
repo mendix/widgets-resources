@@ -13,7 +13,7 @@ module.exports = {
     apps: {
         "ios.developerapp": {
             type: "ios.app",
-            binaryPath: `${__dirname}/apps/DeveloperApp.app`
+            binaryPath: `${__dirname}/apps/NativeComponent.app`
         },
         "android.developerapp": {
             type: "android.apk",
