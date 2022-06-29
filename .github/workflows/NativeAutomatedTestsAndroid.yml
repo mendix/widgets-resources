@@ -280,7 +280,7 @@ jobs:
           cores: 3
           avd-name: NATIVE_pixel_31
           force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          emulator-options: -skin 1080x1920 -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: echo "AVD created"
       - name: Run tests
@@ -294,7 +294,7 @@ jobs:
           cores: 3
           avd-name: NATIVE_pixel_31
           force-avd-creation: false
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          emulator-options: -skin 1080x1920 -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: adb reverse tcp:8080 tcp:8080 && npm run test:e2e:local:${{ matrix.platform }} ${{ needs.scope.outputs.since }}
       - name: "Archive runtime logs"
