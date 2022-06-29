@@ -1,0 +1,61 @@
+name: 'Prepare native tests'
+description: Start the runtime in preparation of the native e2e tests
+inputs:
+  mendix-version:
+    description: Mendix version to use for the runtime
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: "Set up node"
+      uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 # v3
+      with:
+        node-version: 16
+        cache: "npm"
+        cache-dependency-path: "**/package-lock.json"
+    - name: Install dependencies
+      run: npm ci --legacy-peer-deps
+      shell: bash
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    - name: Install Python dependencies
+      run: pip install pyaml httplib2
+      shell: bash
+    - name: Setup Java 11
+      id: setup-java
+      uses: actions/setup-java@16cca5479d7c6b6843f6a6515640ba33c6501543 #3.4.0
+      with:
+        distribution: 'temurin'
+        java-version: '11'
+    - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
+      with:
+        name: mda
+    - name: Extract test project
+      run: |
+        mkdir project
+        unzip -qq automation.mda -d project
+        cp .github/configs/m2ee-native.yml project/m2ee-native.yml
+        sed -i -- 's=$ROOT_PATH=${{ github.workspace }}=g' project/m2ee-native.yml
+        sed -i -- 's=$JAVA_HOME=${{ steps.setup-java.outputs.path }}=g' project/m2ee-native.yml
+      shell: bash
+    - name: Setup m2ee
+      run: |
+        mkdir -p var/log var/opt/m2ee var/run bin tmp
+        git clone https://github.com/KevinVlaanderen/m2ee-tools.git tmp/m2ee
+        mv tmp/m2ee/src/* var/opt/m2ee
+        chmod a=rwx var/log/ var/run/
+        echo "#!/bin/bash -x" > bin/m2ee
+        echo "python3 var/opt/m2ee/m2ee.py \$@" >>bin/m2ee
+        chmod +x bin/m2ee
+      shell: bash
+    - name: Setup mxruntime
+      run: |
+        mkdir -p ${{ github.workspace }}/project/runtimes ${{ github.workspace }}/project/data/model-upload ${{ github.workspace }}/project/data/database ${{ github.workspace }}/project/data/files ${{ github.workspace }}/project/data/tmp
+        wget -q https://cdn.mendix.com/runtime/mendix-${{ inputs.mendix-version }}.tar.gz -O tmp/runtime.tar.gz
+        tar xfz tmp/runtime.tar.gz --directory ${{ github.workspace }}/project/runtimes
+        rm tmp/runtime.tar.gz
+      shell: bash
+    - name: Start mxruntime
+      run: bin/m2ee -c ${{ github.workspace }}/project/m2ee-native.yml --verbose --yolo start
+      shell: bash

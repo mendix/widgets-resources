@@ -122,47 +122,28 @@ jobs:
         with:
           name: mda
           path: automation.mda
-  bundle:
+  android-bundle:
     needs: [ project, mendix-version ]
     runs-on: ubuntu-22.04
     container: ghcr.io/mendix/widgets-resources/mxbuild:${{ needs.mendix-version.outputs.mendix-version }}
-    strategy:
-      matrix:
-        platform: [ 'android', 'ios' ]
     steps:
-      - name: Download test project
-        run: curl -L -o project.zip https://github.com/mendix/Native-Mobile-Resources/archive/refs/heads/main.zip
-      - name: Extract test project
-        uses: montudor/action-zip@0852c26906e00f8a315c704958823928d8018b28
+      - name: "Checking-out code"
+        uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v3
+      - uses: ./.github/actions/create-native-bundle
         with:
-          args: unzip -qq project.zip
-      - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
+          platform: 'android'
+  ios-bundle:
+    needs: [ project, mendix-version ]
+    runs-on: ubuntu-22.04
+    container: ghcr.io/mendix/widgets-resources/mxbuild:${{ needs.mendix-version.outputs.mendix-version }}
+    steps:
+      - name: "Checking-out code"
+        uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v3
+      - uses: ./.github/actions/create-native-bundle
         with:
-          name: mda
-      - name: Extract test project
-        uses: montudor/action-zip@0852c26906e00f8a315c704958823928d8018b28
-        with:
-          args: unzip -qq automation.mda -d Native-Mobile-Resources-main/deployment
-      - run: mkdir -p ${{ matrix.platform }}/assets
-      - name: Bundle ${{ matrix.platform }}
-        run: |
-          cd Native-Mobile-Resources-main/deployment/native && \
-          /tmp/mxbuild/modeler/tools/node/node \
-          /tmp/mxbuild/modeler/tools/node/node_modules/react-native/local-cli/cli.js \
-          bundle --verbose --platform ${{ matrix.platform }} --dev false \
-          --config "$PWD/metro.config.json" \
-          --bundle-output $GITHUB_WORKSPACE/${{ matrix.platform }}/index.${{ matrix.platform }}.bundle \
-          --assets-dest $GITHUB_WORKSPACE/${{ matrix.platform }}/assets/ \
-          --entry-file ./index.js
-        env:
-          NODE_OPTIONS: --max_old_space_size=6144
-      - name: Upload ${{ matrix.platform }} bundle
-        uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
-        with:
-          name: ${{ matrix.platform }}
-          path: ${{ matrix.platform }}
+          platform: 'ios'
   android-app:
-    needs: [ bundle ]
+    needs: [ android-bundle ]
     runs-on: ubuntu-22.04
     steps:
       - name: Check out Native Template for Native Components Test Project
@@ -204,7 +185,7 @@ jobs:
           name: android-app
           path: android/app/build/outputs/apk/**/*.apk
   ios-app:
-    needs: [ bundle ]
+    needs: [ ios-bundle ]
     runs-on: macos-12
     steps:
       - name: Check out Native Template for Native Components Test Project
@@ -240,71 +221,24 @@ jobs:
         with:
           name: ios-app
           path: ios/builds/internal/output/*.app
-  tests:
+  android-tests:
     needs: [ scope, mendix-version, project, android-app ]
     runs-on: macos-12
-    strategy:
-      matrix:
-        platform: [ 'android', 'ios' ]
     steps:
       - name: "Checking-out code"
         uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v3
-      - name: "Set up node"
-        uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 # v3
+      - uses: ./.github/actions/prepare-native-tests
         with:
-          node-version: 16
-          cache: "npm"
-          cache-dependency-path: "**/package-lock.json"
-      - name: Install dependencies
-        run: npm ci --legacy-peer-deps
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-      - name: Install Python dependencies
-        run: pip install pyaml httplib2
-      - name: Setup Java 11
-        id: setup-java
-        uses: actions/setup-java@16cca5479d7c6b6843f6a6515640ba33c6501543 #3.4.0
-        with:
-          distribution: 'temurin'
-          java-version: '11'
+          mendix-version: ${{ needs.mendix-version.outputs.mendix-version }}
       - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
         with:
-          name: ${{ matrix.platform }}-app
-          path: ${{ matrix.platform }}-app
-      - name: Move ${{ matrix.platform }} apps to correct location
+          name: android-app
+          path: android-app
+      - name: Move android apps to correct location
         run: |
           mkdir -p detox/apps
-          find ${{ matrix.platform }}-app -type f -iname "*.ap*" -exec mv {} detox/apps/ \;
-      - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
-        with:
-          name: mda
-      - name: Extract test project
-        run: |
-          mkdir project
-          unzip -qq automation.mda -d project
-          cp .github/configs/m2ee-native.yml project/m2ee-native.yml
-          sed -i -- 's=$ROOT_PATH=${{ github.workspace }}=g' project/m2ee-native.yml
-          sed -i -- 's=$JAVA_HOME=${{ steps.setup-java.outputs.path }}=g' project/m2ee-native.yml
-      - name: Setup m2ee
-        run: |
-          mkdir -p var/log var/opt/m2ee var/run bin tmp
-          git clone https://github.com/KevinVlaanderen/m2ee-tools.git tmp/m2ee
-          mv tmp/m2ee/src/* var/opt/m2ee
-          chmod a=rwx var/log/ var/run/
-          echo "#!/bin/bash -x" > bin/m2ee
-          echo "python3 var/opt/m2ee/m2ee.py \$@" >>bin/m2ee
-          chmod +x bin/m2ee
-      - name: Setup mxruntime
-        run: |
-          mkdir -p ${{ github.workspace }}/project/runtimes ${{ github.workspace }}/project/data/model-upload ${{ github.workspace }}/project/data/database ${{ github.workspace }}/project/data/files ${{ github.workspace }}/project/data/tmp
-          wget -q https://cdn.mendix.com/runtime/mendix-${{ needs.mendix-version.outputs.mendix-version }}.tar.gz -O tmp/runtime.tar.gz
-          tar xfz tmp/runtime.tar.gz --directory ${{ github.workspace }}/project/runtimes
-          rm tmp/runtime.tar.gz
-      - name: Start mxruntime
-        run: bin/m2ee -c ${{ github.workspace }}/project/m2ee-native.yml --verbose --yolo start
+          find android-app -type f -iname "*.apk" -exec mv {} detox/apps/ \;
       - name: AVD cache
-        if: ${{ matrix.platform }} == android
         uses: actions/cache@c3f1317a9e7b1ef106c153ac8c0f00fed3ddbc0d #v3.0.4
         id: avd-cache
         with:
@@ -313,7 +247,7 @@ jobs:
             /Users/runner/.android/adb*
           key: avd-31
       - name: create AVD and generate snapshot for caching
-        if: ${{ matrix.platform }} == android && steps.avd-cache.outputs.cache-hit != 'true'
+        if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@e790971012b979513b4e2fe70d4079bc0ca8a1ae #v2.24.0
         with:
           api-level: 31
@@ -327,7 +261,6 @@ jobs:
           disable-animations: true
           script: echo "AVD created"
       - name: Run Android tests
-        if: ${{ matrix.platform }} == android
         uses: reactivecircus/android-emulator-runner@e790971012b979513b4e2fe70d4079bc0ca8a1ae #v2.24.0
         with:
           api-level: 31
@@ -340,21 +273,53 @@ jobs:
           emulator-options: -skin 1080x1920 -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: adb reverse tcp:8080 tcp:8080 && npm run test:e2e:local:android ${{ needs.scope.outputs.since }}
-      - name: Run iOS tests
-        if: ${{ matrix.platform }} == ios
-        run: npm run test:e2e:local:ios ${{ needs.scope.outputs.since }}
       - name: "Archive runtime logs"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         if: always()
         with:
-          name: ${{ matrix.platform }}-runtime-logs
+          name: android-runtime-logs
           path: log/*.log
           if-no-files-found: ignore
       - name: "Archive test screenshot diff results"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         if: failure()
         with:
-          name: ${{ matrix.platform }}-screenshot-results
+          name: android-screenshot-results
+          path: |
+            ${{ github.workspace }}/packages/**/e2e/diffs/**/*.png
+            ${{ github.workspace }}/packages/**/e2e/actual/**/*.png
+          if-no-files-found: ignore
+  ios-tests:
+    needs: [ scope, mendix-version, project, ios-app ]
+    runs-on: macos-12
+    steps:
+      - name: "Checking-out code"
+        uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v3
+      - uses: ./.github/actions/prepare-native-tests
+        with:
+          mendix-version: ${{ needs.mendix-version.outputs.mendix-version }}
+      - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
+        with:
+          name: ios-app
+          path: ios-app
+      - name: Move android apps to correct location
+        run: |
+          mkdir -p detox/apps
+          find ios-app -type f -iname "*.app" -exec mv {} detox/apps/ \;
+      - name: Run iOS tests
+        run: npm run test:e2e:local:ios ${{ needs.scope.outputs.since }}
+      - name: "Archive runtime logs"
+        uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
+        if: always()
+        with:
+          name: ios-runtime-logs
+          path: log/*.log
+          if-no-files-found: ignore
+      - name: "Archive test screenshot diff results"
+        uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
+        if: failure()
+        with:
+          name: ios-screenshot-results
           path: |
             ${{ github.workspace }}/packages/**/e2e/diffs/**/*.png
             ${{ github.workspace }}/packages/**/e2e/actual/**/*.png
