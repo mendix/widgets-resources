@@ -10,24 +10,25 @@ on:
 
 jobs:
   scope:
-    name: Set scope
     runs-on: ubuntu-latest
     outputs:
       since: ${{ steps.since.outputs.since }}
     steps:
-      - id: since
+      - name: "Determine target ref"
+        id: since
         if: github.event_name == 'pull_request'
         run: echo "::set-output name=since::-- --since origin/${{ github.base_ref }}"
   mendix-version:
     runs-on: ubuntu-22.04
     steps:
-      - name: "Checking-out code"
+      - name: "Check out code"
         uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v3
-      - id: get-mendix-version
+      - name: "Get Mendix version"
+        id: get-mendix-version
         uses: notiz-dev/github-action-json-property@7c8cf5cc36eb85d8d287a8086a39dac59628eb31
         with:
-          path: "configs/e2e/mendix-versions.json"
-          prop_path: "latest"
+          path: configs/e2e/mendix-versions.json
+          prop_path: latest
     outputs:
       mendix-version: ${{ steps.get-mendix-version.outputs.prop }}
   docker-images:
@@ -37,19 +38,22 @@ jobs:
       MENDIX_VERSION: ${{ needs.mendix-version.outputs.mendix-version }}
     strategy:
       matrix:
-        container: [ "mxbuild" ]
+        container: [ mxbuild, mxruntime ]
     steps:
-      - name: Login to GitHub Container Registry
+      - name: "Login to GitHub Container Registry"
         uses: docker/login-action@49ed152c8eca782a232dede0303416e8f356c37b #v1.12.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Check if docker image already exists
+      - name: "Check if docker image already exists"
         run: |
           docker manifest inspect ghcr.io/mendix/widgets-resources/${{ matrix.container }}:${{ env.MENDIX_VERSION }} > /dev/null
           echo "IMAGE_MISSING=$?" >> $GITHUB_ENV
-      - name: "${{ matrix.container }}"
+      - name: "Check out code"
+        uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v3
+        if: ${{ env.GITHUB_ENV.IMAGE_MISSING == 1 }}
+      - name: "Build ${{ matrix.container }} image"
         if: ${{ env.GITHUB_ENV.IMAGE_MISSING == 1 }}
         uses: docker/build-push-action@e551b19e49efd4e98792db7592c17c09b89db8d8
         with:
@@ -67,29 +71,29 @@ jobs:
       packages: read
       contents: read
     steps:
-      - name: "Checking-out code"
+      - name: "Check out code"
         uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v3
         with:
           fetch-depth: 0
       - name: "Set up node"
-        uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 # v3
+        uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 #v3
         with:
-          node-version-file: ".nvmrc"
-          cache: "npm"
+          node-version-file: .nvmrc
+          cache: npm
           cache-dependency-path: "**/package-lock.json"
-      - name: "Installing dependencies"
+      - name: "Install dependencies"
         run: npm ci --legacy-peer-deps
-      - name: "Running build for development (MR)"
+      - name: "Run build for development (MR)"
         if: github.event_name == 'pull_request'
         run: npm run build:native ${{ needs.scope.outputs.since }}
         env:
           NODE_OPTIONS: --max_old_space_size=6144
-      - name: "Running build for development"
+      - name: "Run build for development"
         if: github.event_name != 'pull_request'
         run: npm run build:native
         env:
           NODE_OPTIONS: --max_old_space_size=6144
-      - name: Upload widgets
+      - name: "Upload widgets"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         with:
           name: widgets
@@ -99,25 +103,22 @@ jobs:
     runs-on: ubuntu-22.04
     container: ghcr.io/mendix/widgets-resources/mxbuild:${{ needs.mendix-version.outputs.mendix-version }}
     steps:
-      - name: Download test project
+      - name: "Download test project"
         run: curl -L -o project.zip https://github.com/mendix/Native-Mobile-Resources/archive/refs/heads/main.zip
-      - name: Extract test project
+      - name: "Extract test project"
         uses: montudor/action-zip@0852c26906e00f8a315c704958823928d8018b28
         with:
           args: unzip -qq project.zip
-      - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
+      - name: "Download built widgets"
+        uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
         with:
           name: widgets
           path: packages/pluggableWidgets
-      - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
-        with:
-          name: widgets
-          path: packages/pluggableWidgets
-      - name: update-widgets
+      - name: "Update widgets"
         run: mx update-widgets --loose-version-check Native-Mobile-Resources-main/NativeComponentsTestProject.mpr
-      - name: Build test project
+      - name: "Build test project"
         run: mxbuild -o automation.mda Native-Mobile-Resources-main/NativeComponentsTestProject.mpr
-      - name: Upload MDA
+      - name: "Upload MDA"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         with:
           name: mda
@@ -127,32 +128,45 @@ jobs:
     runs-on: ubuntu-22.04
     container: ghcr.io/mendix/widgets-resources/mxbuild:${{ needs.mendix-version.outputs.mendix-version }}
     steps:
-      - name: "Checking-out code"
+      - name: "Check out code"
         uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v3
-      - uses: ./.github/actions/create-native-bundle
+      - name: "Download deployment package"
+        uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
         with:
-          platform: 'android'
+          name: mda
+      - name: "Create Android bundle"
+        uses: ./.github/actions/create-native-bundle
+        with:
+          platform: android
+          mda-file: automation.mda
   ios-bundle:
     needs: [ project, mendix-version ]
     runs-on: ubuntu-22.04
     container: ghcr.io/mendix/widgets-resources/mxbuild:${{ needs.mendix-version.outputs.mendix-version }}
     steps:
-      - name: "Checking-out code"
+      - name: "Check out code"
         uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v3
-      - uses: ./.github/actions/create-native-bundle
+      - name: "Download project MDA file"
+        uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
         with:
-          platform: 'ios'
+          name: mda
+      - name: "Create iOS bundle"
+        uses: ./.github/actions/create-native-bundle
+        with:
+          platform: ios
+          mda-file: automation.mda
   android-app:
     needs: [ android-bundle ]
     runs-on: ubuntu-22.04
     steps:
-      - name: Check out Native Template for Native Components Test Project
+      - name: "Check out Native Template for Native Components Test Project"
         uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 #v3
         with:
-          repository: 'mendix/native-content-test-app'
-          ref: 'main'
+          repository: mendix/native-content-test-app
+          ref: main
           ssh-key: ${{ secrets.NATIVE_CONTENT_TEST_APP }}
-      - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
+      - name: "Download Android bundle and assets"
+        uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
         with:
           name: android
           path: bundles/android
@@ -160,26 +174,24 @@ jobs:
         run: |
           mv bundles/android/index.android.bundle android/app/src/main/assets/index.android.bundle
           cp -r bundles/android/assets/* android/app/src/main/res/
-      - name: "Set up node"
+      - name: "Set up Node"
         uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 # v3
         with:
           node-version: 14
-          cache: "npm"
+          cache: npm
           cache-dependency-path: "**/package-lock.json"
-      - name: "Installing dependencies"
-        run: |
-          npm ci
-          npm run configure
-      - name: Setup JDK 11
+      - name: "Install dependencies"
+        run: npm ci
+      - name: "Setup JDK 11"
         uses: actions/setup-java@16cca5479d7c6b6843f6a6515640ba33c6501543 #v3.4.0
         with:
           java-version: 11
-          distribution: 'temurin'
-          cache: 'gradle'
-      - name: Build with Gradle
+          distribution: temurin
+          cache: gradle
+      - name: "Build Android app"
         run: ./gradlew assembleAppstoreRelease assembleAndroidTest -DtestBuildType=release
         working-directory: ./android
-      - name: Archive apk
+      - name: "Archive Android app"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         with:
           name: android-app
@@ -188,35 +200,34 @@ jobs:
     needs: [ ios-bundle ]
     runs-on: macos-12
     steps:
-      - name: Check out Native Template for Native Components Test Project
+      - name: "Check out Native Template for Native Components Test Project"
         uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 #v3
         with:
-          repository: 'mendix/native-content-test-app'
-          ref: 'main'
+          repository: mendix/native-content-test-app
+          ref: main
           ssh-key: ${{ secrets.NATIVE_CONTENT_TEST_APP }}
-      - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
+      - name: "Download iOS bundle and assets"
+        uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
         with:
           name: ios
           path: bundles/ios
       - name: "Copy files to the right location"
         run: mv bundles/ios/* ios/Bundle/
-      - name: "Set up node"
+      - name: "Set up Node"
         uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 # v3
         with:
           node-version: 14
-          cache: "npm"
+          cache: npm
           cache-dependency-path: "**/package-lock.json"
-      - name: "Installing dependencies"
-        run: |
-          npm ci
-          npm run configure
-      - name: Pod install
+      - name: "Install Node dependencies"
+        run: npm ci
+      - name: "Install Pod dependencies"
         run: pod install
         working-directory: ./ios
-      - name: Build with Xcode
+      - name: "Build iOS app"
         run: xcodebuild -workspace NativeTemplate.xcworkspace -scheme nativeTemplate -configuration Debug -sdk iphonesimulator -derivedDataPath build
         working-directory: ./ios
-      - name: Archive app
+      - name: "Archive iOS app"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         with:
           name: ios-app
@@ -224,9 +235,9 @@ jobs:
   android-avd:
     runs-on: macos-12
     steps:
-      - name: "Checking-out code"
+      - name: "Check out code"
         uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v3
-      - name: AVD cache
+      - name: "Setup AVD cache"
         uses: actions/cache@c3f1317a9e7b1ef106c153ac8c0f00fed3ddbc0d #v3.0.4
         id: avd-cache
         with:
@@ -234,7 +245,7 @@ jobs:
             /Users/runner/.android/avd/*
             /Users/runner/.android/adb*
           key: avd-31
-      - name: create AVD and generate snapshot for caching
+      - name: "Create AVD and generate snapshot for caching"
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@e790971012b979513b4e2fe70d4079bc0ca8a1ae #v2.24.0
         with:
@@ -252,20 +263,35 @@ jobs:
     needs: [ scope, mendix-version, project, android-app, android-avd ]
     runs-on: macos-12
     steps:
-      - name: "Checking-out code"
+      - name: "Check out code"
         uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v3
-      - uses: ./.github/actions/prepare-native-tests
+      - name: "Set up node"
+        uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 #v3
         with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: "**/package-lock.json"
+      - name: "Install dependencies"
+        run: npm ci --legacy-peer-deps
+      - name: "Download project MDA file"
+        uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
+        with:
+          name: mda
+      - name: "Start runtime"
+        uses: ./.github/actions/start-runtime
+        with:
+          mda-file: automation.mda
           mendix-version: ${{ needs.mendix-version.outputs.mendix-version }}
-      - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
+      - name: "Download Android app"
+        uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
         with:
           name: android-app
           path: android-app
-      - name: Move android apps to correct location
+      - name: "Move android apps to correct location"
         run: |
           mkdir -p detox/apps
           find android-app -type f -iname "*.apk" -exec mv {} detox/apps/ \;
-      - name: AVD cache
+      - name: "Setup AVD cache"
         uses: actions/cache@c3f1317a9e7b1ef106c153ac8c0f00fed3ddbc0d #v3.0.4
         id: avd-cache
         with:
@@ -273,7 +299,7 @@ jobs:
             /Users/runner/.android/avd/*
             /Users/runner/.android/adb*
           key: avd-31
-      - name: Run Android tests
+      - name: "Run tests"
         uses: reactivecircus/android-emulator-runner@e790971012b979513b4e2fe70d4079bc0ca8a1ae #v2.24.0
         with:
           api-level: 31
@@ -306,20 +332,35 @@ jobs:
     needs: [ scope, mendix-version, project, ios-app ]
     runs-on: macos-12
     steps:
-      - name: "Checking-out code"
+      - name: "Check out code"
         uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # v3
-      - uses: ./.github/actions/prepare-native-tests
+      - name: "Set up node"
+        uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 #v3
         with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: "**/package-lock.json"
+      - name: "Install dependencies"
+        run: npm ci --legacy-peer-deps
+      - name: "Download project MDA file"
+        uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
+        with:
+          name: mda
+      - name: "Start runtime"
+        uses: ./.github/actions/start-runtime
+        with:
+          mda-file: automation.mda
           mendix-version: ${{ needs.mendix-version.outputs.mendix-version }}
-      - uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
+      - name: "Download iOS app"
+        uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
         with:
           name: ios-app
           path: ios-app
-      - name: Move android apps to correct location
+      - name: "Move iOS app to correct location"
         run: |
           mkdir -p detox/apps
           find ios-app -type f -iname "*.app" -exec mv {} detox/apps/ \;
-      - name: Run iOS tests
+      - name: "Run tests"
         run: npm run test:e2e:local:ios ${{ needs.scope.outputs.since }}
       - name: "Archive runtime logs"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
