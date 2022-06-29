@@ -14,10 +14,6 @@ export const backgroundGradient: BackgroundGradientStyles = {
     container: {}
 };
 
-export const opacity0: BackgroundGradientStyles = {
-    opacity: 0
-};
-
 export const opacity25: BackgroundGradientStyles = {
     opacity: 0.25
 };
@@ -44,8 +40,4 @@ export const angle45: BackgroundGradientStyles = {
 
 export const angle90: BackgroundGradientStyles = {
     angle: 90
-};
-
-export const angle135: BackgroundGradientStyles = {
-    angle: 135
 };

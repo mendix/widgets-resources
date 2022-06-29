@@ -18,7 +18,23 @@ describe("Background gradient", () => {
             style: []
         };
     });
-    it("render background gradient correctly", () => {
+    it("render correctly", () => {
+        const component = render(<BackgroundGradient {...defaultProps} />);
+        expect(component.toJSON()).toMatchSnapshot();
+    });
+    it("render with undefined opacity", () => {
+        defaultProps = {
+            ...defaultProps,
+            style: [{ container: {}, opacity: undefined }]
+        };
+        const component = render(<BackgroundGradient {...defaultProps} />);
+        expect(component.toJSON()).toMatchSnapshot();
+    });
+    it("render with undefined angle", () => {
+        defaultProps = {
+            ...defaultProps,
+            style: [{ container: {}, angle: undefined }]
+        };
         const component = render(<BackgroundGradient {...defaultProps} />);
         expect(component.toJSON()).toMatchSnapshot();
     });
@@ -29,12 +45,41 @@ describe("Background gradient", () => {
         };
         expect(() => render(<BackgroundGradient {...defaultProps} />)).toThrowError();
     });
+    it("should trow error when opacity is not a number", () => {
+        defaultProps = {
+            ...defaultProps,
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            style: [{ container: {}, opacity: "test" }]
+        };
+        expect(() => render(<BackgroundGradient {...defaultProps} />)).toThrowError();
+    });
+    it("should trow error when angle is not a number", () => {
+        defaultProps = {
+            ...defaultProps,
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            style: [{ container: {}, angle: "test" }]
+        };
+        expect(() => render(<BackgroundGradient {...defaultProps} />)).toThrowError();
+    });
+    it("is should console warn when opacity is not between 0.0 and 1.0", () => {
+        defaultProps = {
+            ...defaultProps,
+            style: [{ container: {}, opacity: 1.1 }]
+        };
+        const spy = jest.spyOn(console, "warn");
+        render(<BackgroundGradient {...defaultProps} />);
+        expect(spy).toHaveBeenCalled();
+    });
     it("render background gradient with custom style", () => {
         defaultProps = {
             ...defaultProps,
             colorList: [],
             style: [
                 {
+                    angle: 0,
+                    opacity: 1,
                     container: {},
                     colorList: [
                         { color: "#fff", offset: Big(0) },

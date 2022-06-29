@@ -3,7 +3,7 @@
 ========================================================================== */
 
 import { ViewStyle } from "react-native";
-import { CheckBoxInputType } from "./widgets";
+import { CheckBoxInputType, GradientColorList } from "./widgets";
 
 declare type FontWeight = "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
 declare type TextAlign = "auto" | "left" | "right" | "center" | "justify";
@@ -587,16 +587,11 @@ export interface VariablesRadioButtons {
     };
 }
 
-interface GradientColorList {
-    color: string;
-    offset: number;
-}
-
 export interface VariableBackgroundGradient {
     container: ViewStyle;
-    angle?: number;
+    angle: number;
     colorList?: GradientColorList[];
-    opacity?: number;
+    opacity: number;
 }
 
 interface ColumnChartGridStyle {

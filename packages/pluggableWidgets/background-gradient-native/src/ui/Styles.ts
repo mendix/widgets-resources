@@ -8,10 +8,11 @@ export interface CustomStyle {
     opacity?: number;
 }
 
-const defaultStyle: CustomStyle = {
+const defaultStyle: Required<CustomStyle> = {
     container: {},
     opacity: 1,
-    angle: 0
+    angle: 0,
+    colorList: []
 };
 
 export default defaultStyle;

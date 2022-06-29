@@ -2742,10 +2742,6 @@
                 {
                     "name": "90 deg",
                     "class": "angle90"
-                },
-                {
-                    "name": "135 deg",
-                    "class": "angle135"
                 }
             ]
         },
@@ -2754,10 +2750,6 @@
             "type": "Dropdown",
             "description": "Sets the opacity of the element.",
             "options": [
-                {
-                    "name": "0%",
-                    "class": "opacity0"
-                },
                 {
                     "name": "25%",
                     "class": "opacity25"
