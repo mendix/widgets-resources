@@ -277,6 +277,7 @@ jobs:
           target: default
           arch: x86_64
           profile: pixel
+          cores: 3
           avd-name: NATIVE_pixel_31
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
@@ -290,6 +291,7 @@ jobs:
           target: default
           arch: x86_64
           profile: pixel
+          cores: 3
           avd-name: NATIVE_pixel_31
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
