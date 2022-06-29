@@ -6,9 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.5.2] Data Widgets - 2022-6-29
+
 ### Fixed
 
 -   We fixed an issue with incorrect wrap text being applied. (Ticket #150083)
+
+## [2.4.0] Datagrid
+
+### Fixed
+
+-   We fixed the issue with datagrid widget not respecting layout sizing if content is too big.
 
 ## [2.5.0] Data Widgets - 2022-5-11
 
