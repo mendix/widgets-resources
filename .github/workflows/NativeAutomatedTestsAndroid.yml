@@ -232,7 +232,7 @@ jobs:
         run: pod install
         working-directory: ./ios
       - name: "Build iOS app"
-        run: xcodebuild -workspace NativeTemplate.xcworkspace -scheme nativeTemplate -configuration Debug -sdk iphonesimulator -derivedDataPath build
+        run: xcodebuild -workspace NativeTemplate.xcworkspace -scheme nativeTemplate -configuration Debug -sdk iphonesimulator -derivedDataPath build -destination id=com.mendix.nativecontenttestapp
         working-directory: ./ios
       - name: "Archive iOS app"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
