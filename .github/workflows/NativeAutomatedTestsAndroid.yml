@@ -229,7 +229,7 @@ jobs:
         run: pod install
         working-directory: ./ios
       - name: "Build iOS app"
-        run: xcodebuild -workspace NativeTemplate.xcworkspace -scheme nativeTemplate -configuration Debug -sdk iphonesimulator -derivedDataPath build -destination id=com.mendix.nativecontenttestapp
+        run: xcodebuild -workspace NativeTemplate.xcworkspace -scheme nativeTemplate -configuration Debug -sdk iphonesimulator -derivedDataPath build
         working-directory: ./ios
       - name: "Archive iOS app"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
@@ -371,7 +371,7 @@ jobs:
       - name: "Move iOS app to correct location"
         run: |
           mkdir -p detox/apps
-          find ios-app -type f -iname "*.app" -exec mv {} detox/apps/ \;
+          find ios-app -type d -iname "*.app" -exec cp -R {} detox/apps/ \;
       - name: Install Detox Dependencies
         run: |
           brew tap wix/brew
