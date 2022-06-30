@@ -17,7 +17,7 @@ jobs:
       - name: "Determine target ref"
         id: since
         if: github.event_name == 'pull_request'
-        run: echo "::set-output name=since::-- --since origin/${{ github.base_ref }}"
+        run: echo "::set-output name=since::--since origin/${{ github.base_ref }}"
   mendix-version:
     runs-on: ubuntu-22.04
     steps:
@@ -85,7 +85,7 @@ jobs:
         run: npm ci --legacy-peer-deps
       - name: "Run build for development (MR)"
         if: github.event_name == 'pull_request'
-        run: npm run build:native ${{ needs.scope.outputs.since }}
+        run: npm run build:native -- ${{ needs.scope.outputs.since }}
         env:
           NODE_OPTIONS: --max_old_space_size=6144
       - name: "Run build for development"
@@ -311,7 +311,7 @@ jobs:
           force-avd-creation: false
           emulator-options: -skin 1080x1920 -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          script: adb reverse tcp:8080 tcp:8080 && npm run test:e2e:local:android ${{ needs.scope.outputs.since }}
+          script: adb reverse tcp:8080 tcp:8080 && npm run test:e2e:local:android -- ${{ needs.scope.outputs.since }}
       - name: "Archive runtime logs"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         if: always()
@@ -361,7 +361,7 @@ jobs:
           mkdir -p detox/apps
           find ios-app -type f -iname "*.app" -exec mv {} detox/apps/ \;
       - name: "Run tests"
-        run: npm run test:e2e:local:ios ${{ needs.scope.outputs.since }}
+        run: npm run test:e2e:local:ios -- ${{ needs.scope.outputs.since }}
       - name: "Archive runtime logs"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         if: always()
