@@ -368,6 +368,10 @@ jobs:
         run: |
           mkdir -p detox/apps
           find ios-app -type f -iname "*.app" -exec mv {} detox/apps/ \;
+      - name: Install Detox Dependencies
+        run: |
+          brew tap wix/brew
+          brew install applesimutils
       - name: "Run tests"
         run: npm run test:e2e:local:ios -- ${{ needs.scope.outputs.since }}
       - name: "Archive runtime logs"
