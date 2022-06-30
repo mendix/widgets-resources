@@ -10,6 +10,13 @@ module.exports = {
     IOS_DEVICE_TYPE,
     "test-runner": "npx jest",
     "runner-config": `${__dirname}/jest.detox.config.js`,
+    detox: {
+        behavior: {
+            init: {
+                reinstallApp: false
+            }
+        }
+    },
     apps: {
         "ios.developerapp": {
             type: "ios.app",
@@ -44,6 +51,28 @@ module.exports = {
         "android.emulator.developerapp": {
             device: "android",
             app: "android.developerapp"
+        }
+    },
+    artifacts: {
+        rootDir: ".artifacts",
+        plugins: {
+            instruments: { enabled: false },
+            log: { enabled: true },
+            uiHierarchy: "enabled",
+            screenshot: {
+                enabled: true,
+                shouldTakeAutomaticSnapshots: true,
+                keepOnlyFailedTestsArtifacts: false,
+                takeWhen: {
+                    testStart: true,
+                    testDone: true,
+                    appNotReady: true
+                }
+            },
+            video: {
+                enabled: true,
+                keepOnlyFailedTestsArtifacts: false
+            }
         }
     }
 };
