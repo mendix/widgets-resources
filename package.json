@@ -25,7 +25,7 @@
     "test:scripts:cross-platform": "lerna run test:scripts:cross-platform --stream",
     "test:e2e": "lerna-parallelism run --ignore @mendix/custom-widgets-utils-internal --stream --concurrency 1 --split 3 test:e2e",
     "test:e2e:local": "lerna run test:e2e --ignore @mendix/custom-widgets-utils-internal --stream --concurrency 1 --no-bail",
-    "test:e2e:local:android": "lerna run test:e2e:local:android --stream --concurrency 1 --scope 'accordion-native'",
+    "test:e2e:local:android": "lerna run test:e2e:local:android --stream --concurrency 1 --scope 'accordion-native' -- --reuse",
     "test:e2e:local:ios": "lerna run test:e2e:local:ios --stream --concurrency 1 --scope '*-native'",
     "build": "lerna run build --ignore '@mendix/custom-widgets-utils-internal'",
     "build:native": "npm run build -- --scope '*-native'",
