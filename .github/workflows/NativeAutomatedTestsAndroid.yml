@@ -221,6 +221,13 @@ jobs:
           cache-dependency-path: "**/package-lock.json"
       - name: "Install Node dependencies"
         run: npm ci
+      - name: "Setup Pods cache"
+        uses: actions/cache@c3f1317a9e7b1ef106c153ac8c0f00fed3ddbc0d #v3.0.4
+        with:
+          path: Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
       - name: "Install Pod dependencies"
         run: pod install
         working-directory: ./ios
