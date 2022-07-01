@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [9.13.2] - 2022-06-29
+
 ### Changed
 
 -   We updated required Node.js version to the current LTS version.
