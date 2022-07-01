@@ -15,6 +15,7 @@ describe("dropdown-sort-web", () => {
         cy.get(".dropdown-list > li:nth-child(2)").click();
         cy.get(".mx-name-drop_downSort1").find(".btn").first().click();
         cy.get(".mx-name-drop_downSort1").find(".btn").first().click();
+        cy.wait(1000);
         cy.get(".mx-name-gallery1").find(".widget-gallery-item").first().should("have.text", "test");
     });
 });
