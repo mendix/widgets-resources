@@ -165,7 +165,7 @@ jobs:
       - name: "Download Android bundle and assets"
         uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
         with:
-          name: android
+          name: android-bundle
           path: bundles/android
       - name: "Copy files to the right location"
         run: |
@@ -206,7 +206,7 @@ jobs:
       - name: "Download iOS bundle and assets"
         uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
         with:
-          name: ios
+          name: ios-bundle
           path: bundles/ios
       - name: "Copy files to the right location"
         run: mv bundles/ios/* ios/Bundle/
