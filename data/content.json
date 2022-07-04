@@ -569,7 +569,7 @@
         },
         {
             "name": "BarChart",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "items": [
                 {
                     "id": "com.mendix.widget.native.barchart.BarChart",
@@ -1009,6 +1009,49 @@
             "version": "1.0.0",
             "items": [
                 {
+                    "id": "com.mendix.widget.native.columnchart.ColumnChart",
+                    "name": "Column chart",
+                    "description": "",
+                    "studioCategory": "Charts",
+                    "studioProCategory": "Charts",
+                    "supportedPlatform": "native",
+                    "offlineCapable": true,
+                    "requirements": {
+                        "isPluginWidget": true,
+                        "hasStructureModePreview": true,
+                        "hasAllTileIcons": true,
+                        "hasAllDarkIcons": true
+                    },
+                    "icons": {
+                        "icon": {
+                            "name": "ColumnChart.icon",
+                            "image": "iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAFZSURBVHgB7dq7bcMwGATgY5A+KTQAuwyRJk4m8AQpkzE8gsukzASeII9GQ6TLAGqygGkZbvQARNKUZAp3X2GA8C/DOlCUfkKAiIgILYPcvVfP2GNb/9PbqOPg/mDMBi/Fx1DVFXLn3Cb+5I+MrT+2vqr8A4CxOJfzB7eAAKZ1jaV5LYbXrbfKIQL9DFAAIKcAQE4BgJwCALnpnwSDu7mw7m1s08+A4G7OWAR0b2Ob4RIwNrjUndP2ptEagLl1u7nI7m1sug2CnAIAOQUAcgoA5PQk6K3IvJtL5Z8BmXdzqQIuAWMR6gLdXCqtAYiVWTeXSrdBkFMAIKcAQE4BgJwCADkFAHIKAOQUAMgt6GXp077L/dN68GXpEu39mW59+blrFfR+rD7guzn+L+4emuOb6vcnp++7fPV1AKvmuB/A43rRW1w+5deudc5aA5CvWWZiLwCzdyuI0DgASERWnZay/KMAAAAASUVORK5CYII="
+                        },
+                        "iconDark": {
+                            "name": "ColumnChart.icon.dark",
+                            "image": "iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAFNSURBVHgB7dpNasJAHAXwN1botlC69yj1Eu0m0E17D4/QfbspZNNue4D2KO7FtQjqGMFF/GAm4yTyD+/9VgZHJC+TSV4IICIiQsvBuKfP1Yvz6/fq413SDx2mHjeTn9fhV2jYAMa5zXqC1J3f8RjtgwsyH0B1JEe4XDQ4+wF0bIie+X67Da5bzx9LjwT0M0ABgJwCADkFAHIKAOQ6vxNs3OYatre2dT4DGre5hu2tbd2fAmltLr32ZtIagCs7bnOp7a1tugyCnAIAOQUAcgoA5HQnGBtgvc3lis4A620uV/wUMN7mcmkNQCJrbS6XLoMgpwBATgGAnAIAOQUAcgoA5BQAyCkAkOvdy9JlWQZflv5dhMcXRXHwAMed+YO/+vZ88/BY374fzP4tfX8sNr4KYFzfPhdArx9xxVQBHOyz1gDYdZWZeBKA934MERpbPohmi8Uv29MAAAAASUVORK5CYII="
+                        },
+                        "tile": {
+                            "name": "ColumnChart.tile",
+                            "image": "iVBORw0KGgoAAAANSUhEUgAAAQAAAADACAYAAADr7b1mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMrSURBVHgB7d2xjRRJGEDhv08bAMa6J00cdx4RQASYEMaQwZpgEgGIAPAgA3wC2Bhodl0E0gA70zO87zPGaqm6q9VPNeXUDAAAAAAAAAAAAAAAAAAAAHBuluHhvb59Nl/n5m52H83JrV9mWfbz/PrNlG32Di5r/v8ZHt667rf5+O8tu7ufm6nb7B0su7mg+ReAo1h2s6V1q/ick2U3W7mg+RcACLsaju/F9fH3Wl7drsPPHfsdXOj8WwFAmABAmABAmABAmABAmABAmABAmABAmABAmABAmABAmABAmABAmABAmABAmABAmABAmABAmABAmABAmABAmABAmABAmHMB+DFn6yVYAfBjztZLEAB+YtnNVpxteDICAGH2ADiMs/X+SlYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAECYAEHY15+b17bP5OjezzKM5ufXLLMt+nl+/GQg4vxXAuu63+fjvLbu7n5uBiDP8C7DsZkvrVvGB07MHAGHntwfwvRfXyxzbq9t1IMgKAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMIEAMKuDr3wv8dP5hQ+zenHfegxPcP24136/f+uTx/e/dL1Bwfgzn5O4N/P7+fU4z70mJ5h+/Eu/f7/wP5XLl4OvfD/x0/XAc7axw9vD/6m79kDgDABgLCD9wDWWV8OAAAAAAAAAAAAAAAAAAAAAAAAAAAA8Pu+AQQTYzR69QFoAAAAAElFTkSuQmCC"
+                        },
+                        "tileDark": {
+                            "name": "ColumnChart.tile.dark",
+                            "image": "iVBORw0KGgoAAAANSUhEUgAAAQEAAADBCAYAAADPcwX9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAPkSURBVHgB7d1BThtXHMfx/zMoCrfwEUgvkKoHaFiRFUVZVFF26UXKAYgUIrEIu0g9QLlBN92H3CC7QoqZDlU2iUjkRIxnzO/zkawRCDP2G/vrebPwqwIAAAAAAAAAAAAAAAAAAADumlYMYvfFxU4trrZrBLOrOnr9bOusgvXjf70Z5Ris2/iLwAB2D8+ft2oHNZZWZxcb9x68edLeV6B+/K83v/XH4PcaQ6u3/fj/sC7jPytuXavZoxpTV/P7l+ejnIVMQT/+rb/9XGNZs/EXAQi3WQyvtaNusXhXA2pttt9/BM6Lmw18DNZ5/EVgBVq3eHXydOu0BvT48MPD/jx0XtykG/IY9GN/fW1tbcffdADCiQCEEwEIJwIQTgQgnAhAOBGAcCIA4UQAwokAhBMBCCcCEE4EIJwIQDgRgHAiAOFEAMKJAIQTAQgnAhBOBCCcCEA4XznOF421nqK1FFdLBLjR/+spdnVQs9WfLHYb9cvOy25t1vJbd6YD3GjU9RTD11JcNRGAcKYDLMdafneWCLAUa/ndXaYDEE4EIJwIQDgRgHAiAOFEAMKJAIQTAQgnAhBOBCCcCEA4EYBwIgDhRADCiQCEEwEIJwIQTgQgnAhAOBGAcCIA4UQAwokAhBMBCCcCEE4EIJwIQDgRgHAiAOFEAMKJAIQTAQgnAhBOBCCcCEA4EYBwmzVBuy8udmpxtV0jmF3V0etnW2cFISYXgd3D8+etq4OajXOS0m3U/s7L7sGbJ+19QYDJTQdazR7VmLqa3788H+UsJNXJr/e6z37VipVxTQDCTfKawCdaO+oWi3c1oNZm+/1nz7yYiq5YmclHoHWLVydPt05rQI8PPzzsX3fzgkCmAxBOBCCcCEA4EYBwIgDhRADCiQCEEwEIJwIQTgQgnAhAOBGAcCIA4UQAwokAhBMBCCcCEE4EIJwIQDgRgHAiAOFEAMKJAIQTAQgnAhBOBCCcCEA4EYBwIgDhRADCiQCEEwEIJwIQTgQgnAhAOBGAcCIA4UQAwokAhBMBCCcCEE4EIJwIQDgRgHAiAOFEAMKJAIQTAQgnAhBOBCCcCEA4EYBwIgDhRADCiQCEEwEIJwIQTgQgnAhAOBGAcCIA4UQAwokAhBMBCCcCEE4EIJwIQDgRgHAiAOFEAMKJAIQTAQgnAhBOBCDc5rJ/eHx83GoF/vin++Tn1ro29L5ve5+ew63s77tfc28v/2p//7t9a/9vavv7mq63t7f3TfdZ+kH2T+jPfvNjAVN13YCf+gicfsudTAcgnAhAuKWvCfS6jzdgmrw/AQAAAAAAAAAAAAAAAAAAAAAAAAAAINJ/GBbLc/VG/2sAAAAASUVORK5CYII="
+                        }
+                    },
+                    "tests": {
+                        "hasUnitTests": true,
+                        "hasE2ETests": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "ColumnChart",
+            "version": "1.0.0",
+            "items": [
+                {
                     "id": "com.mendix.widget.custom.ColumnChart.ColumnChart",
                     "name": "Column chart",
                     "description": "Create a column chart",
@@ -1231,7 +1274,7 @@
         },
         {
             "name": "Datagrid",
-            "version": "2.3.0",
+            "version": "2.4.0",
             "items": [
                 {
                     "id": "com.mendix.widget.web.datagrid.Datagrid",
@@ -1313,7 +1356,7 @@
                     },
                     "tests": {
                         "hasUnitTests": true,
-                        "hasE2ETests": false
+                        "hasE2ETests": true
                     }
                 }
             ]
@@ -1496,7 +1539,7 @@
         },
         {
             "name": "Gallery",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "items": [
                 {
                     "id": "com.mendix.widget.web.gallery.Gallery",
@@ -3383,7 +3426,7 @@
     "jsActionPackages": [
         {
             "name": "mobile-resources-native",
-            "version": "3.8.0",
+            "version": "3.9.1",
             "items": [
                 {
                     "id": "mobile-resources-native/authentication/BiometricAuthentication",
@@ -3610,7 +3653,7 @@
         },
         {
             "name": "nanoflow-actions-native",
-            "version": "2.3.1",
+            "version": "2.4.0",
             "items": [
                 {
                     "id": "nanoflow-actions-native/client/HideProgress",
@@ -3625,6 +3668,11 @@
                 {
                     "id": "nanoflow-actions-native/client/RefreshObject",
                     "name": "RefreshObject",
+                    "group": "client"
+                },
+                {
+                    "id": "nanoflow-actions-native/client/Reload",
+                    "name": "Reload",
                     "group": "client"
                 },
                 {
@@ -3711,6 +3759,11 @@
                     "id": "nanoflow-actions-native/geolocation/ReverseGeocode",
                     "name": "ReverseGeocode",
                     "group": "geolocation"
+                },
+                {
+                    "id": "nanoflow-actions-native/local-storage/ClearCachedSessionData",
+                    "name": "ClearCachedSessionData",
+                    "group": "local-storage"
                 },
                 {
                     "id": "nanoflow-actions-native/local-storage/GetStorageItemObject",
