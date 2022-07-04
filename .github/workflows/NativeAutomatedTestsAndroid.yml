@@ -209,7 +209,9 @@ jobs:
           name: ios-bundle
           path: bundles/ios
       - name: "Copy files to the right location"
-        run: mv bundles/ios/* ios/Bundle/
+        run: |
+          mv bundles/ios/index.ios.bundle ios/Bundle/index.ios.bundle
+          mv bundles/ios/assets/assets ios/Bundle/
       - name: "Set up Node"
         uses: actions/setup-node@5b52f097d36d4b0b2f94ed6de710023fbb8b2236 # v3
         with:
