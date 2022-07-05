@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.5.3] Data Widgets - 2022-7-5
+
+## [2.4.1] Datagrid
+
+### Fixed
+
+-   We fixed the issue with filtering widgets rendered outside of header cells.
+
 ## [2.5.2] Data Widgets - 2022-6-29
 
 ### Fixed
