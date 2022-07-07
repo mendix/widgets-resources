@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+-   We fixed the issue with sidebar "Slide over content" configuration.
+
 ## [3.4.0] Atlas Core - 2022-7-11
 
 ### Fixed
