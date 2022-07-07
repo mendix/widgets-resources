@@ -25,7 +25,7 @@ type UnitOfTime = "MILLISECOND" | "SECOND" | "MINUTE" | "HOUR" | "DAY";
  * The action will return a date as a DateTime that is the amount of milliseconds, seconds, minutes, hours or days after startDate, depending on the value of ENUM_UnitOfTime.
  * @param {Date} startDate
  * @param {Big} amount
- * @param {"TSNanoflowCommons.ENUM_UnitOfTime.MILLISECOND"|"TSNanoflowCommons.ENUM_UnitOfTime.SECOND"|"TSNanoflowCommons.ENUM_UnitOfTime.MINUTE"|"TSNanoflowCommons.ENUM_UnitOfTime.HOUR"|"TSNanoflowCommons.ENUM_UnitOfTime.DAY"} unitOfTime
+ * @param {"MILLISECOND"|"SECOND"|"MINUTE"|"HOUR"|"DAY"} unitOfTime
  * @returns {Promise.<Date>}
  */
 export async function AddTime(startDate: Date, amount: Big, unitOfTime: UnitOfTime): Promise<Date> {
