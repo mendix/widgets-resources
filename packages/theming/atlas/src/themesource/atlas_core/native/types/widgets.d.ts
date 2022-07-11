@@ -845,3 +845,18 @@ export interface BackgroundGradientStyles {
     colorList?: GradientColorList[];
     opacity?: number;
 }
+
+export interface GalleryType {
+    container?: ViewStyle;
+    dynamicItemClasses?: {
+        [key: string]: Pick<GalleryType, "listItem">;
+    };
+    emptyPlaceholder?: ViewStyle;
+    firstItem?: ViewStyle;
+    lastItem?: ViewStyle;
+    list?: ViewStyle;
+    listItem?: ViewStyle;
+    loadMoreButtonContainer?: ViewStyle;
+    loadMoreButtonPressableContainer?: ViewStyle;
+    loadMoreButtonCaption?: TextStyle;
+}

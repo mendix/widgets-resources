@@ -1,0 +1,39 @@
+{
+  "name": "gallery-native",
+  "widgetName": "Gallery",
+  "version": "1.0.0",
+  "description": "A flexible gallery widget that renders columns, rows and layouts.",
+  "copyright": "© Mendix Technology BV 2022. All rights reserved.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "config": {},
+  "marketplace": {},
+  "testProject": {},
+  "packagePath": "com.mendix.widget.native",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:native",
+    "build": "pluggable-widgets-tools build:native",
+    "release": "pluggable-widgets-tools release:native",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "version": "npm run release",
+    "test": "pluggable-widgets-tools test:unit:native",
+    "test:e2e:local:android": "detox test --configuration android.emulator.developerapp",
+    "test:e2e:local:ios": "detox test --configuration ios.simulator.developerapp",
+    "debug:e2e:local:android": "detox test --record-logs all -l trace --configuration android.emulator.developerapp",
+    "debug:e2e:local:ios": "detox test --record-logs all -l trace --configuration ios.simulator.developerapp",
+    "test:e2e:android:update-snapshot": "detox test --updateSnapshot --configuration android.emulator.developerapp",
+    "test:e2e:ios:update-snapshot": "detox test --updateSnapshot --configuration ios.simulator.developerapp"
+  },
+  "dependencies": {
+    "@mendix/piw-utils-internal": "^1.0.0",
+    "react-native-device-info": "8.0.1"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "eslint": "^7.20.0",
+    "detox": "^19.7.1"
+  }
+}

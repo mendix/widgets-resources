@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.native.gallery.Gallery" pluginWidget="true" supportedPlatform="Native" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+    <name>Gallery</name>
+    <description />
+    <studioProCategory>Data containers</studioProCategory>
+    <studioCategory>Data Containers</studioCategory>
+    <helpUrl>https://docs.mendix.com/appstore/modules/gallery</helpUrl>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="datasource" type="datasource" isList="true">
+                    <caption>Data source</caption>
+                    <description />
+                </property>
+                <property key="content" type="widgets" dataSource="datasource" required="false">
+                    <caption>Content placeholder</caption>
+                    <description />
+                </property>
+                <property key="scrollDirection" type="enumeration" defaultValue="vertical">
+                    <caption>Scroll direction</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="vertical">Vertical</enumerationValue>
+                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Columns">
+                <property key="tabletColumns" type="integer" defaultValue="1">
+                    <caption>Tablet columns</caption>
+                    <description />
+                </property>
+                <property key="phoneColumns" type="integer" defaultValue="1">
+                    <caption>Phone columns</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Items">
+                <property key="pageSize" type="integer" defaultValue="20">
+                    <caption>Page size</caption>
+                    <description />
+                </property>
+                <property key="pagination" type="enumeration" defaultValue="virtualScrolling">
+                    <caption>Pagination</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="virtualScrolling">Virtual scrolling</enumerationValue>
+                        <enumerationValue key="buttons">Load more button</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="loadMoreButtonCaption" type="textTemplate" required="false">
+                    <caption>Load more caption</caption>
+                    <description />
+                    <translations>
+                        <translation lang="en_US">Load more</translation>
+                        <translation lang="nl_NL">Laad meer</translation>
+                    </translations>
+                </property>
+                <property key="emptyPlaceholder" type="widgets" required="false">
+                    <caption>Empty placeholder</caption>
+                    <description />
+                </property>
+                <property key="itemClass" type="expression" required="false" dataSource="datasource">
+                    <caption>Dynamic item class</caption>
+                    <description />
+                    <returnType type="String" />
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Events">
+                <property key="onClick" type="action" required="false" dataSource="datasource">
+                    <caption>On click action</caption>
+                    <description />
+                </property>
+                <property key="pullDown" type="action" required="false">
+                    <caption>Pull down</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

@@ -32,7 +32,8 @@ import {
     VariablesCheckbox,
     VariablesRadioButtons,
     VariableBackgroundGradient,
-    VariablesColumnChart
+    VariablesColumnChart,
+    VariablesGallery
 } from "./types/variables";
 //
 //
@@ -794,6 +795,29 @@ let columnChart: VariablesColumnChart = {
 
 columnChart = merge(columnChart, custom.columnChart || ({} as any));
 
+let gallery: VariablesGallery = {
+    container: {},
+    emptyPlaceholder: {},
+    firstItem: {},
+    lastItem: {},
+    list: {},
+    listItem: { flexGrow: 1 },
+    loadMoreButtonContainer: {
+        alignSelf: "stretch"
+    },
+    loadMoreButtonPressableContainer: {
+        alignItems: "center",
+        backgroundColor: "#264AE5",
+        borderRadius: 4
+    },
+    loadMoreButtonCaption: {
+        padding: 8,
+        color: "#FFFFFF"
+    }
+};
+
+gallery = merge(gallery, custom.gallery || ({} as any));
+
 export * from "../../../theme/native/custom-variables";
 export {
     accordion,
@@ -824,5 +848,6 @@ export {
     rating,
     radioButtons,
     backgroundGradient,
-    columnChart
+    columnChart,
+    gallery
 };

@@ -28,7 +28,8 @@ import {
     VariablesTabContainer,
     VariablesRadioButtons,
     VariableBackgroundGradient,
-    VariablesColumnChart
+    VariablesColumnChart,
+    VariablesGallery
 } from "../../themesource/atlas_core/native/types/variables";
 import "./exclusion-variables";
 /*
@@ -767,5 +768,26 @@ export const columnChart: VariablesColumnChart = {
         }
     }
 };
-
 // TODO add bar chart styles
+
+// Gallery style
+export const gallery: VariablesGallery = {
+    container: {},
+    emptyPlaceholder: {},
+    firstItem: {},
+    lastItem: {},
+    list: {},
+    listItem: { flexGrow: 1 },
+    loadMoreButtonContainer: {
+        alignSelf: "stretch"
+    },
+    loadMoreButtonPressableContainer: {
+        alignItems: "center",
+        backgroundColor: "#264AE5",
+        borderRadius: 4
+    },
+    loadMoreButtonCaption: {
+        padding: 8,
+        color: "#FFFFFF"
+    }
+};
