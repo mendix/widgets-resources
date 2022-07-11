@@ -1,6 +1,7 @@
 const { exec } = require("child_process");
 const { join } = require("path");
 const rCopy = require("recursive-copy");
+const { rm } = require("shelljs");
 const { promisify } = require("util");
 
 main().catch(e => {
@@ -9,6 +10,8 @@ main().catch(e => {
 });
 
 async function main() {
+    rm("-rf", "tests/testProject/themesource/datawidgets");
+
     await copyLatestDataWidgets();
 }
 
