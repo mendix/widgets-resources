@@ -5,9 +5,13 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // - the code between BEGIN EXTRA CODE and END EXTRA CODE
 // Other code you write will be lost the next time you deploy the project.
+
 import { Big } from "big.js";
 
+type DistanceUnit = "KILOMETER" | "STATUTE MILE" | "NAUTICAL MILE";
+
 // BEGIN EXTRA CODE
+
 function deg2rad(deg: Big): Big {
     return deg.times(Math.PI / 180);
 }
@@ -19,9 +23,9 @@ function kmToStatueMile(km: Big): Big {
 function kmToNauticalMile(km: Big): Big {
     return km.div(1.852);
 }
+
 // END EXTRA CODE
 
-type DistanceUnit = "KILOMETER" | "STATUTE MILE" | "NAUTICAL MILE";
 /**
  * @param {Big} lat1
  * @param {Big} lon1
