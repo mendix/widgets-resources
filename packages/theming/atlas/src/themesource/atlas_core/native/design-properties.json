@@ -2732,15 +2732,15 @@
             "description": "Line of direction. A value of 0 is equivalent to top; increasing values rotates clockwise.",
             "options": [
                 {
-                    "name": "0 deg",
+                    "name": "0 degrees",
                     "class": "angle0"
                 },
                 {
-                    "name": "45 deg",
+                    "name": "45 degrees",
                     "class": "angle45"
                 },
                 {
-                    "name": "90 deg",
+                    "name": "90 degrees",
                     "class": "angle90"
                 }
             ]

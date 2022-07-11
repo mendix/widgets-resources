@@ -10,7 +10,7 @@ export interface CustomStyle {
 
 const defaultStyle: Required<CustomStyle> = {
     container: {},
-    opacity: 1,
+    opacity: 100,
     angle: 0,
     colorList: []
 };

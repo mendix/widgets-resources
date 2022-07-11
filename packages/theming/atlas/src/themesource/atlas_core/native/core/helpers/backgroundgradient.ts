@@ -15,19 +15,19 @@ export const backgroundGradient: BackgroundGradientStyles = {
 };
 
 export const opacity25: BackgroundGradientStyles = {
-    opacity: 0.25
+    opacity: 25
 };
 
 export const opacity50: BackgroundGradientStyles = {
-    opacity: 0.5
+    opacity: 50
 };
 
 export const opacity75: BackgroundGradientStyles = {
-    opacity: 0.75
+    opacity: 75
 };
 
 export const opacity100: BackgroundGradientStyles = {
-    opacity: 1
+    opacity: 100
 };
 
 export const angle0: BackgroundGradientStyles = {

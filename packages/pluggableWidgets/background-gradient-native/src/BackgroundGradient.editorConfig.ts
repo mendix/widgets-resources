@@ -41,6 +41,12 @@ export function check(values: BackgroundGradientPreviewProps): Problem[] {
     const errors: Problem[] = [];
     const { colorList } = values;
 
+    if (colorList && colorList.some(item => !item.color)) {
+        errors.push({
+            message: "Please specify a color for each color stop."
+        });
+    }
+
     if (colorList && colorList.some(item => item.offset! > 1 || item.offset! < 0)) {
         errors.push({
             property: "colorList",

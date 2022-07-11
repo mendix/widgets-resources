@@ -63,10 +63,10 @@ describe("Background gradient", () => {
         };
         expect(() => render(<BackgroundGradient {...defaultProps} />)).toThrowError();
     });
-    it("is should console warn when opacity is not between 0.0 and 1.0", () => {
+    it("is should console warn when opacity is not between 0 and 100", () => {
         defaultProps = {
             ...defaultProps,
-            style: [{ container: {}, opacity: 1.1 }]
+            style: [{ container: {}, opacity: 101 }]
         };
         const spy = jest.spyOn(console, "warn");
         render(<BackgroundGradient {...defaultProps} />);
@@ -79,7 +79,7 @@ describe("Background gradient", () => {
             style: [
                 {
                     angle: 0,
-                    opacity: 1,
+                    opacity: 100,
                     container: {},
                     colorList: [
                         { color: "#fff", offset: Big(0) },

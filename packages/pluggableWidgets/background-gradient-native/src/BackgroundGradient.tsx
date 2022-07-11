@@ -10,17 +10,17 @@ export type props = BackgroundGradientProps<CustomStyle>;
 
 const opacityValidation = (opacity: number | undefined): number => {
     if (opacity === undefined) {
-        return defaultStyle.opacity;
+        return defaultStyle.opacity / 100;
     }
     const opacityVal = Number(opacity);
     if (isNaN(opacityVal)) {
         throw new Error("Opacity must be a number.");
     }
-    if (opacityVal < 0 || opacityVal > 1) {
-        console.warn("Opacity must be between 0.0 and 1.0");
+    if (opacityVal < 0 || opacityVal > 100) {
+        console.warn("Opacity must be between 0 and 100.");
     }
 
-    return opacityVal;
+    return opacityVal / 100;
 };
 
 const angleValidation = (angle: number | undefined): number => {
