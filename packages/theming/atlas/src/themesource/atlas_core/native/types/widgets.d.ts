@@ -845,3 +845,10 @@ export interface BackgroundGradientStyles {
     colorList?: GradientColorList[];
     opacity?: number;
 }
+
+export interface GalleryType {
+    container?: ViewStyle;
+    listStyle?: ViewStyle;
+    listItem?: ViewStyle;
+    pagination?: ViewStyle;
+}

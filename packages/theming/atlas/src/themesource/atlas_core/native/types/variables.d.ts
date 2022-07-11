@@ -665,3 +665,10 @@ export interface VariablesColumnChart {
         padding?: { x: number; y: number };
     };
 }
+
+export interface VariablesGallery {
+    container?: ViewStyle;
+    listStyle?: ViewStyle;
+    listItem?: ViewStyle;
+    pagination?: ViewStyle;
+}

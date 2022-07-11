@@ -28,7 +28,8 @@ import {
     VariablesTabContainer,
     VariablesRadioButtons,
     VariableBackgroundGradient,
-    VariablesColumnChart
+    VariablesColumnChart,
+    VariablesGallery
 } from "../../themesource/atlas_core/native/types/variables";
 import "./exclusion-variables";
 /*
@@ -767,5 +768,8 @@ export const columnChart: VariablesColumnChart = {
         }
     }
 };
-
 // TODO add bar chart styles
+// Background gradient style
+export const gallery: VariablesGallery = {
+    container: {}
+};

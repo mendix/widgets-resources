@@ -116,3 +116,6 @@ export const excludeBackgroundGradientHelper = false;
 // Column Chart
 export const excludeColumnChart = false;
 export const excludeColumnChartHelper = false;
+// Gallery
+export const excludeGallery = false;
+export const excludeGalleryHelper = false;
