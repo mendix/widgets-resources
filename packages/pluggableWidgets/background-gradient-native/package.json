@@ -1,7 +1,7 @@
 {
   "name": "background-gradient-native",
   "widgetName": "BackgroundGradient",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/mendix/widgets-resources.git"

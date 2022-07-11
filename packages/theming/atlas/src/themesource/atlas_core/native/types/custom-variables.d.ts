@@ -196,3 +196,15 @@ export interface VariablesBadge {
     warning?: VariablesBadgeStyles;
     danger?: VariablesBadgeStyles;
 }
+
+interface GradientColorList {
+    color: string;
+    offset: number;
+}
+
+export interface VariablesBackgroundGradient {
+    container: ViewStyle;
+    angle: number;
+    colorList?: GradientColorList[];
+    opacity: number;
+}

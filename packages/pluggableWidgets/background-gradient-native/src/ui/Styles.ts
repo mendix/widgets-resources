@@ -1,12 +1,18 @@
 import { ViewStyle } from "react-native";
-import { Style } from "@mendix/pluggable-widgets-tools";
+import { ColorListType } from "../../typings/BackgroundGradientProps";
 
-export interface CustomStyle extends Style {
+export interface CustomStyle {
     container: ViewStyle;
+    angle?: number;
+    colorList?: ColorListType[];
+    opacity?: number;
 }
 
-const defaultStyle: CustomStyle = {
-    container: {}
+const defaultStyle: Required<CustomStyle> = {
+    container: {},
+    opacity: 100,
+    angle: 0,
+    colorList: []
 };
 
 export default defaultStyle;

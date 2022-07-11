@@ -39,30 +39,20 @@ function checkTwoDecimalDigits(number: number): boolean {
 
 export function check(values: BackgroundGradientPreviewProps): Problem[] {
     const errors: Problem[] = [];
-    const { opacity, angle, colorList } = values;
-    if (opacity) {
-        if (opacity > 1 || opacity < 0) {
-            errors.push({
-                property: "opacity",
-                message: "Opacity should be between 0.0 and 1.0"
-            });
-        }
-    }
-    if (angle) {
-        if (angle > 360 || angle < 0) {
-            errors.push({
-                property: "angle",
-                message: "Angle should be between 0 and 360"
-            });
-        }
+    const { colorList } = values;
+
+    if (colorList && colorList.some(item => !item.color)) {
+        errors.push({
+            message: "Please specify a color for each color stop."
+        });
     }
 
-    if (colorList.some(item => item.offset! > 1 || item.offset! < 0)) {
+    if (colorList && colorList.some(item => item.offset! > 1 || item.offset! < 0)) {
         errors.push({
             property: "colorList",
             message: "Color offset should be between 0.0 and 1.0"
         });
-    } else if (colorList.some(item => !checkTwoDecimalDigits(item.offset || 0))) {
+    } else if (colorList && colorList.some(item => !checkTwoDecimalDigits(item.offset || 0))) {
         errors.push({
             property: "colorList",
             message: "​​The offset is limited to 2 decimal places"

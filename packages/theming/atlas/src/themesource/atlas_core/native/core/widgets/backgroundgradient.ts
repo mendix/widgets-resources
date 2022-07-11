@@ -17,5 +17,7 @@ export const com_mendix_widget_native_backgroundgradient_BackgroundGradient: Bac
     container: {
         // All ViewStyle properties are allowed
         ...backgroundGradient.container
-    }
+    },
+    angle: backgroundGradient.angle,
+    opacity: backgroundGradient.opacity
 };
