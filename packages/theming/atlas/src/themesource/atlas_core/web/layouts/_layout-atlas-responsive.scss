@@ -76,7 +76,7 @@
             }
 
             &.mx-scrollcontainer-open > .region-sidebar {
-                width: $navsidebar-width-open !important;
+                width: $navsidebar-width-closed !important;
 
                 & > .mx-scrollcontainer-wrapper {
                     position: relative;
@@ -85,7 +85,7 @@
 
             .region-sidebar > .mx-scrollcontainer-wrapper {
                 z-index: 2;
-                left: 0 !important;
+                left: -$navsidebar-width-closed;
                 background-color: inherit;
             }
         }
