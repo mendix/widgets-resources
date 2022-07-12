@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
--   [Node.js](https://nodejs.org) version 14
+See [Prerequisites](https://github.com/mendix/widgets-resources/blob/master/README.md#prerequisites) section of README.md.
 
 ## Getting started
 

@@ -18,7 +18,7 @@ async function main() {
     console.log("Downloading iOS app...");
     const outputPath = join(__dirname, "..", "apps");
     rmSync(join(outputPath, "DeveloperApp.app"), { recursive: true, force: true });
-    const downloadPath = await downloadFile("https://www.dropbox.com/s/g4hctr2joetqn8k/DeveloperApp.zip?dl=1");
+    const downloadPath = await downloadFile("https://www.dropbox.com/s/u7k5ho1krbkn46y/DeveloperApp.zip?dl=1");
 
     console.log("Unzipping iOS app...");
     await promisify(exec)(`unzip -o ${downloadPath} -d ${outputPath}`);

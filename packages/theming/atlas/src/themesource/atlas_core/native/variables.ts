@@ -708,7 +708,9 @@ radioButtons = merge(radioButtons, custom.radioButtons || ({} as any));
 //
 // Background Gradient
 let backgroundGradient: VariableBackgroundGradient = {
-    container: {}
+    container: {},
+    angle: 0,
+    opacity: 100
 };
 
 backgroundGradient = merge(backgroundGradient, custom.backgroundGradient || ({} as any));

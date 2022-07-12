@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Background gradient render background gradient correctly 1`] = `
+exports[`Background gradient render background gradient with custom style 1`] = `
 <View
   accessible={true}
   collapsable={false}
@@ -16,6 +16,123 @@ exports[`Background gradient render background gradient correctly 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
+      "flex": undefined,
+      "opacity": 1,
+    }
+  }
+  testID="test"
+>
+  <BVLinearGradient
+    angle={0}
+    colors={
+      Array [
+        4294967295,
+        4278190080,
+      ]
+    }
+    endPoint={
+      Object {
+        "x": 0.5,
+        "y": 1,
+      }
+    }
+    locations={
+      Array [
+        NaN,
+        NaN,
+      ]
+    }
+    startPoint={
+      Object {
+        "x": 0.5,
+        "y": 0,
+      }
+    }
+    style={Object {}}
+    useAngle={true}
+  >
+    <Text>
+      Test
+    </Text>
+  </BVLinearGradient>
+</View>
+`;
+
+exports[`Background gradient render background gradient with one color 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": undefined,
+      "opacity": 1,
+    }
+  }
+  testID="test"
+>
+  <BVLinearGradient
+    angle={0}
+    colors={
+      Array [
+        4294967295,
+        4294967295,
+      ]
+    }
+    endPoint={
+      Object {
+        "x": 0.5,
+        "y": 1,
+      }
+    }
+    locations={
+      Array [
+        0,
+        0,
+      ]
+    }
+    startPoint={
+      Object {
+        "x": 0.5,
+        "y": 0,
+      }
+    }
+    style={Object {}}
+    useAngle={true}
+  >
+    <Text>
+      Test
+    </Text>
+  </BVLinearGradient>
+</View>
+`;
+
+exports[`Background gradient render correctly 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": undefined,
       "opacity": 1,
     }
   }
@@ -47,6 +164,123 @@ exports[`Background gradient render background gradient correctly 1`] = `
         "y": 0,
       }
     }
+    style={Object {}}
+    useAngle={true}
+  >
+    <Text>
+      Test
+    </Text>
+  </BVLinearGradient>
+</View>
+`;
+
+exports[`Background gradient render with undefined angle 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": undefined,
+      "opacity": 1,
+    }
+  }
+  testID="test"
+>
+  <BVLinearGradient
+    angle={0}
+    colors={
+      Array [
+        4294967295,
+        4278190080,
+      ]
+    }
+    endPoint={
+      Object {
+        "x": 0.5,
+        "y": 1,
+      }
+    }
+    locations={
+      Array [
+        0,
+        1,
+      ]
+    }
+    startPoint={
+      Object {
+        "x": 0.5,
+        "y": 0,
+      }
+    }
+    style={Object {}}
+    useAngle={true}
+  >
+    <Text>
+      Test
+    </Text>
+  </BVLinearGradient>
+</View>
+`;
+
+exports[`Background gradient render with undefined opacity 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": undefined,
+      "opacity": 1,
+    }
+  }
+  testID="test"
+>
+  <BVLinearGradient
+    angle={0}
+    colors={
+      Array [
+        4294967295,
+        4278190080,
+      ]
+    }
+    endPoint={
+      Object {
+        "x": 0.5,
+        "y": 1,
+      }
+    }
+    locations={
+      Array [
+        0,
+        1,
+      ]
+    }
+    startPoint={
+      Object {
+        "x": 0.5,
+        "y": 0,
+      }
+    }
+    style={Object {}}
     useAngle={true}
   >
     <Text>

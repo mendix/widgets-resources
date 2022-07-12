@@ -4,6 +4,7 @@ $icon-size: 14px !default;
 $pagination-button-color: #3b4251 !default;
 $pagination-caption-color: #0a1325 !default;
 $dragging-color-effect: rgba(10, 19, 37, 0.8) !default;
+$dragging-effect-size: 4px;
 
 $grid-bg-striped: #fafafb !default;
 $grid-bg-hover: #f5f6f6 !default;
@@ -47,6 +48,7 @@ $brand-primary: #264ae5 !default;
         position: sticky;
         top: 0;
         z-index: 1;
+        min-width: 0;
 
         /* Clickable column header (Sortable) */
         .clickable {
@@ -74,35 +76,41 @@ $brand-primary: #264ae5 !default;
 
         /* Content of the column header */
         .column-container {
+            display: flex;
+            flex-direction: column;
             flex-grow: 1;
             align-self: stretch;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-
+            min-width: 0;
+            padding-left: $dragging-effect-size;
+            margin-left: -$dragging-effect-size;
             /* Styles while dragging another column */
             &.dragging {
-                border-left: 4px solid $dragging-color-effect;
+                border-left: $dragging-effect-size solid $dragging-color-effect;
+                padding-left: 0;
             }
         }
 
         /* Header text */
         .column-header {
+            height: 100%;
+            margin: 1px 1px 1px -$dragging-effect-size + 1px;
+
             display: flex;
-            flex-grow: 1;
-            align-items: center;
-            margin: 1px;
+            align-items: baseline;
 
             span {
-                display: flex;
+                min-width: 0;
                 flex-grow: 1;
+                text-overflow: ellipsis;
+                overflow: hidden;
             }
 
             svg {
                 margin-left: 8px;
-                flex-grow: 0;
+                flex: 0 0 $icon-size;
                 color: $icon-color;
                 height: $icon-size;
+                align-self: center;
             }
 
             &:focus:not(:focus-visible) {
@@ -135,20 +143,28 @@ $brand-primary: #264ae5 !default;
 
     /* Column selector for hidable columns */
     .column-selector {
-        padding-left: 0;
-        padding-right: 0;
+        padding: 0;
 
         /* Column content */
         .column-selector-content {
-            align-self: flex-end;
+            align-self: center;
 
             /* Button containing the eye icon */
             .column-selector-button {
-                padding: 8px;
-                margin: 0 8px;
+                $icon-margin: 8px;
+                /* 2px as path of icon's path is a bit bigger than outer svg */
+                $icon-slack-size: 2px;
+
+                padding: 0;
+                margin: 0;
+
+                height: ($icon-size + $icon-margin * 2 + $icon-slack-size);
+                width: ($icon-size + $icon-margin * 2 + $icon-slack-size);
 
                 svg {
                     width: $icon-size;
+                    height: $icon-size;
+                    margin: $icon-margin;
                 }
             }
 
@@ -191,6 +207,7 @@ $brand-primary: #264ae5 !default;
         border-width: 0;
         border-color: $grid-border-color;
         border-bottom-width: 1px;
+        min-width: 0;
 
         &.td-borders {
             border-top-width: 1px;

@@ -2725,6 +2725,48 @@
                     "class": "justifyContentSpaceEvenly"
                 }
             ]
+        },
+        {
+            "name": "Angle",
+            "type": "Dropdown",
+            "description": "Line of direction. A value of 0 is equivalent to top; increasing values rotates clockwise.",
+            "options": [
+                {
+                    "name": "0 degrees",
+                    "class": "angle0"
+                },
+                {
+                    "name": "45 degrees",
+                    "class": "angle45"
+                },
+                {
+                    "name": "90 degrees",
+                    "class": "angle90"
+                }
+            ]
+        },
+        {
+            "name": "Opacity",
+            "type": "Dropdown",
+            "description": "Sets the opacity of the element.",
+            "options": [
+                {
+                    "name": "25%",
+                    "class": "opacity25"
+                },
+                {
+                    "name": "50%",
+                    "class": "opacity50"
+                },
+                {
+                    "name": "75%",
+                    "class": "opacity75"
+                },
+                {
+                    "name": "100%",
+                    "class": "opacity100"
+                }
+            ]
         }
     ]
 }

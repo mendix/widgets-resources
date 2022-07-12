@@ -1,7 +1,7 @@
 {
   "name": "background-gradient-native",
   "widgetName": "BackgroundGradient",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/mendix/widgets-resources.git"
@@ -27,7 +27,7 @@
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": "^9.0.0",
     "eslint": "^7.20.0",
-    "detox": "^19.5.7"
+    "detox": "^19.7.1"
   },
   "dependencies": {
     "react-native-linear-gradient": "2.5.6",

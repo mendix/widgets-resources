@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.4.0] Atlas Core - 2022-7-11
+
+### Fixed
+
+-   We fixed the issue with checkbox elements producing rendering artifacts.
+
+### Added
+
+-   We added Atlas styling support for Background Gradient widget.
+
+## [3.3.1] Atlas Core - 2022-6-17
+
 ### Fixed
 
 -   We fixed custom styles issue for column chart native widget.

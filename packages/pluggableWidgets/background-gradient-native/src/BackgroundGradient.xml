@@ -8,29 +8,21 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
-                <property key="colorList" type="object" isList="true" required="true">
+                <property key="colorList" type="object" isList="true" required="false">
                     <caption>Color list</caption>
                     <description />
                     <properties>
                         <propertyGroup caption="Item">
-                            <property key="color" type="string" required="true">
+                            <property key="color" type="string" required="false">
                                 <caption>Color</caption>
                                 <description>Valid color value format: #d0d0d0, rgb(115,155,155), or rgba(195,226,226,0.5)</description>
                             </property>
-                            <property key="offset" type="decimal" defaultValue="0.0" required="true">
+                            <property key="offset" type="decimal" defaultValue="0.0">
                                 <caption>Offset</caption>
                                 <description>A color-stop's value, followed by one or more optional stop positions. Should be between 0.0 and 1.0</description>
                             </property>
                         </propertyGroup>
                     </properties>
-                </property>
-                <property key="angle" type="integer" defaultValue="0">
-                    <caption>Angle</caption>
-                    <description>Line of direction. A value of 0 is equivalent to top; increasing values rotates clockwise.</description>
-                </property>
-                <property key="opacity" type="decimal" defaultValue="1.0">
-                    <caption>Opacity</caption>
-                    <description>Takes a value from 0.0 to 1.0. The lower the value, the more transparent.</description>
                 </property>
                 <property key="content" type="widgets">
                     <caption>Content</caption>

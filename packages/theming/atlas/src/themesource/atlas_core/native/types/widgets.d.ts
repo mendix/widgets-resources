@@ -834,6 +834,14 @@ export interface RadioButtonsContainerStyle {
 export type RadioButtonsStyles = RadioButtonsContainerStyle & RadioButtonsItemStyle & RadioButtonsLabelStyle;
 
 // Background Gradient
+interface GradientColorList {
+    color: string;
+    offset: number;
+}
+
 export interface BackgroundGradientStyles {
     container?: ViewStyle;
+    angle?: number;
+    colorList?: GradientColorList[];
+    opacity?: number;
 }

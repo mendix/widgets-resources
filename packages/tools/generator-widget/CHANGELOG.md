@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [9.2.3] - 2022-07-04
+
+### Changed
+
+-   We updated required Node.js version to the current LTS version.
+
+## [9.2.1] - 2022-02-25
+
 ### Fixed
 
 -   We fixed an issue with generator producing invalid package.json file when user provides answers that has double quotes. (Ticket 142686)
