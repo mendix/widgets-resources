@@ -20,7 +20,6 @@ export async function FindObjectWithGUID(
 ): Promise<mendix.lib.MxObject | undefined> {
     // BEGIN USER CODE
 
-    console.log("Found list: " + list);
     return list.find(element => element.getGuid() === objectGUID);
 
     // END USER CODE
