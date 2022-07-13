@@ -24,6 +24,11 @@ $header-color-hover: #264ae5;
         }
     }
 
+    &:not(.widget-accordion-group-collapsed) {
+        .widget-accordion-group-header-button-icon-animate {
+            transform: rotate(-180deg);
+        }
+    }
     &.widget-accordion-group-collapsing {
         > .widget-accordion-group-header > .widget-accordion-group-header-button,
         > .widget-accordion-group-header
@@ -70,7 +75,6 @@ $header-color-hover: #264ae5;
 
         .widget-accordion-group-header-button-icon {
             fill: $header-color;
-            transform: rotate(-180deg);
 
             &.widget-accordion-group-header-button-icon-animate {
                 transition: transform 0.2s ease-in-out 50ms;
@@ -118,7 +122,6 @@ $header-color-hover: #264ae5;
 
             .widget-accordion-group-header-button-icon {
                 margin-right: 16px;
-                transform: rotate(180deg);
             }
         }
     }
