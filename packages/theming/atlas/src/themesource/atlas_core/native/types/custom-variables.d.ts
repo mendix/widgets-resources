@@ -208,3 +208,10 @@ export interface VariablesBackgroundGradient {
     colorList?: GradientColorList[];
     opacity: number;
 }
+
+export interface VariablesGallery {
+    container?: ViewStyle;
+    listStyle?: ViewStyle;
+    listItem?: ViewStyle;
+    pagination?: ViewStyle;
+}

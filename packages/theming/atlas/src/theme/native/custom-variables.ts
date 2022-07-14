@@ -769,7 +769,11 @@ export const columnChart: VariablesColumnChart = {
     }
 };
 // TODO add bar chart styles
-// Background gradient style
+
+// Gallery style
 export const gallery: VariablesGallery = {
-    container: {}
+    container: {},
+    listStyle: {},
+    listItem: { flex: 1 },
+    pagination: { flexDirection: "row", justifyContent: "center" }
 };
