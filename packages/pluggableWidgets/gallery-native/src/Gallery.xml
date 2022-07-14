@@ -26,11 +26,11 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Columns">
-                <property key="tabletItems" type="integer" defaultValue="1">
+                <property key="tabletColumns" type="integer" defaultValue="1">
                     <caption>Tablet columns</caption>
                     <description />
                 </property>
-                <property key="phoneItems" type="integer" defaultValue="1">
+                <property key="phoneColumns" type="integer" defaultValue="1">
                     <caption>Phone columns</caption>
                     <description />
                 </property>

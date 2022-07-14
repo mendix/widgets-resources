@@ -20,8 +20,8 @@ export interface GalleryProps<Style> {
     datasource: ListValue;
     content?: ListWidgetValue;
     scrollDirection: ScrollDirectionEnum;
-    tabletItems: number;
-    phoneItems: number;
+    tabletColumns: number;
+    phoneColumns: number;
     pageSize: number;
     pagination: PaginationEnum;
     pagingPosition: PagingPositionEnum;
@@ -40,8 +40,8 @@ export interface GalleryPreviewProps {
     datasource: {} | { type: string } | null;
     content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     scrollDirection: ScrollDirectionEnum;
-    tabletItems: number | null;
-    phoneItems: number | null;
+    tabletColumns: number | null;
+    phoneColumns: number | null;
     pageSize: number | null;
     pagination: PaginationEnum;
     pagingPosition: PagingPositionEnum;

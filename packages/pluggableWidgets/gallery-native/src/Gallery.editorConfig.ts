@@ -20,8 +20,8 @@ export function getProperties(values: GalleryPreviewProps, defaultProperties: Pr
 
     if (values.scrollDirection === "horizontal") {
         hidePropertyIn(defaultProperties, values, "pullDown");
-        hidePropertyIn(defaultProperties, values, "tabletItems");
-        hidePropertyIn(defaultProperties, values, "phoneItems");
+        hidePropertyIn(defaultProperties, values, "tabletColumns");
+        hidePropertyIn(defaultProperties, values, "phoneColumns");
     }
 
     return defaultProperties;
@@ -29,15 +29,15 @@ export function getProperties(values: GalleryPreviewProps, defaultProperties: Pr
 
 export function check(values: GalleryPreviewProps): Problem[] {
     const errors: Problem[] = [];
-    if (!values.phoneItems || values.phoneItems < 1 || values.phoneItems > 12) {
+    if (!values.phoneColumns || values.phoneColumns < 1 || values.phoneColumns > 12) {
         errors.push({
-            property: "phoneItems",
+            property: "phoneColumns",
             message: "Phone items must be a number between 1 and 12"
         });
     }
-    if (!values.tabletItems || values.tabletItems < 1 || values.tabletItems > 12) {
+    if (!values.tabletColumns || values.tabletColumns < 1 || values.tabletColumns > 12) {
         errors.push({
-            property: "tabletItems",
+            property: "tabletColumns",
             message: "Tablet items must be a number between 1 and 12"
         });
     }
@@ -96,10 +96,10 @@ export function getPreview(values: GalleryPreviewProps, isDarkMode: boolean): St
                         children: [
                             {
                                 type: "Text",
-                                content: `Tablet ${values.tabletItems} ${getSingularPlural(
+                                content: `Tablet ${values.tabletColumns} ${getSingularPlural(
                                     "Column",
-                                    values.tabletItems!
-                                )}, Phone ${values.phoneItems} ${getSingularPlural("Column", values.phoneItems!)}`,
+                                    values.tabletColumns!
+                                )}, Phone ${values.phoneColumns} ${getSingularPlural("Column", values.phoneColumns!)}`,
                                 fontColor: isDarkMode ? "#DEDEDE" : "#899499"
                             }
                         ]

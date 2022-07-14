@@ -18,19 +18,19 @@ export interface GalleryProps<T extends ObjectItem> {
     pageSize: number;
     paginationPosition?: PagingPositionEnum;
     paging: boolean;
-    phoneItems: number;
+    phoneColumns: number;
     preview?: boolean;
     pullDown?: () => void;
     scrollDirection: ScrollDirectionEnum;
     style: GalleryStyle;
     tabIndex?: number;
-    tabletItems: number;
+    tabletColumns: number;
 }
 
 export const Gallery = <T extends ObjectItem>(props: GalleryProps<T>): ReactElement => {
     const listItemMargin = props.style.listItem?.margin || 0;
     const listItemPadding = props.style.listItem?.padding || 0;
-    const columnSize = DeviceInfo.isTablet() ? props.tabletItems : props.phoneItems;
+    const columnSize = DeviceInfo.isTablet() ? props.tabletColumns : props.phoneColumns;
     const ListEmptyComponent =
         props.emptyPlaceholderRenderer && props.emptyPlaceholderRenderer(children => <View>{children}</View>);
     const onEndReached = (): any =>

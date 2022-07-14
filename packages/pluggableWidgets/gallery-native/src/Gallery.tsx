@@ -53,11 +53,11 @@ export const Gallery = (props: GalleryProps<GalleryStyle>): ReactElement => {
             pageSize={props.pageSize}
             paginationPosition={props.pagingPosition}
             paging={props.pagination === "buttons"}
-            phoneItems={props.phoneItems}
+            phoneColumns={props.phoneColumns}
             pullDown={pullDown}
             scrollDirection={props.scrollDirection}
             style={styles}
-            tabletItems={props.tabletItems}
+            tabletColumns={props.tabletColumns}
         />
     );
 };

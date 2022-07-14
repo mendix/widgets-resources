@@ -23,10 +23,10 @@ const defaultProps: GalleryProps<ObjectItem> = {
     page: 0,
     pageSize: 10,
     paging: false,
-    phoneItems: 2,
+    phoneColumns: 2,
     scrollDirection: "vertical",
     style: { container: {} },
-    tabletItems: 3
+    tabletColumns: 3
 };
 
 describe("Gallery", () => {
