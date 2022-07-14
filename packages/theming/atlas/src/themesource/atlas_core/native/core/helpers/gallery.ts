@@ -86,3 +86,81 @@ export const gridGapOuterLarge = {
         margin: spacing.larger
     }
 };
+
+export const galleryGridAlignSelfStart = {
+    listItem: {
+        alignSelf: "flex-start"
+    }
+};
+
+export const galleryGridAlignSelfCenter = {
+    listItem: {
+        alignSelf: "center"
+    }
+};
+
+export const galleryGridAlignSelfEnd = {
+    listItem: {
+        alignSelf: "flex-end"
+    }
+};
+
+export const galleryGridAlignSelfStretch = {
+    listItem: {
+        alignSelf: "stretch"
+    }
+};
+
+export const galleryGridAlignSelfBaseline = {
+    listItem: {
+        alignSelf: "baseline"
+    }
+};
+
+export const galleryGridFlexRow = {
+    listItem: {
+        flexDirection: "row"
+    }
+};
+
+export const galleryGridFlexWrap = {
+    listItem: {
+        flexWrap: "wrap"
+    }
+};
+
+export const galleryGridJustifyContentStart = {
+    listItem: {
+        justifyContent: "wrap"
+    }
+};
+
+export const galleryGridJustifyContentCenter = {
+    listItem: {
+        justifyContent: "center"
+    }
+};
+
+export const galleryGridJustifyContentEnd = {
+    listItem: {
+        justifyContent: "flex-end"
+    }
+};
+
+export const galleryGridJustifyContentSpaceBetween = {
+    listItem: {
+        justifyContent: "space-between"
+    }
+};
+
+export const galleryGridJustifyContentSpaceAround = {
+    listItem: {
+        justifyContent: "space-around"
+    }
+};
+
+export const galleryGridJustifyContentSpaceEvenly = {
+    listItem: {
+        justifyContent: "space-evenly"
+    }
+};

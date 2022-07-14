@@ -2977,13 +2977,13 @@
             "name": "Render children horizontal",
             "type": "Toggle",
             "description": "Determines the direction in which children are rendered.",
-            "class": "flexRow"
+            "class": "galleryGridFlexRow"
         },
         {
             "name": "Wrap children",
             "type": "Toggle",
             "description": "Determines if children can flow into multiple lines if they hit the end of the container.",
-            "class": "flexWrap"
+            "class": "galleryGridFlexWrap"
         },
         {
             "name": "Align children",
@@ -2992,23 +2992,23 @@
             "options": [
                 {
                     "name": "Start",
-                    "class": "alignChildrenStart"
+                    "class": "galleryGridAlignSelfStart"
                 },
                 {
                     "name": "Center",
-                    "class": "alignChildrenCenter"
+                    "class": "galleryGridAlignSelfCenter"
                 },
                 {
                     "name": "End",
-                    "class": "alignChildrenEnd"
+                    "class": "galleryGridAlignSelfEnd"
                 },
                 {
                     "name": "Stretch",
-                    "class": "alignChildrenStretch"
+                    "class": "galleryGridAlignSelfStretch"
                 },
                 {
                     "name": "Baseline",
-                    "class": "alignChildrenBaseline"
+                    "class": "galleryGridAlignSelfBaseline"
                 }
             ]
         },
@@ -3019,27 +3019,27 @@
             "options": [
                 {
                     "name": "Start",
-                    "class": "justifyContentStart"
+                    "class": "galleryGridJustifyContentStart"
                 },
                 {
                     "name": "Center",
-                    "class": "justifyContentCenter"
+                    "class": "galleryGridJustifyContentCenter"
                 },
                 {
                     "name": "End",
-                    "class": "justifyContentEnd"
+                    "class": "galleryGridJustifyContentEnd"
                 },
                 {
                     "name": "Space between",
-                    "class": "justifyContentSpaceBetween"
+                    "class": "galleryGridJustifyContentSpaceBetween"
                 },
                 {
                     "name": "Space around",
-                    "class": "justifyContentSpaceAround"
+                    "class": "galleryGridJustifyContentSpaceAround"
                 },
                 {
                     "name": "Space evenly",
-                    "class": "justifyContentSpaceEvenly"
+                    "class": "galleryGridJustifyContentSpaceEvenly"
                 }
             ]
         },
@@ -3108,7 +3108,7 @@
                 },
                 {
                     "name": "Outer large",
-                    "class": "gridGapOuterSmallLarge"
+                    "class": "gridGapOuterLarge"
                 }
             ]
         }
