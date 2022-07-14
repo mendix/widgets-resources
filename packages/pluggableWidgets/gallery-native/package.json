@@ -28,7 +28,6 @@
     "test:e2e:ios:update-snapshot": "detox test --updateSnapshot --configuration ios.simulator.developerapp"
   },
   "dependencies": {
-    "@mendix/piw-native-utils-internal": "^1.0.0",
     "@mendix/piw-utils-internal": "^1.0.0",
     "react-native-device-info": "8.0.1"
   },
