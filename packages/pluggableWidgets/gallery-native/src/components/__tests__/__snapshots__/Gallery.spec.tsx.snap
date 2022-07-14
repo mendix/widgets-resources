@@ -17,6 +17,9 @@ exports[`Gallery renders correctly 1`] = `
         Object {
           "id": "33",
         },
+        Object {
+          "id": "_blank",
+        },
       ]
     }
     disableVirtualization={false}
@@ -144,6 +147,16 @@ exports[`Gallery renders correctly 1`] = `
           >
             33
           </View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "transparent",
+                "flex": 0.5,
+                "margin": 0,
+                "padding": 0,
+              }
+            }
+          />
         </View>
       </View>
     </View>
@@ -168,6 +181,9 @@ exports[`Gallery renders correctly with infinite load  1`] = `
         Object {
           "id": "33",
         },
+        Object {
+          "id": "_blank",
+        },
       ]
     }
     disableVirtualization={false}
@@ -295,6 +311,16 @@ exports[`Gallery renders correctly with infinite load  1`] = `
           >
             33
           </View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "transparent",
+                "flex": 0.5,
+                "margin": 0,
+                "padding": 0,
+              }
+            }
+          />
         </View>
       </View>
     </View>
@@ -319,6 +345,9 @@ exports[`Gallery renders correctly with onclick event 1`] = `
         Object {
           "id": "33",
         },
+        Object {
+          "id": "_blank",
+        },
       ]
     }
     disableVirtualization={false}
@@ -446,6 +475,16 @@ exports[`Gallery renders correctly with onclick event 1`] = `
           >
             33
           </View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "transparent",
+                "flex": 0.5,
+                "margin": 0,
+                "padding": 0,
+              }
+            }
+          />
         </View>
       </View>
     </View>
@@ -527,6 +566,9 @@ exports[`Gallery with pagination renders correctly 1`] = `
         Object {
           "id": "33",
         },
+        Object {
+          "id": "_blank",
+        },
       ]
     }
     disableVirtualization={false}
@@ -654,6 +696,16 @@ exports[`Gallery with pagination renders correctly 1`] = `
           >
             33
           </View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "transparent",
+                "flex": 0.5,
+                "margin": 0,
+                "padding": 0,
+              }
+            }
+          />
         </View>
       </View>
       <View
