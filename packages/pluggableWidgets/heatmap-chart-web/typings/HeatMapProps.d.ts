@@ -7,11 +7,11 @@ import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, ListValue, ListAttributeValue, ListExpressionValue } from "mendix";
 import { Big } from "big.js";
 
-export type DeveloperModeEnum = "basic" | "advanced" | "developer";
-
 export type HorizontalSortOrderEnum = "asc" | "desc";
 
 export type VerticalSortOrderEnum = "asc" | "desc";
+
+export type GridLinesEnum = "none" | "horizontal" | "vertical" | "both";
 
 export interface ScaleColorsType {
     valuePercentage: number;
@@ -32,20 +32,21 @@ export interface HeatMapContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    xAxisLabel?: DynamicValue<string>;
-    yAxisLabel?: DynamicValue<string>;
-    showLegend: boolean;
-    developerMode: DeveloperModeEnum;
     seriesDataSource: ListValue;
+    seriesValueAttribute: ListAttributeValue<Big>;
     horizontalAxisAttribute?: ListAttributeValue<string>;
     horizontalSortAttribute?: ListAttributeValue<Big | string | Date>;
     horizontalSortOrder: HorizontalSortOrderEnum;
     verticalAxisAttribute?: ListAttributeValue<string>;
     verticalSortAttribute?: ListAttributeValue<Big | string | Date>;
     verticalSortOrder: VerticalSortOrderEnum;
-    seriesValueAttribute: ListAttributeValue<Big>;
-    scaleColors: ScaleColorsType[];
+    enableAdvancedOptions: boolean;
+    enableDeveloperMode: boolean;
+    xAxisLabel?: DynamicValue<string>;
+    yAxisLabel?: DynamicValue<string>;
     showScale: boolean;
+    gridLines: GridLinesEnum;
+    scaleColors: ScaleColorsType[];
     smoothColor: boolean;
     showValues: boolean;
     valuesColor: string;
@@ -66,20 +67,21 @@ export interface HeatMapPreviewProps {
     style: string;
     styleObject?: CSSProperties;
     readOnly: boolean;
-    xAxisLabel: string;
-    yAxisLabel: string;
-    showLegend: boolean;
-    developerMode: DeveloperModeEnum;
     seriesDataSource: {} | { type: string } | null;
+    seriesValueAttribute: string;
     horizontalAxisAttribute: string;
     horizontalSortAttribute: string;
     horizontalSortOrder: HorizontalSortOrderEnum;
     verticalAxisAttribute: string;
     verticalSortAttribute: string;
     verticalSortOrder: VerticalSortOrderEnum;
-    seriesValueAttribute: string;
-    scaleColors: ScaleColorsPreviewType[];
+    enableAdvancedOptions: boolean;
+    enableDeveloperMode: boolean;
+    xAxisLabel: string;
+    yAxisLabel: string;
     showScale: boolean;
+    gridLines: GridLinesEnum;
+    scaleColors: ScaleColorsPreviewType[];
     smoothColor: boolean;
     showValues: boolean;
     valuesColor: string;

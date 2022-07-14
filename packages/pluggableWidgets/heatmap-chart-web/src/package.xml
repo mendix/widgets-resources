@@ -5,7 +5,7 @@
             <widgetFile path="HeatMap.xml" />
         </widgetFiles>
         <files>
-            <file path="com/mendix/widget/custom/heatmap/" />
+            <file path="com/mendix/widget/web/heatmap/" />
         </files>
     </clientModule>
 </package>
