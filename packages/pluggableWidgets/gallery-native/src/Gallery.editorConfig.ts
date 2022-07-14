@@ -29,16 +29,22 @@ export function getProperties(values: GalleryPreviewProps, defaultProperties: Pr
 
 export function check(values: GalleryPreviewProps): Problem[] {
     const errors: Problem[] = [];
-    if (!values.phoneColumns || values.phoneColumns < 1 || values.phoneColumns > 12) {
+    if (!values.phoneColumns || values.phoneColumns < 1) {
         errors.push({
             property: "phoneColumns",
-            message: "Phone items must be a number between 1 and 12"
+            message: "The phone columns cannot be less than 1."
         });
     }
-    if (!values.tabletColumns || values.tabletColumns < 1 || values.tabletColumns > 12) {
+    if (!values.tabletColumns || values.tabletColumns < 1) {
         errors.push({
             property: "tabletColumns",
-            message: "Tablet items must be a number between 1 and 12"
+            message: "The tablet columns cannot be less than 1."
+        });
+    }
+    if (!values.pageSize || values.pageSize < 1) {
+        errors.push({
+            property: "pageSize",
+            message: "The page size cannot be less than 1."
         });
     }
     return errors;
