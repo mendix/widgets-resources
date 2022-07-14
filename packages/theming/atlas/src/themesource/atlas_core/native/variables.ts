@@ -796,8 +796,6 @@ let columnChart: VariablesColumnChart = {
 columnChart = merge(columnChart, custom.columnChart || ({} as any));
 
 let gallery: VariablesGallery = {
-    container: {},
-    listStyle: {},
     listItem: { flex: 1 },
     pagination: { flexDirection: "row", justifyContent: "center" }
 };

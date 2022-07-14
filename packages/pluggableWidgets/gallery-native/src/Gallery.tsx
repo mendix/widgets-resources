@@ -30,9 +30,10 @@ export const Gallery = (props: GalleryProps<GalleryStyle>): ReactElement => {
         (renderWrapper, item) =>
             renderWrapper(
                 props.content?.get(item),
+                props.itemClass?.get(item)?.value,
                 props.onClick ? () => executeAction(props.onClick?.get(item)) : undefined
             ),
-        [props.content, props.onClick]
+        [props.content, props.itemClass, props.onClick]
     );
     const emptyPlaceHolderRenderer = useCallback(
         renderWrapper => renderWrapper(props.emptyPlaceholder),

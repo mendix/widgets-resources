@@ -28,5 +28,8 @@ export const com_mendix_widget_native_gallery_Gallery: GalleryType = {
     pagination: {
         // All ViewStyle properties are allowed
         ...gallery.pagination
+    },
+    customClasses: {
+        // All custom style properties are allowed
     }
 };

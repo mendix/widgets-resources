@@ -851,4 +851,7 @@ export interface GalleryType {
     listStyle?: ViewStyle;
     listItem?: ViewStyle;
     pagination?: ViewStyle;
+    customClasses?: {
+        [key: string]: Pick<GalleryType, "listItem">;
+    };
 }

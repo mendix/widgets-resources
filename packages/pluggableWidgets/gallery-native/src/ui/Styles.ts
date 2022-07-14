@@ -5,11 +5,12 @@ export interface GalleryStyle {
     listStyle?: ViewStyle;
     listItem?: ViewStyle;
     pagination?: ViewStyle;
+    customClasses?: {
+        [key: string]: Pick<GalleryStyle, "listItem">;
+    };
 }
 
 export const defaultGalleryStyle: GalleryStyle = {
-    container: {},
-    listStyle: {},
     listItem: { flex: 1 },
     pagination: { flexDirection: "row", justifyContent: "center" }
 };

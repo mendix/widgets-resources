@@ -9,7 +9,10 @@ export interface GalleryProps<T extends ObjectItem> {
     emptyPlaceholderRenderer?: (renderWrapper: (children: ReactNode) => ReactElement) => ReactElement;
     hasMoreItems: boolean;
     isInfiniteLoad: boolean;
-    itemRenderer: (renderWrapper: (children: ReactNode, onClick?: () => void) => ReactElement, item: T) => ReactElement;
+    itemRenderer: (
+        renderWrapper: (children: ReactNode, className?: string, onClick?: () => void) => ReactElement,
+        item: T
+    ) => ReactElement;
     items: T[];
     loadMoreItems?: (computePage: (prevPage: number) => number) => void;
     name: string;
@@ -38,10 +41,14 @@ export const Gallery = <T extends ObjectItem>(props: GalleryProps<T>): ReactElem
     const renderItem = (item: { item: T }): ReactElement =>
         item.item.id !== "_blank" ? (
             props.itemRenderer(
-                (children, onClick) => (
+                (children, className, onClick) => (
                     <Pressable
                         testID={`${props.name}-list-item-${item.item.id}`}
-                        style={[props.style.listItem, { flex: 1 / columnSize }]}
+                        style={[
+                            props.style.listItem,
+                            className ? props.style?.customClasses?.[className]?.listItem : [],
+                            { flex: 1 / columnSize }
+                        ]}
                         onPress={onClick}
                     >
                         {children}
