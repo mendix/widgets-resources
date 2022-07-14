@@ -10,9 +10,15 @@ import { Gallery, GalleryProps } from "../Gallery";
 jest.mock("react-native-device-info", () => ({ isTablet: jest.fn().mockReturnValue(false) }));
 
 const itemWrapperFunction =
-    ({ onClick }: { onClick?: () => void }): GalleryProps<ObjectItem>["itemRenderer"] =>
+    ({
+        onClick,
+        customClass
+    }: {
+        onClick?: () => void;
+        customClass?: string;
+    }): GalleryProps<ObjectItem>["itemRenderer"] =>
     (wrapper, item) =>
-        wrapper(item.id, onClick);
+        wrapper(item.id, customClass, onClick);
 
 const defaultProps: GalleryProps<ObjectItem> = {
     hasMoreItems: true,
