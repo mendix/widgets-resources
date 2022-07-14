@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.1.2] - 2022-7-14
+
 ### Fixed
 
 -   We fixed issue related to rotating icons (180deg) when animations are switched off.
