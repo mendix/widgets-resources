@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Changed
+
+-   We updated Feedback widget to the latest version.
+
 ### Fixed
 
 -   We fixed the issue with sidebar "Slide over content" configuration.
