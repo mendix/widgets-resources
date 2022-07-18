@@ -848,10 +848,14 @@ export interface BackgroundGradientStyles {
 
 export interface GalleryType {
     container?: ViewStyle;
-    listStyle?: ViewStyle;
-    listItem?: ViewStyle;
-    pagination?: ViewStyle;
     customClasses?: {
         [key: string]: Pick<GalleryType, "listItem">;
     };
+    emptyPlaceholder?: ViewStyle;
+    firstItem?: ViewStyle;
+    lastItem?: ViewStyle;
+    list?: ViewStyle;
+    listItem?: ViewStyle;
+    pagination?: ViewStyle;
+    paginationText?: TextStyle;
 }

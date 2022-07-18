@@ -25,6 +25,7 @@ export interface GalleryProps<Style> {
     pageSize: number;
     pagination: PaginationEnum;
     pagingPosition: PagingPositionEnum;
+    pagingButtonText: string;
     showEmptyPlaceholder: ShowEmptyPlaceholderEnum;
     emptyPlaceholder?: ReactNode;
     itemClass?: ListExpressionValue<string>;
@@ -45,6 +46,7 @@ export interface GalleryPreviewProps {
     pageSize: number | null;
     pagination: PaginationEnum;
     pagingPosition: PagingPositionEnum;
+    pagingButtonText: string;
     showEmptyPlaceholder: ShowEmptyPlaceholderEnum;
     emptyPlaceholder: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     itemClass: string;

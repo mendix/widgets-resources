@@ -211,10 +211,14 @@ export interface VariablesBackgroundGradient {
 
 export interface VariablesGallery {
     container?: ViewStyle;
-    listStyle?: ViewStyle;
-    listItem?: ViewStyle;
-    pagination?: ViewStyle;
     customClasses?: {
         [key: string]: Pick<VariablesGallery, "listItem">;
     };
+    emptyPlaceholder?: ViewStyle;
+    firstItem?: ViewStyle;
+    lastItem?: ViewStyle;
+    list?: ViewStyle;
+    listItem?: ViewStyle;
+    pagination?: ViewStyle;
+    paginationText?: TextStyle;
 }

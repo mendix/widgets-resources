@@ -68,7 +68,7 @@ Triggers an action (such as a nanoflow, Synchronize, etc. action) when the end-u
 
 ## Custom styling
 
-The look and feel of the widget is fully customizable. Check out the <a href="https://docs.mendix.com/refguide/mobile/designing-mobile-user-interfaces/widget-styling-guide/#1131-background-gradient">Native Mobile Styling documentation</a> for a full overview of the available style customizations.
+The look and feel of the widget is fully customizable. Check out the <a href="https://docs.mendix.com/refguide/mobile/designing-mobile-user-interfaces/widget-styling-guide/#1132-gallery">Native Mobile Styling documentation</a> for a full overview of the available style customizations.
 
 ## Development and contribution
 

@@ -17,9 +17,24 @@ export const com_mendix_widget_native_gallery_Gallery: GalleryType = {
         // All ViewStyle properties are allowed
         ...gallery.container
     },
-    listStyle: {
+    customClasses: {
+        // All custom style properties are allowed
+    },
+    emptyPlaceholder: {
         // All ViewStyle properties are allowed
-        ...gallery.listStyle
+        ...gallery.emptyPlaceholder
+    },
+    firstItem: {
+        // All ViewStyle properties are allowed
+        ...gallery.firstItem
+    },
+    lastItem: {
+        // All ViewStyle properties are allowed
+        ...gallery.lastItem
+    },
+    list: {
+        // All ViewStyle properties are allowed
+        ...gallery.list
     },
     listItem: {
         // All ViewStyle properties are allowed
@@ -29,7 +44,8 @@ export const com_mendix_widget_native_gallery_Gallery: GalleryType = {
         // All ViewStyle properties are allowed
         ...gallery.pagination
     },
-    customClasses: {
-        // All custom style properties are allowed
+    paginationText: {
+        // All TextStyle properties are allowed
+        ...gallery.paginationText
     }
 };

@@ -12,6 +12,7 @@ import { GalleryPreviewProps } from "../typings/GalleryProps";
 export function getProperties(values: GalleryPreviewProps, defaultProperties: Properties): Properties {
     if (values.pagination !== "buttons") {
         hidePropertyIn(defaultProperties, values, "pagingPosition");
+        hidePropertyIn(defaultProperties, values, "pagingButtonText");
     }
 
     if (values.showEmptyPlaceholder === "none") {

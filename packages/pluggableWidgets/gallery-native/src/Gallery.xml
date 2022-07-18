@@ -56,6 +56,10 @@
                         <enumerationValue key="above">Above grid</enumerationValue>
                     </enumerationValues>
                 </property>
+                <property key="pagingButtonText" type="string" defaultValue="Load more">
+                    <caption>Title of paging button</caption>
+                    <description />
+                </property>
                 <property key="showEmptyPlaceholder" type="enumeration" defaultValue="none">
                     <caption>Empty message</caption>
                     <description />

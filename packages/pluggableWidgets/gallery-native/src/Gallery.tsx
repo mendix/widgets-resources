@@ -7,26 +7,19 @@ import { GalleryProps } from "../typings/GalleryProps";
 
 export const Gallery = (props: GalleryProps<GalleryStyle>): ReactElement => {
     const styles = all<GalleryStyle>([defaultGalleryStyle, ...props.style]);
-    const isInfiniteLoad = props.pagination === "virtualScrolling";
     const currentPage = props.datasource.limit / props.pageSize;
 
     useEffect(() => {
-        props.datasource.requestTotalCount(true);
         if (props.datasource.limit === Number.POSITIVE_INFINITY) {
             props.datasource.setLimit(props.pageSize);
         }
     }, [props.datasource, props.pageSize]);
 
-    const loadMoreItems = useCallback(
-        computePage => {
-            const newPage = computePage(currentPage);
-            props.datasource.setLimit(newPage * props.pageSize);
-        },
-        [props.datasource, props.pageSize, currentPage]
-    );
+    const loadMoreItems = useCallback(() => {
+        props.datasource.setLimit((currentPage + 1) * props.pageSize);
+    }, [currentPage, props.datasource, props.pageSize]);
 
-    const pullDown = useCallback(() => props.pullDown && executeAction(props.pullDown), [props.pullDown]);
-    const itemRendered = useCallback(
+    const itemRenderer = useCallback(
         (renderWrapper, item) =>
             renderWrapper(
                 props.content?.get(item),
@@ -35,27 +28,23 @@ export const Gallery = (props: GalleryProps<GalleryStyle>): ReactElement => {
             ),
         [props.content, props.itemClass, props.onClick]
     );
-    const emptyPlaceHolderRenderer = useCallback(
-        renderWrapper => renderWrapper(props.emptyPlaceholder),
-        [props.emptyPlaceholder]
-    );
+
+    const pullDown = useCallback(() => props.pullDown && executeAction(props.pullDown), [props.pullDown]);
 
     return (
         <GalleryComponent
-            emptyPlaceholderRenderer={emptyPlaceHolderRenderer}
+            emptyPlaceholder={props.emptyPlaceholder}
             hasMoreItems={props.datasource.hasMoreItems ?? false}
-            isInfiniteLoad={isInfiniteLoad}
-            itemRenderer={itemRendered}
+            itemRenderer={itemRenderer}
             items={props.datasource.items ?? []}
             loadMoreItems={loadMoreItems}
             name={props.name}
-            numberOfItems={props.datasource.totalCount ?? 0}
-            page={currentPage}
-            pageSize={props.pageSize}
             paginationPosition={props.pagingPosition}
             paging={props.pagination === "buttons"}
+            pagingButtonText={props.pagingButtonText}
             phoneColumns={props.phoneColumns}
             pullDown={pullDown}
+            pullDownIsExecuting={props.pullDown?.isExecuting ?? false}
             scrollDirection={props.scrollDirection}
             style={styles}
             tabletColumns={props.tabletColumns}

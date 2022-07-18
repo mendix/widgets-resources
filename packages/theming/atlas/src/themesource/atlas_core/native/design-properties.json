@@ -3063,7 +3063,7 @@
             ]
         },
         {
-            "name": "List item border",
+            "name": "List item divider",
             "type": "Dropdown",
             "description": "Give each list item a border.",
             "options": [

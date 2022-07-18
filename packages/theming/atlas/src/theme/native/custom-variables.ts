@@ -773,7 +773,11 @@ export const columnChart: VariablesColumnChart = {
 // Gallery style
 export const gallery: VariablesGallery = {
     container: {},
-    listStyle: {},
-    listItem: { flex: 1 },
-    pagination: { flexDirection: "row", justifyContent: "center" }
+    emptyPlaceholder: {},
+    firstItem: {},
+    lastItem: {},
+    list: {},
+    listItem: {},
+    pagination: { flexDirection: "row", justifyContent: "center", marginVertical: spacing.small },
+    paginationText: {}
 };

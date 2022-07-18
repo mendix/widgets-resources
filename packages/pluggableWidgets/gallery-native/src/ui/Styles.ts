@@ -1,16 +1,20 @@
-import { ViewStyle } from "react-native";
+import { TextStyle, ViewStyle } from "react-native";
 
 export interface GalleryStyle {
     container?: ViewStyle;
-    listStyle?: ViewStyle;
-    listItem?: ViewStyle;
-    pagination?: ViewStyle;
     customClasses?: {
         [key: string]: Pick<GalleryStyle, "listItem">;
     };
+    emptyPlaceholder?: ViewStyle;
+    firstItem?: ViewStyle;
+    lastItem?: ViewStyle;
+    list?: ViewStyle;
+    listItem?: ViewStyle;
+    pagination?: ViewStyle;
+    paginationText?: TextStyle;
 }
 
 export const defaultGalleryStyle: GalleryStyle = {
-    listItem: { flex: 1 },
-    pagination: { flexDirection: "row", justifyContent: "center" }
+    listItem: { flexGrow: 1 },
+    pagination: { flexDirection: "row", justifyContent: "center", marginVertical: 8 }
 };

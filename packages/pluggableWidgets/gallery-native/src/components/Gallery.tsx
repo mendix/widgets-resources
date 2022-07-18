@@ -1,108 +1,98 @@
 import { createElement, ReactElement, ReactNode } from "react";
-import { Button, FlatList, Pressable, View } from "react-native";
+import { Text, FlatList, Pressable, View } from "react-native";
 import { ObjectItem } from "mendix";
 import DeviceInfo from "react-native-device-info";
 import { GalleryStyle } from "../ui/Styles";
 import { PagingPositionEnum, ScrollDirectionEnum } from "../../typings/GalleryProps";
 
 export interface GalleryProps<T extends ObjectItem> {
-    emptyPlaceholderRenderer?: (renderWrapper: (children: ReactNode) => ReactElement) => ReactElement;
+    emptyPlaceholder?: ReactNode;
     hasMoreItems: boolean;
-    isInfiniteLoad: boolean;
     itemRenderer: (
         renderWrapper: (children: ReactNode, className?: string, onClick?: () => void) => ReactElement,
         item: T
     ) => ReactElement;
     items: T[];
-    loadMoreItems?: (computePage: (prevPage: number) => number) => void;
+    loadMoreItems: () => void;
     name: string;
-    numberOfItems?: number;
-    page: number;
-    pageSize: number;
     paginationPosition?: PagingPositionEnum;
     paging: boolean;
+    pagingButtonText?: string;
     phoneColumns: number;
-    preview?: boolean;
     pullDown?: () => void;
+    pullDownIsExecuting?: boolean;
     scrollDirection: ScrollDirectionEnum;
     style: GalleryStyle;
-    tabIndex?: number;
     tabletColumns: number;
 }
 
 export const Gallery = <T extends ObjectItem>(props: GalleryProps<T>): ReactElement => {
-    const listItemMargin = props.style.listItem?.margin || 0;
-    const listItemPadding = props.style.listItem?.padding || 0;
-    const columnSize = DeviceInfo.isTablet() ? props.tabletColumns : props.phoneColumns;
-    const ListEmptyComponent =
-        props.emptyPlaceholderRenderer && props.emptyPlaceholderRenderer(children => <View>{children}</View>);
-    const onEndReached = (): any =>
-        props.isInfiniteLoad && props.hasMoreItems && props.loadMoreItems && props.loadMoreItems(prev => prev + 1);
-    const renderItem = (item: { item: T }): ReactElement =>
-        item.item.id !== "_blank" ? (
-            props.itemRenderer(
-                (children, className, onClick) => (
-                    <Pressable
-                        testID={`${props.name}-list-item-${item.item.id}`}
-                        style={[
-                            props.style.listItem,
-                            className ? props.style?.customClasses?.[className]?.listItem : [],
-                            { flex: 1 / columnSize }
-                        ]}
-                        onPress={onClick}
-                    >
-                        {children}
-                    </Pressable>
-                ),
-                item.item
-            )
-        ) : (
-            <View
-                style={{
-                    flex: 1 / columnSize,
-                    backgroundColor: "transparent",
-                    padding: listItemPadding,
-                    margin: listItemMargin
-                }}
-            />
-        );
-    const pagination =
-        !props.isInfiniteLoad && props.paging && props.hasMoreItems ? (
-            <View style={props.style.pagination}>
-                <Button
-                    testID={`${props.name}-pagination-button`}
-                    onPress={() => props.hasMoreItems && props.loadMoreItems && props.loadMoreItems(prev => prev + 1)}
-                    title={"Load more items..."}
-                />
-            </View>
-        ) : undefined;
+    const isScrollDirectionVertical = props.scrollDirection === "vertical";
+    const numOfColumns = DeviceInfo.isTablet() ? props.tabletColumns : props.phoneColumns;
+    const firstItemId = props.items[0]?.id;
+    const lastItemId = props.items[props.items.length - 1]?.id;
 
-    const formatData = (dataList: T[], numColumns: number): T[] => {
-        let totalLastRow = dataList.length % numColumns;
-        while (totalLastRow !== 0 && totalLastRow !== numColumns) {
-            const emptyData: any = { id: "_blank" };
-            dataList.push(emptyData);
-            totalLastRow++;
+    const onEndReached = (): void => {
+        if (!props.paging && props.hasMoreItems) {
+            props.loadMoreItems();
         }
-        return dataList;
     };
 
+    const renderItem = (item: { item: T }): ReactElement =>
+        props.itemRenderer(
+            (children, className, onClick) => (
+                <Pressable
+                    style={isScrollDirectionVertical && { width: `${100 / numOfColumns}%` }}
+                    testID={`${props.name}-list-item-${item.item.id}`}
+                    onPress={onClick}
+                >
+                    <View
+                        style={[
+                            props.style.listItem,
+                            firstItemId === item.item.id && props.style.firstItem,
+                            lastItemId === item.item.id && props.style.lastItem,
+                            className !== undefined && props.style?.customClasses?.[className]?.listItem
+                        ]}
+                    >
+                        {children}
+                    </View>
+                </Pressable>
+            ),
+            item.item
+        );
+
+    const paginationButton =
+        props.paging && props.hasMoreItems ? (
+            <Pressable
+                testID={`${props.name}-pagination-button`}
+                onPress={() => props.hasMoreItems && props.loadMoreItems && props.loadMoreItems()}
+                style={props.style.pagination}
+            >
+                <Text style={props.style.paginationText}>{props.pagingButtonText ?? "Load more"}</Text>
+            </Pressable>
+        ) : null;
+
+    const renderEmptyPlaceholder = (): ReactElement => (
+        <View style={props.style.emptyPlaceholder}>{props.emptyPlaceholder}</View>
+    );
+
     return (
-        <View testID={props.name} style={props.style.container}>
+        <View testID={`${props.name}`} style={props.style.container}>
+            {props.paginationPosition === "above" && paginationButton}
             <FlatList
-                testID={`${props.name}-list`}
-                {...(props.scrollDirection === "vertical" && { onRefresh: props.pullDown })}
-                data={formatData(props.items, columnSize)}
-                horizontal={props.scrollDirection === "horizontal"}
+                {...(isScrollDirectionVertical && props.pullDown ? { onRefresh: props.pullDown } : {})}
+                refreshing={props.pullDownIsExecuting ?? false}
+                data={props.items}
+                horizontal={!isScrollDirectionVertical}
                 keyExtractor={item => item.id}
-                ListEmptyComponent={ListEmptyComponent}
-                ListFooterComponent={pagination}
-                numColumns={columnSize}
+                ListEmptyComponent={renderEmptyPlaceholder}
+                numColumns={numOfColumns}
                 onEndReached={onEndReached}
-                refreshing={false}
                 renderItem={renderItem}
-                style={props.style.listStyle}
+                style={props.style.list}
+                testID={`${props.name}-list`}
             />
+            {props.paginationPosition === "below" && paginationButton}
         </View>
     );
 };

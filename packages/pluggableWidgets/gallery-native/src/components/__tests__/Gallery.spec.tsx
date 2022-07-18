@@ -22,12 +22,10 @@ const itemWrapperFunction =
 
 const defaultProps: GalleryProps<ObjectItem> = {
     hasMoreItems: true,
-    isInfiniteLoad: false,
     itemRenderer: itemWrapperFunction({}),
     items: [{ id: "11" as GUID }, { id: "22" as GUID }, { id: "33" as GUID }],
+    loadMoreItems: jest.fn(),
     name: "gallery-test",
-    page: 0,
-    pageSize: 10,
     paging: false,
     phoneColumns: 2,
     scrollDirection: "vertical",
@@ -36,47 +34,82 @@ const defaultProps: GalleryProps<ObjectItem> = {
 };
 
 describe("Gallery", () => {
-    it("renders correctly", () => {
-        const gallery = render(<Gallery {...defaultProps} />);
-        expect(gallery).toMatchSnapshot();
+    describe("rendering", () => {
+        it("renders correctly", () => {
+            const gallery = render(<Gallery {...defaultProps} />);
+            expect(gallery).toMatchSnapshot();
+        });
+
+        it("renders correctly with empty list and custom placeholder", () => {
+            const gallery = render(
+                <Gallery
+                    {...defaultProps}
+                    pullDownIsExecuting={false}
+                    emptyPlaceholder={<Text>Empty list...</Text>}
+                    hasMoreItems={false}
+                    items={[]}
+                />
+            );
+            expect(gallery).toMatchSnapshot();
+            const emptyPlaceholder = gallery.getByText("Empty list...");
+            expect(emptyPlaceholder).toBeDefined();
+        });
+
+        it("renders correctly with dynamic item class", () => {
+            const gallery = render(
+                <Gallery
+                    {...defaultProps}
+                    itemRenderer={itemWrapperFunction({ customClass: "testClass" })}
+                    style={{ customClasses: { testClass: { listItem: { backgroundColor: "blue" } } } }}
+                />
+            );
+            expect(gallery).toMatchSnapshot();
+        });
+
+        describe("rendering with paging button", () => {
+            it("renders correctly", () => {
+                const gallery = render(<Gallery {...defaultProps} paging />);
+                expect(gallery).toMatchSnapshot();
+            });
+
+            it("renders correctly with custom paging button title", () => {
+                const gallery = render(
+                    <Gallery {...defaultProps} pagingButtonText="Show more" paginationPosition="above" paging />
+                );
+                expect(gallery).toMatchSnapshot();
+
+                const customPagingText = gallery.getByText("Show more");
+                expect(customPagingText).toBeDefined();
+            });
+
+            it("it shouldn't render the paging button if hasn't more item", () => {
+                const gallery = render(
+                    <Gallery
+                        {...defaultProps}
+                        pagingButtonText="Load more"
+                        hasMoreItems={false}
+                        paginationPosition="above"
+                        paging
+                    />
+                );
+                expect(gallery).toMatchSnapshot();
+
+                const loadMoreButtonText = gallery.queryByText("Load more");
+                expect(loadMoreButtonText).toBeNull();
+            });
+        });
     });
 
-    it("renders with empty placeholder", () => {
-        const gallery = render(
-            <Gallery
-                {...defaultProps}
-                emptyPlaceholderRenderer={() => <Text>Empty list...</Text>}
-                hasMoreItems={false}
-                items={[]}
-                numberOfItems={0}
-            />
-        );
-        expect(gallery).toMatchSnapshot();
-        const emptyPlaceholder = gallery.getByText("Empty list...");
-        expect(emptyPlaceholder).toBeDefined();
-    });
-
-    it("renders correctly with infinite load ", () => {
-        const gallery = render(<Gallery {...defaultProps} isInfiniteLoad />);
-        expect(gallery).toMatchSnapshot();
-    });
-
-    it("renders correctly with onclick event", () => {
-        const gallery = render(
-            <Gallery {...defaultProps} itemRenderer={itemWrapperFunction({ onClick: jest.fn() })} />
-        );
-        expect(gallery).toMatchSnapshot();
-    });
-
-    describe("with events", () => {
-        it("with on click action", () => {
+    describe("events", () => {
+        it("item on click action", () => {
             const onClick = jest.fn();
             const gallery = render(<Gallery {...defaultProps} itemRenderer={itemWrapperFunction({ onClick })} />);
             const galleryFirstItem = gallery.getByTestId("gallery-test-list-item-22");
             fireEvent.press(galleryFirstItem);
-            expect(onClick).toBeCalled();
+            expect(onClick).toBeCalledTimes(1);
         });
-        it("with pull down action", async () => {
+
+        it("triggers pull down action", async () => {
             const pullDown = jest.fn();
             const galleryComponent = render(
                 <Gallery {...defaultProps} scrollDirection="vertical" pullDown={pullDown} />
@@ -88,45 +121,11 @@ describe("Gallery", () => {
             await act(async () => {
                 refreshControl.props.onRefresh();
             });
-            expect(pullDown).toBeCalled();
-        });
-    });
-
-    describe("with pagination", () => {
-        it("renders correctly", () => {
-            const gallery = render(<Gallery {...defaultProps} isInfiniteLoad={false} paging hasMoreItems />);
-            expect(gallery).toMatchSnapshot();
+            expect(pullDown).toBeCalledTimes(1);
         });
 
-        it("triggers correct events on click load more items button", () => {
-            const loadMoreItems = jest.fn();
-            const gallery = render(
-                <Gallery
-                    {...defaultProps}
-                    isInfiniteLoad={false}
-                    paging
-                    paginationPosition="below"
-                    numberOfItems={20}
-                    hasMoreItems
-                    loadMoreItems={loadMoreItems}
-                />
-            );
-            const loadMoreItemsButton = gallery.getByTestId("gallery-test-pagination-button");
-            fireEvent.press(loadMoreItemsButton);
-            expect(loadMoreItems).toBeCalled();
-        });
-
-        it("triggers correct events on end reached", () => {
-            const loadMoreItems = jest.fn();
-            const gallery = render(
-                <Gallery
-                    {...defaultProps}
-                    isInfiniteLoad
-                    numberOfItems={20}
-                    hasMoreItems
-                    loadMoreItems={loadMoreItems}
-                />
-            );
+        it("triggers load more items events on end reached", () => {
+            const gallery = render(<Gallery {...defaultProps} />);
             const galleryList = gallery.getByTestId("gallery-test-list");
             fireEvent.scroll(galleryList, {
                 nativeEvent: {
@@ -143,26 +142,37 @@ describe("Gallery", () => {
                     }
                 }
             });
-            expect(loadMoreItems).toBeCalled();
+            expect(defaultProps.loadMoreItems).toBeCalledTimes(1);
+        });
+
+        it("it shouldn't triggers the load more items event when item list empty", () => {
+            const gallery = render(<Gallery {...defaultProps} items={[]} hasMoreItems={false} />);
+            const galleryList = gallery.getByTestId("gallery-test-list");
+            fireEvent.scroll(galleryList, {
+                nativeEvent: {
+                    contentOffset: {
+                        y: 500
+                    },
+                    contentSize: {
+                        height: 500,
+                        width: 100
+                    },
+                    layoutMeasurement: {
+                        height: 100,
+                        width: 100
+                    }
+                }
+            });
+            expect(defaultProps.loadMoreItems).not.toBeCalled();
+        });
+
+        describe("with pagination button", () => {
+            it("triggers load more items event on click load more items button", () => {
+                const gallery = render(<Gallery {...defaultProps} paginationPosition="below" paging />);
+                const loadMoreItemsButton = gallery.getByTestId("gallery-test-pagination-button");
+                fireEvent.press(loadMoreItemsButton);
+                expect(defaultProps.loadMoreItems).toBeCalledTimes(1);
+            });
         });
     });
 });
-
-// describe("Gallery - Tablet", () => {
-//     it("renders correctly", () => {
-//         const loadMoreItems = jest.fn();
-
-//         const gallery = render(
-//             <Gallery
-//                 {...defaultProps}
-//                 isInfiniteLoad={false}
-//                 paging
-//                 paginationPosition="below"
-//                 numberOfItems={20}
-//                 hasMoreItems
-//                 loadMoreItems={loadMoreItems}
-//             />
-//         );
-//         expect(gallery).toMatchSnapshot();
-//     });
-// });
