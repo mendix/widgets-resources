@@ -1,12 +1,5 @@
-import {
-    hidePropertyIn,
-    Properties,
-    Problem,
-    StructurePreviewProps,
-    DropZoneProps,
-    RowLayoutProps,
-    TextProps
-} from "@mendix/piw-utils-internal";
+import { StructurePreviewProps, DropZoneProps, RowLayoutProps, TextProps } from "@mendix/piw-utils-internal";
+import { hidePropertyIn, Properties, Problem } from "@mendix/pluggable-widgets-tools";
 import { AttributesListPreviewType, AccessibilityHelperPreviewProps } from "../typings/AccessibilityHelperProps";
 
 const PROHIBITED_ATTRIBUTES = ["class", "style", "widgetid", "data-mendix-id"];

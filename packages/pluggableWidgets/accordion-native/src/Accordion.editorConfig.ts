@@ -1,11 +1,5 @@
-import {
-    StructurePreviewProps,
-    changePropertyIn,
-    hidePropertyIn,
-    Properties,
-    Problem,
-    ContainerProps
-} from "@mendix/piw-utils-internal";
+import { StructurePreviewProps, ContainerProps } from "@mendix/piw-utils-internal";
+import { changePropertyIn, hidePropertyIn, Properties, Problem } from "@mendix/pluggable-widgets-tools";
 
 import { AccordionPreviewProps, GroupsPreviewType } from "../typings/AccordionProps";
 

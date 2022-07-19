@@ -1,15 +1,13 @@
 import { ColumnChartPreviewProps, BarmodeEnum } from "../typings/ColumnChartProps";
+import { StructurePreviewProps, ImageProps, ContainerProps } from "@mendix/piw-utils-internal";
 import {
     hideNestedPropertiesIn,
     hidePropertiesIn,
     hidePropertyIn,
     Problem,
     Properties,
-    StructurePreviewProps,
-    transformGroupsIntoTabs,
-    ImageProps,
-    ContainerProps
-} from "@mendix/piw-utils-internal";
+    transformGroupsIntoTabs
+} from "@mendix/pluggable-widgets-tools";
 
 import ColumnChartGroupedDark from "./assets/ColumnChart-grouped.dark.svg";
 import ColumnChartGroupedLight from "./assets/ColumnChart-grouped.light.svg";

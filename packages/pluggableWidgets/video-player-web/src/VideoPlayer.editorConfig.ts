@@ -1,11 +1,11 @@
+import { StructurePreviewProps } from "@mendix/piw-utils-internal";
 import {
     hidePropertiesIn,
     hidePropertyIn,
     Problem,
     Properties,
-    StructurePreviewProps,
     transformGroupsIntoTabs
-} from "@mendix/piw-utils-internal";
+} from "@mendix/pluggable-widgets-tools";
 
 import { VideoPlayerContainerProps, VideoPlayerPreviewProps } from "../typings/VideoPlayerProps";
 

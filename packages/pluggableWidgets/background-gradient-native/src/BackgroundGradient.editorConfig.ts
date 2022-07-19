@@ -1,5 +1,6 @@
-import { StructurePreviewProps, Problem } from "@mendix/piw-utils-internal";
+import { StructurePreviewProps } from "@mendix/piw-utils-internal";
 import { BackgroundGradientPreviewProps } from "../typings/BackgroundGradientProps";
+import { Problem } from "@mendix/pluggable-widgets-tools";
 
 export const getPreview = (values: BackgroundGradientPreviewProps, isDarkMode: boolean): StructurePreviewProps => ({
     type: "Container",

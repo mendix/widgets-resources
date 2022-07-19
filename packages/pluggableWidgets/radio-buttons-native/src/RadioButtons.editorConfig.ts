@@ -1,4 +1,6 @@
-import { StructurePreviewProps, Properties, hidePropertiesIn } from "@mendix/piw-utils-internal";
+import { StructurePreviewProps } from "@mendix/piw-utils-internal";
+import { Properties, hidePropertiesIn } from "@mendix/pluggable-widgets-tools";
+
 import { RadioButtonsPreviewProps } from "../typings/RadioButtonsProps";
 import darkRadioIcon from "./assets/radioButton_dark.svg";
 import lightRadioIcon from "./assets/radioButton_light.svg";

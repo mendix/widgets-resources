@@ -1,8 +1,7 @@
-/* eslint-disable */
 /**
  * TODO: Include tests for methods
  */
-import { Properties, Property, PropertyGroup } from "../typings";
+import { Properties, Property, PropertyGroup } from "./typings";
 
 declare type Option<T> = T | undefined;
 

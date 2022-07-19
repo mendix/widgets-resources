@@ -12,14 +12,11 @@ import {
     greaterThanEqualIconDark,
     greaterThanIcon,
     greaterThanIconDark,
-    hidePropertiesIn,
-    hidePropertyIn,
     ImageProps,
     notEmptyIcon,
     notEmptyIconDark,
     notEqualIcon,
     notEqualIconDark,
-    Properties,
     smallerThanEqualIcon,
     smallerThanEqualIconDark,
     smallerThanIcon,
@@ -27,6 +24,8 @@ import {
     StructurePreviewProps,
     TextProps
 } from "@mendix/piw-utils-internal";
+import { hidePropertiesIn, hidePropertyIn, Properties } from "@mendix/pluggable-widgets-tools";
+
 import { DatagridDateFilterPreviewProps, DefaultFilterEnum } from "../typings/DatagridDateFilterProps";
 
 export function getProperties(

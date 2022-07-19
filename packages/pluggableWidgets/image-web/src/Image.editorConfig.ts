@@ -1,14 +1,13 @@
+import { DropZoneProps, RowLayoutProps, StructurePreviewProps } from "@mendix/piw-utils-internal";
 import {
-    DropZoneProps,
     hidePropertiesIn,
     hidePropertyIn,
     moveProperty,
     Problem,
     Properties,
-    RowLayoutProps,
-    StructurePreviewProps,
     transformGroupsIntoTabs
-} from "@mendix/piw-utils-internal";
+} from "@mendix/pluggable-widgets-tools";
+
 import { DatasourceEnum, ImagePreviewProps } from "../typings/ImageProps";
 import StructurePreviewImageSvg from "./assets/placeholder.svg";
 import StructurePreviewImageSvgDark from "./assets/placeholder-dark.svg";

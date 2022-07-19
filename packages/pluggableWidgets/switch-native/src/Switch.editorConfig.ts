@@ -1,4 +1,6 @@
-import { hidePropertiesIn, Properties, StructurePreviewProps } from "@mendix/piw-utils-internal";
+import { StructurePreviewProps } from "@mendix/piw-utils-internal";
+import { hidePropertiesIn, Properties } from "@mendix/pluggable-widgets-tools";
+
 import { SwitchPreviewProps } from "../typings/SwitchProps";
 import StructurePreviewSwitchSVG from "./assets/checked.svg";
 import StructurePreviewSwitchDarkSVG from "./assets/checked-dark.svg";

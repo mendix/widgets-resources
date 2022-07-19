@@ -87,10 +87,10 @@ export interface TimeSeriesContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     lines: LinesType[];
-    xAxisLabel?: DynamicValue<string>;
-    yAxisLabel?: DynamicValue<string>;
     enableAdvancedOptions: boolean;
     enableDeveloperMode: boolean;
+    xAxisLabel?: DynamicValue<string>;
+    yAxisLabel?: DynamicValue<string>;
     showLegend: boolean;
     showRangeSlider: boolean;
     gridLines: GridLinesEnum;
@@ -110,10 +110,10 @@ export interface TimeSeriesPreviewProps {
     styleObject?: CSSProperties;
     readOnly: boolean;
     lines: LinesPreviewType[];
-    xAxisLabel: string;
-    yAxisLabel: string;
     enableAdvancedOptions: boolean;
     enableDeveloperMode: boolean;
+    xAxisLabel: string;
+    yAxisLabel: string;
     showLegend: boolean;
     showRangeSlider: boolean;
     gridLines: GridLinesEnum;

@@ -1,4 +1,4 @@
-import { Properties } from "../../typings/PageEditor";
+import { Properties } from "../typings";
 import { moveProperty } from "../PageEditorUtils";
 
 describe("The PageEditorUtils", () => {
