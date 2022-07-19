@@ -250,7 +250,7 @@ jobs:
           path: |
             /Users/runner/.android/avd/*
             /Users/runner/.android/adb*
-          key: pixel_30_x86_aosp-atd
+          key: pixel_30_x86_aosp-atd_6core
       - name: "Create AVD and generate snapshot for caching"
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@e790971012b979513b4e2fe70d4079bc0ca8a1ae #v2.24.0
@@ -306,7 +306,7 @@ jobs:
           path: |
             /Users/runner/.android/avd/*
             /Users/runner/.android/adb*
-          key: pixel_30_x86_aosp-atd
+          key: pixel_30_x86_aosp-atd_6core
       - name: "Run tests"
         run: npm run test:e2e:local:android -- ${{ needs.scope.outputs.since }}
       - name: "Archive runtime logs"
