@@ -259,7 +259,7 @@ jobs:
           target: aosp_atd
           arch: x86
           profile: pixel
-          cores: 3
+          cores: 6
           ram-size: 4096M
           heap-size: 512M
           avd-name: NATIVE_pixel_30
