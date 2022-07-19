@@ -260,6 +260,8 @@ jobs:
           arch: x86
           profile: pixel
           cores: 3
+          ram-size: 4096M
+          heap-size: 512M
           avd-name: NATIVE_pixel_31
           force-avd-creation: false
           emulator-options: -skin 1080x1920 -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
@@ -313,6 +315,8 @@ jobs:
           arch: x86
           profile: pixel
           cores: 3
+          ram-size: 4096M
+          heap-size: 512M
           avd-name: NATIVE_pixel_31
           force-avd-creation: false
           emulator-options: -skin 1080x1920 -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
