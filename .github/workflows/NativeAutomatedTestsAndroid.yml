@@ -338,8 +338,8 @@ jobs:
         with:
           name: android-screenshot-results
           path: |
-            ${{ github.workspace }}/packages/**/e2e/diffs/**/*.png
-            ${{ github.workspace }}/packages/**/e2e/actual/**/*.png
+            ${{ github.workspace }}/packages/**/e2e/images/diffs/**/*.png
+            ${{ github.workspace }}/packages/**/e2e/images/actual/**/*.png
           if-no-files-found: ignore
       - name: "Archive artifacts"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
@@ -399,8 +399,8 @@ jobs:
         with:
           name: ios-screenshot-results
           path: |
-            ${{ github.workspace }}/packages/**/e2e/diffs/**/*.png
-            ${{ github.workspace }}/packages/**/e2e/actual/**/*.png
+            ${{ github.workspace }}/packages/**/e2e/images/diffs/**/*.png
+            ${{ github.workspace }}/packages/**/e2e/images/actual/**/*.png
           if-no-files-found: ignore
       - name: "Archive artifacts"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
