@@ -323,12 +323,6 @@ jobs:
           disable-animations: true
           script: |
             adb shell setprop debug.hwui.renderer skiagl
-            adb shell "rm -fr /data/local/tmp/detox"
-            adb shell "mkdir -p /data/local/tmp/detox"
-            adb push "/Users/runner/work/widgets-resources/widgets-resources/detox/apps/app-appstore-release.apk" "/data/local/tmp/detox/Application.apk"
-            adb push "/Users/runner/work/widgets-resources/widgets-resources/detox/apps/app-appstore-release-androidTest.apk" "/data/local/tmp/detox/Test.apk"
-            adb shell pm install -r -g -t /data/local/tmp/detox/Application.apk 2>/dev/null
-            adb shell pm install -r -g -t /data/local/tmp/detox/Test.apk 2>/dev/null
             adb reverse tcp:8080 tcp:8080
             npm run test:e2e:local:android -- ${{ needs.scope.outputs.since }}
       - name: "Archive runtime logs"
