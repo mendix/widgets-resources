@@ -257,7 +257,7 @@ jobs:
         with:
           api-level: 31
           target: default
-          arch: x86_64
+          arch: x86
           profile: pixel
           cores: 3
           avd-name: NATIVE_pixel_31
@@ -310,7 +310,7 @@ jobs:
         with:
           api-level: 31
           target: default
-          arch: x86_64
+          arch: x86
           profile: pixel
           cores: 3
           avd-name: NATIVE_pixel_31
@@ -318,6 +318,7 @@ jobs:
           emulator-options: -skin 1080x1920 -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
+            adb shell setprop debug.hwui.renderer skiagl
             adb shell "rm -fr /data/local/tmp/detox"
             adb shell "mkdir -p /data/local/tmp/detox"
             adb push "/Users/runner/work/widgets-resources/widgets-resources/detox/apps/app-appstore-release.apk" "/data/local/tmp/detox/Application.apk"
