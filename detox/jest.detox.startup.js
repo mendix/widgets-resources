@@ -4,7 +4,7 @@ const specReporter = require("detox/runners/jest/specReporter");
 const config = require("./detox.config");
 const { toMatchImageSnapshot } = require("jest-image-snapshot");
 const { join, resolve } = require("path");
-const { execSync } = require("child_process");
+const { execSync, exec } = require("child_process");
 
 jest.setTimeout(300000);
 jasmine.getEnv().addReporter(adapter);
@@ -43,6 +43,12 @@ expect.extend({
 
 beforeAll(async () => {
     await init(config, { initGlobals: false, launchApp: false });
+
+    if (device.getPlatform() === "android") {
+        const id = device.id;
+        execSync(`adb -s ${id} shell setprop debug.hwui.renderer skiag`);
+        execSync(`adb -s ${id} reverse tcp:8080 tcp:8080`);
+    }
 
     await device.launchApp({
         newInstance: false,

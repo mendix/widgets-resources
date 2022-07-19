@@ -250,7 +250,7 @@ jobs:
           path: |
             /Users/runner/.android/avd/*
             /Users/runner/.android/adb*
-          key: pixel_30_x86_aosp-atd
+          key: NATIVE_pixel_30
       - name: "Create AVD and generate snapshot for caching"
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@e790971012b979513b4e2fe70d4079bc0ca8a1ae #v2.24.0
@@ -306,25 +306,9 @@ jobs:
           path: |
             /Users/runner/.android/avd/*
             /Users/runner/.android/adb*
-          key: pixel_30_x86_aosp-atd
+          key: NATIVE_pixel_30
       - name: "Run tests"
-        uses: reactivecircus/android-emulator-runner@e790971012b979513b4e2fe70d4079bc0ca8a1ae #v2.24.0
-        with:
-          api-level: 30
-          target: aosp_atd
-          arch: x86
-          profile: pixel
-          cores: 3
-          ram-size: 4096M
-          heap-size: 512M
-          avd-name: NATIVE_pixel_30
-          force-avd-creation: false
-          emulator-options: -skin 1080x1920 -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
-          script: |
-            adb shell setprop debug.hwui.renderer skiagl
-            adb reverse tcp:8080 tcp:8080
-            npm run test:e2e:local:android -- ${{ needs.scope.outputs.since }}
+        run: npm run test:e2e:local:android -- ${{ needs.scope.outputs.since }}
       - name: "Archive runtime logs"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         if: always()
