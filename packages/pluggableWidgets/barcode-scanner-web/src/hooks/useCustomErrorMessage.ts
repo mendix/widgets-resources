@@ -26,6 +26,8 @@ function getErrorMessage<E extends Error>(error: E): string | null {
 
 export const useCustomErrorMessage: UseCustomErrorMessageHook = () => {
     const [message, setMessage] = useState<string | null>(null);
-    const setError = useCallback<ErrorCb>(error => setMessage(getErrorMessage(error)), []);
+    const setError = useCallback<ErrorCb>(error => {
+        setMessage(getErrorMessage(error));
+    }, []);
     return [message, setError];
 };

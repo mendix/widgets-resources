@@ -1,10 +1,10 @@
-import { createElement, ReactElement, ReactNode } from "react";
+import { createElement, ReactElement, ReactNode, useCallback, SyntheticEvent } from "react";
 import classNames from "classnames";
 import { Alert } from "@mendix/piw-utils-internal/components/web";
 import { Dimensions, getDimensions } from "@mendix/piw-utils-internal";
 import { useCustomErrorMessage } from "../hooks/useCustomErrorMessage";
 import { useReader } from "../hooks/useReader";
-import { browserSupportsCameraAccess } from "../hooks/useMediaStream";
+import { useHasUserMedia } from "../hooks/useHasUserMedia";
 
 import "../ui/BarcodeScanner.scss";
 
@@ -59,7 +59,12 @@ export function BarcodeScanner({
 }: BarcodeScannerProps): ReactElement | null {
     const [errorMessage, setError] = useCustomErrorMessage();
     const videoRef = useReader({ onSuccess: onDetect, onError: setError });
-    const supportsCameraAccess = browserSupportsCameraAccess();
+    const supportsCameraAccess = useHasUserMedia();
+    const onCanPlay = useCallback((event: SyntheticEvent<HTMLVideoElement>) => {
+        if (event.currentTarget.paused) {
+            event.currentTarget.play();
+        }
+    }, []);
 
     if (!supportsCameraAccess) {
         // Mendix ensures that Mendix apps are only run in the supported browsers and all of them
@@ -81,15 +86,7 @@ export function BarcodeScanner({
 
     return (
         <BarcodeScannerOverlay class={className} showMask={showMask} {...dimensions}>
-            <video
-                className={classNames("video")}
-                ref={videoRef}
-                onCanPlay={event => {
-                    if (event.currentTarget.paused) {
-                        event.currentTarget.play();
-                    }
-                }}
-            />
+            <video className={classNames("video")} ref={videoRef} onCanPlay={onCanPlay} />
         </BarcodeScannerOverlay>
     );
 }

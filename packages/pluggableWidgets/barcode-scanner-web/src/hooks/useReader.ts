@@ -31,6 +31,7 @@ export const useReader: UseReaderHook = args => {
     const onError = useEventCallback(args.onError);
 
     function setup(): (() => void) | void {
+        console.log("setup");
         if (!videoRef.current) {
             return;
         }
@@ -46,18 +47,24 @@ export const useReader: UseReaderHook = args => {
             }
         };
 
-        const decode = async (): Promise<void> => {
-            reader = new BrowserMultiFormatReader(hints, 2000);
-            try {
-                const result = await reader.decodeOnceFromConstraints(mediaStreamConstraints, elt);
-                onSuccess(result.getText());
-            } catch (e) {
-                if (!isCanceled && onError) {
-                    onError(e);
+        const decode = (): void => {
+            console.log("decode");
+            const fn = async (): Promise<void> => {
+                console.log("decode.fn");
+                reader = new BrowserMultiFormatReader(hints, 2000);
+                try {
+                    const result = await reader.decodeOnceFromConstraints(mediaStreamConstraints, elt);
+                    onSuccess(result.getText());
+                } catch (e) {
+                    console.log(e.message);
+                    if (!isCanceled && onError) {
+                        onError(e);
+                    }
+                } finally {
+                    cleanup();
                 }
-            } finally {
-                cleanup();
-            }
+            };
+            fn();
         };
 
         decode();
