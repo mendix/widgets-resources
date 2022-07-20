@@ -31,7 +31,6 @@ export const useReader: UseReaderHook = args => {
     const onError = useEventCallback(args.onError);
 
     function setup(): (() => void) | void {
-        console.log("setup");
         if (!videoRef.current) {
             return;
         }
@@ -48,9 +47,7 @@ export const useReader: UseReaderHook = args => {
         };
 
         const decode = (): void => {
-            console.log("decode");
             const fn = async (): Promise<void> => {
-                console.log("decode.fn");
                 reader = new BrowserMultiFormatReader(hints, 2000);
                 try {
                     const result = await reader.decodeOnceFromConstraints(mediaStreamConstraints, elt);
