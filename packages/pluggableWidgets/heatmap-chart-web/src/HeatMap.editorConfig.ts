@@ -1,11 +1,11 @@
 import {
     hidePropertiesIn,
-    hidePropertyIn,
     Properties,
     StructurePreviewProps,
     transformGroupsIntoTabs,
     ImageProps,
-    ContainerProps
+    ContainerProps,
+    moveProperty
 } from "@mendix/piw-utils-internal";
 import { HeatMapPreviewProps } from "../typings/HeatMapProps";
 
@@ -14,30 +14,53 @@ import HeatMapLight from "./assets/HeatMap.light.svg";
 import HeatMapLegendDark from "./assets/HeatMap-legend.dark.svg";
 import HeatMapLegendLight from "./assets/HeatMap-legend.light.svg";
 
+function removeEmptyGroups(props: Properties): Properties {
+    return props.filter(p => (p.properties?.length ?? 0) > 0 || (p.propertyGroups?.length ?? 0) > 0);
+}
+function moveVisibility(props: Properties): Properties {
+    moveProperty(7, 4, props);
+    return props;
+}
+
+function hideScaleControls(props: Properties, values: HeatMapPreviewProps): void {
+    const { showScale, showValues, enableAdvancedOptions } = values;
+    const controls: Array<[keyof HeatMapPreviewProps, boolean]> = [
+        ["scaleColors", showScale],
+        ["smoothColor", showScale && enableAdvancedOptions],
+        ["showValues", showScale && enableAdvancedOptions],
+        ["valuesColor", showScale && enableAdvancedOptions && showValues]
+    ];
+
+    const propsToHide = controls.map(([key, visible]) => (!visible ? [key] : [])).flat();
+
+    hidePropertiesIn(props, values, propsToHide);
+}
+
 export function getProperties(
     values: HeatMapPreviewProps,
     defaultProperties: Properties,
     platform: "web" | "desktop"
 ): Properties {
-    const showAdvancedOptions = values.developerMode !== "basic";
-
-    if (!values.showValues) {
-        hidePropertyIn(defaultProperties, values, "valuesColor");
-    }
-
     if (platform === "web") {
-        hidePropertyIn(defaultProperties, values, "developerMode");
-
-        transformGroupsIntoTabs(defaultProperties);
-    } else {
-        if (!showAdvancedOptions) {
+        if (!values.enableAdvancedOptions) {
             hidePropertiesIn(defaultProperties, values, [
                 "customLayout",
                 "customConfigurations",
                 "customSeriesOptions",
-                "enableThemeConfig"
+                "enableThemeConfig",
+                "enableDeveloperMode"
             ]);
         }
+
+        hideScaleControls(defaultProperties, values);
+        transformGroupsIntoTabs(defaultProperties);
+        const clean = removeEmptyGroups(defaultProperties);
+        moveVisibility(clean);
+        return clean;
+    } else {
+        hidePropertiesIn(defaultProperties, values, ["enableAdvancedOptions"]);
+        // Remove Visibiltiy tab
+        defaultProperties.splice(-2, 1);
     }
     return defaultProperties;
 }
@@ -74,6 +97,6 @@ export function getPreview(values: HeatMapPreviewProps, isDarkMode: boolean): St
     return {
         type: "RowLayout",
         columnSize: "fixed",
-        children: values.showLegend ? [chartImage, legendImage, filler] : [chartImage, filler]
+        children: values.showScale ? [chartImage, legendImage, filler] : [chartImage, filler]
     };
 }

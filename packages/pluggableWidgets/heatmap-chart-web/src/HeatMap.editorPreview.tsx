@@ -10,7 +10,7 @@ export function preview(props: HeatMapPreviewProps): ReactNode {
             className={className}
             style={{
                 display: "flex",
-                width: props.showLegend ? "385px" : "300px",
+                width: props.showScale ? "385px" : "300px",
                 height: "232px"
             }}
         >
@@ -19,7 +19,7 @@ export function preview(props: HeatMapPreviewProps): ReactNode {
                 alt="heatMap-chart-image"
                 style={{ objectFit: "contain", width: "300px", height: "100%" }}
             />
-            {props.showLegend ? (
+            {props.showScale ? (
                 <img src={HeatMapChartLegend} alt="heatMap-chart-legend" style={{ width: "85px" }} />
             ) : null}
         </div>

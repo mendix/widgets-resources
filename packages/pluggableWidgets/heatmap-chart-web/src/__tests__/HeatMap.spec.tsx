@@ -17,8 +17,9 @@ describe("The HeatMap widget", () => {
             <HeatMap
                 name="line-chart-test"
                 class="line-chart-class"
-                showLegend={false}
-                developerMode="basic"
+                enableDeveloperMode={false}
+                enableAdvancedOptions={false}
+                gridLines={"none"}
                 widthUnit="percentage"
                 width={0}
                 heightUnit="pixels"
