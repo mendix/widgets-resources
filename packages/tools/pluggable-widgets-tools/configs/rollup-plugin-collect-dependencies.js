@@ -10,6 +10,7 @@ import resolve from "resolve";
 import _ from "lodash";
 import moment from "moment";
 import mkdirp from "mkdirp";
+import { LICENSE_GLOB } from "./common/glob";
 
 const dependencies = [];
 export function collectDependencies({
@@ -171,7 +172,7 @@ async function copyJsModule(moduleSourcePath, to) {
     return promisify(copy)(moduleSourcePath, to, {
         filter: [
             "**/*.*",
-            "{license,LICENSE}",
+            LICENSE_GLOB,
             "!**/{android,ios,windows,mac,jest,github,gradle,__*__,docs,jest,example*}/**/*",
             "!**/*.{config,setup}.*",
             "!**/*.{podspec,flow}"
@@ -211,7 +212,7 @@ async function scanDependency(dir) {
     if (!name && !hasLicense) {
         return null;
     }
-    const absolutePath = join(dir, "licen[cs]e");
+    const absolutePath = join(dir, LICENSE_GLOB);
     const licenseFile = (await fg([absolutePath], { cwd: dir, caseSensitiveMatch: false }))[0];
     if (licenseFile) {
         packageJson.licenseText = readFileSync(licenseFile, "utf-8");
@@ -301,7 +302,8 @@ class Dependency {
         }
 
         if (this.repository) {
-            lines.push(`Repository: ${this.repository.url}`);
+            const url = typeof this.repository === "string" ? this.repository : this.repository.url;
+            lines.push(`Repository: ${url}`);
         }
 
         if (this.homepage) {
