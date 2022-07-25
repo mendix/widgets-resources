@@ -46,7 +46,7 @@ export const useReader: UseReaderHook = args => {
             }
         };
 
-        const decode = (): void => {
+        const decodeFromReader = (): void => {
             const fn = async (): Promise<void> => {
                 reader = new BrowserMultiFormatReader(hints, 2000);
                 try {
@@ -64,7 +64,7 @@ export const useReader: UseReaderHook = args => {
             fn();
         };
 
-        decode();
+        decodeFromReader();
 
         return cleanup;
     }

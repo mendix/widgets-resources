@@ -4,7 +4,6 @@ import { Alert } from "@mendix/piw-utils-internal/components/web";
 import { Dimensions, getDimensions } from "@mendix/piw-utils-internal";
 import { useCustomErrorMessage } from "../hooks/useCustomErrorMessage";
 import { useReader } from "../hooks/useReader";
-import { useHasUserMedia } from "../hooks/useHasUserMedia";
 
 import "../ui/BarcodeScanner.scss";
 
@@ -59,7 +58,7 @@ export function BarcodeScanner({
 }: BarcodeScannerProps): ReactElement | null {
     const [errorMessage, setError] = useCustomErrorMessage();
     const videoRef = useReader({ onSuccess: onDetect, onError: setError });
-    const supportsCameraAccess = useHasUserMedia();
+    const supportsCameraAccess = typeof navigator?.mediaDevices?.getUserMedia === "function";
     const onCanPlay = useCallback((event: SyntheticEvent<HTMLVideoElement>) => {
         if (event.currentTarget.paused) {
             event.currentTarget.play();
@@ -86,7 +85,7 @@ export function BarcodeScanner({
 
     return (
         <BarcodeScannerOverlay class={className} showMask={showMask} {...dimensions}>
-            <video className={classNames("video")} ref={videoRef} onCanPlay={onCanPlay} />
+            <video className="video" ref={videoRef} onCanPlay={onCanPlay} />
         </BarcodeScannerOverlay>
     );
 }

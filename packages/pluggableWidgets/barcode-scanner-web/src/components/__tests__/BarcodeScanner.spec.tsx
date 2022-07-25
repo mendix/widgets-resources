@@ -11,12 +11,6 @@ jest.mock("../../hooks/useReader", () => ({
     useReader: (...args: any[]) => useReaderMock(...args)
 }));
 
-let useHasUserMediaMock = jest.fn();
-jest.mock("../../hooks/useHasUserMedia", () => ({
-    // we can't use mock directly because of variable hosting.
-    useHasUserMedia: (...args: any[]) => useHasUserMediaMock(...args)
-}));
-
 describe("Barcode scanner", () => {
     const backupMediaDevices = window.navigator.mediaDevices;
     const dimensions: Dimensions = {
@@ -26,6 +20,13 @@ describe("Barcode scanner", () => {
         height: 100
     };
 
+    function mockGetUserMedia(getUserMediaMock: jest.Mock): void {
+        Object.defineProperty(window.navigator, "mediaDevices", {
+            value: { getUserMedia: getUserMediaMock },
+            writable: true
+        });
+    }
+
     afterEach(() => {
         // reset the mocking
         Object.defineProperty(window.navigator, "mediaDevices", {
@@ -33,16 +34,15 @@ describe("Barcode scanner", () => {
             writable: true
         });
         useReaderMock = jest.fn();
-        useHasUserMediaMock = jest.fn();
     });
 
     it("renders video and overlay correctly", () => {
-        useHasUserMediaMock.mockImplementation(() => true);
+        mockGetUserMedia(jest.fn());
         expect(render(<BarcodeScanner class="" showMask {...dimensions} />).container).toMatchSnapshot();
     });
 
     it("does not show the overlay when the user opts out of it", () => {
-        useHasUserMediaMock.mockImplementation(() => true);
+        mockGetUserMedia(jest.fn());
         expect(render(<BarcodeScanner class="" showMask={false} {...dimensions} />).container).toMatchSnapshot();
     });
 
@@ -56,7 +56,7 @@ describe("Barcode scanner", () => {
         useReaderMock.mockImplementationOnce((args: any) => {
             setTimeout(() => args.onSuccess("42"), 100);
         });
-        useHasUserMediaMock.mockImplementation(() => true);
+        mockGetUserMedia(jest.fn());
 
         render(<BarcodeScanner class="" onDetect={onDetectMock} showMask {...dimensions} />);
 
@@ -68,7 +68,7 @@ describe("Barcode scanner", () => {
             useReaderMock.mockImplementationOnce((args: any) => {
                 setTimeout(() => args.onError(new Error("this is unexpected error")), 100);
             });
-            useHasUserMediaMock.mockImplementation(() => true);
+            mockGetUserMedia(jest.fn());
 
             const { container } = render(<BarcodeScanner class="" showMask {...dimensions} />);
 
@@ -88,7 +88,7 @@ describe("Barcode scanner", () => {
                 }, 100);
             });
 
-            useHasUserMediaMock.mockImplementation(() => true);
+            mockGetUserMedia(jest.fn());
 
             const { container } = render(<BarcodeScanner class="" showMask {...dimensions} />);
 
@@ -106,7 +106,7 @@ describe("Barcode scanner", () => {
                 }, 100);
             });
 
-            useHasUserMediaMock.mockImplementation(() => true);
+            mockGetUserMedia(jest.fn());
 
             const { container } = render(<BarcodeScanner class="" showMask {...dimensions} />);
 
@@ -120,7 +120,7 @@ describe("Barcode scanner", () => {
                 }, 100);
             });
 
-            useHasUserMediaMock.mockImplementation(() => true);
+            mockGetUserMedia(jest.fn());
 
             const { container } = render(<BarcodeScanner class="" showMask {...dimensions} />);
 
