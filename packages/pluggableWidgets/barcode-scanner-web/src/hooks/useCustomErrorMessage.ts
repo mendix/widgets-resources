@@ -1,4 +1,4 @@
-import { Exception } from "@zxing/library";
+import { Exception } from "@zxing/library/cjs";
 import { useState, useCallback } from "react";
 
 type ErrorCb<E extends Error = Error> = (error: E) => void;

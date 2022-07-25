@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import { render, waitFor } from "@testing-library/react";
 import { createElement } from "react";
 import { Dimensions } from "@mendix/piw-utils-internal";
-import { NotFoundException } from "@zxing/library";
+import { NotFoundException } from "@zxing/library/cjs";
 import { BarcodeScanner } from "../BarcodeScanner";
 
 let useReaderMock = jest.fn();
