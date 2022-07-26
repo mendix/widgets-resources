@@ -1,4 +1,6 @@
 describe("datagrid-text-filter-web", () => {
+    const browserName = Cypress.browser.name;
+
     beforeEach(() => {
         cy.visit("/"); // resets page
     });

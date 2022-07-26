@@ -1,4 +1,6 @@
 describe("datagrid-dropdown-filter-web", () => {
+    const browserName = Cypress.browser.name;
+
     beforeEach(() => {
         cy.visit("/");
     });
