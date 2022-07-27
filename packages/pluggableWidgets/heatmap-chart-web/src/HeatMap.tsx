@@ -102,11 +102,11 @@ export function HeatMap(props: HeatMapContainerProps): ReactElement | null {
             widthUnit={props.widthUnit}
             height={props.height}
             heightUnit={props.heightUnit}
-            showLegend={props.showLegend}
+            showLegend={props.showScale}
             xAxisLabel={props.xAxisLabel?.value}
             yAxisLabel={props.yAxisLabel?.value}
-            gridLinesMode="none"
-            showSidebarEditor={props.developerMode === "developer"}
+            gridLinesMode={props.gridLines}
+            showSidebarEditor={props.enableDeveloperMode}
             customLayout={props.customLayout}
             customConfig={props.customConfigurations}
             layoutOptions={heatmapChartLayout}

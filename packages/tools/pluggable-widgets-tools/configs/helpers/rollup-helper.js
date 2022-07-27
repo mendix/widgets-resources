@@ -5,9 +5,10 @@ import { join } from "path";
 import fg from "fast-glob";
 import { cp } from "shelljs";
 import { zip } from "zip-a-folder";
+import { LICENSE_GLOB } from "../common/glob";
 
 export async function copyLicenseFile(sourcePath, outDir) {
-    const absolutePath = join(sourcePath, "licen[cs]e");
+    const absolutePath = join(sourcePath, LICENSE_GLOB);
     const licenseFile = (await fg([absolutePath], { cwd: sourcePath, caseSensitiveMatch: false }))[0];
     if (existsSync(licenseFile)) {
         cp(licenseFile, outDir);
