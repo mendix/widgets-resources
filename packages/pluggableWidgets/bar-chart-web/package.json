@@ -21,7 +21,7 @@
     "githubUrl": "https://github.com/mendix/testProjects",
     "branchName": "bar-chart-web"
   },
-  "packagePath": "com.mendix.widget.custom",
+  "packagePath": "com.mendix.widget.web",
   "scripts": {
     "start": "pluggable-widgets-tools start:server",
     "dev": "pluggable-widgets-tools start:web",

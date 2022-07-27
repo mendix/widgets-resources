@@ -5,7 +5,7 @@
             <widgetFile path="LineChart.xml" />
         </widgetFiles>
         <files>
-            <file path="com/mendix/widget/custom/linechart/" />
+            <file path="com/mendix/widget/web/linechart/" />
         </files>
     </clientModule>
 </package>
