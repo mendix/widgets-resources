@@ -116,4 +116,12 @@ describe("datagrid-web", () => {
             cy.get(".mx-name-datagrid7").scrollIntoView().compareSnapshot(`dataGridColumnContent-${browserName}`, 0.2);
         });
     });
+
+    describe("visual testing:", () => {
+        it("compares with a screenshot baseline and checks if all datagrid and filter elements are rendered as expected", () => {
+            cy.wait(3000);
+            cy.get(".mx-name-datagrid1").should("be.visible");
+            cy.get(".mx-name-datagrid1").compareSnapshot(`datagrid-${browserName}`, 0.1);
+        });
+    });
 });
