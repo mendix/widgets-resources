@@ -1,86 +1,81 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Barcode scanner does not show the overlay when the user opts out of it 1`] = `
-<BarcodeScannerOverlay
-  class=""
-  height={100}
-  heightUnit="percentageOfParent"
-  showMask={false}
-  width={100}
-  widthUnit="percentage"
->
-  <video
-    className="video"
-    onCanPlay={[Function]}
-  />
-</BarcodeScannerOverlay>
-`;
-
-exports[`Barcode scanner shows a loading screen while waiting for the user to give persmission to access the media device 1`] = `
-<BarcodeScannerOverlay
-  class=""
-  height={100}
-  heightUnit="percentageOfParent"
-  showMask={true}
-  width={100}
-  widthUnit="percentage"
->
-  <video
-    className="video"
-    onCanPlay={[Function]}
-  />
-</BarcodeScannerOverlay>
-`;
-
-exports[`Barcode scanner the overlay structure should be correct 1`] = `
-<div
-  className="mx-barcode-scanner"
-  style={
-    Object {
-      "height": "100%",
-      "width": "100%",
-    }
-  }
->
+<div>
   <div
-    className="mx-barcode-scanner-content"
+    class="mx-barcode-scanner"
+    style="width: 100%; height: 100%;"
   >
     <div
-      className="video-canvas"
+      class="mx-barcode-scanner-content"
     >
-      <div
-        className="canvas-left canvas-background"
+      <video
+        class="video"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Barcode scanner renders video and overlay correctly 1`] = `
+<div>
+  <div
+    class="mx-barcode-scanner"
+    style="width: 100%; height: 100%;"
+  >
+    <div
+      class="mx-barcode-scanner-content"
+    >
+      <video
+        class="video"
       />
       <div
-        className="canvas-middle"
+        class="video-canvas"
       >
         <div
-          className="canvas-middle-top canvas-background"
+          class="canvas-left canvas-background"
         />
         <div
-          className="canvas-middle-middle"
+          class="canvas-middle"
         >
           <div
-            className="corner corner-top-left"
+            class="canvas-middle-top canvas-background"
           />
           <div
-            className="corner corner-top-right"
-          />
+            class="canvas-middle-middle"
+          >
+            <div
+              class="corner corner-top-left"
+            />
+            <div
+              class="corner corner-top-right"
+            />
+            <div
+              class="corner corner-bottom-right"
+            />
+            <div
+              class="corner corner-bottom-left"
+            />
+          </div>
           <div
-            className="corner corner-bottom-right"
-          />
-          <div
-            className="corner corner-bottom-left"
+            class="canvas-middle-bottom canvas-background"
           />
         </div>
         <div
-          className="canvas-middle-bottom canvas-background"
+          class="canvas-right canvas-background"
         />
       </div>
-      <div
-        className="canvas-right canvas-background"
-      />
     </div>
+  </div>
+</div>
+`;
+
+exports[`Barcode scanner shows an appropriate error when the mediaDevices API is not present (like over http) 1`] = `
+<div>
+  <div
+    class="alert alert-danger"
+  >
+    The barcode scanner widget is only compatible with certain browsers and requires a secure HTTPS connection in certain browsers. If you encounter this error message as an user, please contact your system administrator. If you are a Mendix developer, please refer to the appropriate docs on how to resolve this issue.
   </div>
 </div>
 `;
