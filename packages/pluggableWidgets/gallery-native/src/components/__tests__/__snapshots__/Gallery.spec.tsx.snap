@@ -82,8 +82,8 @@ exports[`Gallery rendering rendering with paging button it shouldn't render the 
                 Array [
                   undefined,
                   undefined,
-                  undefined,
-                  undefined,
+                  false,
+                  false,
                 ]
               }
             >
@@ -114,9 +114,9 @@ exports[`Gallery rendering rendering with paging button it shouldn't render the 
               style={
                 Array [
                   undefined,
-                  undefined,
-                  undefined,
-                  undefined,
+                  false,
+                  false,
+                  false,
                 ]
               }
             >
@@ -160,9 +160,9 @@ exports[`Gallery rendering rendering with paging button it shouldn't render the 
               style={
                 Array [
                   undefined,
+                  false,
                   undefined,
-                  undefined,
-                  undefined,
+                  false,
                 ]
               }
             >
@@ -258,8 +258,8 @@ exports[`Gallery rendering rendering with paging button renders correctly 1`] = 
                 Array [
                   undefined,
                   undefined,
-                  undefined,
-                  undefined,
+                  false,
+                  false,
                 ]
               }
             >
@@ -290,9 +290,9 @@ exports[`Gallery rendering rendering with paging button renders correctly 1`] = 
               style={
                 Array [
                   undefined,
-                  undefined,
-                  undefined,
-                  undefined,
+                  false,
+                  false,
+                  false,
                 ]
               }
             >
@@ -336,9 +336,9 @@ exports[`Gallery rendering rendering with paging button renders correctly 1`] = 
               style={
                 Array [
                   undefined,
+                  false,
                   undefined,
-                  undefined,
-                  undefined,
+                  false,
                 ]
               }
             >
@@ -453,8 +453,8 @@ exports[`Gallery rendering rendering with paging button renders correctly with c
                 Array [
                   undefined,
                   undefined,
-                  undefined,
-                  undefined,
+                  false,
+                  false,
                 ]
               }
             >
@@ -485,9 +485,9 @@ exports[`Gallery rendering rendering with paging button renders correctly with c
               style={
                 Array [
                   undefined,
-                  undefined,
-                  undefined,
-                  undefined,
+                  false,
+                  false,
+                  false,
                 ]
               }
             >
@@ -531,9 +531,9 @@ exports[`Gallery rendering rendering with paging button renders correctly with c
               style={
                 Array [
                   undefined,
+                  false,
                   undefined,
-                  undefined,
-                  undefined,
+                  false,
                 ]
               }
             >
@@ -629,8 +629,8 @@ exports[`Gallery rendering renders correctly 1`] = `
                 Array [
                   undefined,
                   undefined,
-                  undefined,
-                  undefined,
+                  false,
+                  false,
                 ]
               }
             >
@@ -661,9 +661,9 @@ exports[`Gallery rendering renders correctly 1`] = `
               style={
                 Array [
                   undefined,
-                  undefined,
-                  undefined,
-                  undefined,
+                  false,
+                  false,
+                  false,
                 ]
               }
             >
@@ -707,9 +707,9 @@ exports[`Gallery rendering renders correctly 1`] = `
               style={
                 Array [
                   undefined,
+                  false,
                   undefined,
-                  undefined,
-                  undefined,
+                  false,
                 ]
               }
             >
@@ -804,7 +804,7 @@ exports[`Gallery rendering renders correctly with dynamic item class 1`] = `
                 Array [
                   undefined,
                   undefined,
-                  undefined,
+                  false,
                   Object {
                     "backgroundColor": "blue",
                   },
@@ -838,8 +838,8 @@ exports[`Gallery rendering renders correctly with dynamic item class 1`] = `
               style={
                 Array [
                   undefined,
-                  undefined,
-                  undefined,
+                  false,
+                  false,
                   Object {
                     "backgroundColor": "blue",
                   },
@@ -886,7 +886,7 @@ exports[`Gallery rendering renders correctly with dynamic item class 1`] = `
               style={
                 Array [
                   undefined,
-                  undefined,
+                  false,
                   undefined,
                   Object {
                     "backgroundColor": "blue",
