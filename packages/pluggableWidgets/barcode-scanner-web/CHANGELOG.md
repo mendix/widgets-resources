@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.2.1] - 2022-7-27
+
 ### Fixed
 
 -   We fixed a perfomance issue when scanner being used multiple times (#153365, #154299)
