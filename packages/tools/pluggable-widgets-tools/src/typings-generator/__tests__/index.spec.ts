@@ -1,6 +1,8 @@
 import { parseString } from "xml2js";
 import { listActionInput, listActionInputNative } from "./inputs/list-action";
 import { listActionNativeOutput, listActionWebOutput } from "./outputs/list-action";
+import { listAssociationWebInput, listAssociationNativeInput } from "./inputs/list-association";
+import { listAssociationNativeOutput, listAssociationWebOutput } from "./outputs/list-association";
 import { listImageInput, listImageInputNative } from "./inputs/list-image";
 import { listImageNativeOutput, listImageWebOutput } from "./outputs/list-image";
 import { iconInput, iconInputNative } from "./inputs/icon";
@@ -133,6 +135,16 @@ describe("Generating tests", () => {
     it("Generates a parsed typing from XML for native using association", () => {
         const newContent = generateNativeTypesFor(associationInputNative);
         expect(newContent).toBe(associationNativeOutput);
+    });
+
+    it("Generates a parsed typing from XML for web using linked association", () => {
+        const newContent = generateFullTypesFor(listAssociationWebInput);
+        expect(newContent).toBe(listAssociationWebOutput);
+    });
+
+    it("Generates a parsed typing from XML for native using linked association", () => {
+        const newContent = generateNativeTypesFor(listAssociationNativeInput);
+        expect(newContent).toBe(listAssociationNativeOutput);
     });
 });
 
