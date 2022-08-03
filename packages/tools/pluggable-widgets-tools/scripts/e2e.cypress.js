@@ -107,8 +107,7 @@ async function main() {
     const runtimeContainerId = execSync(
         `docker run -td -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source -p ${freePort}:8080 ` +
             `-e MENDIX_VERSION=${mendixVersion} --entrypoint /bin/bash ` +
-            `--rm ${ghcr}mxruntime:${mendixVersion} /shared/runtime.sh`,
-        { stdio: "inherit" }
+            `--rm ${ghcr}mxruntime:${mendixVersion} /shared/runtime.sh`
     )
         .toString()
         .trim();
