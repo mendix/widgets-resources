@@ -5,7 +5,7 @@
             <widgetFile path="PieChart.xml" />
         </widgetFiles>
         <files>
-            <file path="com/mendix/widget/custom/piechart/" />
+            <file path="com/mendix/widget/web/piechart/" />
         </files>
     </clientModule>
 </package>

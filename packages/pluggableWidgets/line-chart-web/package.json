@@ -21,7 +21,7 @@
     "githubUrl": "https://github.com/mendix/testProjects",
     "branchName": "line-chart-web"
   },
-  "packagePath": "com.mendix.widget.custom",
+  "packagePath": "com.mendix.widget.web",
   "scripts": {
     "start": "pluggable-widgets-tools start:server",
     "dev": "pluggable-widgets-tools start:web",
@@ -29,8 +29,8 @@
     "format": "pluggable-widgets-tools format",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
-    "pretest:e2e": "NODE_OPTIONS=--max_old_space_size=4096 npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
-    "test:e2e": "pluggable-widgets-tools test:e2e:web:cypress",
+    "pretest:e2e-skip-pre": "NODE_OPTIONS=--max_old_space_size=4096 npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
+    "test:e2e-skip": "pluggable-widgets-tools test:e2e:web:cypress",
     "test:e2e:local": "npx cypress open --browser chrome --config-file ../../../configs/e2e/cypress/cypress.json",
     "release": "pluggable-widgets-tools release:web",
     "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
