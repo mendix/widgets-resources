@@ -119,7 +119,6 @@ function sharedChardConfig(args, chartName) {
     }
 
     result.forEach(config => {
-        console.log(config);
         const onwarn = config.onwarn;
         if (onwarn) {
             config.onwarn = warning => {
