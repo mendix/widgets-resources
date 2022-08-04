@@ -9,12 +9,14 @@ import {
     unBlockAbsoluteElementBottom,
     unBlockAbsoluteElementLeft,
     unBlockAbsoluteElementRight,
-    unBlockAbsoluteElementTop
+    unBlockAbsoluteElementTop,
+    handleOnClickOutsideElement
 } from "@mendix/piw-utils-internal";
 import { PositionEnum, TriggerEnum } from "../../typings/LanguageSelectorProps";
 import { LanguageItem } from "../LanguageSelector";
 
 interface PopupMenuProps {
+    preview: boolean;
     currentLanguage: LanguageItem | null;
     languageList: LanguageItem[];
     position: PositionEnum;
@@ -22,9 +24,13 @@ interface PopupMenuProps {
     trigger: TriggerEnum;
 }
 export const PopupMenu = (props: PopupMenuProps): ReactElement => {
+    const preview = !!props.preview;
     const { languageList, trigger } = props;
     const [visibility, setVisibility] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
+    if (!preview) {
+        handleOnClickOutsideElement(ref, () => setVisibility(false));
+    }
     const menuOptions = (): ReactElement[] => {
         return languageList.map(item => {
             return (

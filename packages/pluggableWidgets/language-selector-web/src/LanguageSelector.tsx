@@ -32,15 +32,13 @@ export default function LanguageSelector(props: LanguageSelectorContainerProps):
                                     lang._guid ===
                                     window.mx.session.getUserObject()?.jsonData.attributes["System.User_Language"].value
                             ) || null;
-                        console.log(currentLanguage);
                         setLanguage(currentLanguage);
                     }
-                },
-                error: e => console.log("errr", e)
+                }
             });
         };
         getLanguages();
-    }, [window.mx]);
+    }, []);
 
     const selectLanguage = useCallback((item: LanguageItem) => {
         setLanguage(item);
@@ -48,23 +46,22 @@ export default function LanguageSelector(props: LanguageSelectorContainerProps):
         window.mx.data.commit({
             mxobj: window.mx.session.getUserObject(),
             callback() {
-                // window.mx.session.sessionStore.remove().then(() => window.mx.reloadWithState());
-                window.mx.session.clearCachedSessionData().then(() => window.mx.reload());
-            },
-            error: e => {
-                console.error("Could not commit object:", e);
+                window.mx.session
+                    .clearCachedSessionData()
+                    .then(() => window.mx.reload() && window.mx.reloadWithState());
             }
         });
     }, []);
     return (
         <div>
-            {mx.session.getUserObject()?.addReference ? (
+            {window.mx.session.getUserObject()?.addReference ? (
                 <PopupMenu
                     position={props.position}
                     currentLanguage={language}
                     languageList={languageList}
                     onSelect={selectLanguage}
                     trigger={props.trigger}
+                    preview={false}
                 ></PopupMenu>
             ) : null}
         </div>
