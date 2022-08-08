@@ -34,9 +34,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     const pickerRef = useRef<DatePickerComponent | null>(null);
 
     useEffect(() => {
-        if (props.defaultValue) {
-            setValue(props.defaultValue);
-        }
+        setValue(props.defaultValue);
     }, [props.defaultValue]);
 
     useEffect(() => {
