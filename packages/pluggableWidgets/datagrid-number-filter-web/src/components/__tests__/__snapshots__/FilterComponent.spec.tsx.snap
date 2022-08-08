@@ -24,6 +24,7 @@ exports[`Filter component renders correctly 1`] = `
   <input
     class="form-control filter-input"
     type="number"
+    value=""
   />
 </div>
 `;
@@ -36,6 +37,7 @@ exports[`Filter component renders correctly when not adjustable by user 1`] = `
   <input
     class="form-control"
     type="number"
+    value=""
   />
 </div>
 `;
@@ -66,6 +68,7 @@ exports[`Filter component renders correctly with aria labels 1`] = `
     aria-label="my label"
     class="form-control filter-input"
     type="number"
+    value=""
   />
 </div>
 `;
