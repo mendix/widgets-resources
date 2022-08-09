@@ -25,11 +25,6 @@ describe("Text Filter", () => {
             delete (global as any)["com.mendix.widgets.web.UUID"];
         });
 
-        /**
-         * Syncing defaultValue is bed practice in React,
-         * but this is how filter works right now, so we
-         * have to test and support this behaviour.
-         */
         describe("sync input value with defaultValue prop", () => {
             beforeAll(() => {
                 (window as any)["com.mendix.widgets.web.filterable.filterContext"] = createContext({
