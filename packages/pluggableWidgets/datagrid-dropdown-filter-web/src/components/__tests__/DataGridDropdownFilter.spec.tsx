@@ -119,12 +119,7 @@ describe("Dropdown Filter", () => {
                         expect(screen.getByRole("textbox")).toHaveValue("");
                     });
 
-                    // Due to fact that we mock widget context
-                    // we have to do some speculations and rerender twice.
-                    // This is because widget runs in "real" context
-                    // It dispatch some events, which cases extra rerender.
-                    // This not happens with mocked context, so we forced
-                    // to do rerender twice.
+                    // “Real” context causes widgets to re-renders multiple times, replicate this in mocked context.
                     rerender(
                         <DatagridDropdownFilter
                             {...commonProps}
@@ -163,12 +158,7 @@ describe("Dropdown Filter", () => {
 
                     expect(screen.getByRole("textbox")).toHaveValue("xyz");
 
-                    // Due to fact that we mock widget context
-                    // we have to do some speculations and rerender twice.
-                    // This is because widget runs in "real" context
-                    // It dispatch some events, which cases extra rerender.
-                    // This not happens with mocked context, so we forced
-                    // to do rerender twice.
+                    // “Real” context causes widgets to re-renders multiple times, replicate this in mocked context.
                     rerender(
                         <DatagridDropdownFilter
                             {...commonProps}
