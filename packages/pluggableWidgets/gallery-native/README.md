@@ -6,7 +6,7 @@ The Gallery widget, a replacement for both the template grid and list view, help
 
 Here is an example of Gallery widget using:
 
-// Add image here!!!
+![Gallery](./assets/gallery-widget.gif)
 
 ### 1.2 Features
 
@@ -43,16 +43,15 @@ You can choose between `Paging buttons` (button being presented below) or `Virtu
 
 When this option is defined as custom it will show a composable region. Here you can place widgets that will be presented when no items are available to be shown, as well as when the filter does not return any data:
 
-// Add image here!!!
+![EmptyMessage](./assets/custom-empty-message.png)
 
 ### 2.3.4 Dynamic Item Class
 
 In the new Gallery widget we offer an option to dynamically apply a style object to a specific item. You can achieve this by adding an expression based on the item values (attributes) like the example below.
 
-In this example we check the value of `CountryName`, then if the attribute is equal to `Spain` apply the style object `my-custom-class` to the items:
+In this example we check the value of `CountryName`, then if the attribute is equal to `Spain` apply the style object `myCustomStyle` to the items:
 
-// Needs more information
-// Add image here!!!
+![DynamicItemClass](./assets/dynamic-item-class.png)
 
 ## 2.4 Events
 
