@@ -40,12 +40,12 @@
                     <caption>Page size</caption>
                     <description />
                 </property>
-                <property key="pagination" type="enumeration" defaultValue="buttons">
+                <property key="pagination" type="enumeration" defaultValue="virtualScrolling">
                     <caption>Pagination</caption>
                     <description />
                     <enumerationValues>
-                        <enumerationValue key="buttons">Paging buttons</enumerationValue>
                         <enumerationValue key="virtualScrolling">Virtual scrolling</enumerationValue>
+                        <enumerationValue key="buttons">Paging buttons</enumerationValue>
                     </enumerationValues>
                 </property>
                 <property key="pagingPosition" type="enumeration" defaultValue="below">

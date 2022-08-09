@@ -110,6 +110,11 @@ export function getPreview(values: GalleryPreviewProps, isDarkMode: boolean): St
                                 fontColor: isDarkMode ? "#DEDEDE" : "#899499"
                             }
                         ]
+                    },
+                    {
+                        type: "Container",
+                        grow: 1,
+                        children: []
                     }
                 ]
             } as RowLayoutProps

@@ -8,7 +8,7 @@ import { ActionValue, ListValue, ListActionValue, ListExpressionValue, ListWidge
 
 export type ScrollDirectionEnum = "vertical" | "horizontal";
 
-export type PaginationEnum = "buttons" | "virtualScrolling";
+export type PaginationEnum = "virtualScrolling" | "buttons";
 
 export type PagingPositionEnum = "below" | "above";
 
