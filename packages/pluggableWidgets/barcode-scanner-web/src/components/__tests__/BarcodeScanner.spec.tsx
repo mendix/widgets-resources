@@ -1,18 +1,15 @@
-import { mount, shallow } from "enzyme";
+import "@testing-library/jest-dom";
+import { render, waitFor } from "@testing-library/react";
 import { createElement } from "react";
-import * as zxing from "@zxing/library";
 import { Dimensions } from "@mendix/piw-utils-internal";
-import { BarcodeScanner, BarcodeScannerOverlay } from "../BarcodeScanner";
-import * as mediaStreamFunctions from "../../hooks/useMediaStream";
-import { act } from "react-dom/test-utils";
+import { NotFoundException } from "@zxing/library/cjs";
+import { BarcodeScanner } from "../BarcodeScanner";
 
-jest.mock("@zxing/library", () => {
-    const original = jest.requireActual("@zxing/library");
-    return {
-        ...original,
-        BrowserMultiFormatReader: jest.fn()
-    };
-});
+let useReaderMock = jest.fn();
+jest.mock("../../hooks/useReader", () => ({
+    // we can't use mock directly because of variable hosting.
+    useReader: (...args: any[]) => useReaderMock(...args)
+}));
 
 describe("Barcode scanner", () => {
     const backupMediaDevices = window.navigator.mediaDevices;
@@ -23,128 +20,115 @@ describe("Barcode scanner", () => {
         height: 100
     };
 
+    function mockGetUserMedia(getUserMediaMock: jest.Mock): void {
+        Object.defineProperty(window.navigator, "mediaDevices", {
+            value: { getUserMedia: getUserMediaMock },
+            writable: true
+        });
+    }
+
     afterEach(() => {
         // reset the mocking
         Object.defineProperty(window.navigator, "mediaDevices", {
             value: backupMediaDevices,
             writable: true
         });
+        useReaderMock = jest.fn();
     });
 
-    function mockGetUserMedia(getUserMediaMock: jest.Mock): void {
-        Object.defineProperty(window.navigator, "mediaDevices", {
-            value: {
-                getUserMedia: getUserMediaMock
-            },
-            writable: true
-        });
-    }
-
-    it("shows an appropriate error when the mediaDevices API is not present (like over http)", () => {
-        expect(navigator.mediaDevices).toBe(undefined);
-        const barcodeScanner = mount(<BarcodeScanner class="" showMask {...dimensions} />);
-        expect(barcodeScanner.text()).toBe(
-            "The barcode scanner widget is only compatible with certain browsers and requires a secure HTTPS connection in certain browsers. If you encounter this error message as an user, please contact your system administrator. If you are a Mendix developer, please refer to the appropriate docs on how to resolve this issue."
-        );
-    });
-
-    it("shows a loading screen while waiting for the user to give persmission to access the media device", () => {
+    it("renders video and overlay correctly", () => {
         mockGetUserMedia(jest.fn());
-        expect(shallow(<BarcodeScanner class="" showMask {...dimensions} />)).toMatchSnapshot();
+        expect(render(<BarcodeScanner class="" showMask {...dimensions} />).container).toMatchSnapshot();
     });
 
     it("does not show the overlay when the user opts out of it", () => {
         mockGetUserMedia(jest.fn());
-        expect(shallow(<BarcodeScanner class="" showMask={false} {...dimensions} />)).toMatchSnapshot();
+        expect(render(<BarcodeScanner class="" showMask={false} {...dimensions} />).container).toMatchSnapshot();
     });
 
-    it("calls the onDetect function if it has been provided and a barcode has been detected", async () => {
+    it("shows an appropriate error when the mediaDevices API is not present (like over http)", async () => {
+        expect(navigator.mediaDevices).toBe(undefined);
+        expect(render(<BarcodeScanner class="" showMask {...dimensions} />).container).toMatchSnapshot();
+    });
+
+    it("prop health check: pass onDetect prop as onSuccess callback", async () => {
         const onDetectMock = jest.fn();
-        const handleFakeMediaStream = Promise.resolve({});
-        const handleScanResult = Promise.resolve({ getText: jest.fn(() => "https://www.mendix.com") });
-        jest.spyOn(mediaStreamFunctions, "browserSupportsCameraAccess").mockImplementation(() => true);
-        mockGetUserMedia(jest.fn(() => handleFakeMediaStream));
-
-        // @ts-expect-error It has been mocked
-        zxing.BrowserMultiFormatReader.mockImplementation(() => ({
-            decodeOnceFromStream: jest.fn(() => handleScanResult)
-        }));
-
-        mount(<BarcodeScanner class="" showMask onDetect={onDetectMock} {...dimensions} />);
-
-        await act(async () => {
-            await handleFakeMediaStream;
+        useReaderMock.mockImplementationOnce((args: any) => {
+            setTimeout(() => args.onSuccess("42"), 100);
         });
+        mockGetUserMedia(jest.fn());
 
-        expect(onDetectMock).toHaveBeenCalledWith("https://www.mendix.com");
+        render(<BarcodeScanner class="" onDetect={onDetectMock} showMask {...dimensions} />);
+
+        await waitFor(() => expect(onDetectMock).toBeCalledWith("42"));
     });
 
     describe("shows an appropriate error to the user", () => {
-        it("in the form of text when a generic error occurs", () => {
-            mockGetUserMedia(
-                jest.fn(() => {
-                    throw new Error("This is an error message");
-                })
-            );
+        it("in the form of text when a generic error occurs", async () => {
+            useReaderMock.mockImplementationOnce((args: any) => {
+                setTimeout(() => args.onError(new Error("this is unexpected error")), 100);
+            });
+            mockGetUserMedia(jest.fn());
 
-            const barcodeScanner = mount(<BarcodeScanner class="" showMask {...dimensions} />);
-            expect(barcodeScanner.text()).toBe(
-                "Error in barcode scanner: an unexpected error occurred while retrieving the camera media stream."
+            const { container } = render(<BarcodeScanner class="" showMask {...dimensions} />);
+
+            await waitFor(() =>
+                expect(container).toHaveTextContent(
+                    "Error in barcode scanner: an unexpected error occurred while retrieving the camera media stream."
+                )
             );
         });
 
-        it("in the form of text when no device was found", () => {
-            mockGetUserMedia(
-                jest.fn(() => {
+        it("in the form of text when no device was found", async () => {
+            useReaderMock.mockImplementationOnce((args: any) => {
+                setTimeout(() => {
                     const error = new Error("This is an error message");
                     error.name = "NotFoundError";
-                    throw error;
-                })
-            );
+                    args.onError(error);
+                }, 100);
+            });
 
-            const barcodeScanner = mount(<BarcodeScanner class="" showMask {...dimensions} />);
-            expect(barcodeScanner.text()).toBe("Error in barcode scanner: no camera media devices were found.");
+            mockGetUserMedia(jest.fn());
+
+            const { container } = render(<BarcodeScanner class="" showMask {...dimensions} />);
+
+            await waitFor(() =>
+                expect(container).toHaveTextContent("Error in barcode scanner: no camera media devices were found.")
+            );
         });
 
-        it("not in the form of text since that is handled by the design when the users denies access to the camera", () => {
-            mockGetUserMedia(
-                jest.fn(() => {
+        it("not in the form of text since that is handled by the design when the users denies access to the camera", async () => {
+            useReaderMock.mockImplementationOnce((args: any) => {
+                setTimeout(() => {
                     const error = new Error("This is an error message");
                     error.name = "NotAllowedError";
-                    throw error;
-                })
-            );
+                    args.onError(error);
+                }, 100);
+            });
 
-            const barcodeScanner = mount(<BarcodeScanner class="" showMask {...dimensions} />);
-            expect(barcodeScanner.text()).not.toContain("Error in barcode scanner");
+            mockGetUserMedia(jest.fn());
+
+            const { container } = render(<BarcodeScanner class="" showMask {...dimensions} />);
+
+            await waitFor(() => expect(container).not.toHaveTextContent(/Error in barcode scanner:/));
         });
 
         it("in the form of text when the code scanner unexpectedly fails", async () => {
-            const handleFakeMediaStream = Promise.resolve({});
-            jest.spyOn(mediaStreamFunctions, "browserSupportsCameraAccess").mockImplementation(() => true);
-            mockGetUserMedia(jest.fn(() => handleFakeMediaStream));
-
-            // @ts-expect-error It has been mocked
-            zxing.BrowserMultiFormatReader.mockImplementation(() => {
-                throw new Error("This is an error");
+            useReaderMock.mockImplementationOnce((args: any) => {
+                setTimeout(() => {
+                    args.onError(new NotFoundException("Unable to decode from stream"));
+                }, 100);
             });
 
-            const barcodeScanner = mount(<BarcodeScanner class="" showMask {...dimensions} />);
+            mockGetUserMedia(jest.fn());
 
-            await act(async () => {
-                await handleFakeMediaStream;
-            });
-            // The above `act` block handles state updates as a result of the `handleFakeMediaStream` promise, but not
-            // actual DOM updates, which is why we need this `.update` call.
-            barcodeScanner.update();
+            const { container } = render(<BarcodeScanner class="" showMask {...dimensions} />);
 
-            expect(barcodeScanner.text()).toBe(
-                "Error in barcode scanner: an unexpected error occurred while detecting a barcode in the camera media stream."
+            await waitFor(() =>
+                expect(container).toHaveTextContent(
+                    "Error in barcode scanner: an unexpected error occurred while detecting a barcode in the camera media stream."
+                )
             );
         });
-    });
-
-    it("the overlay structure should be correct", () => {
-        expect(shallow(<BarcodeScannerOverlay class="" showMask {...dimensions} />)).toMatchSnapshot();
     });
 });

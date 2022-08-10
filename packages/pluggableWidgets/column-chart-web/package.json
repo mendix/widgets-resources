@@ -1,7 +1,7 @@
 {
   "name": "column-chart-web",
   "widgetName": "ColumnChart",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "Showsdata in a column format graph.",
   "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "license": "Apache-2.0",
@@ -21,7 +21,7 @@
     "githubUrl": "https://github.com/mendix/testProjects",
     "branchName": "column-chart-web"
   },
-  "packagePath": "com.mendix.widget.custom",
+  "packagePath": "com.mendix.widget.web",
   "scripts": {
     "start": "pluggable-widgets-tools start:server",
     "dev": "pluggable-widgets-tools start:web",

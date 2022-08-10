@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="com.mendix.widget.custom.TimeSeries.TimeSeries" needsEntityContext="true" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+<widget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="com.mendix.widget.web.timeseries.TimeSeries" needsEntityContext="true" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Time series</name>
     <description>Create a time series chart</description>
     <studioProCategory>Charts</studioProCategory>

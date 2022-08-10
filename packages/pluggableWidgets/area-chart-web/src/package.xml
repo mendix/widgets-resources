@@ -5,7 +5,7 @@
             <widgetFile path="AreaChart.xml" />
         </widgetFiles>
         <files>
-            <file path="com/mendix/widget/custom/areachart/" />
+            <file path="com/mendix/widget/web/areachart/" />
         </files>
     </clientModule>
 </package>

@@ -5,7 +5,7 @@
             <widgetFile path="BubbleChart.xml" />
         </widgetFiles>
         <files>
-            <file path="com/mendix/widget/custom/bubblechart/" />
+            <file path="com/mendix/widget/web/bubblechart/" />
         </files>
     </clientModule>
 </package>

@@ -5,7 +5,7 @@
             <widgetFile path="TimeSeries.xml" />
         </widgetFiles>
         <files>
-            <file path="com/mendix/widget/custom/timeseries/" />
+            <file path="com/mendix/widget/web/timeseries/" />
         </files>
     </clientModule>
 </package>

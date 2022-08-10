@@ -118,16 +118,6 @@ function sharedChardConfig(args, chartName) {
         );
     }
 
-    // We change the output because chart widget packages were wrongly named with uppercase first letter in the past.
-    jsConfig.output.file = join(
-        process.cwd(),
-        `dist/tmp/widgets/com/mendix/widget/custom/${chartName}/${chartName}.js`
-    );
-    mJsConfig.output.file = join(
-        process.cwd(),
-        `dist/tmp/widgets/com/mendix/widget/custom/${chartName}/${chartName}.mjs`
-    );
-
     result.forEach(config => {
         const onwarn = config.onwarn;
         if (onwarn) {

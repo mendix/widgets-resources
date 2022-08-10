@@ -13,6 +13,7 @@ describe("line-chart-web", () => {
         });
 
         it("renders line with markers and compares with a screenshot baseline", () => {
+            cy.get(".mx-name-containerMarkers", { timeout: 10000 }).should("be.visible");
             cy.get(".mx-name-containerMarkers")
                 .scrollIntoView()
                 .compareSnapshot(`lineChartLineMarkers-${browserName}`, 0.1);

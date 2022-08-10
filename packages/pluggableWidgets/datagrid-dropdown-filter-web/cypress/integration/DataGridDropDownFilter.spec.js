@@ -1,6 +1,16 @@
 describe("datagrid-dropdown-filter-web", () => {
+    const browserName = Cypress.browser.name;
+
     beforeEach(() => {
         cy.visit("/");
+    });
+
+    describe("visual testing:", () => {
+        it("compares with a screenshot baseline and checks if all datagrid and filter elements are rendered as expected", () => {
+            cy.wait(3000);
+            cy.get(".mx-name-datagrid1").should("be.visible");
+            cy.get(".mx-name-datagrid1").compareSnapshot(`dataGridDropDownFilter-${browserName}`, 0.1);
+        });
     });
 
     describe("using enumeration as attribute", () => {
