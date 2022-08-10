@@ -1,8 +1,9 @@
+import "@testing-library/jest-dom";
 import { Alert, FilterContextValue } from "@mendix/piw-utils-internal/components/web";
 import { actionValue, dynamicValue, EditableValueBuilder, ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
 import { createContext, createElement } from "react";
 import DatagridDropdownFilter from "../../DatagridDropdownFilter";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import { mount } from "enzyme";
 import { FilterComponent } from "../FilterComponent";
 
@@ -20,11 +21,11 @@ describe("Dropdown Filter", () => {
         });
 
         describe("with single attribute", () => {
-            beforeAll(() => {
+            function mockCtx(universe: string[]): void {
                 (window as any)["com.mendix.widgets.web.filterable.filterContext"] = createContext({
                     filterDispatcher: jest.fn(),
                     singleAttribute: new ListAttributeValueBuilder()
-                        .withUniverse(["enum_value_1", "enum_value_2"])
+                        .withUniverse(universe)
                         .withType("Enum")
                         .withFilterable(true)
                         .withFormatter(
@@ -33,6 +34,9 @@ describe("Dropdown Filter", () => {
                         )
                         .build()
                 } as FilterContextValue);
+            }
+            beforeAll(() => {
+                mockCtx(["enum_value_1", "enum_value_2"]);
             });
 
             describe("with auto options", () => {
@@ -83,6 +87,101 @@ describe("Dropdown Filter", () => {
 
                 expect(action.execute).toBeCalledTimes(1);
                 expect(attribute.setValue).toBeCalledWith("enum_value_2");
+            });
+
+            describe("with defaultValue", () => {
+                it("initialize component with defaultValue", () => {
+                    render(
+                        <DatagridDropdownFilter
+                            {...commonProps}
+                            auto
+                            multiSelect={false}
+                            filterOptions={[]}
+                            defaultValue={dynamicValue<string>("enum_value_1")}
+                        />
+                    );
+
+                    expect(screen.getByRole("textbox")).toHaveValue("enum_value_1");
+                });
+
+                it("sync defaultValue with state when defaultValue changes from undefined to string", async () => {
+                    const { rerender } = render(
+                        <DatagridDropdownFilter
+                            {...commonProps}
+                            auto
+                            multiSelect={false}
+                            filterOptions={[]}
+                            defaultValue={dynamicValue<string>("")}
+                        />
+                    );
+
+                    await waitFor(() => {
+                        expect(screen.getByRole("textbox")).toHaveValue("");
+                    });
+
+                    // “Real” context causes widgets to re-renders multiple times, replicate this in mocked context.
+                    rerender(
+                        <DatagridDropdownFilter
+                            {...commonProps}
+                            auto
+                            multiSelect={false}
+                            filterOptions={[]}
+                            defaultValue={dynamicValue<string>("")}
+                        />
+                    );
+                    rerender(
+                        <DatagridDropdownFilter
+                            {...commonProps}
+                            auto
+                            multiSelect={false}
+                            filterOptions={[]}
+                            defaultValue={dynamicValue<string>("enum_value_1")}
+                        />
+                    );
+
+                    await waitFor(() => {
+                        expect(screen.getByRole("textbox")).toHaveValue("enum_value_1");
+                    });
+                });
+
+                it("sync defaultValue with state when defaultValue changes from string to undefined", async () => {
+                    mockCtx(["xyz", "abc"]);
+                    const { rerender } = render(
+                        <DatagridDropdownFilter
+                            {...commonProps}
+                            auto
+                            multiSelect={false}
+                            filterOptions={[]}
+                            defaultValue={dynamicValue<string>("xyz")}
+                        />
+                    );
+
+                    expect(screen.getByRole("textbox")).toHaveValue("xyz");
+
+                    // “Real” context causes widgets to re-renders multiple times, replicate this in mocked context.
+                    rerender(
+                        <DatagridDropdownFilter
+                            {...commonProps}
+                            auto
+                            multiSelect={false}
+                            filterOptions={[]}
+                            defaultValue={dynamicValue<string>("xyz")}
+                        />
+                    );
+                    rerender(
+                        <DatagridDropdownFilter
+                            {...commonProps}
+                            auto
+                            multiSelect={false}
+                            filterOptions={[]}
+                            defaultValue={undefined}
+                        />
+                    );
+
+                    await waitFor(() => {
+                        expect(screen.getByRole("textbox")).toHaveValue("");
+                    });
+                });
             });
 
             afterAll(() => {

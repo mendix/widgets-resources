@@ -1,6 +1,7 @@
+import "@testing-library/jest-dom";
 import { Alert, FilterContextValue } from "@mendix/piw-utils-internal/components/web";
-import { actionValue, EditableValueBuilder, ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { actionValue, dynamicValue, EditableValueBuilder, ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
+import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import { mount } from "enzyme";
 import { createContext, createElement } from "react";
 
@@ -50,6 +51,29 @@ describe("Number Filter", () => {
 
                 expect(action.execute).toBeCalledTimes(1);
                 expect(attribute.setValue).toBeCalledWith(new Big(10));
+            });
+
+            describe("with defaultValue", () => {
+                it("initializes with defaultValue", () => {
+                    render(<DatagridNumberFilter {...commonProps} defaultValue={dynamicValue<Big>(new Big(100))} />);
+                    expect(screen.getByRole("spinbutton")).toHaveValue(100);
+                });
+                it("sync value and defaultValue when defaultValue changes from undefined to number", () => {
+                    const { rerender } = render(<DatagridNumberFilter {...commonProps} defaultValue={undefined} />);
+                    expect(screen.getByRole("spinbutton")).toHaveValue(null);
+                    rerender(<DatagridNumberFilter {...commonProps} defaultValue={dynamicValue<Big>(new Big(100))} />);
+                    expect(screen.getByRole("spinbutton")).toHaveValue(100);
+                });
+                it("sync value and defaultValue when defaultValue changes from number to undefined", async () => {
+                    const { rerender } = render(
+                        <DatagridNumberFilter {...commonProps} defaultValue={dynamicValue<Big>(new Big(100))} />
+                    );
+                    expect(screen.getByRole("spinbutton")).toHaveValue(100);
+                    rerender(<DatagridNumberFilter {...commonProps} defaultValue={undefined} />);
+                    await waitFor(() => {
+                        expect(screen.getByRole("spinbutton")).toHaveValue(null);
+                    });
+                });
             });
 
             afterAll(() => {
