@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useCallback } from "react";
 
 /**
  * Utility hook for wrapping arbitrary function to produce stable version of it.
@@ -10,9 +10,7 @@ export function useEventCallback<T extends (...args: any[]) => any>(fn?: T): T {
     const ref: any = useRef(fn);
 
     // we copy a ref to the callback scoped to the current state/props on each render
-    useEffect(() => {
-        ref.current = fn;
-    });
+    ref.current = fn;
 
     return useCallback((...args: any[]) => ref.current && ref.current.apply(undefined, args), []) as T;
 }

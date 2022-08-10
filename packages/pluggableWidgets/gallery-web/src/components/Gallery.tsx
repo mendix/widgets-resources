@@ -2,6 +2,8 @@ import { createElement, ReactElement, ReactNode } from "react";
 import { InfiniteBody, Pagination } from "@mendix/piw-utils-internal/components/web";
 import { ObjectItem } from "mendix";
 import classNames from "classnames";
+import { useCalcPageHeight } from "@mendix/piw-utils-internal";
+import { calcGalleryHeight } from "src/utils/calcGalleryHeight";
 
 export interface GalleryProps<T extends ObjectItem> {
     className?: string;
@@ -45,6 +47,8 @@ export function Gallery<T extends ObjectItem>(props: GalleryProps<T>): ReactElem
         </div>
     ) : null;
 
+    const getPageHeight = useCalcPageHeight(props.items.length, props.pageSize, calcGalleryHeight);
+
     return (
         <div className={classNames("widget-gallery", props.className)} data-focusindex={props.tabIndex || 0}>
             {props.paginationPosition === "above" && pagination}
@@ -66,6 +70,7 @@ export function Gallery<T extends ObjectItem>(props: GalleryProps<T>): ReactElem
                     setPage={props.setPage}
                     isInfinite={!props.paging}
                     role="list"
+                    getContainerHeight={getPageHeight}
                 >
                     {props.items.map(item =>
                         props.itemRenderer((children, className, onClick) => {

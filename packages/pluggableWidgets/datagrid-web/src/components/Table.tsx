@@ -16,7 +16,9 @@ import classNames from "classnames";
 import { EditableValue, ObjectItem } from "mendix";
 import { SortingRule, useSettings } from "../utils/settings";
 import { ColumnResizer } from "./ColumnResizer";
+import { useCalcPageHeight } from "@mendix/piw-utils-internal";
 import { InfiniteBody, Pagination } from "@mendix/piw-utils-internal/components/web";
+import { calcGridHeight } from "../utils/calcGridHeight";
 
 export type TableColumn = Omit<
     ColumnsPreviewType,
@@ -107,6 +109,8 @@ export function Table<T extends ObjectItem>(props: TableProps<T>): ReactElement 
         columnsWidth,
         setColumnsWidth
     );
+
+    const getPageHeight = useCalcPageHeight(props.data.length, props.pageSize, calcGridHeight);
 
     useEffect(() => updateSettings(), [columnOrder, hiddenColumns, sortBy]);
 
@@ -247,6 +251,7 @@ export function Table<T extends ObjectItem>(props: TableProps<T>): ReactElement 
                     role="rowgroup"
                     setPage={props.setPage}
                     style={cssGridStyles}
+                    getContainerHeight={getPageHeight}
                 >
                     <div className="tr" role="row">
                         {visibleColumns.map(column =>

@@ -10,16 +10,38 @@ import {
 } from "react";
 import classNames from "classnames";
 
+type GetContainerHeightFn = (container: HTMLDivElement) => number;
+
 interface InfiniteBodyProps {
     className?: string;
     hasMoreItems: boolean;
     isInfinite: boolean;
     role?: string;
-    setPage?: (computePage: (prevPage: number) => number) => void;
     style?: CSSProperties;
+    setPage?: (computePage: (prevPage: number) => number) => void;
+    /**
+     * When `isInfinte` is `true` this function will be called to
+     * measure container height.
+     * If this function returns number greater than 0,
+     * component will set this value as container max height.
+     * NOTE: This function will be called on each render,
+     * so, we have to keep it fast enough to avoid UI flickering.
+     */
+    getContainerHeight?: GetContainerHeightFn;
 }
 
-export function InfiniteBody(props: PropsWithChildren<InfiniteBodyProps>): ReactElement {
+const defaultGetContainerHeight: GetContainerHeightFn = _container => 0;
+
+export function InfiniteBody({
+    children,
+    className,
+    hasMoreItems,
+    isInfinite,
+    role,
+    setPage,
+    style,
+    getContainerHeight = defaultGetContainerHeight
+}: PropsWithChildren<InfiniteBodyProps>): ReactElement {
     const [bodySize, setBodySize] = useState(0);
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -30,33 +52,36 @@ export function InfiniteBody(props: PropsWithChildren<InfiniteBodyProps>): React
              */
             const bottom = Math.floor(e.target.scrollHeight - e.target.scrollTop) === Math.floor(e.target.clientHeight);
             if (bottom) {
-                if (props.hasMoreItems && props.setPage) {
-                    props.setPage(prev => prev + 1);
+                if (hasMoreItems && setPage) {
+                    setPage(prev => prev + 1);
                 }
             }
         },
-        [props.hasMoreItems, props.setPage]
+        [hasMoreItems, setPage]
     );
 
-    const calculateBodyHeight = useCallback((): void => {
-        if (props.isInfinite && props.hasMoreItems && bodySize <= 0 && containerRef.current) {
-            setBodySize(containerRef.current.clientHeight - 30);
-        }
-    }, [props.isInfinite, props.hasMoreItems, bodySize]);
-
+    // Don't pass deps array as we need to run effect
+    // on each render after DOM changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useLayoutEffect(() => {
-        setTimeout(() => calculateBodyHeight(), 100);
-    }, [calculateBodyHeight]);
+        if (isInfinite && containerRef.current) {
+            const h = getContainerHeight(containerRef.current);
+            if (h > 0) {
+                console.log("make a change");
+                setBodySize(h);
+            }
+        }
+    });
 
     return (
         <div
             ref={containerRef}
-            className={classNames(props.className, props.isInfinite ? "infinite-loading" : "")}
-            onScroll={props.isInfinite ? trackScrolling : undefined}
-            role={props.role}
-            style={props.isInfinite && bodySize > 0 ? { ...props.style, maxHeight: bodySize } : props.style}
+            className={classNames(className, isInfinite ? "infinite-loading" : "")}
+            onScroll={isInfinite ? trackScrolling : undefined}
+            role={role}
+            style={isInfinite && bodySize > 0 ? { ...style, maxHeight: bodySize } : style}
         >
-            {props.children}
+            {children}
         </div>
     );
 }
