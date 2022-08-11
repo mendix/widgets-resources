@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+-   We fixed the issue with grid container having incorrect height when infinite scroll is enabled and number of rows exceed page size (Ticket #149371)
+
 ## [2.4.1] - 2022-7-5
 
 ### Fixed

@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+-   We fixed the issue with gallery container having incorrect height when infinite scroll is enabled and number of rows exceed page size (Ticket #149371)
+
 ## [1.2.0] - 2022-6-13
 
 ### Fixed
