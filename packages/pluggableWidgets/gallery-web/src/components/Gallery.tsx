@@ -3,7 +3,7 @@ import { InfiniteBody, Pagination } from "@mendix/piw-utils-internal/components/
 import { ObjectItem } from "mendix";
 import classNames from "classnames";
 import { useCalcPageHeight } from "@mendix/piw-utils-internal";
-import { calcGalleryHeight } from "src/utils/calcGalleryHeight";
+import { calcGalleryHeight } from "../utils/calcGalleryHeight";
 
 export interface GalleryProps<T extends ObjectItem> {
     className?: string;
