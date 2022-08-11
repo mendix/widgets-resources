@@ -1,13 +1,12 @@
+import { StructurePreviewProps, ImageProps, ContainerProps } from "@mendix/piw-utils-internal";
 import {
     hidePropertiesIn,
     hidePropertyIn,
     Problem,
     Properties,
-    StructurePreviewProps,
-    transformGroupsIntoTabs,
-    ImageProps,
-    ContainerProps
-} from "@mendix/piw-utils-internal";
+    transformGroupsIntoTabs
+} from "@mendix/pluggable-widgets-tools";
+
 import { PieChartPreviewProps } from "../typings/PieChartProps";
 
 import PieChartDark from "./assets/PieChart.dark.svg";

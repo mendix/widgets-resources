@@ -1,14 +1,12 @@
+import { ContainerProps, RowLayoutProps, StructurePreviewProps } from "@mendix/piw-utils-internal";
 import {
-    ContainerProps,
     hideNestedPropertiesIn,
     hidePropertiesIn,
     hidePropertyIn,
     Problem,
     Properties,
-    RowLayoutProps,
-    StructurePreviewProps,
     transformGroupsIntoTabs
-} from "@mendix/piw-utils-internal";
+} from "@mendix/pluggable-widgets-tools";
 
 import { AccordionPreviewProps, GroupsPreviewType } from "../typings/AccordionProps";
 

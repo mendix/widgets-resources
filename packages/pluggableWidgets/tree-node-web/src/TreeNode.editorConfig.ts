@@ -1,14 +1,12 @@
 import {
     ContainerProps,
     DropZoneProps,
-    hidePropertiesIn,
-    hidePropertyIn,
-    Properties,
     RowLayoutProps,
     StructurePreviewProps,
-    TextProps,
-    transformGroupsIntoTabs
+    TextProps
 } from "@mendix/piw-utils-internal";
+import { hidePropertiesIn, hidePropertyIn, Properties, transformGroupsIntoTabs } from "@mendix/pluggable-widgets-tools";
+
 import { HeaderTypeEnum, TreeNodePreviewProps } from "../typings/TreeNodeProps";
 
 import ChevronSVG from "./assets/ChevronStructurePreview.svg";

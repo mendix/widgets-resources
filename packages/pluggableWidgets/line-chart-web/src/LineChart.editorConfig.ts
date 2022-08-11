@@ -1,14 +1,13 @@
+import { StructurePreviewProps, ImageProps, ContainerProps } from "@mendix/piw-utils-internal";
 import {
     hideNestedPropertiesIn,
     hidePropertiesIn,
     hidePropertyIn,
     Problem,
     Properties,
-    StructurePreviewProps,
-    transformGroupsIntoTabs,
-    ImageProps,
-    ContainerProps
-} from "@mendix/piw-utils-internal";
+    transformGroupsIntoTabs
+} from "@mendix/pluggable-widgets-tools";
+
 import { LineChartPreviewProps } from "../typings/LineChartProps";
 
 import LineChartDark from "./assets/LineChart.dark.svg";
