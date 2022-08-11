@@ -6,6 +6,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.5.4] Data Widgets - 2022-8-11
+
+## [2.4.1] DatagridDateFilter
+
+### Fixed
+
+-   We fixed an issue with sync of widget defaultValue property and current filter value (#151789)
+
+## [2.2.3] DatagridDropdownFilter
+
+### Fixed
+
+-   We fixed an issue with sync of widget defaultValue property and current filter value (#151789)
+
+## [2.3.1] DatagridNumberFilter
+
+### Fixed
+
+-   We fixed an issue with sync of widget defaultValue property and current filter value (#151789)
+
+## [2.3.2] DatagridTextFilter
+
+### Fixed
+
+-   We fixed an issue with sync of widget defaultValue property and current filter value (#151789)
+
 ## [2.5.3] Data Widgets - 2022-7-5
 
 ## [2.4.1] Datagrid
