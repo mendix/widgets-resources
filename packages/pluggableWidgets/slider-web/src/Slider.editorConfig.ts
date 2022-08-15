@@ -1,11 +1,12 @@
+import { StructurePreviewProps } from "@mendix/piw-utils-internal";
 import {
     hidePropertiesIn,
     hidePropertyIn,
     Problem,
     Properties,
-    StructurePreviewProps,
     transformGroupsIntoTabs
-} from "@mendix/piw-utils-internal";
+} from "@mendix/pluggable-widgets-tools";
+
 import { MaxValueTypeEnum, MinValueTypeEnum, SliderPreviewProps, StepSizeTypeEnum } from "../typings/SliderProps";
 import StructurePreviewSvg from "./assets/structure-preview.svg";
 import StructurePreviewSvgDark from "./assets/structure-preview-dark.svg";

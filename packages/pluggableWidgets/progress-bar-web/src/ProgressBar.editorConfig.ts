@@ -1,10 +1,6 @@
-import {
-    hidePropertiesIn,
-    hidePropertyIn,
-    Problem,
-    Properties,
-    StructurePreviewProps
-} from "@mendix/piw-utils-internal";
+import { StructurePreviewProps } from "@mendix/piw-utils-internal";
+import { hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@mendix/pluggable-widgets-tools";
+
 import { ProgressBarPreviewProps, TypeEnum } from "../typings/ProgressBarProps";
 import StructurePreviewSvg from "./assets/structure-preview.svg";
 import StructurePreviewSvgDark from "./assets/structure-preview-dark.svg";

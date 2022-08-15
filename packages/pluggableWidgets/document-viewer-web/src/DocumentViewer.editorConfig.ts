@@ -1,5 +1,6 @@
 import { DocumentViewerPreviewProps } from "../typings/DocumentViewerProps";
-import { hidePropertyIn, Problem, Properties, StructurePreviewProps } from "@mendix/piw-utils-internal";
+import { StructurePreviewProps } from "@mendix/piw-utils-internal";
+import { hidePropertyIn, Problem, Properties } from "@mendix/pluggable-widgets-tools";
 
 import DocumentViewerURLPreviewSVGDark from "./assets/document-viewer-url-preview.dark.svg";
 import DocumentViewerURLPreviewSVGLight from "./assets/document-viewer-url-preview.light.svg";

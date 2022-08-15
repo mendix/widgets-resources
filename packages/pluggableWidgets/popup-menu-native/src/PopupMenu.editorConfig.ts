@@ -1,11 +1,6 @@
-import {
-    StructurePreviewProps,
-    hidePropertyIn,
-    Properties,
-    DropZoneProps,
-    ContainerProps,
-    RowLayoutProps
-} from "@mendix/piw-utils-internal";
+import { StructurePreviewProps, DropZoneProps, ContainerProps, RowLayoutProps } from "@mendix/piw-utils-internal";
+import { hidePropertyIn, Properties } from "@mendix/pluggable-widgets-tools";
+
 import { BasicItemsPreviewType, PopupMenuPreviewProps } from "../typings/PopupMenuProps";
 
 export function getPreview(values: PopupMenuPreviewProps, isDarkMode: boolean): StructurePreviewProps {

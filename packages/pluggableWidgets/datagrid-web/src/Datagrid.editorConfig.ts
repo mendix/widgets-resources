@@ -1,16 +1,14 @@
+import { ContainerProps, DropZoneProps, RowLayoutProps, StructurePreviewProps } from "@mendix/piw-utils-internal";
 import {
     changePropertyIn,
-    ContainerProps,
-    DropZoneProps,
     hideNestedPropertiesIn,
     hidePropertiesIn,
     hidePropertyIn,
     Problem,
     Properties,
-    RowLayoutProps,
-    StructurePreviewProps,
     transformGroupsIntoTabs
-} from "@mendix/piw-utils-internal";
+} from "@mendix/pluggable-widgets-tools";
+
 import { ColumnsPreviewType, DatagridPreviewProps } from "../typings/DatagridProps";
 
 export function getProperties(

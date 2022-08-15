@@ -3,13 +3,11 @@ import {
     chevronDownIcon,
     chevronDownIconDark,
     ContainerProps,
-    hidePropertiesIn,
-    hidePropertyIn,
     ImageProps,
-    Properties,
     StructurePreviewProps,
     TextProps
 } from "@mendix/piw-utils-internal";
+import { hidePropertiesIn, hidePropertyIn, Properties } from "@mendix/pluggable-widgets-tools";
 
 export function getProperties(
     values: DatagridDropdownFilterPreviewProps,

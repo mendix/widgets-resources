@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.2.3] - 2022-8-11
+
+### Fixed
+
+-   We fixed an issue with sync of widget defaultValue property and current filter value (#151789)
+
 ## [2.2.2] - 2022-04-13
 
 ### Fixed

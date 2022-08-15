@@ -1,14 +1,12 @@
 import {
     ContainerProps,
     ImageProps,
-    Properties,
     RowLayoutProps,
     StructurePreviewProps,
-    TextProps,
-    transformGroupsIntoTabs,
-    hidePropertiesIn,
-    hidePropertyIn
+    TextProps
 } from "@mendix/piw-utils-internal";
+import { Properties, transformGroupsIntoTabs, hidePropertiesIn, hidePropertyIn } from "@mendix/pluggable-widgets-tools";
+
 import { ColorPickerPreviewProps } from "../typings/ColorPickerProps";
 import StructurePreviewSvg from "./assets/structure-preview.svg";
 import StructurePreviewSvgDark from "./assets/structure-preview-dark.svg";

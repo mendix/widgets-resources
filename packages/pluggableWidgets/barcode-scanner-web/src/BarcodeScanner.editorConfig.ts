@@ -1,4 +1,6 @@
-import { Properties, StructurePreviewProps, transformGroupsIntoTabs } from "@mendix/piw-utils-internal";
+import { StructurePreviewProps } from "@mendix/piw-utils-internal";
+import { Properties, transformGroupsIntoTabs } from "@mendix/pluggable-widgets-tools";
+
 import { BarcodeScannerContainerProps } from "../typings/BarcodeScannerProps";
 import BarcodeScannerSvg from "./assets/barcodescanner.svg";
 import BarcodeScannerSvgDark from "./assets/barcodescanner-dark.svg";

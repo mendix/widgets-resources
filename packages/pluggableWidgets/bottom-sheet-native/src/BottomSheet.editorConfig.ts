@@ -1,11 +1,11 @@
+import { StructurePreviewProps } from "@mendix/piw-utils-internal";
 import {
-    StructurePreviewProps,
     changePropertyIn,
     hidePropertiesIn,
     hidePropertyIn,
     Problem,
     Properties
-} from "@mendix/piw-utils-internal";
+} from "@mendix/pluggable-widgets-tools";
 
 import { BottomSheetPreviewProps } from "../typings/BottomSheetProps";
 

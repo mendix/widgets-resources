@@ -1,14 +1,13 @@
+import { StructurePreviewProps, ImageProps, ContainerProps } from "@mendix/piw-utils-internal";
 import {
     hideNestedPropertiesIn,
     hidePropertiesIn,
     hidePropertyIn,
     Problem,
     Properties,
-    transformGroupsIntoTabs,
-    StructurePreviewProps,
-    ImageProps,
-    ContainerProps
-} from "@mendix/piw-utils-internal";
+    transformGroupsIntoTabs
+} from "@mendix/pluggable-widgets-tools";
+
 import { TimeSeriesPreviewProps } from "../typings/TimeSeriesProps";
 
 import TimeSeriesDark from "./assets/TimeSeries.dark.svg";

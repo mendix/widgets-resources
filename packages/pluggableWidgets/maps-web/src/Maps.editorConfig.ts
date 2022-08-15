@@ -1,10 +1,6 @@
-import {
-    hidePropertiesIn,
-    hidePropertyIn,
-    Problem,
-    Properties,
-    StructurePreviewProps
-} from "@mendix/piw-utils-internal";
+import { StructurePreviewProps } from "@mendix/piw-utils-internal";
+import { hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@mendix/pluggable-widgets-tools";
+
 import { MapsPreviewProps } from "../typings/MapsProps";
 
 import GoogleMapsSVG from "./assets/GoogleMaps.svg";

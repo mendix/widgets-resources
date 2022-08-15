@@ -1,7 +1,4 @@
 import {
-    Properties,
-    transformGroupsIntoTabs,
-    hidePropertiesIn,
     StructurePreviewProps,
     TextProps,
     DropZoneProps,
@@ -9,6 +6,8 @@ import {
     RowLayoutProps,
     ImageProps
 } from "@mendix/piw-utils-internal";
+import { Properties, transformGroupsIntoTabs, hidePropertiesIn } from "@mendix/pluggable-widgets-tools";
+
 import { CarouselPreviewProps } from "../typings/CarouselProps";
 import DotBlue from "./ui/dot_blue.svg";
 import DotGrey from "./ui/dot_grey.svg";

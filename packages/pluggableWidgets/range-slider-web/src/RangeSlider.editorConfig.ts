@@ -1,10 +1,6 @@
-import {
-    hidePropertiesIn,
-    hidePropertyIn,
-    Properties,
-    StructurePreviewProps,
-    transformGroupsIntoTabs
-} from "@mendix/piw-utils-internal";
+import { StructurePreviewProps } from "@mendix/piw-utils-internal";
+import { hidePropertiesIn, hidePropertyIn, Properties, transformGroupsIntoTabs } from "@mendix/pluggable-widgets-tools";
+
 import {
     MaxValueTypeEnum,
     MinValueTypeEnum,

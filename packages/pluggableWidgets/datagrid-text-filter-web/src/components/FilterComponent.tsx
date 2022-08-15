@@ -27,10 +27,8 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
-        if (props.value) {
-            setValueInput(props.value);
-            setValue(props.value);
-        }
+        setValueInput(props.value ?? "");
+        setValue(props.value ?? "");
     }, [props.value]);
 
     useEffect(() => {

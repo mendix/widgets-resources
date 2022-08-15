@@ -1,15 +1,13 @@
 import { BarChartPreviewProps, BarmodeEnum } from "../typings/BarChartProps";
+import { StructurePreviewProps, ContainerProps, ImageProps } from "@mendix/piw-utils-internal";
 import {
     hideNestedPropertiesIn,
     hidePropertiesIn,
     hidePropertyIn,
     Problem,
     Properties,
-    StructurePreviewProps,
-    transformGroupsIntoTabs,
-    ContainerProps,
-    ImageProps
-} from "@mendix/piw-utils-internal";
+    transformGroupsIntoTabs
+} from "@mendix/pluggable-widgets-tools";
 
 import BarChartGroupedDark from "./assets/BarChart-grouped.dark.svg";
 import BarChartGroupedLight from "./assets/BarChart-grouped.light.svg";

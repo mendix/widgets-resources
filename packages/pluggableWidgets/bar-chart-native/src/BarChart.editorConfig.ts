@@ -1,4 +1,5 @@
-import { StructurePreviewProps, hideNestedPropertiesIn, Problem, Properties } from "@mendix/piw-utils-internal";
+import { StructurePreviewProps } from "@mendix/piw-utils-internal";
+import { hideNestedPropertiesIn, Problem, Properties } from "@mendix/pluggable-widgets-tools";
 
 import barChartGroupedSvgDark from "./assets/BarChart.Grouped.dark.svg";
 import barChartGroupedSvgLight from "./assets/BarChart.Grouped.light.svg";

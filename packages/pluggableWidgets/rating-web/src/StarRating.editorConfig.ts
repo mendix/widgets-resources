@@ -1,4 +1,6 @@
-import { ImageProps, Problem, RowLayoutProps } from "@mendix/piw-utils-internal";
+import { ImageProps, RowLayoutProps } from "@mendix/piw-utils-internal";
+import { Problem } from "@mendix/pluggable-widgets-tools";
+
 import StructurePreviewRatingFilledSVG from "./assets/StructurePreviewRatingFilled.svg";
 import StructurePreviewRatingFilledSVGDark from "./assets/StructurePreviewRatingFilled-dark.svg";
 import StructurePreviewRatingEmptySVG from "./assets/StructurePreviewRatingEmpty.svg";

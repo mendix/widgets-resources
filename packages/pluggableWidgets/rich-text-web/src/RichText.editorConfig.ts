@@ -1,10 +1,6 @@
-import {
-    Properties,
-    hidePropertiesIn,
-    transformGroupsIntoTabs,
-    hidePropertyIn,
-    StructurePreviewProps
-} from "@mendix/piw-utils-internal";
+import { StructurePreviewProps } from "@mendix/piw-utils-internal";
+import { Properties, hidePropertiesIn, transformGroupsIntoTabs, hidePropertyIn } from "@mendix/pluggable-widgets-tools";
+
 import { RichTextPreviewProps } from "../typings/RichTextProps";
 import RichTextPreviewSVGDark from "./assets/rich-text-preview-dark.svg";
 import RichTextPreviewSVGLight from "./assets/rich-text-preview-light.svg";

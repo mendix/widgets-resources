@@ -1,14 +1,13 @@
+import { ContainerProps, ImageProps, StructurePreviewProps } from "@mendix/piw-utils-internal";
 import {
-    ContainerProps,
     hideNestedPropertiesIn,
     hidePropertiesIn,
     hidePropertyIn,
-    ImageProps,
     Problem,
     Properties,
-    StructurePreviewProps,
     transformGroupsIntoTabs
-} from "@mendix/piw-utils-internal";
+} from "@mendix/pluggable-widgets-tools";
+
 import { AreaChartPreviewProps } from "../typings/AreaChartProps";
 
 import AreaChartLightSvg from "./assets/AreaChart.light.svg";

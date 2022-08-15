@@ -1,11 +1,12 @@
+import { StructurePreviewProps } from "@mendix/piw-utils-internal";
 import {
     changePropertyIn,
     hidePropertiesIn,
     hidePropertyIn,
     Problem,
-    Properties,
-    StructurePreviewProps
-} from "@mendix/piw-utils-internal";
+    Properties
+} from "@mendix/pluggable-widgets-tools";
+
 import { MapsPreviewProps } from "../typings/MapsProps";
 import StructurePreviewMapsSVG from "./assets/StructurePreviewMaps.svg";
 

@@ -1,12 +1,7 @@
 import { SidebarTogglePreviewProps } from "../typings/SidebarToggleProps";
-import {
-    hidePropertyIn,
-    ImageProps,
-    Properties,
-    StructurePreviewProps,
-    TextProps,
-    transformGroupsIntoTabs
-} from "@mendix/piw-utils-internal";
+import { ImageProps, StructurePreviewProps, TextProps } from "@mendix/piw-utils-internal";
+import { hidePropertyIn, Properties, transformGroupsIntoTabs } from "@mendix/pluggable-widgets-tools";
+
 import HamburgerIcon from "./assets/hamburger.svg";
 
 export function getProperties(

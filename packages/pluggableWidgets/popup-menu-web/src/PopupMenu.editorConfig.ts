@@ -1,16 +1,19 @@
 import {
-    changePropertyIn,
     ContainerProps,
     DropZoneProps,
-    hidePropertyIn,
-    Problem,
-    Properties,
     RowLayoutProps,
     SelectableProps,
     StructurePreviewProps,
-    TextProps,
-    transformGroupsIntoTabs
+    TextProps
 } from "@mendix/piw-utils-internal";
+import {
+    changePropertyIn,
+    hidePropertyIn,
+    Problem,
+    Properties,
+    transformGroupsIntoTabs
+} from "@mendix/pluggable-widgets-tools";
+
 import { BasicItemsPreviewType, PopupMenuPreviewProps } from "../typings/PopupMenuProps";
 
 export function getProperties(

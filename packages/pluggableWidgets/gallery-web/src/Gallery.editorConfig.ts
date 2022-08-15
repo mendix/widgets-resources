@@ -1,14 +1,11 @@
+import { ContainerProps, DropZoneProps, RowLayoutProps, StructurePreviewProps } from "@mendix/piw-utils-internal";
 import {
-    ContainerProps,
-    DropZoneProps,
     hidePropertiesIn,
     hidePropertyIn,
     Problem,
     Properties,
-    RowLayoutProps,
-    StructurePreviewProps,
     transformGroupsIntoTabs
-} from "@mendix/piw-utils-internal";
+} from "@mendix/pluggable-widgets-tools";
 import { GalleryPreviewProps } from "../typings/GalleryProps";
 
 export function getProperties(
