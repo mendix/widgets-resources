@@ -65,7 +65,7 @@ beforeAll(async () => {
     await waitFor(element(by.id("$screen")).atIndex(0))
         .toBeVisible()
         .withTimeout(180000);
-}, 360000);
+}, 1800000);
 
 beforeEach(async () => {
     await adapter.beforeEach();
