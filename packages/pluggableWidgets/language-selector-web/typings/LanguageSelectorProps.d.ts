@@ -4,6 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
+import { ListValue, ListExpressionValue } from "mendix";
 
 export type PositionEnum = "left" | "right" | "top" | "bottom";
 
@@ -14,6 +15,8 @@ export interface LanguageSelectorContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
+    languageOptions: ListValue;
+    languageCaption: ListExpressionValue<string>;
     position: PositionEnum;
     trigger: TriggerEnum;
 }
@@ -23,6 +26,8 @@ export interface LanguageSelectorPreviewProps {
     style: string;
     styleObject?: CSSProperties;
     readOnly: boolean;
+    languageOptions: {} | { type: string } | null;
+    languageCaption: string;
     position: PositionEnum;
     trigger: TriggerEnum;
 }

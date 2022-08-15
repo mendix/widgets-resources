@@ -1,69 +1,54 @@
 import { ReactNode, createElement, useEffect, useState, useCallback } from "react";
 import { LanguageSelectorContainerProps } from "typings/LanguageSelectorProps";
-import { PopupMenu } from "./Popup/PopupMenu";
+import { LanguageSwitcher } from "./components/LanguageSwitcher";
 
-export type AttributeView = {
-    value: string;
-    key: string;
-};
-export type LanguageAttribute = {
-    Code: AttributeView;
-    Description: AttributeView;
-};
 export type LanguageItem = {
     _guid: string;
-    jsonData: {
-        attributes: LanguageAttribute;
-    };
+    value: string;
 };
 export default function LanguageSelector(props: LanguageSelectorContainerProps): ReactNode {
-    const [language, setLanguage] = useState<LanguageItem | null>(null);
+    const [selectedLanguage, setSelectedLanguage] = useState<LanguageItem | undefined>();
     const [languageList, setLanguageList] = useState<LanguageItem[]>([]);
+
     useEffect(() => {
-        const getLanguages = (): void => {
-            window.mx.data.get({
-                xpath: "//System.Language",
-                callback: (objs: LanguageItem[]) => {
-                    if (objs.length) {
-                        setLanguageList(objs);
-                        const currentLanguage: LanguageItem | null =
-                            objs.find(
-                                (lang: LanguageItem) =>
-                                    lang._guid ===
-                                    window.mx.session.getUserObject()?.jsonData.attributes["System.User_Language"].value
-                            ) || null;
-                        setLanguage(currentLanguage);
-                    }
-                }
+        if (props.languageOptions.items) {
+            const languages = props.languageOptions.items.map(item => {
+                return {
+                    _guid: item.id,
+                    value: props.languageCaption.get(item).value as string
+                };
             });
-        };
-        getLanguages();
-    }, []);
+            setLanguageList(languages);
+        }
+    }, [props]);
+
+    useEffect(() => {
+        const currentUser = window.mx.session.getUserObject();
+        const currentLanguageId = currentUser.jsonData.attributes["System.User_Language"].value;
+        const currentLanguage = languageList.find(language => language._guid === currentLanguageId);
+        setSelectedLanguage(currentLanguage);
+    }, [languageList]);
 
     const selectLanguage = useCallback((item: LanguageItem) => {
-        setLanguage(item);
-        window.mx.session.getUserObject()?.addReference("System.User_Language", "" + item._guid);
+        const currentUser = window.mx.session.getUserObject();
+        currentUser.addReference("System.User_Language", "" + item._guid);
         window.mx.data.commit({
             mxobj: window.mx.session.getUserObject(),
             callback() {
-                window.mx.session
-                    .clearCachedSessionData()
-                    .then(() => window.mx.reload() && window.mx.reloadWithState());
+                setSelectedLanguage(item);
+                window.mx.reloadWithState();
             }
         });
     }, []);
+
     return (
-        <div>
-            {window.mx.session.getUserObject()?.addReference ? (
-                <PopupMenu
-                    position={props.position}
-                    currentLanguage={language}
-                    languageList={languageList}
-                    onSelect={selectLanguage}
-                    trigger={props.trigger}
-                    preview={false}
-                ></PopupMenu>
-            ) : null}
-        </div>
+        <LanguageSwitcher
+            position={props.position}
+            currentLanguage={selectedLanguage}
+            languageList={languageList}
+            onSelect={selectLanguage}
+            trigger={props.trigger}
+            preview={false}
+        />
     );
 }

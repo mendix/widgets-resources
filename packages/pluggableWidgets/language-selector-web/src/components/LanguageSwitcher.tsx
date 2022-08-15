@@ -15,15 +15,15 @@ import {
 import { PositionEnum, TriggerEnum } from "../../typings/LanguageSelectorProps";
 import { LanguageItem } from "../LanguageSelector";
 
-interface PopupMenuProps {
+interface LanguageSwitcherProps {
     preview: boolean;
-    currentLanguage: LanguageItem | null;
-    languageList: LanguageItem[];
+    currentLanguage: LanguageItem | undefined;
+    languageList: any[];
     position: PositionEnum;
     onSelect: (lang: LanguageItem) => void;
     trigger: TriggerEnum;
 }
-export const PopupMenu = (props: PopupMenuProps): ReactElement => {
+export const LanguageSwitcher = (props: LanguageSwitcherProps): ReactElement => {
     const preview = !!props.preview;
     const { languageList, trigger } = props;
     const [visibility, setVisibility] = useState(false);
@@ -35,11 +35,12 @@ export const PopupMenu = (props: PopupMenuProps): ReactElement => {
         return languageList.map(item => {
             return (
                 <div key={item._guid} className={"popupmenu-basic-item"} onClick={() => props.onSelect(item)}>
-                    {item.jsonData.attributes.Code.value} {item.jsonData.attributes.Description.value}
+                    {item.value}
                 </div>
             );
         });
     };
+
     const onClickHandle = useCallback(
         (e): void => {
             e.preventDefault();
@@ -48,6 +49,7 @@ export const PopupMenu = (props: PopupMenuProps): ReactElement => {
         },
         [setVisibility]
     );
+
     const onHover =
         trigger === "hover"
             ? {
@@ -55,7 +57,9 @@ export const PopupMenu = (props: PopupMenuProps): ReactElement => {
                   onMouseLeave: onClickHandle
               }
             : {};
+
     const onClick = trigger === "click" ? { onClick: onClickHandle } : {};
+
     useEffect(() => {
         const element = ref.current?.querySelector(".popupmenu-menu") as HTMLDivElement | null;
         if (element) {
@@ -65,10 +69,11 @@ export const PopupMenu = (props: PopupMenuProps): ReactElement => {
             }
         }
     }, [props.position, visibility]);
+
     return (
         <div ref={ref} className={classNames("popupmenu")} {...onHover}>
             <div className={"popupmenu-trigger"} {...onClick}>
-                {props?.currentLanguage?.jsonData.attributes.Description.value || ""}
+                {props?.currentLanguage?.value || ""}
             </div>
             <div className={classNames("popupmenu-menu", `popupmenu-position-${props.position}`)}>{menuOptions()}</div>
         </div>
