@@ -1127,7 +1127,7 @@
         },
         {
             "name": "DatagridDateFilter",
-            "version": "2.4.0",
+            "version": "2.4.1",
             "items": [
                 {
                     "id": "com.mendix.widget.web.datagriddatefilter.DatagridDateFilter",
@@ -1172,7 +1172,7 @@
         },
         {
             "name": "DatagridDropdownFilter",
-            "version": "2.2.2",
+            "version": "2.2.3",
             "items": [
                 {
                     "id": "com.mendix.widget.web.datagriddropdownfilter.DatagridDropdownFilter",
@@ -1217,7 +1217,7 @@
         },
         {
             "name": "DatagridNumberFilter",
-            "version": "2.3.0",
+            "version": "2.3.1",
             "items": [
                 {
                     "id": "com.mendix.widget.web.datagridnumberfilter.DatagridNumberFilter",
@@ -1262,7 +1262,7 @@
         },
         {
             "name": "DatagridTextFilter",
-            "version": "2.3.0",
+            "version": "2.3.2",
             "items": [
                 {
                     "id": "com.mendix.widget.web.datagridtextfilter.DatagridTextFilter",
