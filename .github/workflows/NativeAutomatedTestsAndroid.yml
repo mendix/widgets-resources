@@ -307,6 +307,7 @@ jobs:
           path: |
             /Users/runner/.android/avd/*
             /Users/runner/.android/adb*
+            /Users/runner/Library/Android/sdk/system-images/**/*
           key: pixel_30_x86_aosp-atd_3core_and_system_images
       - name: "Run tests"
         run: npm run test:e2e:local:android -- ${{ needs.scope.outputs.since }}
