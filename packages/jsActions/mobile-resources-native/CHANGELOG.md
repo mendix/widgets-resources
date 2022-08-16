@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+
+-   We introduce a new `RequestGenericPermission` action for requesting any desired available device permission.
+
 ## [3.10.0] Native Mobile Resources - 2022-7-11
 
 ## [2.0.0] BackgroundGradient
