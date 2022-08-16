@@ -1,41 +1,41 @@
 name: Testing Atlas Build
 
 on:
-    push:
-        branches: [master]
-        paths:
-            - "packages/theming/atlas/**"
-            - "!**/*.md"
-    pull_request:
-        branches: [master]
-        paths:
-          - "packages/theming/atlas/**"
-          - "!**/*.md"
+  push:
+    branches: [master]
+    paths:
+      - "packages/theming/atlas/**"
+      - "!**/*.md"
+  pull_request:
+    branches: [master]
+    paths:
+      - "packages/theming/atlas/**"
+      - "!**/*.md"
 
 jobs:
-    test:
-        name: "Testing Atlas Build"
-        runs-on: ubuntu-latest
+  test:
+    name: "Testing Atlas Build"
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: "Checking-out code"
-              uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
-              with:
-                  submodules: false
-            - name: "Defining cache"
-              uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed # v2
-              env:
-                  cache-name: cache-node-modules
-              with:
-                  path: ~/.npm
-                  key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-            - name: "Defining node version"
-              uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
-              with:
-                  node-version-file: '.nvmrc'
-            - name: "Installing dependencies"
-              run: npm install
-            - name: "Running Atlas build"
-              run: |
-                  cd packages/theming/atlas
-                  npm run build -- --validate-sass
+    steps:
+      - name: "Checking-out code"
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
+        with:
+          submodules: false
+      - name: "Defining cache"
+        uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed # v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+      - name: "Defining node version"
+        uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
+        with:
+          node-version-file: ".nvmrc"
+      - name: "Installing dependencies"
+        run: npm install
+      - name: "Running Atlas build"
+        run: |
+          cd packages/theming/atlas
+          npm run build -- --validate-sass

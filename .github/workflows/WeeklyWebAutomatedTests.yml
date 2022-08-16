@@ -3,55 +3,55 @@ name: Run cross-browser automated end-to-end tests weekly
 on:
   schedule:
     # At 03:00 on Tuesday.
-    - cron: '0 03 * * 2'
+    - cron: "0 03 * * 2"
 
 jobs:
-    test:
-        name: "Cross-Browser Automated tests"
-        runs-on: ubuntu-latest
-        permissions:
-          packages: read
-          contents: read
-        strategy:
-            # when one test fails, DO NOT cancel the other
-            fail-fast: false
-            matrix:
-                # run 3 copies of the current job in parallel
-                containers: [0, 1, 2]
+  test:
+    name: "Cross-Browser Automated tests"
+    runs-on: ubuntu-latest
+    permissions:
+      packages: read
+      contents: read
+    strategy:
+      # when one test fails, DO NOT cancel the other
+      fail-fast: false
+      matrix:
+        # run 3 copies of the current job in parallel
+        containers: [0, 1, 2]
 
-        steps:
-            - name: "Checking out code"
-              uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
-              with:
-                submodules: false
-            - name: "Defining node version"
-              uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
-              with:
-                  node-version-file: '.nvmrc'
-            - name: "Installing dependencies"
-              run: npm install
-            - name: Login to GitHub Container Registry
-              if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
-              uses: docker/login-action@42d299face0c5c43a0487c477f595ac9cf22f1a7 # v1.12.0
-              with:
-                  registry: ghcr.io
-                  username: ${{ github.actor }}
-                  password: ${{ secrets.GITHUB_TOKEN }}
-            - name: "Executing E2E tests on Firefox"
-              run: CIRCLE_NODE_INDEX=${{ matrix.containers }} BROWSER_CYPRESS=firefox npm run test:e2e -- ${{ steps.variables.outputs.arg }}
-            - name: "Fixing files permissions"
-              if: failure()
-              run: |
-                  sudo find ${{ github.workspace }}/packages/* -type d -exec chmod 755 {} \;
-                  sudo find ${{ github.workspace }}/packages/* -type f -exec chmod 644 {} \;
-            - name: "Archive test screenshot diff results"
-              uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
-              if: failure()
-              with:
-                  name: test-screenshot-results
-                  path: |
-                      ${{ github.workspace }}/packages/**/tests/e2e/screenshot-results/diff/**/*.png
-                      ${{ github.workspace }}/packages/**/tests/e2e/screenshot-results/TESTFAIL_*.png
-                      ${{ github.workspace }}/packages/**/cypress/cypress-visual-screenshots/diff/*.png
-                      ${{ github.workspace }}/packages/**/cypress/videos/*.mp4
-                  if-no-files-found: error
+    steps:
+      - name: "Checking out code"
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
+        with:
+          submodules: false
+      - name: "Defining node version"
+        uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
+        with:
+          node-version-file: ".nvmrc"
+      - name: "Installing dependencies"
+        run: npm install
+      - name: Login to GitHub Container Registry
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        uses: docker/login-action@42d299face0c5c43a0487c477f595ac9cf22f1a7 # v1.12.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Executing E2E tests on Firefox"
+        run: CIRCLE_NODE_INDEX=${{ matrix.containers }} BROWSER_CYPRESS=firefox npm run test:e2e -- ${{ steps.variables.outputs.arg }}
+      - name: "Fixing files permissions"
+        if: failure()
+        run: |
+          sudo find ${{ github.workspace }}/packages/* -type d -exec chmod 755 {} \;
+          sudo find ${{ github.workspace }}/packages/* -type f -exec chmod 644 {} \;
+      - name: "Archive test screenshot diff results"
+        uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
+        if: failure()
+        with:
+          name: test-screenshot-results
+          path: |
+            ${{ github.workspace }}/packages/**/tests/e2e/screenshot-results/diff/**/*.png
+            ${{ github.workspace }}/packages/**/tests/e2e/screenshot-results/TESTFAIL_*.png
+            ${{ github.workspace }}/packages/**/cypress/cypress-visual-screenshots/diff/*.png
+            ${{ github.workspace }}/packages/**/cypress/videos/*.mp4
+          if-no-files-found: error

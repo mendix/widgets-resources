@@ -1,72 +1,71 @@
 name: Script tests
 
 on:
-    push:
-        branches: [master]
-    pull_request:
-        branches: [master]
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
 
 jobs:
-    test:
-        name: "Script tests (Node ${{ matrix.node }}, ${{ matrix.os }})"
-        runs-on: ${{ matrix.os }}
-        strategy:
-            matrix:
-                node: [16]
-                os: [windows-latest, ubuntu-latest]
-                include:
-                    - node: 14
-                      os: ubuntu-latest
-                      experimental: true
+  test:
+    name: "Script tests (Node ${{ matrix.node }}, ${{ matrix.os }})"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node: [16]
+        os: [windows-latest, ubuntu-latest]
+        include:
+          - node: 14
+            os: ubuntu-latest
+            experimental: true
 
-        steps:
-            - name: "Checking changed files"
-              id: files
-              uses: softprops/diffset@3aeca0719d5043522e155012d3c9f7470fdd2dc6 # v1
-              if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
-              with:
-                global_files: |
-                  !{packages/**/*,configs/e2e/*.json,scripts/**/*,data/**/*}
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            - name: "Checking-out code"
-              uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
-              with:
-                  submodules: false
-            - name: "Fetching master to compare"
-              if: github.event_name == 'pull_request' && steps.files.outputs.global_files == ''
-              run:
-                  git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
-            - name: "Defining environment variables"
-              if: startsWith(matrix.os, 'windows')
-              id: variablesWindows
-              run: |
-                  echo "::set-output name=arg::$(If ('${{ steps.files.outputs.global_files }}' -eq '' -AND '${{ github.event_name == 'pull_request' }}' -eq 'true'){ echo '--since origin/${{ github.base_ref }}' } Else { echo '' })"
-            - name: "Defining environment variables"
-              if: startsWith(matrix.os, 'ubuntu')
-              id: variablesLinux
-              run: |
-                  echo "::set-output name=arg::$(if [ "${{ steps.files.outputs.global_files }}" = "" ] && ${{ github.event_name == 'pull_request' }}; then echo '--since origin/${{ github.base_ref }}'; else echo ''; fi)"
-            - name: "Defining cache"
-              uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed # v2
-              env:
-                cache-name: cache-node-modules
-              with:
-                path: ~/.npm
-                key: ${{ runner.os }}-${{ matrix.node }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-            - name: "Defining node version"
-              uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
-              with:
-                  node-version: ${{ matrix.node }}
-            - name: "Removing package-lock and installing dependencies"
-              if: matrix.node == '14'
-              # Because lerna doesn't handle nicely the lower version of node we need to remove the package-lock https://github.com/lerna/lerna/issues/2832
-              run: rm -f package-lock.json && npm install
-            - name: "Installing dependencies"
-              if: matrix.node != '14'
-              run: npm install
-            - name: Increase number of watchers
-              if: startsWith(matrix.os, 'ubuntu')
-              run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-            - name: "Running PIW-Tools commands tests"
-              run: npm run test:scripts -- ${{ steps.variablesLinux.outputs.arg }} ${{ steps.variablesWindows.outputs.arg }}
+    steps:
+      - name: "Checking changed files"
+        id: files
+        uses: softprops/diffset@3aeca0719d5043522e155012d3c9f7470fdd2dc6 # v1
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        with:
+          global_files: |
+            !{packages/**/*,configs/e2e/*.json,scripts/**/*,data/**/*}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Checking-out code"
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
+        with:
+          submodules: false
+      - name: "Fetching master to compare"
+        if: github.event_name == 'pull_request' && steps.files.outputs.global_files == ''
+        run: git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
+      - name: "Defining environment variables"
+        if: startsWith(matrix.os, 'windows')
+        id: variablesWindows
+        run: |
+          echo "::set-output name=arg::$(If ('${{ steps.files.outputs.global_files }}' -eq '' -AND '${{ github.event_name == 'pull_request' }}' -eq 'true'){ echo '--since origin/${{ github.base_ref }}' } Else { echo '' })"
+      - name: "Defining environment variables"
+        if: startsWith(matrix.os, 'ubuntu')
+        id: variablesLinux
+        run: |
+          echo "::set-output name=arg::$(if [ "${{ steps.files.outputs.global_files }}" = "" ] && ${{ github.event_name == 'pull_request' }}; then echo '--since origin/${{ github.base_ref }}'; else echo ''; fi)"
+      - name: "Defining cache"
+        uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed # v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-${{ matrix.node }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+      - name: "Defining node version"
+        uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
+        with:
+          node-version: ${{ matrix.node }}
+      - name: "Removing package-lock and installing dependencies"
+        if: matrix.node == '14'
+        # Because lerna doesn't handle nicely the lower version of node we need to remove the package-lock https://github.com/lerna/lerna/issues/2832
+        run: rm -f package-lock.json && npm install
+      - name: "Installing dependencies"
+        if: matrix.node != '14'
+        run: npm install
+      - name: Increase number of watchers
+        if: startsWith(matrix.os, 'ubuntu')
+        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+      - name: "Running PIW-Tools commands tests"
+        run: npm run test:scripts -- ${{ steps.variablesLinux.outputs.arg }} ${{ steps.variablesWindows.outputs.arg }}

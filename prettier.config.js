@@ -34,6 +34,14 @@ module.exports = {
             options: {
                 printWidth: 500
             }
+        },
+        {
+            files: ["*.yaml", "*.yml"],
+            options: {
+                tabWidth: 2,
+                // Disable line wrapping in .yml files
+                printWidth: 99999
+            }
         }
     ]
 };
