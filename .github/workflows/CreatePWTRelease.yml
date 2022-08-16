@@ -1,0 +1,33 @@
+name: Create PWT release
+
+on: workflow_dispatch
+
+jobs:
+  release:
+    name: "Create PWT release"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checking-out code"
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
+        with:
+          submodules: false
+
+      - name: "Defining node version"
+        uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: "Installing dependencies"
+        run: npm install
+
+      # no separate build step as PWT is ready to use after "prepare" step
+      # and "prepare" step runs automatically after "npm install"
+
+      - name: "Creating PWT release"
+        run: "npm run release:pwt:ts"
+        env:
+          GH_USERNAME: ${{ secrets.GH_USERNAME }}
+          GH_EMAIL: ${{ secrets.GH_EMAIL }}
+          GH_NAME: ${{ secrets.GH_NAME }}
+          GH_PAT: ${{ secrets.GH_PAT }}
