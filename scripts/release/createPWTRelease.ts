@@ -1,9 +1,12 @@
-import { getPackageInfo, PackageInfo } from "../../packages/tools/release-utils-internal/dist";
-import gh from "../../packages/tools/release-utils-internal/dist/github";
 import { join } from "path";
-import { addRemoteWithAuthentication } from "../../packages/tools/release-utils-internal/dist/git";
-import { execShellCommand } from "../../packages/tools/release-utils-internal/dist/shell";
-import { WidgetChangelogFileWrapper } from "../../packages/tools/release-utils-internal/dist/changelog-parser";
+import {
+    addRemoteWithAuthentication,
+    execShellCommand,
+    getPackageInfo,
+    gh,
+    PackageInfo,
+    WidgetChangelogFileWrapper
+} from "../../packages/tools/release-utils-internal";
 
 main().catch(e => {
     console.error(e);
@@ -47,7 +50,7 @@ async function main(): Promise<void> {
     // 4. Do release
     console.log("Preparing pluggable-widget-tools release...");
 
-    const remoteName = `origin-${packageInfo.packageName}-v${packageInfo.version.format()}-${makeid()}`;
+    const remoteName = `origin-${packageInfo.packageName}-v${packageInfo.version.format()}-${Date.now()}`;
 
     // 4.1 Set remote repo as origin
     await addRemoteWithAuthentication(packageInfo.repositoryUrl, remoteName);
@@ -59,7 +62,7 @@ async function main(): Promise<void> {
     // 4.3 Create release
     console.log("Creating Github release...");
     await gh.createGithubReleaseFrom({
-        title: `${packageInfo.packageFullName} (Web) - Marketplace Release v${packageInfo.version.format()}`,
+        title: `${packageInfo.packageFullName} v${packageInfo.version.format()}`,
         notes: changelog.changelog.content[0].sections
             .map(s => `## ${s.type}\n\n${s.logs.map(l => `- ${l}`).join("\n\n")}`)
             .join("\n\n"),
@@ -78,40 +81,30 @@ async function updateChangelogsAndCreatePR(
     releaseTag: string,
     remoteName: string
 ): Promise<void> {
-    const changelogBranchName = `${releaseTag}-branch`;
+    const releaseBranchName = `${releaseTag}-update-changelog`;
 
-    console.log(`Creating branch '${changelogBranchName}'...`);
-    await execShellCommand(`git checkout -b ${changelogBranchName}`);
+    console.log(`Creating branch '${releaseBranchName}'...`);
+    await execShellCommand(`git checkout -b ${releaseBranchName}`);
 
-    console.log("Updating package CHANGELOG.md...");
+    console.log("Updating CHANGELOG.md...");
     const updatedChangelog = changelog.moveUnreleasedToVersion(packageInfo.version);
     updatedChangelog.save();
 
-    console.log(`Committing CHANGELOG.md to '${changelogBranchName}' and pushing to remote...`);
+    console.log(`Committing CHANGELOG.md to '${releaseBranchName}' and pushing to remote...`);
     await execShellCommand([
         `git add ${changelog.changelogPath}`,
-        `git commit -m "chore(${packageInfo.packageName}): update changelogs"`,
-        `git push ${remoteName} ${changelogBranchName}`
+        `git commit -m "chore(${packageInfo.packageName}): update changelog"`,
+        `git push ${remoteName} ${releaseBranchName}`
     ]);
 
-    console.log(`Creating pull request for '${changelogBranchName}'`);
+    console.log(`Creating pull request for '${releaseBranchName}'`);
     await gh.createGithubPRFrom({
-        title: `${packageInfo.packageFullName}: Merge release to master`,
-        body: "This is an automated PR that merges released tag to master.",
+        title: `${packageInfo.packageFullName} v${packageInfo.version.format()}: Update changelog`,
+        body: "This is an automated PR that merges changelog update to master.",
         base: "master",
-        head: changelogBranchName,
+        head: releaseBranchName,
         repo: packageInfo.repositoryUrl
     });
 
     console.log("Created PR for changelog updates.");
-}
-
-function makeid(length = 4): string {
-    let result = "";
-    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
 }

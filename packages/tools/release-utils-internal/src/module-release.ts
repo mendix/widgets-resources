@@ -1,7 +1,7 @@
 import { stat } from "node:fs/promises";
 import { BuildOptions, BuildParams, getBuildConfig, getDepsConfig } from "./config";
 import { setLocalGitUserInfo } from "./git";
-import gh from "./github";
+import { gh } from "./github";
 import { stepBuildDeps, stepBuildModuleMpk } from "./module-build";
 
 export async function moduleChangelogPR(): Promise<void> {
