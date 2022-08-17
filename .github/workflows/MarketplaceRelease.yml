@@ -53,7 +53,7 @@ jobs:
           MARKETPLACE_API_KEY: ${{ secrets.MARKETPLACE_API_KEY }}
           MARKETPLACE_USERNAME: ${{ secrets.MARKETPLACE_USERNAME }}
           TAG: ${{ steps.variables.outputs.tag }}
-      - name: "Send work-weixin-notifier on successful"
+      - name: "Send workweixin notifier on successful"
         uses: jerray/work-weixin-notifier@5341bd2e4ee6e2a2abe410f1a63ace0fdffb4384
         with:
           key: ${{ secrets.WEIXIN_API_KEY }}
