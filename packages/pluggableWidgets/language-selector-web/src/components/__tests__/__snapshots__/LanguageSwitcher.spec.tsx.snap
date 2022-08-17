@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Language switcher renders renders the structure with language list and selected default language 1`] = `
+<DocumentFragment>
+  <div
+    class="popupmenu"
+  >
+    <div
+      class="popupmenu-trigger"
+    >
+      En us
+    </div>
+    <div
+      class="popupmenu-menu popupmenu-position-left"
+    >
+      <div
+        class="popupmenu-basic-item"
+      >
+        En us
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Language switcher renders the structure with empty language list 1`] = `
+<DocumentFragment>
+  <div
+    class="popupmenu"
+  >
+    <div
+      class="popupmenu-trigger"
+    />
+    <div
+      class="popupmenu-menu popupmenu-position-left"
+    />
+  </div>
+</DocumentFragment>
+`;

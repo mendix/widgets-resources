@@ -15,10 +15,10 @@ import {
 import { PositionEnum, TriggerEnum } from "../../typings/LanguageSelectorProps";
 import { LanguageItem } from "../LanguageSelector";
 
-interface LanguageSwitcherProps {
+export interface LanguageSwitcherProps {
     preview: boolean;
     currentLanguage: LanguageItem | undefined;
-    languageList: any[];
+    languageList: LanguageItem[];
     position: PositionEnum;
     onSelect: (lang: LanguageItem) => void;
     trigger: TriggerEnum;

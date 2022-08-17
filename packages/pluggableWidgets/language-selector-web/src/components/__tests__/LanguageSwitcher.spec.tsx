@@ -1,25 +1,26 @@
-import { mount, render } from "enzyme";
+import { render } from "@testing-library/react";
 import { createElement } from "react";
-import { LanguageItem } from "src/LanguageSelector";
-import { LanguageSwitcher } from "../LanguageSwitcher";
+import { PositionEnum, TriggerEnum } from "typings/LanguageSelectorProps";
+import { LanguageSwitcher, LanguageSwitcherProps } from "../LanguageSwitcher";
 
-const props = {};
+let props: LanguageSwitcherProps = {
+    preview: false,
+    currentLanguage: undefined,
+    languageList: [],
+    position: "left" as PositionEnum,
+    onSelect: jest.fn(),
+    trigger: "click" as TriggerEnum
+};
+const language = { _guid: "111", value: "En us" };
 describe("Language switcher", () => {
-    it("renders the structure with an image", () => {
-        expect(
-            render(
-                <LanguageSwitcher
-                    preview={false}
-                    currentLanguage={undefined}
-                    languageList={[]}
-                    position={"left"}
-                    onSelect={function (lang: LanguageItem): void {
-                        throw new Error("Function not implemented.");
-                    }}
-                    trigger={"click"}
-                    {...props}
-                />
-            )
-        ).toMatchSnapshot();
+    it("renders the structure with empty language list", () => {
+        const { asFragment } = render(<LanguageSwitcher {...props} />);
+        expect(asFragment()).toMatchSnapshot();
+    });
+
+    it("renders renders the structure with language list and selected default language", () => {
+        props = { ...props, languageList: [language], currentLanguage: language };
+        const { asFragment } = render(<LanguageSwitcher {...props} />);
+        expect(asFragment()).toMatchSnapshot();
     });
 });
