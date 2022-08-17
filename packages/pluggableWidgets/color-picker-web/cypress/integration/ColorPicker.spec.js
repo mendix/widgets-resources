@@ -2,7 +2,7 @@ describe("color-picker-web", () => {
     describe("render a picker of mode", () => {
         it("button", () => {
             cy.visit("/p/modePage");
-            cy.wait(1000);
+            cy.wait(3000);
             cy.get(".mx-name-colorPicker3 .widget-color-picker-inner").should(
                 "have.css",
                 "background",
