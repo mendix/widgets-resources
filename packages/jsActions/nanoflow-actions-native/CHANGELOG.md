@@ -6,9 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Breaking
+
+-   We removed next actions: SetCookie, ReadCookie, SetFavicon, ScrollToClass.
+
 ## [2.5.0] Nanoflow Commons - 2022-7-25
 
-## Added
+### Added
 
 -   We introduced a new set of actions:
     -   AddMilliseconds
