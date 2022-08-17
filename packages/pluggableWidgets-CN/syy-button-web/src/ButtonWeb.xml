@@ -89,11 +89,11 @@
                 <caption>Confirm title</caption>
                 <description />
             </property>
-            <property key="confirmokText" type="string" defaultValue="confirm">
+            <property key="confirmokText" type="string" required="false">
                 <caption>Confirm text</caption>
                 <description />
             </property>
-            <property key="confirmcancelText" type="string" defaultValue="cancel">
+            <property key="confirmcancelText" type="string" required="false">
                 <caption>Cancel text</caption>
                 <description />
             </property>

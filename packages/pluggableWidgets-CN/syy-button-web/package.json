@@ -16,6 +16,10 @@
     "minimumMXVersion": "9.6.0",
     "marketplaceId": 118796
   },
+  "testProject": {
+    "githubUrl": "https://github.com/runjiangufen/testProjects",
+    "branchName": "syy-button-web"
+  },
   "config": {
     "projectPath": "D:\\work\\antd-web-docs-main",
     "mendixHost": "http://localhost:8080",
@@ -23,16 +27,16 @@
   },
   "packagePath": "runjian",
   "scripts": {
-    "start": "cross-env MPKOUTPUT=ButtonWeb.mpk pluggable-widgets-tools start:server",
-    "dev": "cross-env MPKOUTPUT=ButtonWeb.mpk pluggable-widgets-tools start:web",
-    "build": "cross-env MPKOUTPUT=ButtonWeb.mpk pluggable-widgets-tools build:web",
+    "start": "pluggable-widgets-tools start:server",
+    "dev": "pluggable-widgets-tools start:web",
+    "build": "pluggable-widgets-tools build:web",
     "format": "pluggable-widgets-tools format",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e": "pluggable-widgets-tools test:e2e:web:cypress",
-    "test:e2e:local": "npx cypress open --browser chrome --config-file ../../../configs/e2e/cypress/cypress.json",
-    "release": "cross-env MPKOUTPUT=ButtonWeb.mpk pluggable-widgets-tools release:web",
+    "test:e2e:local": "npx cypress@9.6.1 open --browser chrome --config-file ../../../configs/e2e/cypress/cypress.json",
+    "release": "pluggable-widgets-tools release:web",
     "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "devDependencies": {
