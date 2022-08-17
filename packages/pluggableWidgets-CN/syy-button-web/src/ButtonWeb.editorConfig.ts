@@ -1,18 +1,8 @@
 import { ButtonWebPreviewProps } from "../typings/ButtonWebProps";
 
-import {
-    // changePropertyIn,
-    // ContainerProps,
-    // DropZoneProps,
-    // hideNestedPropertiesIn,
-    hidePropertiesIn,
-    hidePropertyIn,
-    // Problem,
-    Properties,
-    // RowLayoutProps,
-    StructurePreviewProps,
-    transformGroupsIntoTabs
-} from "@mendix/piw-utils-internal";
+import { StructurePreviewProps } from "@mendix/piw-utils-internal";
+
+import { hidePropertiesIn, hidePropertyIn, Properties, transformGroupsIntoTabs } from "@mendix/pluggable-widgets-tools";
 
 export function getProperties(
     values: ButtonWebPreviewProps,

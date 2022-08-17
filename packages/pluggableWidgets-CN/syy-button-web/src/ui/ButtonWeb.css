@@ -1,3 +1,6 @@
 /*
     ButtonWeb
 */
+.rating-icon+span {
+    margin-left: 8px;
+}
