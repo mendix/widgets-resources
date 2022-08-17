@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
-    "detox": "^19.7.1",
+    "detox": "^19.9.3",
     "eslint": "^7.20.0"
   }
 }
