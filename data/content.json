@@ -70,7 +70,7 @@
                     "icons": {},
                     "tests": {
                         "hasUnitTests": true,
-                        "hasE2ETests": false
+                        "hasE2ETests": true
                     }
                 }
             ]
