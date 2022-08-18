@@ -1,11 +1,13 @@
 import { ReactNode, createElement, useEffect, useState, useCallback } from "react";
 import { LanguageSelectorContainerProps } from "typings/LanguageSelectorProps";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
+import "./ui/LanguageSelector.scss";
 
 export type LanguageItem = {
     _guid: string;
     value: string;
 };
+
 export default function LanguageSelector(props: LanguageSelectorContainerProps): ReactNode {
     const [selectedLanguage, setSelectedLanguage] = useState<LanguageItem | undefined>();
     const [languageList, setLanguageList] = useState<LanguageItem[]>([]);
@@ -43,6 +45,7 @@ export default function LanguageSelector(props: LanguageSelectorContainerProps):
 
     return (
         <LanguageSwitcher
+            className={props.class}
             position={props.position}
             currentLanguage={selectedLanguage}
             languageList={languageList}

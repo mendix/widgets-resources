@@ -20,8 +20,9 @@ export interface LanguageSwitcherProps {
     currentLanguage: LanguageItem | undefined;
     languageList: LanguageItem[];
     position: PositionEnum;
-    onSelect: (lang: LanguageItem) => void;
+    onSelect?: (lang: LanguageItem) => void;
     trigger: TriggerEnum;
+    className: string;
 }
 export const LanguageSwitcher = (props: LanguageSwitcherProps): ReactElement => {
     const preview = !!props.preview;
@@ -34,7 +35,15 @@ export const LanguageSwitcher = (props: LanguageSwitcherProps): ReactElement => 
     const menuOptions = (): ReactElement[] => {
         return languageList.map(item => {
             return (
-                <div key={item._guid} className={"popupmenu-basic-item"} onClick={() => props.onSelect(item)}>
+                <div
+                    key={item._guid}
+                    className={"popupmenu-basic-item"}
+                    onClick={() => {
+                        if (props.onSelect) {
+                            return props.onSelect(item);
+                        }
+                    }}
+                >
                     {item.value}
                 </div>
             );
@@ -70,10 +79,15 @@ export const LanguageSwitcher = (props: LanguageSwitcherProps): ReactElement => 
         }
     }, [props.position, visibility]);
 
+    const popupMenuStyle = {
+        display: "flex",
+        alignItems: "center"
+    };
     return (
-        <div ref={ref} className={classNames("popupmenu")} {...onHover}>
-            <div className={"popupmenu-trigger"} {...onClick}>
-                {props?.currentLanguage?.value || ""}
+        <div ref={ref} className={classNames(props.className, "widget-language-selector", "popupmenu")} {...onHover}>
+            <div className={"popupmenu-trigger popupmenu-trigger-alignement"} style={popupMenuStyle} {...onClick}>
+                <span className="current-language-text">{props?.currentLanguage?.value || ""}</span>
+                <span className={`glyphicon glyphicon-chevron-${visibility ? "up" : "down"}`} aria-hidden="true"></span>
             </div>
             <div className={classNames("popupmenu-menu", `popupmenu-position-${props.position}`)}>{menuOptions()}</div>
         </div>
