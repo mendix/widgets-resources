@@ -1,7 +1,7 @@
 {
   "name": "mobile-resources-native",
   "moduleName": "Native Mobile Resources",
-  "version": "3.10.0",
+  "version": "3.11.0",
   "license": "Apache-2.0",
   "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "repository": {
@@ -36,7 +36,7 @@
     "react-native-sound": "0.11.0",
     "react-native-touch-id": "4.4.1",
     "url-parse": "^1.4.7",
-    "react-native-permissions": "3.0.4",
+    "react-native-permissions": "3.3.1",
     "fbjs": "3.0.4"
   },
   "devDependencies": {
