@@ -1,0 +1,43 @@
+name: Create GitHub release of PWT
+
+# This workflow for pluggable-widgets-tools:
+# 1. Puts current version from package.json as the version for unreleased changes in CHANGELOG.md
+# 2. Commits the updates of CHANGELOG.md and pushes the commit to the repo
+# 3. Based on the commit it:
+#   3.1 Creates a draft GitHub release for PWT.
+#   3.2 Creates a merge request that targets CHANGELOG.md updates back to master.
+#
+#  NOTE: Publishing to npm doesn't happen in this workflow. PublishNpm.yml is responsible fot npm publishing.
+#        When the GitHub release is approved, that creates a corresponding git tag to trigger PublishNpm.yml.
+
+on: workflow_dispatch
+
+jobs:
+  release:
+    name: "Create GitHub release and changelogs MR of PWT"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checking-out code"
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
+        with:
+          submodules: false
+
+      - name: "Defining node version"
+        uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
+        with:
+          node-version-file: ".nvmrc"
+
+      - name: "Installing dependencies"
+        run: npm install
+
+      # no separate build step as PWT is ready to use after "prepare" step
+      # and "prepare" step runs automatically after "npm install"
+
+      - name: "Creating PWT release and MR"
+        run: "npm run release:pwt:ts"
+        env:
+          GH_USERNAME: ${{ secrets.GH_USERNAME }}
+          GH_EMAIL: ${{ secrets.GH_EMAIL }}
+          GH_NAME: ${{ secrets.GH_NAME }}
+          GH_PAT: ${{ secrets.GH_PAT }}

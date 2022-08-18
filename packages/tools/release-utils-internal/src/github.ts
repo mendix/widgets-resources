@@ -111,4 +111,4 @@ export class GitHub {
     }
 }
 
-export default new GitHub();
+export const gh = new GitHub();
