@@ -2,32 +2,17 @@
   "name": "@mendix/piw-utils-internal",
   "version": "1.0.0",
   "description": "Tools and helper functions for PIW",
-  "license": "Apache-2.0",
-  "copyright": "© Mendix Technology BV 2022. All rights reserved.",
-  "homepage": "https://github.com/mendix/widgets-resources/tree/master/packages/tools/piw-utils-internal",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mendix/widgets-resources/"
-  },
   "private": true,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "start": "tsc --watch",
-    "prebuild": "rimraf ./dist",
-    "build": "tsc",
-    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-    "prepare": "npm run build",
-    "test": "pluggable-widgets-tools test:unit:web"
+    "start": "..\"/../../node_modules/.bin/tsc\" --watch",
+    "prebuild": "..\"/../../node_modules/.bin/rimraf\" ./dist",
+    "build": "..\"/../../node_modules/.bin/tsc\"",
+    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "prepare": "npm run build"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": ">=8.9.2",
-    "eslint": "^7.20.0",
-    "typescript": "^4.5.4",
-    "rimraf": "^2.7.1"
-  },
-  "files": [
-    "components",
-    "dist"
-  ]
+    "@mendix/pluggable-widgets-tools": ">=8.9.2"
+  }
 }

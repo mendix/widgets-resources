@@ -1,0 +1,35 @@
+{
+  "name": "syy-radio-web",
+  "widgetName": "RadioWeb",
+  "version": "1.1.0",
+  "description": "My widget description",
+  "copyright": "2020 Mendix Technology BV",
+  "author": "songzhengxu",
+  "engines": {
+    "node": ">=12"
+  },
+  "config": {
+    "projectPath": "C:\\runjian\\develop\\git\\antd-web-docs",
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": "3000"
+  },
+  "packagePath": "runjian",
+  "scripts": {
+    "start": "cross-env MPKOUTPUT=RadioWeb.mpk pluggable-widgets-tools start:server",
+    "dev": "cross-env MPKOUTPUT=RadioWeb.mpk pluggable-widgets-tools start:ts",
+    "build": "cross-env MPKOUTPUT=RadioWeb.mpk pluggable-widgets-tools build:ts",
+    "format": "pluggable-widgets-tools format",
+    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
+    "release": "cross-env MPKOUTPUT=RadioWeb.mpk pluggable-widgets-tools release:web"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "@types/classnames": "^2.2.6",
+    "cross-env": "^7.0.2"
+  },
+  "dependencies": {
+    "@mendix/piw-utils-internal": "^1.0.0",
+    "classnames": "^2.2.6"
+  }
+}

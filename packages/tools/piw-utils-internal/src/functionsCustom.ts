@@ -1,14 +1,7 @@
-import {
-    ActionValue,
-    DynamicValue,
-    EditableValue,
-    ListValue,
-    ListAttributeValue,
-    ListExpressionValue,
-    ValueStatus,
-    ObjectItem
-} from "mendix";
+import { EditableValue, ListValue, ListAttributeValue, ListExpressionValue, ValueStatus, ObjectItem } from "mendix";
+
 import { SessionStorageKey } from "./constants";
+
 import Big from "big.js";
 
 /**
@@ -24,12 +17,6 @@ export function queryArray(array: any[], key: string, value: string): any {
     }
     return array.find(_ => _[key] === value);
 }
-
-export const executeAction = (action?: ActionValue): void => {
-    if (action && action.canExecute && !action.isExecuting) {
-        action.execute();
-    }
-};
 
 export const getAttributeValueToString = (editable?: EditableValue<string | Big | any>, defaultValue = ""): string => {
     const value = getAttributeValue(editable);
@@ -55,8 +42,7 @@ export const updateAttributeValue = (
         return;
     }
 
-    // 修复 if (editable.value instanceof Big) 来做判断 时 editable.value 为空的bug
-    if (editable.value instanceof Big || editable.formatter.type === "number") {
+    if (editable.value instanceof Big) {
         editable.setValue(new Big(value));
     } else {
         let setValue = "";
@@ -65,6 +51,7 @@ export const updateAttributeValue = (
         } else {
             setValue = value;
         }
+
         editable.setValue(setValue);
     }
 };
@@ -77,33 +64,10 @@ export const listIsAvailable = (listValue?: ListValue): boolean => {
     return listValue !== undefined && listValue && listValue.status === ValueStatus.Available;
 };
 
-export const isAvailable = (property: DynamicValue<any> | EditableValue<any>): boolean => {
-    return property && property.status === ValueStatus.Available && property.value;
-};
-
-export const isAvailableWithoutValue = (property: EditableValue<any>): boolean => {
-    return property && property.status === ValueStatus.Available;
-};
-
-export const parseStyle = (style = ""): { [key: string]: string } => {
-    try {
-        return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
-            const pair = line.split(":");
-            if (pair.length === 2) {
-                const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
-                styleObject[name] = pair[1].trim();
-            }
-            return styleObject;
-        }, {});
-    } catch (_) {
-        return {};
-    }
-};
-
 let userMenuPaths: string[] = [];
 
 export interface UserMenuType {
-    path: string;
+    Path: string;
 }
 
 /**
@@ -127,25 +91,9 @@ export const getAuthPaths = (): string[] => {
 
     const userMenu: UserMenuType[] = JSON.parse(window.sessionStorage.getItem(SessionStorageKey.userMenu) || "[]");
 
-    userMenuPaths = userMenu.map(({ path }: UserMenuType) => path).filter(path => !!path);
+    userMenuPaths = userMenu.map(({ Path }: UserMenuType) => Path).filter(path => !!path);
 
     return userMenuPaths;
-};
-
-export const getUserRoleNames = (): string => {
-    return mx.session.getConfig("roles");
-};
-
-export const hasSomeRole = (role: string[]): boolean => {
-    if (undefined === role) {
-        return !0;
-    }
-    const roleNames = getUserRoleNames();
-    return role.some(role => roleNames.includes(role));
-};
-
-export const hasSomeAdminRole = (): boolean => {
-    return hasSomeRole(["Administrator"]);
 };
 
 /**
@@ -157,13 +105,8 @@ export const checkPathPermission = (authPath: string): boolean => {
         return true;
     }
 
-    // 判断是否超级管理员权限，直接显示所有权限按钮
-    if (hasSomeAdminRole()) {
-        return true;
-    }
-
     const authPaths = getAuthPaths();
-    // 本地没有权限资源时，不要放出权限按钮
+
     // if (!authPaths.length) {
     //     return true;
     // }
@@ -175,11 +118,11 @@ export const checkPathPermission = (authPath: string): boolean => {
  * 判断是否有值
  * @returns boolean true为有值
  */
-export const valueIsEmpty = (value: string | string[] | undefined): boolean => {
+export const valueIsEmpty = (value: string | string[]): boolean => {
     if (value instanceof Array) {
         return value.length <= 0;
     } else if ("undefined" === typeof value) {
-        return true;
+        return false;
     } else {
         return value === "" || value.toString().trim() === "";
     }
@@ -227,35 +170,4 @@ export const getListAttributeValue = (
         return attr.get(item).value;
     }
     return attr(item).value;
-};
-
-/**
- * 获取Mendix的会话数据
- * @returns string 会话数据
- */
-export const getSessionData = (): any => {
-    let sessionData = {};
-    try {
-        if (localStorage.session) {
-            sessionData = JSON.parse(localStorage.session);
-        }
-    } catch {
-        sessionData = {};
-    }
-
-    return sessionData;
-};
-
-/**
- * 获取指定Key的会话数据
- * @returns string 指定Key的值
- */
-export const getSessionDataByKey = (key: string): string | undefined | null => {
-    let value = sessionStorage.getItem(key);
-    if (!value) {
-        const sessionData = getSessionData();
-        value = sessionData[key];
-    }
-
-    return value;
 };

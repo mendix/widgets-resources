@@ -7,7 +7,8 @@ export function generatePreviewTypes(
     systemProperties: SystemProperty[]
 ): string[] {
     const results = Array.of<string>();
-    const isLabeled = systemProperties.some(p => p.$.key === "Label");
+    let isLabeled = systemProperties.some(p => p.$.key === "Label");
+    isLabeled = false;
 
     results.push(`export interface ${widgetName}PreviewProps {${
         !isLabeled

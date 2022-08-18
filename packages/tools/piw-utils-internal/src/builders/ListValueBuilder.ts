@@ -1,6 +1,7 @@
 import { ListValue, ObjectItem, ValueStatus } from "mendix";
 
 export function ListValueBuilder() {
+    // @ts-ignore
     const listValue: ListValue = {
         status: ValueStatus.Available,
         offset: 0,
@@ -10,12 +11,7 @@ export function ListValueBuilder() {
         hasMoreItems: false,
         setLimit: jest.fn(),
         setOffset: jest.fn(),
-        requestTotalCount: jest.fn(),
-        sortOrder: [],
-        filter: undefined,
-        setSortOrder: jest.fn(),
-        setFilter: jest.fn(),
-        reload: jest.fn()
+        requestTotalCount: jest.fn()
     };
     return {
         withItems(items: ObjectItem[]): ListValue {

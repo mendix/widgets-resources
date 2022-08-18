@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="runjian.radioweb.RadioWeb" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>SYY Radio Web</name>
+    <description>My widget description</description>
+    <icon />
+    <properties>
+        <propertyGroup caption="General">
+            <systemProperty key="Label" />
+            <property key="datasType" type="enumeration" defaultValue="dynamic">
+                <caption>DataType</caption>
+                <description>Configure the data source type</description>
+                <enumerationValues>
+                    <enumerationValue key="dynamic">dynamic</enumerationValue>
+                    <enumerationValue key="static">static</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="staticData" type="object" isList="true" required="false">
+                <caption>StaticData</caption>
+                <description />
+                <properties>
+                    <propertyGroup caption="Object list group">
+                        <property key="manualValue" type="string">
+                            <caption>value</caption>
+                            <description />
+                        </property>
+                        <property key="manuaTitle" type="string">
+                            <caption>label</caption>
+                            <description />
+                        </property>
+                        <property key="manualDisabled" type="boolean" defaultValue="false">
+                            <caption>disabled</caption>
+                            <description />
+                        </property>
+                    </propertyGroup>
+                </properties>
+            </property>
+            <property key="data" type="datasource" isList="true" required="false">
+                <caption>Data source</caption>
+                <description />
+            </property>
+            <property key="attribute" type="attribute" required="false" dataSource="data">
+                <caption>Attribute</caption>
+                <description>The value had selected</description>
+                <attributeTypes>
+                    <attributeType name="String" />
+                    <attributeType name="DateTime" />
+                    <attributeType name="Decimal" />
+                    <attributeType name="Integer" />
+                </attributeTypes>
+            </property>
+            <property key="title" type="attribute" dataSource="data" required="false">
+                <caption>Name</caption>
+                <description>The name will be displayed on the label</description>
+                <attributeTypes>
+                    <attributeType name="String" />
+                </attributeTypes>
+            </property>
+            <property key="attributedata" type="attribute" required="false">
+                <caption>Attributedata</caption>
+                <description>Use the enumeration value of the attribute of an entity as the male and female of the gender field of the user table as the breakthrough item and the data source</description>
+                <attributeTypes>
+                    <attributeType name="Enum" />
+                </attributeTypes>
+            </property>
+            <property key="selectedValue" type="attribute" required="false">
+                <caption>SelectedValue</caption>
+                <description>The value has selected</description>
+                <attributeTypes>
+                    <attributeType name="String" />
+                    <attributeType name="DateTime" />
+                    <attributeType name="Decimal" />
+                    <attributeType name="Integer" />
+                </attributeTypes>
+            </property>
+
+            <property key="isText" type="boolean" defaultValue="false">
+                <caption>IsText</caption>
+                <description>Only show as Text</description>
+            </property>
+            <property key="size" type="enumeration" defaultValue="middle">
+                <caption>Size</caption>
+                <description>The size of radio button style</description>
+                <enumerationValues>
+                    <enumerationValue key="large">large</enumerationValue>
+                    <enumerationValue key="middle">middle</enumerationValue>
+                    <enumerationValue key="small">small</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="buttonStyle" type="enumeration" defaultValue="solid">
+                <caption>ButtonStyle</caption>
+                <description>The style type of radio button</description>
+                <enumerationValues>
+                    <enumerationValue key="outline">outline</enumerationValue>
+                    <enumerationValue key="solid">solid</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="disabled" type="expression" defaultValue="false">
+                <caption>Disabled</caption>
+                <description>Disable all radio buttons</description>
+                <returnType type="Boolean" />
+            </property>
+            <property key="radioName" type="string" required="false">
+                <caption>RadioName</caption>
+                <description>The name property of all input[type="radio"] children</description>
+            </property>
+            <property key="optionType" type="enumeration" defaultValue="default">
+                <caption>OptionType</caption>
+                <description>Set Radio optionType</description>
+                <enumerationValues>
+                    <enumerationValue key="default">default</enumerationValue>
+                    <enumerationValue key="button">button</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="direction" type="enumeration" defaultValue="horizontal">
+                <caption>Direction</caption>
+                <description>The space direction</description>
+                <enumerationValues>
+                    <enumerationValue key="horizontal">horizontal</enumerationValue>
+                    <enumerationValue key="vertical">vertical</enumerationValue>
+                </enumerationValues>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <property key="onChangeAction" type="action">
+                <caption>onChange</caption>
+                <description>The callback function that is triggered when the state changes</description>
+            </property>
+            <property key="customWidgetOnChangeValidate" type="boolean" defaultValue="true">
+                <caption>Change event triggers validation</caption>
+                <description />
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>

@@ -1,0 +1,17 @@
+/*
+Place your custom CSS here
+*/
+
+.rating-radio+span{
+    margin-left: 8px;
+}
+.ant-radio-wrapper{
+    font-weight: normal;
+}
+
+.ant-radio-wrapper input[type=radio]{
+    position: absolute !important;
+}
+label{
+    font-weight: normal !important;
+}

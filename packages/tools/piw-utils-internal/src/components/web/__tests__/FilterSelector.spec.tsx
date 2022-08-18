@@ -1,5 +1,7 @@
 import { shallow } from "enzyme";
+// @ts-ignore
 import { render, fireEvent, screen } from "@testing-library/react";
+// @ts-ignore
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import { createElement } from "react";
@@ -89,7 +91,7 @@ describe("Filter selector", () => {
 
         it("changes focused element when pressing filter selector button", () => {
             render(<FilterSelector defaultFilter="contains" onChange={jest.fn()} id="test" options={options} />);
-
+            // @ts-ignore
             expect(document.body).toHaveFocus();
 
             const button = screen.getByRole("button");
@@ -99,13 +101,13 @@ describe("Filter selector", () => {
             jest.advanceTimersByTime(10);
 
             const items = screen.getAllByRole("menuitem");
-
+            // @ts-ignore
             expect(items[0]).toHaveFocus();
         });
 
         it("changes focused element back to the button when pressing shift+tab in the first element", () => {
             render(<FilterSelector defaultFilter="contains" onChange={jest.fn()} id="test" options={options} />);
-
+            // @ts-ignore
             expect(document.body).toHaveFocus();
 
             const button = screen.getByRole("button");
@@ -115,12 +117,13 @@ describe("Filter selector", () => {
             jest.advanceTimersByTime(10);
 
             const items = screen.getAllByRole("menuitem");
+            // @ts-ignore
             expect(items[0]).toHaveFocus();
 
             userEvent.tab({ shift: true });
 
             jest.advanceTimersByTime(10);
-
+            // @ts-ignore
             expect(button).toHaveFocus();
         });
 
@@ -138,7 +141,7 @@ describe("Filter selector", () => {
                     ]}
                 />
             );
-
+            // @ts-ignore
             expect(document.body).toHaveFocus();
 
             const button = screen.getByRole("button");
@@ -148,9 +151,11 @@ describe("Filter selector", () => {
             jest.advanceTimersByTime(10);
 
             const items = screen.getAllByRole("menuitem");
+            // @ts-ignore
             expect(items[0]).toHaveFocus();
 
             userEvent.tab();
+            // @ts-ignore
             expect(items[1]).toHaveFocus();
             userEvent.tab();
 
@@ -161,7 +166,7 @@ describe("Filter selector", () => {
 
         it("changes focused element back to the button when pressing escape in any element", () => {
             render(<FilterSelector defaultFilter="contains" onChange={jest.fn()} id="test" options={options} />);
-
+            // @ts-ignore
             expect(document.body).toHaveFocus();
 
             const button = screen.getByRole("button");
@@ -171,16 +176,17 @@ describe("Filter selector", () => {
             jest.advanceTimersByTime(10);
 
             const items = screen.getAllByRole("menuitem");
+            // @ts-ignore
             expect(items[0]).toHaveFocus();
 
             userEvent.tab();
-
+            // @ts-ignore
             expect(items[1]).toHaveFocus();
 
             userEvent.keyboard("{esc}");
 
             jest.advanceTimersByTime(10);
-
+            // @ts-ignore
             expect(button).toHaveFocus();
         });
     });
