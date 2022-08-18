@@ -11,16 +11,18 @@ export type LanguageItem = {
 export default function LanguageSelector(props: LanguageSelectorContainerProps): ReactNode {
     const [selectedLanguage, setSelectedLanguage] = useState<LanguageItem | undefined>();
     const [languageList, setLanguageList] = useState<LanguageItem[]>([]);
+    const [hideWidget, setHideWidget] = useState(false);
 
     useEffect(() => {
-        if (props.languageOptions.items) {
-            const languages = props.languageOptions.items.map(item => {
-                return {
-                    _guid: item.id,
-                    value: props.languageCaption.get(item).value as string
-                };
-            });
+        if (props.languageOptions.items && props.languageCaption) {
+            const languages = props.languageOptions.items.map(item => ({
+                _guid: item.id,
+                value: props.languageCaption.get(item).value as string
+            }));
             setLanguageList(languages);
+            if (languageList.length === 1 && props.hideForSingle) {
+                setHideWidget(true);
+            }
         }
     }, [props]);
 
@@ -43,7 +45,7 @@ export default function LanguageSelector(props: LanguageSelectorContainerProps):
         });
     }, []);
 
-    return (
+    return hideWidget ? null : (
         <LanguageSwitcher
             className={props.class}
             position={props.position}

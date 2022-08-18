@@ -13,6 +13,7 @@ let props: LanguageSwitcherProps = {
     className: ""
 };
 const language = { _guid: "111", value: "En us" };
+
 describe("Language switcher", () => {
     it("renders the structure with empty language list", () => {
         const { asFragment } = render(<LanguageSwitcher {...props} />);

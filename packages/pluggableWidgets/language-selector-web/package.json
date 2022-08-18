@@ -15,7 +15,7 @@
   },
   "marketplace": {
     "minimumMXVersion": "9.12.0",
-    "marketplaceId": "N/A"
+    "marketplaceId": 0
   },
   "testProject": {
     "githubUrl": "https://github.com/mendix/testProjects",
@@ -29,8 +29,8 @@
     "format": "pluggable-widgets-tools format",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
-    "pretest:e2e": "npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
-    "test:e2e": "pluggable-widgets-tools test:e2e:web:cypress",
+    "pretest:e2e": "echo \"Skipping language-selector-web e2e pretest\"",
+    "test:e2e": "echo \"Skipping language-selector-web e2e test\"",
     "test:e2e:local": "npx cypress open --browser chrome --config-file ../../../configs/e2e/cypress/cypress.json",
     "release": "pluggable-widgets-tools release:web",
     "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"

@@ -29,9 +29,11 @@ export const LanguageSwitcher = (props: LanguageSwitcherProps): ReactElement => 
     const { languageList, trigger } = props;
     const [visibility, setVisibility] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
+
     if (!preview) {
         handleOnClickOutsideElement(ref, () => setVisibility(false));
     }
+
     const menuOptions = (): ReactElement[] => {
         return languageList.map(item => {
             return (
@@ -79,13 +81,9 @@ export const LanguageSwitcher = (props: LanguageSwitcherProps): ReactElement => 
         }
     }, [props.position, visibility]);
 
-    const popupMenuStyle = {
-        display: "flex",
-        alignItems: "center"
-    };
     return (
         <div ref={ref} className={classNames(props.className, "widget-language-selector", "popupmenu")} {...onHover}>
-            <div className={"popupmenu-trigger popupmenu-trigger-alignement"} style={popupMenuStyle} {...onClick}>
+            <div className={"popupmenu-trigger popupmenu-trigger-alignement"} {...onClick}>
                 <span className="current-language-text">{props?.currentLanguage?.value || ""}</span>
                 <span className={`glyphicon glyphicon-chevron-${visibility ? "up" : "down"}`} aria-hidden="true"></span>
             </div>

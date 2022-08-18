@@ -19,6 +19,7 @@ export interface LanguageSelectorContainerProps {
     languageCaption: ListExpressionValue<string>;
     position: PositionEnum;
     trigger: TriggerEnum;
+    hideForSingle: boolean;
 }
 
 export interface LanguageSelectorPreviewProps {
@@ -30,4 +31,5 @@ export interface LanguageSelectorPreviewProps {
     languageCaption: string;
     position: PositionEnum;
     trigger: TriggerEnum;
+    hideForSingle: boolean;
 }

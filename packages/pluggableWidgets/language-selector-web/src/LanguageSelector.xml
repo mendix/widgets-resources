@@ -37,6 +37,10 @@
                         <enumerationValue key="hover">Hover</enumerationValue>
                     </enumerationValues>
                 </property>
+                <property key="hideForSingle" type="boolean" defaultValue="true">
+                    <caption>Hide for single language</caption>
+                    <description />
+                </property>
             </propertyGroup>
         </propertyGroup>
     </properties>

@@ -1,20 +1,3 @@
-export interface MXLocalePatterns {
-    date: string;
-    datetime: string;
-    time: string;
-}
-
-export interface MXSessionLocale {
-    code: string;
-    firstDayOfWeek: number;
-    languageTag: string;
-    patterns: MXLocalePatterns;
-}
-
-export interface MXSessionConfig extends MxObject {
-    locale: MXSessionLocale;
-}
-
 export interface MXSession {
     clearCachedSessionData();
     getUserObject(): MxObject;
