@@ -8,11 +8,15 @@
   "scripts": {
     "start": "tsc --watch",
     "prebuild": "rimraf ./dist",
-    "build": "tsc && copy-and-watch \"src/**/*.{scss,svg,js}\" \"dist/\"",
-    "release": "npm run build",
+    "build:components": "tsc && copy-and-watch \"src/**/*.{scss,svg,js}\" \"dist/\"",
+    "build:shared": "rollup --config rollup.config.js",
+    "build": "npm run build:components && npm run build:shared",
+    "release:shared": "rollup --config rollup.config.js --configProduction",
+    "release": "npm run build:components && npm run release:shared",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "prepare": "npm run build",
-    "test": "pluggable-widgets-tools test:unit:web"
+    "test": "pluggable-widgets-tools test:unit:web",
+    "do": "rollup --config rollup.config.js"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
@@ -35,6 +39,7 @@
   "files": [
     "dist",
     "hooks",
-    "rollup"
+    "rollup",
+    "shared"
   ]
 }
