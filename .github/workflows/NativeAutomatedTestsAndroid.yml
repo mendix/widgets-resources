@@ -310,7 +310,27 @@ jobs:
             /Users/runner/Library/Android/sdk/system-images/**/*
           key: pixel_30_x86_aosp-atd_3core_and_system_images
       - name: "Run tests"
-        run: npm run test:e2e:local:android -- ${{ needs.scope.outputs.since }}
+        uses: reactivecircus/android-emulator-runner@e790971012b979513b4e2fe70d4079bc0ca8a1ae #v2.24.0
+        with:
+          api-level: 30
+          target: aosp_atd
+          arch: x86
+          profile: pixel
+          cores: 3
+          ram-size: 4096M
+          heap-size: 512M
+          avd-name: NATIVE_pixel_30
+          force-avd-creation: false
+          emulator-options: -skin 1080x1920 -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: |
+            adb shell "rm -fr /data/local/tmp/detox"
+            adb shell "mkdir -p /data/local/tmp/detox"
+            adb push "/Users/runner/work/widgets-resources/widgets-resources/detox/apps/app-appstore-release.apk" "/data/local/tmp/detox/Application.apk"
+            adb push "/Users/runner/work/widgets-resources/widgets-resources/detox/apps/app-appstore-release-androidTest.apk" "/data/local/tmp/detox/Test.apk"
+            adb shell pm install -r -g -t /data/local/tmp/detox/Application.apk 2>/dev/null
+            adb shell pm install -r -g -t /data/local/tmp/detox/Test.apk 2>/dev/null
+            npm run test:e2e:local:android -- ${{ needs.scope.outputs.since }}
       - name: "Archive runtime logs"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         if: always()

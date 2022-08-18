@@ -42,7 +42,7 @@ expect.extend({
 });
 
 beforeAll(async () => {
-    await init(config, { initGlobals: false, launchApp: false });
+    await init(config, { initGlobals: false, launchApp: false, reuse: true });
 
     if (device.getPlatform() === "android") {
         const id = device.id;
