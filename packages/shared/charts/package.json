@@ -14,9 +14,7 @@
     "release:shared": "rollup --config rollup.config.js --configProduction",
     "release": "npm run build:components && npm run release:shared",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-    "prepare": "npm run build",
-    "test": "pluggable-widgets-tools test:unit:web",
-    "do": "rollup --config rollup.config.js"
+    "test": "pluggable-widgets-tools test:unit:web"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
