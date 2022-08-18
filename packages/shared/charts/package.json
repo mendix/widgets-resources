@@ -8,11 +8,12 @@
   "scripts": {
     "start": "tsc --watch",
     "prebuild": "rimraf ./dist",
-    "build:components": "tsc && copy-and-watch \"src/**/*.{scss,svg,js}\" \"dist/\"",
-    "build:shared": "rollup --config rollup.config.js",
-    "build": "npm run build:components && npm run build:shared",
-    "release:shared": "rollup --config rollup.config.js --configProduction",
-    "release": "npm run build:components && npm run release:shared",
+    "prepare": "npm run compile",
+    "compile": "tsc && copy-and-watch \"src/**/*.{scss,svg,js}\" \"dist/\"",
+    "build:externals": "rollup --config rollup.config.js",
+    "build": "npm run compile && npm run build:externals",
+    "release:externals": "rollup --config rollup.config.js --configProduction",
+    "release": "npm run compile && npm run release:externals",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web"
   },
