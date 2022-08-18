@@ -1,5 +1,5 @@
 import { expect, by, element } from "detox";
-import { expectToMatchScreenshot, resetDevice, setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, setText, tapMenuItem } from "../../../../../detox/src/helpers";
 import { Alert } from "../../../../../detox/src/Alert";
 
 describe("Slider", () => {

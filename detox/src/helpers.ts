@@ -32,20 +32,6 @@ export async function tapMenuItem(caption: string): Promise<void> {
     await element(by.text(caption)).tap();
 }
 
-export async function resetDevice(): Promise<void> {
-    /**
-     * Reasons for 'terminateApp' and 'launchApp' instead of using 'reloadReactNative':
-     * - Android: open alerts do not disappear when using 'reloadReactNative'
-     * - iOS: focussed alerts do disappear (or move to background?), but seem to keep focus which means
-     *   any subsequent click will not trigger.
-     * - If another app than the one under test is opened, using 'reloadReactNative' does not bring
-     *   the app to the foreground agin.
-     */
-
-    await device.terminateApp();
-    await device.launchApp();
-}
-
 export async function sleep(time: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, time));
 }

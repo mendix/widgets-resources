@@ -1,6 +1,6 @@
 import { expect, element, by } from "detox";
 import { Alert } from "../../../../../detox/src/Alert";
-import { expectToMatchScreenshot, resetDevice, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Background Gradient", () => {
     beforeEach(async () => {

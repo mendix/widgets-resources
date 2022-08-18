@@ -1,5 +1,5 @@
 import { element, by } from "detox";
-import { expectToMatchScreenshot, resetDevice, setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, setText, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("QR code", () => {
     beforeEach(async () => {

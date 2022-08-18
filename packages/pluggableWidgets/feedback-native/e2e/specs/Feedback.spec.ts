@@ -1,4 +1,4 @@
-import { expectToMatchScreenshot, resetDevice, setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, setText, tapMenuItem } from "../../../../../detox/src/helpers";
 import { element, by, waitFor } from "detox";
 
 describe("Feedback widget", () => {

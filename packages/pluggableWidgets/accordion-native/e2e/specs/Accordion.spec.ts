@@ -1,14 +1,10 @@
-import { expectToMatchScreenshot, resetDevice, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
 import { expect, element, by } from "detox";
 import { Alert } from "../../../../../detox/src/Alert";
 
 describe("Accordion", () => {
     beforeEach(async () => {
         await tapMenuItem("Accordion");
-    });
-
-    afterEach(async () => {
-        await resetDevice();
     });
 
     it("should render custom icons correctly", async () => {

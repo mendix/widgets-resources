@@ -1,5 +1,5 @@
 import { expect, by, element } from "detox";
-import { resetDevice, setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import { setText, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Progress Bar", () => {
     beforeAll(async () => {
@@ -7,10 +7,6 @@ describe("Progress Bar", () => {
 
         const textBox = element(by.id("textBoxProgressBarValue"));
         await setText(textBox, "75");
-    });
-
-    afterAll(async () => {
-        await resetDevice();
     });
 
     it("renders the progress bar with dynamic values", async () => {

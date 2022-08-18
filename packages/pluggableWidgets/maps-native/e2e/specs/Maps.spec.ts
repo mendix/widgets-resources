@@ -1,5 +1,5 @@
 import { element, by } from "detox";
-import { expectToMatchScreenshot, resetDevice, tapMenuItem, sleep } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, tapMenuItem, sleep } from "../../../../../detox/src/helpers";
 
 describe("Maps widget", () => {
     beforeEach(async () => {

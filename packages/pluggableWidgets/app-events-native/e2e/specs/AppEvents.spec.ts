@@ -1,13 +1,9 @@
-import { resetDevice, tapMenuItem } from "../../../../../detox/src/helpers";
+import { tapMenuItem } from "../../../../../detox/src/helpers";
 import { waitFor, element, by } from "detox";
 
 describe("App events", () => {
     beforeAll(async () => {
         await tapMenuItem("App events");
-    });
-
-    afterAll(async () => {
-        await resetDevice();
     });
 
     it("should generate onPageLoad event", async () => {

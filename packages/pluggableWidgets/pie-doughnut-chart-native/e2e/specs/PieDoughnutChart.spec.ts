@@ -1,5 +1,5 @@
 import { element, by, waitFor } from "detox";
-import { expectToMatchScreenshot, resetDevice, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Pie-doughnut chart", () => {
     beforeEach(async () => {

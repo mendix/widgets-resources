@@ -50,8 +50,13 @@ beforeAll(async () => {
         execSync(`adb -s ${id} reverse tcp:8080 tcp:8080`);
     }
 
+    await setDemoMode();
+}, 1800000);
+
+beforeEach(async () => {
+    await adapter.beforeEach();
     await device.launchApp({
-        newInstance: false,
+        newInstance: true,
         launchArgs: {
             detoxPrintBusyIdleResources: "YES",
             // Notifications
@@ -60,15 +65,10 @@ beforeAll(async () => {
         // JS actions
         permissions: { faceid: "YES", location: "inuse", camera: "YES", photos: "YES", notifications: "YES" }
     });
-    await setDemoMode();
 
     await waitFor(element(by.id("$screen")).atIndex(0))
         .toBeVisible()
         .withTimeout(180000);
-}, 1800000);
-
-beforeEach(async () => {
-    await adapter.beforeEach();
 });
 
 afterAll(async () => {
