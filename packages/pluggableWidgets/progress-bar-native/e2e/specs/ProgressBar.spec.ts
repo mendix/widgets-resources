@@ -1,8 +1,9 @@
 import { expect, by, element } from "detox";
-import { setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import { launchApp, setText, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Progress Bar", () => {
     beforeAll(async () => {
+        await launchApp();
         await tapMenuItem("Progress bar");
 
         const textBox = element(by.id("textBoxProgressBarValue"));

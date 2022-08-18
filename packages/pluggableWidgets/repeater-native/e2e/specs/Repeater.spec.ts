@@ -1,7 +1,8 @@
-import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, launchApp, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Repeater", () => {
     beforeAll(async () => {
+        await launchApp();
         await tapMenuItem("Repeater");
     });
 

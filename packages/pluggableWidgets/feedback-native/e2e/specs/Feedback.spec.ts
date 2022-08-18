@@ -5,11 +5,8 @@ describe("Feedback widget", () => {
     const widgetName = "feedback";
 
     beforeEach(async () => {
+        await launchApp();
         await tapMenuItem("Feedback");
-    });
-
-    afterEach(async () => {
-        await resetDevice();
     });
 
     it("should be able to submit a feedback item", async () => {

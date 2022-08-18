@@ -1,8 +1,9 @@
 import { element, by } from "detox";
-import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, launchApp, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Column chart", () => {
     beforeAll(async () => {
+        await launchApp();
         await tapMenuItem("Column chart");
     });
 

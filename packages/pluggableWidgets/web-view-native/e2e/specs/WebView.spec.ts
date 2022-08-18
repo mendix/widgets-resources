@@ -1,4 +1,4 @@
-import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, launchApp, tapMenuItem } from "../../../../../detox/src/helpers";
 import { expect, element, by, device, waitFor } from "detox";
 import { Alert } from "../../../../../detox/src/Alert";
 
@@ -6,11 +6,8 @@ const timeout = 5000;
 
 describe("Web view", () => {
     beforeEach(async () => {
+        await launchApp();
         await tapMenuItem("Web view");
-    });
-
-    afterEach(async () => {
-        await resetDevice();
     });
 
     it("should render messge if no content is provided", async () => {

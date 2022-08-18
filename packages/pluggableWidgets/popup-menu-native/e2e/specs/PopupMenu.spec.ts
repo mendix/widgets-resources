@@ -1,14 +1,11 @@
 import { expect, element, by } from "detox";
-import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, launchApp, tapMenuItem } from "../../../../../detox/src/helpers";
 import { Alert } from "../../../../../detox/src/Alert";
 
 describe("Popup menu", () => {
     beforeEach(async () => {
+        await launchApp();
         await tapMenuItem("Popup menu");
-    });
-
-    afterEach(async () => {
-        await resetDevice();
     });
 
     it("has a basic menu with an action", async () => {

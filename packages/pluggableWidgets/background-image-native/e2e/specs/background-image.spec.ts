@@ -1,14 +1,11 @@
-import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, launchApp, tapMenuItem } from "../../../../../detox/src/helpers";
 import { Alert } from "../../../../../detox/src/Alert";
 import { expect, element, by, waitFor } from "detox";
 
 describe("Background image", () => {
     beforeEach(async () => {
+        await launchApp();
         await tapMenuItem("Background image");
-    });
-
-    afterEach(async () => {
-        await resetDevice();
     });
 
     it("renders the static images", async () => {

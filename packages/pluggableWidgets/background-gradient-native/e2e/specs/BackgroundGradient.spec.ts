@@ -1,9 +1,10 @@
 import { expect, element, by } from "detox";
 import { Alert } from "../../../../../detox/src/Alert";
-import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, launchApp, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Background Gradient", () => {
     beforeEach(async () => {
+        await launchApp();
         await tapMenuItem("Background gradient");
     });
 
@@ -19,9 +20,5 @@ describe("Background Gradient", () => {
         const alert = Alert();
         await expect(alert.messageElement).toHaveText("Clicked!");
         await alert.confirm();
-    });
-
-    afterEach(async () => {
-        await resetDevice();
     });
 });

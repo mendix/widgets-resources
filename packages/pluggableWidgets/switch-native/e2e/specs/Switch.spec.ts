@@ -1,9 +1,10 @@
-import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, launchApp, tapMenuItem } from "../../../../../detox/src/helpers";
 import { Alert } from "../../../../../detox/src/Alert";
 import { expect, by, element } from "detox";
 
 describe("Switch", () => {
     beforeAll(async () => {
+        await launchApp();
         await tapMenuItem("Switch");
     });
 

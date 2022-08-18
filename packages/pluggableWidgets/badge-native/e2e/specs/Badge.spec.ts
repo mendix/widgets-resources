@@ -1,9 +1,10 @@
 import { Alert } from "../../../../../detox/src/Alert";
 import { expect, element, by } from "detox";
-import { setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import { launchApp, setText, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Badge", () => {
     beforeAll(async () => {
+        await launchApp();
         await tapMenuItem("Badge");
 
         const textBox = element(by.id("textBoxBadge"));

@@ -1,14 +1,11 @@
 import { expect, by, element } from "detox";
-import { expectToMatchScreenshot, setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, launchApp, setText, tapMenuItem } from "../../../../../detox/src/helpers";
 import { Alert } from "../../../../../detox/src/Alert";
 
 describe("Slider", () => {
     beforeEach(async () => {
+        await launchApp();
         await tapMenuItem("Slider");
-    });
-
-    afterEach(async () => {
-        await resetDevice();
     });
 
     it("renders correct initial appearance", async () => {

@@ -1,8 +1,24 @@
-import { by, element, device } from "detox";
+import { by, element, device, waitFor } from "detox";
 import { readFileSync } from "fs";
 import { MatchImageSnapshotOptions } from "jest-image-snapshot";
 import "../jest.detox.startup";
 
+export async function launchApp(): Promise<void> {
+    await device.launchApp({
+        newInstance: true,
+        launchArgs: {
+            detoxPrintBusyIdleResources: "YES",
+            // Notifications
+            detoxURLBlacklistRegex: ".*firestore.*"
+        },
+        // JS actions
+        permissions: { faceid: "YES", location: "inuse", camera: "YES", photos: "YES", notifications: "YES" }
+    });
+
+    await waitFor(element(by.id("$screen")).atIndex(0))
+        .toBeVisible()
+        .withTimeout(180000);
+}
 export async function expectToMatchScreenshot(
     element?: Detox.NativeElement,
     options?: MatchImageSnapshotOptions

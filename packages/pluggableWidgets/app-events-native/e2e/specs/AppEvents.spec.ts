@@ -1,8 +1,9 @@
-import { tapMenuItem } from "../../../../../detox/src/helpers";
+import { launchApp, tapMenuItem } from "../../../../../detox/src/helpers";
 import { waitFor, element, by } from "detox";
 
 describe("App events", () => {
     beforeAll(async () => {
+        await launchApp();
         await tapMenuItem("App events");
     });
 

@@ -10,13 +10,6 @@ module.exports = {
     IOS_DEVICE_TYPE,
     "test-runner": "npx jest",
     "runner-config": `${__dirname}/jest.detox.config.js`,
-    detox: {
-        behavior: {
-            init: {
-                reinstallApp: false
-            }
-        }
-    },
     apps: {
         "ios.developerapp": {
             type: "ios.app",
@@ -46,11 +39,23 @@ module.exports = {
     configurations: {
         "ios.simulator.developerapp": {
             device: "ios",
-            app: "ios.developerapp"
+            app: "ios.developerapp",
+            behavior: {
+                init: {
+                    exposeGlobals: false,
+                    reinstallApp: true
+                }
+            }
         },
         "android.emulator.developerapp": {
             device: "android",
-            app: "android.developerapp"
+            app: "android.developerapp",
+            behavior: {
+                init: {
+                    exposeGlobals: false,
+                    reinstallApp: !process.env.CI === "true"
+                }
+            }
         }
     },
     artifacts: {

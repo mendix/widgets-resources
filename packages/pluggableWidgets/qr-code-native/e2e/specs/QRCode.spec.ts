@@ -1,13 +1,10 @@
 import { element, by } from "detox";
-import { expectToMatchScreenshot, setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, launchApp, setText, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("QR code", () => {
     beforeEach(async () => {
+        await launchApp();
         await tapMenuItem("QR code");
-    });
-
-    afterEach(async () => {
-        await resetDevice();
     });
 
     it("renders correctly", async () => {

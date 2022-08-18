@@ -1,10 +1,10 @@
-const { by, cleanup, init, device, element, waitFor } = require("detox");
+const { cleanup, init, device } = require("detox");
 const adapter = require("detox/runners/jest/adapter");
 const specReporter = require("detox/runners/jest/specReporter");
 const config = require("./detox.config");
 const { toMatchImageSnapshot } = require("jest-image-snapshot");
 const { join, resolve } = require("path");
-const { execSync, exec } = require("child_process");
+const { execSync } = require("child_process");
 
 jest.setTimeout(300000);
 jasmine.getEnv().addReporter(adapter);
@@ -42,7 +42,7 @@ expect.extend({
 });
 
 beforeAll(async () => {
-    await init(config, { initGlobals: false, launchApp: false, reuse: true });
+    await init();
 
     if (device.getPlatform() === "android") {
         const id = device.id;
@@ -55,20 +55,6 @@ beforeAll(async () => {
 
 beforeEach(async () => {
     await adapter.beforeEach();
-    await device.launchApp({
-        newInstance: true,
-        launchArgs: {
-            detoxPrintBusyIdleResources: "YES",
-            // Notifications
-            detoxURLBlacklistRegex: ".*firestore.*"
-        },
-        // JS actions
-        permissions: { faceid: "YES", location: "inuse", camera: "YES", photos: "YES", notifications: "YES" }
-    });
-
-    await waitFor(element(by.id("$screen")).atIndex(0))
-        .toBeVisible()
-        .withTimeout(180000);
 });
 
 afterAll(async () => {

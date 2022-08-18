@@ -1,8 +1,9 @@
 import { element, by } from "detox";
-import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, launchApp, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Line chart", () => {
     beforeAll(async () => {
+        await launchApp();
         await tapMenuItem("Line chart");
     });
 

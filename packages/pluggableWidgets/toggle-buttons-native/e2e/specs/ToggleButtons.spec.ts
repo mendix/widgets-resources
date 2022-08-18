@@ -1,14 +1,11 @@
-import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, launchApp, tapMenuItem } from "../../../../../detox/src/helpers";
 import { Alert } from "../../../../../detox/src/Alert";
 import { expect, by, element } from "detox";
 
 describe("Toggle Buttons", () => {
     beforeEach(async () => {
+        await launchApp();
         await tapMenuItem("Toggle buttons");
-    });
-
-    afterEach(async () => {
-        await resetDevice();
     });
 
     it("renders default state correctly", async () => {

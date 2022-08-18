@@ -19,7 +19,6 @@ mendixProject
 **/screenshot-results
 **/tests/testProject
 **/pluggableWidgets/**/.artifacts
-**/pluggableWidgets/**/artifacts
 
 **/cypress/videos
 **/cypress/screenshots

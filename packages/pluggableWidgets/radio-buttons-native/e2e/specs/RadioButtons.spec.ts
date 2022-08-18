@@ -1,9 +1,10 @@
 import { expect, element, by } from "detox";
 import { Alert } from "../../../../../detox/src/Alert";
-import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, launchApp, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Radio Buttons", () => {
     beforeEach(async () => {
+        await launchApp();
         await tapMenuItem("Radio buttons");
     });
 
@@ -14,9 +15,5 @@ describe("Radio Buttons", () => {
         await expect(alert.messageElement).toHaveText("Option_1");
         await alert.confirm();
         await expectToMatchScreenshot(element(by.id("radioButtonsVertical")));
-    });
-
-    afterEach(async () => {
-        await resetDevice();
     });
 });
