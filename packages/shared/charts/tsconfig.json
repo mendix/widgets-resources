@@ -1,9 +1,14 @@
 {
+    "ts-node": {
+        "compilerOptions": {
+            "module": "commonjs"
+        }
+    },
     "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
     "baseUrl": "./",
     "include": ["./src", "./typings", "node_modules/@mendix/pluggable-widgets-tools/typings"],
     "compilerOptions": {
-        "types": ["mendix-client", "big.js", "jest"],
+        "types": ["mendix-client", "big.js", "jest", "node"],
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "baseUrl": "./",
