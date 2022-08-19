@@ -20,8 +20,11 @@
     "build": "cross-env MPKOUTPUT=RadioWeb.mpk pluggable-widgets-tools build:ts",
     "format": "pluggable-widgets-tools format",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
-    "release": "cross-env MPKOUTPUT=RadioWeb.mpk pluggable-widgets-tools release:web"
+    "release": "cross-env MPKOUTPUT=RadioWeb.mpk pluggable-widgets-tools release:web",
+    "test": "pluggable-widgets-tools test:unit:web",
+    "pretest:e2e": "npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web:cypress",
+    "test:e2e:local": "npx cypress@9.6.1 open --browser chrome --config-file ../../../configs/e2e/cypress/cypress.json"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",

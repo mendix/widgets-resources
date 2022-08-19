@@ -1,90 +1,56 @@
-import { shallow, ShallowWrapper } from "enzyme";
+import { render, ShallowWrapper, shallow } from "enzyme";
 import { createElement } from "react";
 
-import { Badge, BadgeProps } from "../Badge";
+import { RadioComponent, RadioProps } from "../RadioComponent";
 
-describe("Badge", () => {
-    const createBadge = (props: BadgeProps): ShallowWrapper<any, any> => shallow(<Badge {...props} />);
+describe("Radio", () => {
+    const createRadio = (props: RadioProps): ShallowWrapper<any, any> => shallow(<RadioComponent {...props} />);
 
-    let defaultBadgeProps: BadgeProps;
+    let defaultRadioProps: RadioProps;
 
     beforeEach(() => {
-        defaultBadgeProps = {
-            type: "badge",
-            value: "text"
+        defaultRadioProps = {
+            options: [
+                { label: "Apple", value: "Apple" },
+                { label: "Pear", value: "Pear" },
+                { label: "Orange", value: "Orange" }
+            ]
         };
     });
 
-    it("renders as a badge", () => {
-        const badge = createBadge(defaultBadgeProps);
-
-        expect(badge).toMatchSnapshot();
+    it("renders as radioGroup", () => {
+        const radioWrapper = createRadio(defaultRadioProps);
+        expect(radioWrapper).toMatchSnapshot();
     });
 
-    it("renders as a label", () => {
-        defaultBadgeProps.type = "label";
-        const badge = createBadge(defaultBadgeProps);
-
-        expect(badge).toMatchSnapshot();
+    it("renders as radioGroup when direction is vertical", () => {
+        defaultRadioProps.direction = "vertical";
+        const radioWrapper = createRadio(defaultRadioProps);
+        radioWrapper.find(".ant-space-vertical").exists();
     });
 
-    it("renders when an empty string is passed as value", () => {
-        defaultBadgeProps.value = "";
-        const badge = createBadge(defaultBadgeProps);
-
-        expect(badge).toMatchSnapshot();
+    it("renders as radioGroup when have defaultValue", () => {
+        defaultRadioProps.defaultValue = "Pear";
+        const radioWrapper = render(<RadioComponent {...defaultRadioProps} />);
+        expect(radioWrapper).toMatchSnapshot();
     });
 
-    it("renders as a button like element when onClick function is passed", () => {
-        defaultBadgeProps.onClick = jest.fn();
-        const badge = createBadge(defaultBadgeProps);
-
-        expect(badge).toMatchSnapshot();
+    it("renders as radioGroup when optionType is equal to button", () => {
+        defaultRadioProps.optionType = "button";
+        const radioWrapper = createRadio(defaultRadioProps);
+        expect(radioWrapper).toMatchSnapshot();
     });
 
-    it("triggers onClick function with a click event", () => {
-        defaultBadgeProps.onClick = jest.fn();
-        const badge = createBadge(defaultBadgeProps);
-
-        badge.simulate("click");
-
-        expect(defaultBadgeProps.onClick).toHaveBeenCalledTimes(1);
+    it("renders as radioGroup when option is disabled", () => {
+        defaultRadioProps.options[0].disabled = true;
+        const radioWrapper = render(<RadioComponent {...defaultRadioProps} />);
+        expect(radioWrapper).toMatchSnapshot();
     });
 
-    it("renders as a button like element when onKeyDown function is passed", () => {
-        defaultBadgeProps.onKeyDown = jest.fn();
-        const badge = createBadge(defaultBadgeProps);
-
-        expect(badge).toMatchSnapshot();
-    });
-
-    it("triggers onKeyDown function on key down", () => {
-        defaultBadgeProps.onKeyDown = jest.fn();
-        const badge = createBadge(defaultBadgeProps);
-
-        badge.simulate("keydown");
-
-        expect(defaultBadgeProps.onKeyDown).toHaveBeenCalledTimes(1);
-    });
-
-    it("renders with a tabIndex", () => {
-        defaultBadgeProps.tabIndex = 1;
-        const badge = createBadge(defaultBadgeProps);
-
-        expect(badge).toMatchSnapshot();
-    });
-
-    it("renders custom classes", () => {
-        defaultBadgeProps.className = "custom-class";
-        const badge = createBadge(defaultBadgeProps);
-
-        expect(badge).toMatchSnapshot();
-    });
-
-    it("renders custom styles", () => {
-        defaultBadgeProps.style = { padding: 5 };
-        const badge = createBadge(defaultBadgeProps);
-
-        expect(badge).toMatchSnapshot();
+    it("renders as radioGroup when have disabled", () => {
+        defaultRadioProps.disabled = true;
+        defaultRadioProps.options[0].disabled = true;
+        const radioWrapper = render(<RadioComponent {...defaultRadioProps} />);
+        expect(radioWrapper).toMatchSnapshot();
     });
 });

@@ -1,0 +1,246 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Radio renders as radioGroup 1`] = `
+<Memo(ForwardRef)>
+  <Radio
+    key="Apple"
+    value="Apple"
+  >
+    Apple
+  </Radio>
+  <Radio
+    key="Pear"
+    value="Pear"
+  >
+    Pear
+  </Radio>
+  <Radio
+    key="Orange"
+    value="Orange"
+  >
+    Orange
+  </Radio>
+</Memo(ForwardRef)>
+`;
+
+exports[`Radio renders as radioGroup when have defaultValue 1`] = `
+<div
+  class="ant-radio-group ant-radio-group-outline"
+>
+  <label
+    class="ant-radio-wrapper"
+  >
+    <span
+      class="ant-radio"
+    >
+      <input
+        class="ant-radio-input"
+        type="radio"
+        value="Apple"
+      />
+      <span
+        class="ant-radio-inner"
+      />
+    </span>
+    <span>
+      Apple
+    </span>
+  </label>
+  <label
+    class="ant-radio-wrapper ant-radio-wrapper-checked"
+  >
+    <span
+      class="ant-radio ant-radio-checked"
+    >
+      <input
+        checked=""
+        class="ant-radio-input"
+        type="radio"
+        value="Pear"
+      />
+      <span
+        class="ant-radio-inner"
+      />
+    </span>
+    <span>
+      Pear
+    </span>
+  </label>
+  <label
+    class="ant-radio-wrapper"
+  >
+    <span
+      class="ant-radio"
+    >
+      <input
+        class="ant-radio-input"
+        type="radio"
+        value="Orange"
+      />
+      <span
+        class="ant-radio-inner"
+      />
+    </span>
+    <span>
+      Orange
+    </span>
+  </label>
+</div>
+`;
+
+exports[`Radio renders as radioGroup when have disabled 1`] = `
+<div
+  class="ant-radio-group ant-radio-group-outline"
+>
+  <label
+    class="ant-radio-wrapper ant-radio-wrapper-disabled"
+  >
+    <span
+      class="ant-radio ant-radio-disabled"
+    >
+      <input
+        class="ant-radio-input"
+        disabled=""
+        type="radio"
+        value="Apple"
+      />
+      <span
+        class="ant-radio-inner"
+      />
+    </span>
+    <span>
+      Apple
+    </span>
+  </label>
+  <label
+    class="ant-radio-wrapper ant-radio-wrapper-disabled"
+  >
+    <span
+      class="ant-radio ant-radio-disabled"
+    >
+      <input
+        class="ant-radio-input"
+        disabled=""
+        type="radio"
+        value="Pear"
+      />
+      <span
+        class="ant-radio-inner"
+      />
+    </span>
+    <span>
+      Pear
+    </span>
+  </label>
+  <label
+    class="ant-radio-wrapper ant-radio-wrapper-disabled"
+  >
+    <span
+      class="ant-radio ant-radio-disabled"
+    >
+      <input
+        class="ant-radio-input"
+        disabled=""
+        type="radio"
+        value="Orange"
+      />
+      <span
+        class="ant-radio-inner"
+      />
+    </span>
+    <span>
+      Orange
+    </span>
+  </label>
+</div>
+`;
+
+exports[`Radio renders as radioGroup when option is disabled 1`] = `
+<div
+  class="ant-radio-group ant-radio-group-outline"
+>
+  <label
+    class="ant-radio-wrapper ant-radio-wrapper-disabled"
+  >
+    <span
+      class="ant-radio ant-radio-disabled"
+    >
+      <input
+        class="ant-radio-input"
+        disabled=""
+        type="radio"
+        value="Apple"
+      />
+      <span
+        class="ant-radio-inner"
+      />
+    </span>
+    <span>
+      Apple
+    </span>
+  </label>
+  <label
+    class="ant-radio-wrapper"
+  >
+    <span
+      class="ant-radio"
+    >
+      <input
+        class="ant-radio-input"
+        type="radio"
+        value="Pear"
+      />
+      <span
+        class="ant-radio-inner"
+      />
+    </span>
+    <span>
+      Pear
+    </span>
+  </label>
+  <label
+    class="ant-radio-wrapper"
+  >
+    <span
+      class="ant-radio"
+    >
+      <input
+        class="ant-radio-input"
+        type="radio"
+        value="Orange"
+      />
+      <span
+        class="ant-radio-inner"
+      />
+    </span>
+    <span>
+      Orange
+    </span>
+  </label>
+</div>
+`;
+
+exports[`Radio renders as radioGroup when optionType is equal to button 1`] = `
+<Memo(ForwardRef)
+  optionType="button"
+>
+  <ForwardRef(RadioButton)
+    key="Apple"
+    value="Apple"
+  >
+    Apple
+  </ForwardRef(RadioButton)>
+  <ForwardRef(RadioButton)
+    key="Pear"
+    value="Pear"
+  >
+    Pear
+  </ForwardRef(RadioButton)>
+  <ForwardRef(RadioButton)
+    key="Orange"
+    value="Orange"
+  >
+    Orange
+  </ForwardRef(RadioButton)>
+</Memo(ForwardRef)>
+`;

@@ -3,7 +3,7 @@ import { Radio, Space, RadioGroupProps, CheckboxOptionType } from "antd";
 
 export interface RadioProps extends RadioGroupProps {
     direction?: string;
-    options: Array<CheckboxOptionType | string | number>;
+    options: CheckboxOptionType[];
 }
 
 export const RadioComponent = (props: RadioProps): ReactElement => {
