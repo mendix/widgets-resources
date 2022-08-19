@@ -14,8 +14,7 @@
     "developmentPort": 3000
   },
   "marketplace": {
-    "minimumMXVersion": "9.6.0",
-    "marketplaceId": 0
+    "minimumMXVersion": "9.6.0"
   },
   "testProject": {
     "githubUrl": "https://github.com/mendix/testProjects",
@@ -23,17 +22,19 @@
   },
   "packagePath": "com.mendix.widget.web",
   "scripts": {
+    "prestart": "lerna run build --scope '@mendix/shared-charts'",
     "start": "pluggable-widgets-tools start:server",
     "dev": "pluggable-widgets-tools start:web",
     "build": "pluggable-widgets-tools build:ts",
+    "build:with-deps": "lerna run build --scope 'pie-doughnut-chart-web' --include-dependencies",
     "format": "pluggable-widgets-tools format",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
-    "pretest:e2e": "NODE_OPTIONS=--max_old_space_size=4096 npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
+    "pretest:e2e": "NODE_OPTIONS=--max_old_space_size=4096 npm run release:with-deps && node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e": "pluggable-widgets-tools test:e2e:web:cypress",
     "test:e2e:local": "npx cypress open --browser chrome --config-file ../../../configs/e2e/cypress/cypress.json",
     "release": "pluggable-widgets-tools release:web",
-    "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
+    "release:with-deps": "lerna run release --scope 'pie-doughnut-chart-web' --include-dependencies"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
