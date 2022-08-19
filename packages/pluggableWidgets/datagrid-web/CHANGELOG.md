@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+-   We fixed the issue with column selector, where the list wouldn't overflow and just go out of viewport, making it inaccessible. (Ticket(s) #162255 and #163129)
+
 ## [2.4.1] - 2022-7-5
 
 ### Fixed
