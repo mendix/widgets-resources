@@ -1,8 +1,9 @@
-import { ReactNode, createElement, useMemo, useCallback, useState, useEffect } from "react";
+import { ReactNode, createElement, useMemo, useCallback } from "react";
 import { RadioWebContainerProps } from "../typings/RadioWebProps";
 import "./ui/index.css";
-import { Radio, Space, RadioChangeEvent } from "antd";
+import { RadioChangeEvent } from "antd";
 import { updateAttributeValue, executeAction } from "@mendix/piw-utils-internal";
+import { RadioComponent } from "./components/RadioComponent";
 
 export function RadioWeb(props: RadioWebContainerProps): ReactNode {
     const {
@@ -23,16 +24,9 @@ export function RadioWeb(props: RadioWebContainerProps): ReactNode {
         onChangeAction
     } = props;
 
-    const [selectedValueState, setSelectedValueState] = useState(selectedValue);
-
-    useEffect(() => {
-        setSelectedValueState(selectedValue);
-    }, [selectedValue]);
-
     const handleRadioChange = useCallback(
         (e: RadioChangeEvent): void => {
             const value = e.target.value;
-            console.info(7777, value);
 
             updateAttributeValue(selectedValue, value);
             updateAttributeValue(attributedata, value);
@@ -48,6 +42,7 @@ export function RadioWeb(props: RadioWebContainerProps): ReactNode {
         return val(item).value;
     };
 
+    // 格式化options
     const dataOption: any[] = useMemo(() => {
         const { items = [] } = data;
         const options: any = [];
@@ -83,19 +78,19 @@ export function RadioWeb(props: RadioWebContainerProps): ReactNode {
         return options;
     }, [attribute, attributedata, data, staticData, title, datasType]);
 
-    const TAGS = optionType === "button" ? Radio.Button : Radio;
     if (attributedata || (props.data && props.data.status === "available") || staticData.length) {
+        // 静态数据
         if (isText) {
             return (
                 <div>
                     {dataOption
-                        .filter((item: any) => item.value === selectedValueState?.displayValue)
+                        .filter((item: any) => item.value === selectedValue?.displayValue)
                         .map((elem: any) => elem.label)}
                 </div>
             );
         }
         return (
-            <Radio.Group
+            <RadioComponent
                 size={size}
                 buttonStyle={buttonStyle}
                 disabled={disabled && disabled.value}
@@ -104,32 +99,10 @@ export function RadioWeb(props: RadioWebContainerProps): ReactNode {
                 className={props.class}
                 style={props.style}
                 onChange={handleRadioChange}
-                value={attributedata ? attributedata.value : selectedValueState?.displayValue}
-            >
-                {direction === "vertical" ? (
-                    <Space direction={direction}>
-                        {dataOption.map((item: any) => (
-                            <TAGS
-                                key={item.value}
-                                value={item.value}
-                                disabled={item.disabled ? item.disabled : disabled.value}
-                            >
-                                {item.label}
-                            </TAGS>
-                        ))}
-                    </Space>
-                ) : (
-                    dataOption.map((item: any) => (
-                        <TAGS
-                            key={item.value}
-                            value={item.value}
-                            disabled={item.disabled ? item.disabled : disabled.value}
-                        >
-                            {item.label}
-                        </TAGS>
-                    ))
-                )}
-            </Radio.Group>
+                direction={direction}
+                options={dataOption}
+                defaultValue={attributedata ? attributedata.value : selectedValue?.displayValue}
+            />
         );
     } else {
         return null;
