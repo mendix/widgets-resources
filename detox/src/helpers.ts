@@ -1,3 +1,4 @@
+import { execSync } from "child_process";
 import { by, element, device, waitFor } from "detox";
 import { readFileSync } from "fs";
 import { MatchImageSnapshotOptions } from "jest-image-snapshot";
@@ -15,10 +16,45 @@ export async function launchApp(): Promise<void> {
         permissions: { faceid: "YES", location: "inuse", camera: "YES", photos: "YES", notifications: "YES" }
     });
 
+    /**
+     * For some reason, whenever the app restarts on iOS, the topbar is reset.
+     * So we need to run this command on every app launch.
+     * For simplicity/consistency sake, we are running it here for Android as well.
+     **/
+    await setDemoMode();
+
     await waitFor(element(by.id("$screen")).atIndex(0))
         .toBeVisible()
         .withTimeout(180000);
 }
+
+async function setDemoMode(): Promise<void> {
+    if (device.getPlatform() === "ios") {
+        const type = device.name.substring(device.name.indexOf("(") + 1, device.name.lastIndexOf(")"));
+        execSync(
+            `xcrun simctl status_bar "${type}" override --time "12:00" --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularMode active --cellularBars 4`
+        );
+    } else {
+        const id = device.id;
+        // enter demo mode
+        execSync(`adb -s ${id} shell settings put global sysui_demo_allowed 1`);
+        // display time 12:00
+        execSync(`adb -s ${id} shell am broadcast -a com.android.systemui.demo -e command clock -e hhmm 1200`);
+        // Display full mobile data with 4g type and no wifi
+        execSync(
+            `adb -s ${id} shell am broadcast -a com.android.systemui.demo -e command network -e mobile show -e level 4 -e datatype 4g -e wifi false`
+        );
+        // Hide notifications
+        execSync(
+            `adb -s ${id} shell am broadcast -a com.android.systemui.demo -e command notifications -e visible false`
+        );
+        // Show full battery but not in charging state
+        execSync(
+            `adb -s ${id} shell am broadcast -a com.android.systemui.demo -e command battery -e plugged false -e level 100`
+        );
+    }
+}
+
 export async function expectToMatchScreenshot(
     element?: Detox.NativeElement,
     options?: MatchImageSnapshotOptions
