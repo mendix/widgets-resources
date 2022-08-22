@@ -1,12 +1,21 @@
 describe("color-picker-web", () => {
     describe("render a picker of mode", () => {
-        it("button", () => {
+        it("button", { browser: "!firefox" }, () => {
             cy.visit("/p/modePage");
             cy.wait(1000);
             cy.get(".mx-name-colorPicker3 .widget-color-picker-inner").should(
                 "have.css",
                 "background",
                 "rgb(76, 175, 80) none repeat scroll 0% 0% / auto padding-box border-box"
+            );
+        });
+        it("button", { browser: "firefox" }, () => {
+            cy.visit("/p/modePage");
+            cy.wait(1000);
+            cy.get(".mx-name-colorPicker3 .widget-color-picker-inner").should(
+                "have.css",
+                "background",
+                "rgb(76, 175, 80) none repeat scroll 0% 0%"
             );
         });
         it("input box", () => {
