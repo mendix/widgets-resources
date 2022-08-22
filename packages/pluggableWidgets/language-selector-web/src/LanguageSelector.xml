@@ -10,17 +10,17 @@
             <propertyGroup caption="Languages">
                 <property key="languageOptions" type="datasource" isList="true" required="true">
                     <caption>Data source</caption>
-                    <description />
+                    <description>Recommended: Database data source with System.Language as entity.</description>
                 </property>
                 <property key="languageCaption" type="textTemplate" dataSource="languageOptions" required="true">
                     <caption>Language caption</caption>
-                    <description />
+                    <description>Recommended: {1} with attribute Language.Description as parameter.</description>
                 </property>
             </propertyGroup>
             <propertyGroup caption="General">
-                <property key="position" type="enumeration" defaultValue="top">
+                <property key="position" type="enumeration" defaultValue="bottom">
                     <caption>Menu position</caption>
-                    <description>How to position the menu in relation to the trigger element - at the top, to the left, at the bottom or to the right.</description>
+                    <description>The location of the menu relative to the current selected language (click area).</description>
                     <enumerationValues>
                         <enumerationValue key="left">Left</enumerationValue>
                         <enumerationValue key="right">Right</enumerationValue>
@@ -30,8 +30,8 @@
                 </property>
 
                 <property key="trigger" type="enumeration" defaultValue="click">
-                    <caption>Open on</caption>
-                    <description>How the menu is triggered - click, hover.</description>
+                    <caption>Open menu on</caption>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="click">Click</enumerationValue>
                         <enumerationValue key="hover">Hover</enumerationValue>

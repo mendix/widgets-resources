@@ -20,7 +20,7 @@ export default function LanguageSelector(props: LanguageSelectorContainerProps):
                 value: props.languageCaption.get(item).value as string
             }));
             setLanguageList(languages);
-            if (languageList.length === 1 && props.hideForSingle) {
+            if (languageList.length < 2 && props.hideForSingle) {
                 setHideWidget(true);
             }
         }
