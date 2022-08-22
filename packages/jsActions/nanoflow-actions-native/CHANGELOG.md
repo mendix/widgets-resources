@@ -8,7 +8,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Breaking
 
--   We removed next actions: SetCookie, ReadCookie, SetFavicon, ScrollToClass.
+-   We removed next actions:
+    -   SetCookie (will be available in Web Actions module)
+    -   ReadCookie (will be available in Web Actions module)
+    -   SetFavicon (will be available in Web Actions module)
+    -   ScrollToClass
+    -   AddMilliseconds
+    -   AddTime
+-   "Is connected" actino is renamed to "Has server connection"
+-   Parameter names are changed for next actions:
+    -   Base64Decode
+    -   Base64DecodeToImage
+    -   Base64Encode
+    -   GetStraightLineDistance
+-   New "Enum_DistanceUnit" enum is introduce for GetStraightLineDistance action
 
 ## [2.5.0] Nanoflow Commons - 2022-7-25
 
