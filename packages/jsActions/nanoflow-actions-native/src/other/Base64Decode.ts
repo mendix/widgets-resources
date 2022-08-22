@@ -8,11 +8,11 @@
 import Base64 from "js-base64";
 
 /**
- * @param {string} inputString
+ * @param {string} base64
  * @returns {Promise.<string>}
  */
-export async function Base64Decode(inputString: string): Promise<string> {
+export async function Base64Decode(base64: string): Promise<string> {
     // BEGIN USER CODE
-    return Base64.decode(inputString);
+    return Base64.decode(base64);
     // END USER CODE
 }
