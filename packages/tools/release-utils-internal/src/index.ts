@@ -1,6 +1,7 @@
+export { default as sh } from "./sh";
 export * from "./version";
+export * from "./zip";
 export * from "./package-info";
-export * from "./shell";
 export * from "./git";
 export * from "./github";
 export * from "./mpk";

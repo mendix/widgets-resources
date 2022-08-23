@@ -1,22 +1,21 @@
 import { basename, join, parse, format } from "path";
 import { z } from "zod";
 import { XMLBuilder, XMLParser } from "fast-xml-parser";
-import { cp, rm, mkdir } from "shelljs";
-
-import { execShellCommand, getFiles, unzip, zip } from "./shell";
+import sh from "./sh";
+import { unzip, zip } from "./zip";
 import { ModuleInfo } from "./package-info";
 import { Version } from "./version";
-import { readFile, writeFile } from "fs/promises";
+import { readFileSync, writeFileSync } from "fs";
 import { execSync } from "child_process";
 
-async function ensureMxBuildDockerImageExists(mendixVersion: Version) {
+function ensureMxBuildDockerImageExists(mendixVersion: Version): void {
     const version = mendixVersion.format(true);
 
-    const existingImages = (await execShellCommand(`docker image ls -q mxbuild:${version}`)).toString().trim();
+    const existingImages = sh.exec(`docker image ls -q mxbuild:${version}`).trim();
     if (!existingImages) {
         console.log(`Creating new mxbuild:${version} docker image...`);
         const dockerfilePath = join(process.cwd(), "packages/tools/pluggable-widgets-tools/scripts/mxbuild.Dockerfile");
-        await execShellCommand(
+        sh.exec(
             `docker build -f ${dockerfilePath} ` +
                 `--build-arg MENDIX_VERSION=${version} ` +
                 `-t mxbuild:${version} ${process.cwd()}`
@@ -24,18 +23,18 @@ async function ensureMxBuildDockerImageExists(mendixVersion: Version) {
     }
 }
 
-export async function createModuleMpkInDocker(
+export function createModuleMpkInDocker(
     sourceDir: string,
     moduleName: string,
     mendixVersion: Version,
     excludeFilesRegExp: string
-): Promise<void> {
+): void {
     const version = mendixVersion.format(true);
-    await ensureMxBuildDockerImageExists(mendixVersion);
+    ensureMxBuildDockerImageExists(mendixVersion);
 
     console.log(`Creating module ${moduleName} using mxbuild:${version}...`);
     // Build testProject via mxbuild
-    const projectFile = basename((await getFiles(sourceDir, [`.mpr`]))[0]);
+    const projectFile = basename(sh.find(join(sourceDir, "**/*.mpr"))[0]);
     const args = [
         // update widgets
         "mx",
@@ -52,7 +51,7 @@ export async function createModuleMpkInDocker(
         moduleName
     ].join(" ");
 
-    await execShellCommand(`docker run -t -v ${sourceDir}:/source --rm mxbuild:${version} bash -c "${args}"`);
+    sh.exec(`docker run -t -v ${sourceDir}:/source --rm mxbuild:${version} bash -c "${args}"`);
     console.log(`Module ${moduleName} created successfully.`);
     if (process.env.CI) {
         console.info("Changing sourceDir ownership...");
@@ -60,18 +59,9 @@ export async function createModuleMpkInDocker(
     }
 }
 
-export async function createMPK(
-    tmpFolder: string,
-    moduleInfo: ModuleInfo,
-    excludeFilesRegExp: string
-): Promise<string> {
-    await createModuleMpkInDocker(
-        tmpFolder,
-        moduleInfo.moduleNameInModeler,
-        moduleInfo.minimumMXVersion,
-        excludeFilesRegExp
-    );
-    return (await getFiles(tmpFolder, [`.mpk`]))[0];
+export function createMPK(tmpFolder: string, moduleInfo: ModuleInfo, excludeFilesRegExp: string): string {
+    createModuleMpkInDocker(tmpFolder, moduleInfo.moduleNameInModeler, moduleInfo.minimumMXVersion, excludeFilesRegExp);
+    return sh.find(join(tmpFolder, "*.mpk"))[0];
 }
 
 const EmptyTag = z.literal("");
@@ -136,16 +126,16 @@ export async function addFilesToPackageXml(filePath: string, paths: string[]): P
     const builder = new XMLBuilder({ ignoreAttributes: false, format: true, suppressEmptyNode: true });
     const source = parse(filePath);
     const backup = { ...source, base: source.base + ".backup" };
-    const fileContent = await readFile(filePath);
+    const fileContent = readFileSync(filePath);
     const rawData = parser.parse(fileContent);
     const meta = ensureModlerProjectPackageFile(rawData);
     const currentFiles = meta.package.modelerProject.files.file;
     const newFiles = paths.map(path => ({ "@_path": path }));
 
     meta.package.modelerProject.files.file = joinPackageFiles(currentFiles, newFiles);
-    cp("-n", filePath, format(backup));
-    await writeFile(filePath, builder.build(meta));
-    rm(format(backup));
+    sh.cp("-n", filePath, format(backup));
+    writeFileSync(filePath, builder.build(meta));
+    sh.rm(format(backup));
 }
 
 export async function exportModuleWithWidgets(mpk: string, widgets: string[]): Promise<void> {
@@ -154,16 +144,16 @@ export async function exportModuleWithWidgets(mpk: string, widgets: string[]): P
     const widgetsOut = join(target, "widgets");
     const packageXml = join(target, "package.xml");
     const packageFilePaths = widgets.map(path => `widgets/${parse(path).base}`);
-    rm("-rf", target);
+    sh.rm("-rf", target);
     console.info("Unzip module mpk...");
-    await unzip(mpk, target);
-    mkdir("-p", widgetsOut);
+    unzip(mpk, target);
+    sh.mkdir("-p", widgetsOut);
     console.info(`Adding ${widgets.length} widgets to ${mpkEntry.base}...`);
-    cp(widgets, widgetsOut);
+    sh.cp(widgets, widgetsOut);
     console.info(`Adding file entries to package.xml...`);
-    await addFilesToPackageXml(packageXml, packageFilePaths);
-    rm(mpk);
+    addFilesToPackageXml(packageXml, packageFilePaths);
+    sh.rm(mpk);
     console.info("Create module zip archive...");
-    await zip(target, mpk);
-    rm("-rf", target);
+    zip(target, mpk);
+    sh.rm("-rf", target);
 }

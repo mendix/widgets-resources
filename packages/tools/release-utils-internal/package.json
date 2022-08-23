@@ -15,6 +15,7 @@
     "prepare": "npm run build && npm run build:parser:widget && npm run build:parser:module"
   },
   "devDependencies": {
+    "@types/shelljs": "^0.8.11",
     "@types/node-fetch": "2.6.1",
     "node-fetch": "^2.6.1",
     "eslint": "^7.20.0",

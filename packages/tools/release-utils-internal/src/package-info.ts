@@ -1,5 +1,5 @@
 import { join } from "path";
-import { access } from "fs/promises";
+import { accessSync } from "fs";
 import { Version, VersionString } from "./version";
 // FIXME: Uncomment when md parser is 100% ready.
 // Disable changelog parser for now
@@ -55,11 +55,12 @@ export interface ModuleInfo extends WidgetPackageInfo {
     moduleFolderNameInModeler: string;
 }
 
-export async function getPackageFileContent(dirPath: string): Promise<PackageJsonFileContent> {
+export function getPackageFileContent(dirPath: string): PackageJsonFileContent {
     const pkgPath = join(dirPath, `package.json`);
     try {
-        await access(pkgPath);
-        const result = (await import(pkgPath)) as PackageJsonFileContent;
+        accessSync(pkgPath);
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        const result = <PackageJsonFileContent>require(pkgPath);
         return result;
     } catch (error) {
         console.log(error);
@@ -68,11 +69,12 @@ export async function getPackageFileContent(dirPath: string): Promise<PackageJso
     }
 }
 
-export async function getPackageInfo(path: string): Promise<PackageInfo> {
+export function getPackageInfo(path: string): PackageInfo {
     const pkgPath = join(path, `package.json`);
     try {
-        await access(pkgPath);
-        const { name, version, repository } = (await import(pkgPath)) as PackageJsonFileContent;
+        accessSync(pkgPath);
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        const { name, version, repository } = <PackageJsonFileContent>require(pkgPath);
         return {
             packageName: ensureString(name, "name"),
             packageFullName: "",
@@ -91,13 +93,13 @@ export async function getPackageInfo(path: string): Promise<PackageInfo> {
     }
 }
 
-export async function getWidgetPackageInfo(path: string): Promise<WidgetPackageInfo> {
+export function getWidgetPackageInfo(path: string): WidgetPackageInfo {
     const pkgPath = join(path, `package.json`);
     try {
-        await access(pkgPath);
-        const { name, widgetName, moduleName, version, marketplace, testProject, repository } = (await import(
-            pkgPath
-        )) as PackageJsonFileContent;
+        accessSync(pkgPath);
+        const { name, widgetName, moduleName, version, marketplace, testProject, repository } =
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
+            require(pkgPath) as PackageJsonFileContent;
         return {
             packageName: ensureString(name, "name"),
             packageFullName: ensureString(moduleName ?? widgetName, "moduleName or widgetName"),
@@ -119,7 +121,7 @@ export async function getWidgetPackageInfo(path: string): Promise<WidgetPackageI
     }
 }
 
-export async function getModulePackageInfo(pkgDir: string): Promise<ModuleInfo> {
+export function getModulePackageInfo(pkgDir: string): ModuleInfo {
     const {
         name,
         moduleName: moduleNameRaw,
@@ -127,7 +129,7 @@ export async function getModulePackageInfo(pkgDir: string): Promise<ModuleInfo> 
         marketplace,
         testProject,
         repository
-    } = await getPackageFileContent(pkgDir);
+    } = getPackageFileContent(pkgDir);
     const moduleName = ensureString(moduleNameRaw, "moduleName");
     return {
         packageName: ensureString(name, "name"),

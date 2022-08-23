@@ -1,6 +1,5 @@
 import { join } from "node:path";
-import { find } from "shelljs";
-import { string } from "zod";
+import sh from "./sh";
 import { getModulePackageInfo, ModuleInfo } from "./package-info";
 
 export interface DepsBuildConfig {
@@ -72,14 +71,14 @@ export function getDepsConfig(params: BuildParams, options: BuildOptions = {}): 
     };
 }
 
-export async function getBuildConfig({
+export function getBuildConfig({
     packagePath,
     repoRootPath,
     scope,
     widgetFolderNames
-}: DepsBuildConfig): Promise<ModuleBuildConfig> {
+}: DepsBuildConfig): ModuleBuildConfig {
     console.info("Reading package.json...");
-    const moduleInfo = await getModulePackageInfo(packagePath);
+    const moduleInfo = getModulePackageInfo(packagePath);
     const { version, moduleNameInModeler, moduleFolderNameInModeler } = moduleInfo;
 
     console.info(`Creating build config for ${moduleNameInModeler}...`);
@@ -91,7 +90,7 @@ export async function getBuildConfig({
     const widgetPaths = widgetFolderNames.map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
 
     const widgetMpks = widgetPaths.flatMap(path => {
-        const files = find(`${path}/dist`);
+        const files = sh.find(`${path}/dist`);
         return files.filter(name => name.match(/\.mpk$/));
     });
 

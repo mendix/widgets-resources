@@ -1,6 +1,4 @@
-import { execSync } from "child_process";
-import { mkdir, rm } from "fs/promises";
-import { execShellCommand } from "./shell";
+import sh from "./sh";
 
 function getGHRepoAuthUrl(repoUrl: string): string {
     const url = new URL(repoUrl);
@@ -15,36 +13,40 @@ function getGHRepoAuthUrl(repoUrl: string): string {
     return url.toString();
 }
 
-export async function cloneRepo(githubUrl: string, localFolder: string): Promise<void> {
-    // clean up local folder
-    await rm(localFolder, { recursive: true, force: true });
-    await mkdir(localFolder, { recursive: true });
-
-    // clone and set local credentials
-    await execSync(`git clone ${getGHRepoAuthUrl(githubUrl)} ${localFolder}`, { stdio: "inherit" });
-
-    // set credentials
-    await setLocalGitUserInfo(localFolder);
-}
-
-export async function cloneRepoShallow(remoteUrl: string, branch: string, localFolder: string) {
-    await execSync(
-        `git clone ${getGHRepoAuthUrl(remoteUrl)} --branch=${branch} --depth=1 --single-branch ${localFolder}`,
-        { stdio: "inherit" }
-    );
-}
-
-export async function setLocalGitUserInfo(workingDirectory?: string): Promise<void> {
+export function setLocalGitUserInfo(workingDirectory?: string): void {
+    const hasCWD = !!workingDirectory;
     const { GH_NAME, GH_EMAIL } = process.env;
     if (!GH_NAME || !GH_EMAIL) {
         throw new Error("Required GH_NAME and GH_EMAIL env vars are not set.");
     }
-    await execShellCommand(`git config user.name "${GH_NAME}"`, workingDirectory);
-    await execShellCommand(`git config user.email "${GH_EMAIL}"`, workingDirectory);
+    if (hasCWD) {
+        sh.pushd(workingDirectory);
+    }
+    sh.exec(`git config user.name "${GH_NAME}"`);
+    sh.exec(`git config user.email "${GH_EMAIL}"`);
+    if (hasCWD) {
+        sh.popd();
+    }
 }
 
-export async function addRemoteWithAuthentication(repoUrl: string, remoteName: string) {
-    await setLocalGitUserInfo();
+export function cloneRepo(githubUrl: string, localFolder: string): void {
+    // clean up local folder
+    sh.rm("-rf", localFolder);
+    sh.mkdir("-p", localFolder);
 
-    await execShellCommand(`git remote add "${remoteName}" "${getGHRepoAuthUrl(repoUrl)}"`);
+    // clone and set local credentials
+    sh.exec(`git clone ${getGHRepoAuthUrl(githubUrl)} ${localFolder}`);
+
+    // set credentials
+    setLocalGitUserInfo(localFolder);
+}
+
+export function cloneRepoShallow(remoteUrl: string, branch: string, localFolder: string): void {
+    sh.exec(`git clone ${getGHRepoAuthUrl(remoteUrl)} --branch=${branch} --depth=1 --single-branch ${localFolder}`);
+}
+
+export function addRemoteWithAuthentication(repoUrl: string, remoteName: string): void {
+    setLocalGitUserInfo();
+
+    sh.exec(`git remote add "${remoteName}" "${getGHRepoAuthUrl(repoUrl)}"`);
 }

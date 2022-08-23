@@ -1,4 +1,4 @@
-import { execShellCommand } from "./shell";
+import sh from "./sh";
 import { fetch } from "./fetch";
 
 interface GitHubReleaseInfo {
@@ -22,18 +22,18 @@ interface GitHubPRInfo {
 export class GitHub {
     authSet = false;
 
-    private async ensureAuth(): Promise<void> {
+    private ensureAuth(): void {
         if (!this.authSet) {
-            await execShellCommand(`echo "${process.env.GH_PAT}" | gh auth login --with-token`);
+            sh.exec(`echo "${process.env.GH_PAT}" | gh auth login --with-token`);
         }
     }
 
-    async createGithubPRFrom(pr: GitHubPRInfo): Promise<void> {
-        await this.ensureAuth();
+    createGithubPRFrom(pr: GitHubPRInfo): void {
+        this.ensureAuth();
 
         const repoArgument = pr.repo ? `-R "${pr.repo}"` : "";
 
-        await execShellCommand(
+        sh.exec(
             `gh pr create --title "${pr.title}" --body "${pr.body}" --base ${pr.base} --head ${pr.head} ${repoArgument}`
         );
     }
@@ -47,15 +47,15 @@ export class GitHub {
         isDraft = false,
         repo
     }: GitHubReleaseInfo): Promise<void> {
-        await this.ensureAuth();
+        this.ensureAuth();
 
         const draftArgument = isDraft ? "--draft" : "";
         const repoArgument = repo ? `-R "${repo}"` : "";
         const filesArgument = filesToRelease ? `"${filesToRelease}"` : "";
 
-        const targetHash = (await execShellCommand(`git rev-parse --verify ${target}`)).trim();
+        const targetHash = sh.exec(`git rev-parse --verify ${target}`).trim();
 
-        await execShellCommand(
+        sh.exec(
             `gh release create --title "${title}" --notes "${notes}" ${draftArgument} ${repoArgument} "${tag}" --target ${targetHash}  ${filesArgument}`
         );
     }
@@ -84,7 +84,7 @@ export class GitHub {
     }
 
     async getReleaseArtifacts(releaseTag: string): Promise<Array<{ name: string; browser_download_url: string }>> {
-        const releaseId = this.getReleaseIdByReleaseTag(releaseTag);
+        const releaseId = await this.getReleaseIdByReleaseTag(releaseTag);
 
         if (!releaseId) {
             throw new Error(`Could not find release with tag '${releaseTag}' on GitHub`);
