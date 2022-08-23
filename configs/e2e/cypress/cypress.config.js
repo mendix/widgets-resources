@@ -11,6 +11,7 @@ module.exports = defineConfig({
             });
         },
         baseUrl: "http://localhost:8080",
+        retries: 2,
         video: false,
         videoUploadOnPasses: false,
         viewportHeight: 1080,

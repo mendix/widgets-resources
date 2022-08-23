@@ -1,16 +1,40 @@
 describe("color-picker-web", () => {
-    describe("render a picker of mode", () => {
-        it("button", { browser: "!firefox" }, () => {
-            cy.visit("/p/modePage");
-            cy.wait(4000);
-            cy.get(".mx-name-colorPicker3").should("be.visible", true);
-            cy.get(".mx-name-colorPicker3 .widget-color-picker-inner").should(
-                "have.css",
-                "background",
-                "rgb(76, 175, 80) none repeat scroll 0% 0% / auto padding-box border-box"
-            );
+    const cleanMendixSession = () => {
+        cy.window().then(window => {
+            // Cypress opens a new session for every test, so it exceeds mendix license limit of 5 sessions, we need to logout after each test.
+            window.mx.session.logout();
         });
-        it("button", { browser: "firefox" }, () => {
+    };
+
+    afterEach(() => cleanMendixSession());
+
+    describe("render a picker of mode", () => {
+        it(
+            "button",
+            {
+                retries: {
+                    runMode: 10,
+                    openMode: 10
+                },
+                browser: "!firefox"
+            },
+            () => {
+                cy.visit("/p/modePage");
+                cy.wait(5000);
+                cy.get(".mx-name-colorPicker3 .widget-color-picker-inner", { timeout: 10000 }).should(
+                    "be.visible",
+                    true
+                );
+                cy.get(".mx-name-navigationTree3-2").click({ force: true });
+                cy.wait(5000);
+                cy.get(".mx-name-colorPicker3 .widget-color-picker-inner", { timeout: 10000 }).should(
+                    "have.css",
+                    "background",
+                    "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box"
+                );
+            }
+        );
+        it("button(Firefox)", { browser: "firefox" }, () => {
             cy.visit("/p/modePage");
             cy.wait(1000);
             cy.get(".mx-name-colorPicker3 .widget-color-picker-inner").should(
