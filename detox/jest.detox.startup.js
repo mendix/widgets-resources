@@ -46,7 +46,7 @@ beforeAll(async () => {
 
     if (device.getPlatform() === "android") {
         const id = device.id;
-        execSync(`adb -s ${id} shell setprop debug.hwui.renderer skiag`);
+        execSync(`adb -s ${id} shell setprop debug.hwui.renderer skiagl`);
         execSync(`adb -s ${id} reverse tcp:8080 tcp:8080`);
     }
 }, 1800000);

@@ -56,14 +56,20 @@ async function setDemoMode(): Promise<void> {
 }
 
 export async function expectToMatchScreenshot(
-    element?: Detox.NativeElement,
+    nativeElement?: Detox.NativeElement,
     options?: MatchImageSnapshotOptions
 ): Promise<void> {
     let screenshotPath: string;
-    if (element) {
-        screenshotPath = await element.takeScreenshot("screenshot");
+    if (nativeElement) {
+        screenshotPath = await nativeElement.takeScreenshot("screenshot");
     } else {
-        screenshotPath = await device.takeScreenshot("screenshot");
+        if (device.getPlatform() === "android") {
+            nativeElement = element(by.type("android.widget.FrameLayout")).atIndex(0);
+            screenshotPath = await nativeElement.takeScreenshot("screenshot");
+        } else {
+            nativeElement = element(by.type("RCTRootView")).atIndex(0);
+            screenshotPath = await nativeElement.takeScreenshot("screenshot");
+        }
     }
     expect(readFileSync(screenshotPath)).toMatchImageSnapshot(options);
 }

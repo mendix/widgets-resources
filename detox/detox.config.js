@@ -53,7 +53,7 @@ module.exports = {
             behavior: {
                 init: {
                     exposeGlobals: false,
-                    reinstallApp: !process.env.CI === "true"
+                    reinstallApp: process.env.CI !== "true"
                 }
             }
         }

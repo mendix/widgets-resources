@@ -14,7 +14,8 @@ detox/apps
 detox/*.log
 **/results
 mendixProject
-**/e2e/diffs
+**/e2e/images/diffs
+**/e2e/images/actual
 **/screenshot
 **/screenshot-results
 **/tests/testProject

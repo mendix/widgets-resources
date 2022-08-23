@@ -12,7 +12,7 @@ describe("Maps widget", () => {
 
         await btnStaticMarkers.tap();
 
-        await sleep(2000);
+        await sleep(5000);
 
         await expectToMatchScreenshot();
     });
@@ -22,7 +22,7 @@ describe("Maps widget", () => {
 
         await btnDynamicMarkers.tap();
 
-        await sleep(2000);
+        await sleep(5000);
 
         await expectToMatchScreenshot();
     });

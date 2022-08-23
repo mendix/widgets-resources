@@ -265,7 +265,7 @@ jobs:
           heap-size: 512M
           avd-name: NATIVE_pixel_30
           force-avd-creation: false
-          emulator-options: -skin 1080x1920 -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: echo "AVD created"
   android-tests:
@@ -321,7 +321,7 @@ jobs:
           heap-size: 512M
           avd-name: NATIVE_pixel_30
           force-avd-creation: false
-          emulator-options: -skin 1080x1920 -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
             adb shell "rm -fr /data/local/tmp/detox"
