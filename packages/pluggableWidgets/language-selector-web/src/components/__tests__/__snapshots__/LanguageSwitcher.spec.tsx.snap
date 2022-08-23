@@ -15,7 +15,7 @@ exports[`Language switcher renders renders the structure with language list and 
       </span>
       <span
         aria-hidden="true"
-        class="glyphicon glyphicon-chevron-down"
+        class="language-arrow glyphicon glyphicon-chevron-down"
       />
     </div>
     <div
@@ -44,7 +44,7 @@ exports[`Language switcher renders the structure with empty language list 1`] = 
       />
       <span
         aria-hidden="true"
-        class="glyphicon glyphicon-chevron-down"
+        class="language-arrow glyphicon glyphicon-chevron-down"
       />
     </div>
     <div

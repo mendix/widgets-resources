@@ -85,7 +85,10 @@ export const LanguageSwitcher = (props: LanguageSwitcherProps): ReactElement => 
         <div ref={ref} className={classNames(props.className, "widget-language-selector", "popupmenu")} {...onHover}>
             <div className={"popupmenu-trigger popupmenu-trigger-alignement"} {...onClick}>
                 <span className="current-language-text">{props?.currentLanguage?.value || ""}</span>
-                <span className={`glyphicon glyphicon-chevron-${visibility ? "up" : "down"}`} aria-hidden="true"></span>
+                <span
+                    className={`language-arrow glyphicon glyphicon-chevron-${visibility ? "up" : "down"}`}
+                    aria-hidden="true"
+                ></span>
             </div>
             <div className={classNames("popupmenu-menu", `popupmenu-position-${props.position}`)}>{menuOptions()}</div>
         </div>

@@ -1,7 +1,21 @@
-.popupmenu-trigger-alignement {
-    display: flex;
-    align-items: center;
+.navbar-brand {
+    .widget-language-selector {
+        .current-language-text,
+        .language-arrow {
+            color: white;
+        }
+    }
 }
-.current-language-text {
-    margin-right: 6px;
+
+.widget-language-selector {
+    .popupmenu-trigger-alignement {
+        display: flex;
+        align-items: center;
+    }
+    .current-language-text {
+        margin-right: 6px;
+    }
+    .popupmenu-basic-item {
+        border: 1px solid #ced0d3;
+    }
 }
