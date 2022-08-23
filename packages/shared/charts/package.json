@@ -1,17 +1,20 @@
 {
   "name": "@mendix/shared-charts",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Shared components for charts",
   "private": true,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "start": "tsc --watch",
-    "prebuild": "rimraf ./dist",
-    "build": "tsc && copy-and-watch \"src/**/*.{scss,svg,js}\" \"dist/\"",
-    "release": "npm run build",
+    "prepare": "npm run compile",
+    "precompile": "rimraf ./dist",
+    "compile": "tsc && copy-and-watch \"src/**/*.{scss,svg,js}\" \"dist/\"",
+    "build:externals": "rollup --config rollup.config.js",
+    "build": "ts-node ./scripts/build.ts",
+    "release:externals": "rollup --config rollup.config.js --configProduction",
+    "release": "ts-node ./scripts/release.ts",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-    "prepare": "npm run build",
     "test": "pluggable-widgets-tools test:unit:web"
   },
   "devDependencies": {
