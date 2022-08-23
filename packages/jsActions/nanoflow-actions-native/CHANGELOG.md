@@ -15,7 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
     -   ScrollToClass
     -   AddMilliseconds
     -   AddTime
--   "Is connected" actino is renamed to "Has server connection"
+-   "Is connected" action is renamed to "Has server connection"
 -   Parameter names are changed for next actions:
     -   Base64Decode
     -   Base64DecodeToImage
