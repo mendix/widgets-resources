@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Changed
+
+-   We updated `cypress` to version 10
+
 ## [9.13.3] - 2022-08-15
 
 ### Added

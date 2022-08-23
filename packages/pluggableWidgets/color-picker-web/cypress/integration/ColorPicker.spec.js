@@ -2,7 +2,8 @@ describe("color-picker-web", () => {
     describe("render a picker of mode", () => {
         it("button", { browser: "!firefox" }, () => {
             cy.visit("/p/modePage");
-            cy.wait(1000);
+            cy.wait(4000);
+            cy.get(".mx-name-colorPicker3").should("be.visible", true);
             cy.get(".mx-name-colorPicker3 .widget-color-picker-inner").should(
                 "have.css",
                 "background",
