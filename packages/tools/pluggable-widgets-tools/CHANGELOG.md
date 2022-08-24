@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 -   We updated `cypress` to version 10
 
+### Fixed
+
+-   We fixed an issue which caused CSS URL transforms to include paths with backslashes when running on Windows.
+
 ## [9.13.3] - 2022-08-15
 
 ### Added

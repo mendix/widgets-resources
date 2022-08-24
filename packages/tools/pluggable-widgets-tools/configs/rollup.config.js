@@ -50,7 +50,7 @@ const outAssetsDir = join(outWidgetDir, assetsDirName);
  * Its main purpose to "adjust" asset path so that
  * after bundling css by studio assets paths stay correct.
  * Adjustment is required because of assets copying -- postcss-url can copy
- * files, but final url will be relative to *destenation* file and though
+ * files, but final url will be relative to *destination* file and though
  * will be broken after bundling by studio (pro).
  *
  * Example
@@ -58,7 +58,7 @@ const outAssetsDir = join(outWidgetDir, assetsDirName);
  * after: com/mendix/widget/web/accordion/assets/icon.png
  */
 const cssUrlTransform = asset =>
-    asset.url.startsWith(`${assetsDirName}/`) ? `${outWidgetDir}/${asset.url}` : asset.url;
+    asset.url.startsWith(`${assetsDirName}/`) ? `${outWidgetDir.replace(/\\/g, "/")}/${asset.url}` : asset.url;
 
 export default async args => {
     const production = Boolean(args.configProduction);
