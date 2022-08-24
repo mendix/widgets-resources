@@ -6,6 +6,12 @@ import "@testing-library/jest-dom";
 import { ColumnSelector, ColumnSelectorProps } from "../ColumnSelector";
 import { ColumnProperty } from "../Table";
 
+let useIsElementInViewportMock = jest.fn(() => true);
+
+jest.mock("../../utils/useIsElementInViewport", () => ({
+    useIsElementInViewport: () => useIsElementInViewportMock()
+}));
+
 jest.useFakeTimers();
 
 describe("Column Selector", () => {
@@ -17,6 +23,29 @@ describe("Column Selector", () => {
 
     describe("focus", () => {
         beforeEach(() => (document.body.innerHTML = ""));
+
+        it("classname for the ul element in ColumnSelector is NOT set to overflow", () => {
+            renderTestingLib(<ColumnSelector {...mockColumnSelectorProps()} />);
+            expect(document.body).toHaveFocus();
+            const button = screen.getByRole("button");
+            expect(button).toBeDefined();
+            fireEvent.click(button);
+
+            const element = document.querySelector(".column-selectors");
+            expect(element?.classList.contains("overflow")).toBe(false);
+        });
+
+        it("classname for the ul element in ColumnSelector IS set to overflow", () => {
+            useIsElementInViewportMock = jest.fn(() => false);
+            renderTestingLib(<ColumnSelector {...mockColumnSelectorProps()} />);
+            expect(document.body).toHaveFocus();
+            const button = screen.getByRole("button");
+            expect(button).toBeDefined();
+            fireEvent.click(button);
+
+            const element = document.querySelector(".column-selectors");
+            expect(element?.classList.contains("overflow")).toBe(true);
+        });
 
         it("changes focused element when pressing the button", () => {
             renderTestingLib(<ColumnSelector {...mockColumnSelectorProps()} />);
