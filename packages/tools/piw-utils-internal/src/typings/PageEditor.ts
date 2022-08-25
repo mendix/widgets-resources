@@ -13,7 +13,8 @@ export type StructurePreviewProps =
     | RowLayoutProps
     | TextProps
     | DropZoneProps
-    | SelectableProps;
+    | SelectableProps
+    | DatasourceProps;
 
 export type ImageProps = BaseProps & {
     type: "Image";
@@ -62,4 +63,10 @@ export type DropZoneProps = BaseProps & {
 export type SelectableProps = BaseProps & {
     object: object;
     child: StructurePreviewProps;
+};
+
+export declare type DatasourceProps = BaseProps & {
+    type: "Datasource";
+    property: object;
+    child?: StructurePreviewProps;
 };
