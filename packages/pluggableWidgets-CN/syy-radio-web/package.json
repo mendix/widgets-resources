@@ -1,7 +1,7 @@
 {
   "name": "syy-radio-web",
   "widgetName": "RadioWeb",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "My widget description",
   "copyright": "2020 Mendix Technology BV",
   "author": "songzhengxu",
@@ -9,7 +9,7 @@
     "node": ">=12"
   },
   "config": {
-    "projectPath": "C:\\runjian\\develop\\git\\antd-web-docs",
+    "projectPath": "C:\\runjian\\test\\test-project",
     "mendixHost": "http://localhost:8080",
     "developmentPort": "3000"
   },

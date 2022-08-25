@@ -1,4 +1,4 @@
-import { render, ShallowWrapper, shallow } from "enzyme";
+import { render, ShallowWrapper, shallow, mount } from "enzyme";
 import { createElement } from "react";
 
 import { RadioComponent, RadioProps } from "../RadioComponent";
@@ -47,10 +47,19 @@ describe("Radio", () => {
         expect(radioWrapper).toMatchSnapshot();
     });
 
-    it("renders as radioGroup when have disabled", () => {
-        defaultRadioProps.disabled = true;
+    it("renders as radioGroup when have option0 disabled", () => {
+        defaultRadioProps.direction = "vertical";
         defaultRadioProps.options[0].disabled = true;
         const radioWrapper = render(<RadioComponent {...defaultRadioProps} />);
         expect(radioWrapper).toMatchSnapshot();
+    });
+
+    it("triggers onChange function with radiot change", () => {
+        const onChange = jest.fn();
+        defaultRadioProps.options = [{ label: "Apple", value: "Apple" }];
+        const radioWrapper = mount(<RadioComponent {...defaultRadioProps} onChange={onChange} />);
+        const inputWrapper = radioWrapper.find("input");
+        inputWrapper.simulate("change");
+        expect(onChange).toHaveBeenCalledTimes(1);
     });
 });
