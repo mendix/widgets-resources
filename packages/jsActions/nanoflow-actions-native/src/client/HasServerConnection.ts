@@ -12,7 +12,7 @@
 /**
  * @returns {Promise.<boolean>}
  */
-export async function IsConnected(): Promise<boolean> {
+export async function HasServerConnection(): Promise<boolean> {
     // BEGIN USER CODE
     try {
         const response = await fetch(mx.remoteUrl);

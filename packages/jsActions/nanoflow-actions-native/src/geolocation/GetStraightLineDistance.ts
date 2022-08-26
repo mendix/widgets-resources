@@ -8,7 +8,7 @@
 
 import { Big } from "big.js";
 
-type DistanceUnit = "KILOMETER" | "STATUTE MILE" | "NAUTICAL MILE";
+type DistanceUnit = "KILOMETER" | "STATUTE_MILE" | "NAUTICAL_MILE";
 
 // BEGIN EXTRA CODE
 
@@ -27,28 +27,29 @@ function kmToNauticalMile(km: Big): Big {
 // END EXTRA CODE
 
 /**
- * @param {Big} lat1
- * @param {Big} lon1
- * @param {Big} lat2
- * @param {Big} lon2
- * @param {"KILOMETER"|"STATUTE MILE"|"NAUTICAL MILE"} [unit="KILOMETER"] - unit of measure
+ * latitudePoint1, longitudePoint1, latitudePoint2, longitudePoint2
+ * @param {Big} latitudePoint1
+ * @param {Big} longitudePoint1
+ * @param {Big} latitudePoint2
+ * @param {Big} longitudePoint2
+ * @param {"KILOMETER"|"STATUTE_MILE"|"NAUTICAL_MILE"} [unit="KILOMETER"] - unit of measure
  * @returns {Promise.<Big>}
  */
 export async function GetStraightLineDistance(
-    lat1: Big,
-    lon1: Big,
-    lat2: Big,
-    lon2: Big,
+    latitudePoint1: Big,
+    longitudePoint1: Big,
+    latitudePoint2: Big,
+    longitudePoint2: Big,
     unit = "KILOMETER" as DistanceUnit
 ): Promise<Big> {
     // BEGIN USER CODE
     const R = 6371; // Radius of the earth in km
-    const dLat: number = deg2rad(lat2.minus(lat1)).toNumber();
-    const dLon: number = deg2rad(lon2.minus(lon1)).toNumber();
+    const dLat: number = deg2rad(latitudePoint2.minus(latitudePoint1)).toNumber();
+    const dLon: number = deg2rad(longitudePoint2.minus(longitudePoint1)).toNumber();
     const a: number =
         Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(deg2rad(lat1).toNumber()) *
-            Math.cos(deg2rad(lat2).toNumber()) *
+        Math.cos(deg2rad(latitudePoint1).toNumber()) *
+            Math.cos(deg2rad(latitudePoint2).toNumber()) *
             Math.sin(dLon / 2) *
             Math.sin(dLon / 2);
     const c: number = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
@@ -58,10 +59,10 @@ export async function GetStraightLineDistance(
         case "KILOMETER": {
             return d;
         }
-        case "STATUTE MILE": {
+        case "STATUTE_MILE": {
             return kmToStatueMile(d);
         }
-        case "NAUTICAL MILE": {
+        case "NAUTICAL_MILE": {
             return kmToNauticalMile(d);
         }
         default:
