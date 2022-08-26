@@ -20,18 +20,18 @@ function cloneWithNewUrl(link: HTMLLinkElement, href: string): HTMLLinkElement {
 // END EXTRA CODE
 
 /**
- * @param {string} favicon16x16
- * @param {string} favicon32x32
- * @param {string} appletouchicon
+ * @param {string} iconUrl16x16
+ * @param {string} iconUrl32x32
+ * @param {string} appleTouchIconUrl
  * @returns {Promise.<void>}
  */
-export async function SetFavicon(favicon16x16: string, favicon32x32: string, appletouchicon: string): Promise<void> {
+export async function SetFavicon(iconUrl16x16: string, iconUrl32x32: string, appleTouchIconUrl: string): Promise<void> {
     // BEGIN USER CODE
 
     const entries = [
-        ["link[rel=icon][sizes=16x16]", favicon16x16],
-        ["link[rel=icon][sizes=32x32]", favicon32x32],
-        ["link[rel=apple-touch-icon]", appletouchicon]
+        ["link[rel=icon][sizes=16x16]", iconUrl16x16],
+        ["link[rel=icon][sizes=32x32]", iconUrl32x32],
+        ["link[rel=apple-touch-icon]", appleTouchIconUrl]
     ];
 
     const links = entries.reduce<HTMLLinkElement[]>((acc, [selector, href]) => {
