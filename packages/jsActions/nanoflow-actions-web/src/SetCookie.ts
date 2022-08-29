@@ -12,16 +12,14 @@
 /**
  * @param {string} key
  * @param {string} value
- * @returns {Promise.<boolean>}
+ * @returns {Promise.<void>}
  */
-export async function SetCookie(key: string, value: string): Promise<boolean> {
+export async function SetCookie(key: string, value: string): Promise<void> {
     // BEGIN USER CODE
     try {
         document.cookie = key + "=" + value + ";";
-        return true;
     } catch (e) {
         console.error(e);
-        return false;
     }
     // END USER CODE
 }
