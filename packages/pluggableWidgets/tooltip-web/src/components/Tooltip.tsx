@@ -39,7 +39,7 @@ export const Tooltip = (props: TooltipProps): ReactElement => {
             {
                 name: "flip",
                 options: {
-                    fallbackPlacements: ["top", "bottom"]
+                    fallbackPlacements: ["top", "right", "bottom", "left"]
                 }
             },
             { name: "offset", options: { offset: [0, 8] } }
