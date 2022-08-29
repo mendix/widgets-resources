@@ -3,6 +3,7 @@ import { FaEye } from "./icons/FaEye";
 import { useOnClickOutside, usePositionObserver } from "@mendix/piw-utils-internal/components/web";
 import { ColumnProperty } from "./Table";
 import { createPortal } from "react-dom";
+import { useIsElementInViewport } from "../utils/useIsElementInViewport";
 
 export interface ColumnSelectorProps {
     columns: ColumnProperty[];
@@ -23,6 +24,8 @@ export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
     useOnClickOutside([buttonRef, optionsRef], () => setShow(false));
 
     const label = props.label ?? "Column selector";
+
+    const isInViewport = useIsElementInViewport(optionsRef);
 
     const onClick = useCallback(
         (isVisible: boolean, id: string) => {
@@ -47,7 +50,7 @@ export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
         <ul
             ref={optionsRef}
             id={`${props.id}-column-selectors`}
-            className="column-selectors"
+            className={`column-selectors ${isInViewport ? "" : "overflow"}`}
             data-focusindex={0}
             role="menu"
             style={{

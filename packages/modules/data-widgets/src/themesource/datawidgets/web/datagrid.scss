@@ -329,6 +329,11 @@ $brand-primary: #264ae5 !default;
     -moz-box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
     box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
 
+    &.overflow {
+        height: 250px;
+        overflow-y: scroll;
+    }
+
     li {
         display: flex;
         align-items: center;
