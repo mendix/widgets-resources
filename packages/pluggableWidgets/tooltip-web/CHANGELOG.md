@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Fixed
 
--   We fixed an issue with Tooltip widget having styling issues on a specific placement, caused due to react-popper usage.
+-   We fixed an issue with Tooltip widget having positioning issues on a specific placement.
 
 ## [1.2.0] - 2022-05-10
 
