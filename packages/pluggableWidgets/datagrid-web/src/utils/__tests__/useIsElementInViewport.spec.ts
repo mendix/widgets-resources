@@ -6,7 +6,6 @@ describe("ColumnSelector useIsElementInViewport hook", () => {
         const { result } = renderHook(useIsElementInViewport, {
             initialProps: {
                 current: {
-                    // @ts-ignore
                     getBoundingClientRect: () => {
                         return {
                             width: 0,
@@ -17,7 +16,7 @@ describe("ColumnSelector useIsElementInViewport hook", () => {
                             right: 0
                         };
                     }
-                }
+                } as HTMLElement
             }
         });
         expect(result.current).toBe(false);
@@ -26,7 +25,6 @@ describe("ColumnSelector useIsElementInViewport hook", () => {
         const { result } = renderHook(useIsElementInViewport, {
             initialProps: {
                 current: {
-                    // @ts-ignore
                     getBoundingClientRect: () => {
                         return {
                             width: 0,
@@ -37,7 +35,7 @@ describe("ColumnSelector useIsElementInViewport hook", () => {
                             right: 0
                         };
                     }
-                }
+                } as HTMLElement
             }
         });
         expect(result.current).toBe(true);
