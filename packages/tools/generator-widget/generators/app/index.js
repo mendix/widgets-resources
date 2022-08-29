@@ -236,17 +236,22 @@ class MxGenerator extends Generator {
     _writeEndToEndTests() {
         if (this.widget.hasE2eTests && this.widget.isPlatformWeb) {
             if (this.widget.isLanguageTS) {
-                this._copyFile(`${this.widget.templateSourcePath}tests/e2e/tsconfig.json`, "tests/e2e/tsconfig.json");
+                this._copyFile(
+                    `${this.widget.templateSourcePath}tests/configs/e2e/tsconfig.json`,
+                    "configs/e2e/tsconfig.json"
+                );
             }
 
             this._copyTemplate(
                 `${this.widget.templateSourcePath}tests/e2e/WidgetName.spec.${this.widget.fileExtension}.ejs`,
-                `tests/e2e/${this.widget.name}.spec.${this.widget.fileExtension}`
+                `cypress/integration/${this.widget.name}.spec.${this.widget.fileExtension}`
             );
 
+            this._copyFile(`${this.widget.templateSourcePath}tests/e2e/support/e2e.js`, `cypress/support/e2e.js`);
+
             this._copyFile(
-                `${this.widget.templateSourcePath}tests/e2e/pages/home.page.${this.widget.fileExtension}.ejs`,
-                `tests/e2e/pages/home.page.${this.widget.fileExtension}`
+                `${this.widget.templateSourcePath}configs/e2e/cypress/support/e2e.js`,
+                `configs/e2e/cypress/support/e2e.js`
             );
         }
     }
