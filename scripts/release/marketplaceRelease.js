@@ -9,7 +9,7 @@ const config = {
     // account and could be found at Profile -> Advanced -> Personal Info -> View My Data -> Open id
     // For each env (accp, test, prod) we have different Open Ids.
     // If this header is missing API will return 401.
-    openIdUrl: "https://mxid2.mendixcloud.com/mxid2/id?id=a39025a8-55b8-4532-bc5d-4e74901d11f9"
+    openIdUrl: process.env.OPENID_URL
 };
 
 main().catch(e => {
