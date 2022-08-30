@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <package xmlns="http://www.mendix.com/package/1.0/">
-    <clientModule name="Tooltip" version="1.2.0" xmlns="http://www.mendix.com/clientModule/1.0/">
+    <clientModule name="Tooltip" version="1.2.1" xmlns="http://www.mendix.com/clientModule/1.0/">
         <widgetFiles>
             <widgetFile path="Tooltip.xml" />
         </widgetFiles>
