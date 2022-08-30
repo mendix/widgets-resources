@@ -43,7 +43,7 @@ async function main() {
 async function uploadModuleToAppStore(pkgName, marketplaceId, version, minimumMXVersion) {
     try {
         const postResponse = await createDraft(marketplaceId, version, minimumMXVersion);
-        await publishDraft(postResponse.Version.VersionUUID);
+        await publishDraft(postResponse.UUID);
         console.log(`Successfully uploaded ${pkgName} to the Mendix Marketplace.`);
     } catch (error) {
         error.message = `Failed uploading ${pkgName} to appstore with error: ${error.message}`;
