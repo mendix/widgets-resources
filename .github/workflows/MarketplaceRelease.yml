@@ -50,8 +50,9 @@ jobs:
       - name: "Check changes and publish package ${{ steps.variables.outputs.tag }}"
         run: "npm run release:marketplace -- --scope '${{ steps.scope.outputs._0 }}'"
         env:
-          MARKETPLACE_API_KEY: ${{ secrets.MARKETPLACE_API_KEY }}
-          MARKETPLACE_USERNAME: ${{ secrets.MARKETPLACE_USERNAME }}
+          OPENID_URL: ${{ secrets.OPENID_URL }}
+          CPAPI_USERNAME: ${{ secrets.CPAPI_USERNAME }}
+          CPAPI_PASS_PROD: ${{ secrets.CPAPI_PASS_PROD }}
           TAG: ${{ steps.variables.outputs.tag }}
       - name: "Send slack msg on failure"
         if: ${{ failure() }}

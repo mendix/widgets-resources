@@ -2,7 +2,14 @@ const nodefetch = require("node-fetch");
 const { join } = require("path");
 
 const config = {
-    appStoreUrl: "https://appstore.home.mendix.com/rest/packagesapi/v2"
+    appStoreUrl: "https://appstore.home.mendix.com/rest/packagesapi/v2",
+    contributorUrl: "https://contributor.mendixcloud.com/apis/v1",
+    // This one, for some reasons, needs to be added as OpenID header to contributor request.
+    // The open id  value (a39025a8-55b8-4532-bc5d-4e74901d11f9) is taken from widgets@mendix.com
+    // account and could be found at Profile -> Advanced -> Personal Info -> View My Data -> Open id
+    // For each env (accp, test, prod) we have different Open Ids.
+    // If this header is missing API will return 401.
+    openIdUrl: process.env.OPENID_URL
 };
 
 main().catch(e => {
@@ -65,7 +72,7 @@ async function getGithubAssetUrl() {
 }
 
 async function createDraft(marketplaceId, version, minimumMXVersion) {
-    console.log(`Creating draft in the Mendix Marketplace..`);
+    console.log(`Creating draft in the Mendix Marketplace...`);
     console.log(`ID: ${marketplaceId} - Version: ${version} - MXVersion: ${minimumMXVersion}`);
     const [major, minor, patch] = version.split(".");
     try {
@@ -74,14 +81,14 @@ async function createDraft(marketplaceId, version, minimumMXVersion) {
             VersionMinor: minor ?? 0,
             VersionPatch: patch ?? 0,
             StudioProVersion: minimumMXVersion.split(".").slice(0, 3).join("."),
-            IsSourceGitHub: "true",
+            IsSourceGitHub: true,
             GithubRepo: {
                 UseReadmeForDoc: false,
                 ArtifactURL: await getGithubAssetUrl()
             }
         };
 
-        return fetchMarketplace("POST", `packages/${marketplaceId}/version`, JSON.stringify(body));
+        return fetchContributor("POST", `packages/${marketplaceId}/versions`, JSON.stringify(body));
     } catch (error) {
         error.message = `Failed creating draft in the appstore with error: ${error.message}`;
         throw error;
@@ -89,19 +96,23 @@ async function createDraft(marketplaceId, version, minimumMXVersion) {
 }
 
 function publishDraft(UUID) {
-    console.log(`Publishing draft in the Mendix Marketplace..`);
+    console.log(`Publishing draft in the Mendix Marketplace...`);
     try {
-        return fetchMarketplace("PUT", `version/${UUID}/publish`);
+        return fetchContributor("PATCH", `package-versions/${UUID}`, JSON.stringify({ Status: "Publish" }));
     } catch (error) {
         error.message = `Failed publishing draft in the appstore with error: ${error.message}`;
         throw error;
     }
 }
 
-async function fetchMarketplace(method, url, body) {
-    return fetch(method, `${config.appStoreUrl}/${url}`, body, {
-        "Mendix-Username": process.env.MARKETPLACE_USERNAME,
-        "Mendix-ApiKey": process.env.MARKETPLACE_API_KEY
+async function fetchContributor(method, path, body) {
+    const user = process.env.CPAPI_USERNAME;
+    const pass = process.env.CPAPI_PASS_PROD;
+    const credentials = `${user}:${pass}`;
+
+    return fetch(method, `${config.contributorUrl}/${path}`, body, {
+        OpenID: config.openIdUrl,
+        Authorization: `Basic ${Buffer.from(credentials).toString("base64")}`
     });
 }
 
