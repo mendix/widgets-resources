@@ -53,8 +53,6 @@ jobs:
           OPENID_URL: ${{ secrets.OPENID_URL }}
           CPAPI_USERNAME: ${{ secrets.CPAPI_USERNAME }}
           CPAPI_PASS_PROD: ${{ secrets.CPAPI_PASS_PROD }}
-          MARKETPLACE_API_KEY: ${{ secrets.MARKETPLACE_API_KEY }}
-          MARKETPLACE_USERNAME: ${{ secrets.MARKETPLACE_USERNAME }}
           TAG: ${{ steps.variables.outputs.tag }}
       - name: "Send slack msg on failure"
         if: ${{ failure() }}

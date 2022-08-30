@@ -116,13 +116,6 @@ async function fetchContributor(method, path, body) {
     });
 }
 
-async function fetchMarketplace(method, url, body) {
-    return fetch(method, `${config.appStoreUrl}/${url}`, body, {
-        "Mendix-Username": process.env.MARKETPLACE_USERNAME,
-        "Mendix-ApiKey": process.env.MARKETPLACE_API_KEY
-    });
-}
-
 async function fetch(method, url, body, additionalHeaders) {
     let response;
     const httpsOptions = {
