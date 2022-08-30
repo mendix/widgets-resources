@@ -12,7 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Breaking changes
 
--   We removed `webdriverio` from our dependencies.
+-   We removed `webdriverio` from our dependencies as we're using Cypress for e2e testing purposes. In case if you want to continue using WebDriverIO, please install the dependencies manually.
 
 ## [9.13.4] - 2022-08-26
 

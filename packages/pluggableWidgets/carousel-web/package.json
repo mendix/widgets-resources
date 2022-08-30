@@ -28,7 +28,7 @@
     "release": "cross-env MPKOUTPUT=Carousel.mpk pluggable-widgets-tools release:web",
     "pretest:e2e": "npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e": "pluggable-widgets-tools test:e2e:web:cypress",
-    "test:e2e:local": "npx cypress open --browser chrome --config-file ../../../configs/e2e/cypress/cypress.json",
+    "test:e2e:local": "pluggable-widgets-tools test:e2e:web:cypress:local -- --config-file ../../../configs/e2e/cypress/cypress.json",
     "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "config": {

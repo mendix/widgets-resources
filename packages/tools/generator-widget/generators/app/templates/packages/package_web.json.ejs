@@ -23,9 +23,8 @@
     "lint:fix": "pluggable-widgets-tools lint:fix",<% if (hasUnitTests) { %>
     "test": "pluggable-widgets-tools test:unit:web --no-cache --ci<% if (hasE2eTests) { %> && npm run test:e2e<% } %>",
     "test:unit": "pluggable-widgets-tools test:unit:web --coverage",<% } %><% if (hasE2eTests) { %>
-    "pretest:e2e": "npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e": "pluggable-widgets-tools test:e2e:web:cypress",
-    "test:e2e:local": "npx cypress open --browser chrome --e2e --config-file ../configs/e2e/cypress/cypress.config.js",<% } %>
+    "test:e2e:local": "pluggable-widgets-tools test:e2e:web:cypress:local -- --config-file cypress/cypress.config.js",<% } %>
     "prerelease": "npm run lint",
     "release": "pluggable-widgets-tools release:web"
   },
