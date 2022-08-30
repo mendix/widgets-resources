@@ -35,9 +35,9 @@ export default function LanguageSelector(props: LanguageSelectorContainerProps):
 
     const selectLanguage = useCallback((item: LanguageItem) => {
         const currentUser = window.mx.session.getUserObject();
-        currentUser.addReference("System.User_Language", "" + item._guid);
+        currentUser.addReference("System.User_Language", item._guid);
         window.mx.data.commit({
-            mxobj: window.mx.session.getUserObject(),
+            mxobj: currentUser,
             callback() {
                 setSelectedLanguage(item);
                 window.mx.reloadWithState();

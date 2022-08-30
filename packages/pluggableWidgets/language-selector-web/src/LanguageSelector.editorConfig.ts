@@ -31,7 +31,7 @@ export function getPreview(__values: LanguageSelectorPreviewProps, isDarkMode: b
                         height: 8
                     }
                 ]
-            }, // fills space on right
+            },
 
             { type: "Container" } // fills space on right
         ]

@@ -1,6 +1,6 @@
 import { RefObject, useEffect } from "react";
 
-function isElementBlockedTop(dynamicWindow: Window, srcRect: DOMRect, blockingRect: DOMRect): boolean {
+function isElementBlockedTop(dynamicWindow: Window, srcRect: DOMRect, blockingRect: DOMRect) {
     return (
         srcRect.top < blockingRect.bottom &&
         srcRect.bottom >= blockingRect.bottom &&
@@ -8,17 +8,17 @@ function isElementBlockedTop(dynamicWindow: Window, srcRect: DOMRect, blockingRe
     );
 }
 
-function isElementBlockedBottom(srcRect: DOMRect, blockingRect: DOMRect): boolean {
+function isElementBlockedBottom(srcRect: DOMRect, blockingRect: DOMRect) {
     return srcRect.bottom > blockingRect.top && srcRect.top <= blockingRect.top && srcRect.y - srcRect.height > 0;
 }
 
-function isElementBlockedLeft(srcRect: DOMRect, blockingRect: DOMRect): boolean {
+function isElementBlockedLeft(srcRect: DOMRect, blockingRect: DOMRect) {
     return (
         srcRect.left < blockingRect.right && srcRect.right >= blockingRect.right && srcRect.left >= blockingRect.left
     );
 }
 
-function isElementBlockedRight(srcRect: DOMRect, blockingRect: DOMRect): boolean {
+function isElementBlockedRight(srcRect: DOMRect, blockingRect: DOMRect) {
     return (
         srcRect.right > blockingRect.left && srcRect.left <= blockingRect.left && srcRect.right <= blockingRect.right
     );
@@ -81,7 +81,7 @@ function isBehindRandomElementCheck(
     blockingElement: HTMLElement,
     excludeElements: HTMLElement[],
     excludeElementWithClass: string
-): boolean {
+) {
     return (
         blockingElement &&
         blockingElement !== element &&

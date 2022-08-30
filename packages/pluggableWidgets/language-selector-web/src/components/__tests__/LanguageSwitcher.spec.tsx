@@ -20,7 +20,7 @@ describe("Language switcher", () => {
         expect(asFragment()).toMatchSnapshot();
     });
 
-    it("renders renders the structure with language list and selected default language", () => {
+    it("renders the structure with language list and selected default language", () => {
         props = { ...props, languageList: [language], currentLanguage: language };
         const { asFragment } = render(<LanguageSwitcher {...props} />);
         expect(asFragment()).toMatchSnapshot();

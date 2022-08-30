@@ -11,7 +11,7 @@ import {
     unBlockAbsoluteElementRight,
     unBlockAbsoluteElementTop,
     handleOnClickOutsideElement
-} from "@mendix/piw-utils-internal";
+} from "../utils/document";
 import { PositionEnum, TriggerEnum } from "../../typings/LanguageSelectorProps";
 import { LanguageItem } from "../LanguageSelector";
 
@@ -33,24 +33,6 @@ export const LanguageSwitcher = (props: LanguageSwitcherProps): ReactElement => 
     if (!preview) {
         handleOnClickOutsideElement(ref, () => setVisibility(false));
     }
-
-    const menuOptions = (): ReactElement[] => {
-        return languageList.map(item => {
-            return (
-                <div
-                    key={item._guid}
-                    className={"popupmenu-basic-item"}
-                    onClick={() => {
-                        if (props.onSelect) {
-                            return props.onSelect(item);
-                        }
-                    }}
-                >
-                    {item.value}
-                </div>
-            );
-        });
-    };
 
     const onClickHandle = useCallback(
         (e): void => {
@@ -83,14 +65,28 @@ export const LanguageSwitcher = (props: LanguageSwitcherProps): ReactElement => 
 
     return (
         <div ref={ref} className={classNames(props.className, "widget-language-selector", "popupmenu")} {...onHover}>
-            <div className={"popupmenu-trigger popupmenu-trigger-alignement"} {...onClick}>
-                <span className="current-language-text">{props?.currentLanguage?.value || ""}</span>
+            <div className={"popupmenu-trigger popupmenu-trigger-alignment"} {...onClick}>
+                <span className="current-language-text">{props.currentLanguage?.value || ""}</span>
                 <span
                     className={`language-arrow glyphicon glyphicon-chevron-${visibility ? "up" : "down"}`}
                     aria-hidden="true"
                 ></span>
             </div>
-            <div className={classNames("popupmenu-menu", `popupmenu-position-${props.position}`)}>{menuOptions()}</div>
+            <div className={classNames("popupmenu-menu", `popupmenu-position-${props.position}`)}>
+                {languageList.map(item => (
+                    <div
+                        key={item._guid}
+                        className={"popupmenu-basic-item"}
+                        onClick={() => {
+                            if (props.onSelect) {
+                                return props.onSelect(item);
+                            }
+                        }}
+                    >
+                        {item.value}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
