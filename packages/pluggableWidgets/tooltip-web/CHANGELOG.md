@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [1.2.1] - 2022-8-30
+
 ### Fixed
 
 -   We fixed an issue with Tooltip widget having positioning issues on a specific placement.
