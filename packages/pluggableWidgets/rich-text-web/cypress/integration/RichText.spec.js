@@ -15,6 +15,12 @@ describe("RichText", () => {
                 .then(cy.wrap)
         );
     };
+    Cypress.on("uncaught:exception", (err, runnable, promise) => {
+        if (getIframeBody()) {
+            return false;
+        }
+    });
+
     before(() => {
         cy.visit("/");
         cy.contains("Generate Data").click();
