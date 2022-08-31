@@ -9,6 +9,7 @@ on:
       - "data-widgets-v*"
       - "atlas-core-v*"
       - "atlas-web-*-v*"
+      - "web-actions-v*"
 
 jobs:
   publish_release:
