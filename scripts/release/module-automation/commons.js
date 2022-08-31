@@ -241,10 +241,18 @@ async function createGithubRelease(moduleInfo, moduleChangelogs, mpkOutput) {
 }
 
 async function createGithubReleaseFrom({ title, body, tag, mpkOutput, isDraft = false }) {
-    const draftArgument = isDraft ? "--draft " : "";
-    await execShellCommand(
-        `gh release create --title "${title}" --notes "${body}" ${draftArgument}"${tag}" "${mpkOutput}"`
-    );
+    const command = [
+        `gh release create`,
+        `--title '${title}'`,
+        `--notes '${body}'`,
+        isDraft ? "--draft" : "",
+        `'${tag}'`,
+        `'${mpkOutput}'`
+    ]
+        .filter(str => str !== "")
+        .join(" ");
+
+    await execShellCommand(command);
 }
 
 function zip(src, fileName) {
