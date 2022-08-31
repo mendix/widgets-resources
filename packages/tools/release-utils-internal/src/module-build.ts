@@ -1,9 +1,9 @@
-import { execSync } from "node:child_process";
 import { dirname, join, relative } from "node:path";
 import { cp, mkdir, mv, popd, pushd, rm } from "shelljs";
 import { BuildOptions, BuildParams, DepsBuildConfig, getBuildConfig, getDepsConfig, ModuleBuildConfig } from "./config";
 import { cloneRepoShallow } from "./git";
 import { createMPK, exportModuleWithWidgets } from "./mpk";
+import { exec } from "./shell";
 
 export async function cleanup(config: ModuleBuildConfig): Promise<void> {
     console.info("Removing dist...");
@@ -40,7 +40,7 @@ export async function stepBuildDeps(config: DepsBuildConfig): Promise<void> {
     console.info("Changing cwd...");
     pushd(config.repoRootPath);
     console.info("Start building dependencies...");
-    execSync(`npm run release -- ${config.scope} --include-dependencies --concurrency 1`, { stdio: "inherit" });
+    await exec(`npm run release -- ${config.scope} --include-dependencies --concurrency 1`, { stdio: "inherit" });
     console.info("Changing cwd...");
     popd();
 }

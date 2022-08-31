@@ -3,23 +3,23 @@ import { z } from "zod";
 import { XMLBuilder, XMLParser } from "fast-xml-parser";
 import { cp, rm, mkdir } from "shelljs";
 
-import { execShellCommand, getFiles, unzip, zip } from "./shell";
+import { exec, getFiles, unzip, zip } from "./shell";
 import { ModuleInfo } from "./package-info";
 import { Version } from "./version";
 import { readFile, writeFile } from "fs/promises";
-import { execSync } from "child_process";
 
-async function ensureMxBuildDockerImageExists(mendixVersion: Version) {
+async function ensureMxBuildDockerImageExists(mendixVersion: Version): Promise<void> {
     const version = mendixVersion.format(true);
 
-    const existingImages = (await execShellCommand(`docker image ls -q mxbuild:${version}`)).toString().trim();
+    const existingImages = (await exec(`docker image ls -q mxbuild:${version}`)).stdout.trim();
     if (!existingImages) {
         console.log(`Creating new mxbuild:${version} docker image...`);
         const dockerfilePath = join(process.cwd(), "packages/tools/pluggable-widgets-tools/scripts/mxbuild.Dockerfile");
-        await execShellCommand(
+        await exec(
             `docker build -f ${dockerfilePath} ` +
                 `--build-arg MENDIX_VERSION=${version} ` +
-                `-t mxbuild:${version} ${process.cwd()}`
+                `mxbuild:${version} ${process.cwd()}`,
+            { stdio: "inherit" }
         );
     }
 }
@@ -52,11 +52,11 @@ export async function createModuleMpkInDocker(
         moduleName
     ].join(" ");
 
-    await execShellCommand(`docker run -t -v ${sourceDir}:/source --rm mxbuild:${version} bash -c "${args}"`);
+    await exec(`docker run -v ${sourceDir}:/source --rm mxbuild:${version} bash -c "${args}"`, { stdio: "inherit" });
     console.log(`Module ${moduleName} created successfully.`);
     if (process.env.CI) {
         console.info("Changing sourceDir ownership...");
-        execSync(`sudo chown -R "$(id -u):$(id -g)" ${sourceDir}`, { stdio: "inherit" });
+        await exec(`sudo chown -R "$(id -u):$(id -g)" ${sourceDir}`, { stdio: "inherit" });
     }
 }
 

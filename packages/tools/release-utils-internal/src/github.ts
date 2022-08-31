@@ -1,4 +1,4 @@
-import { execShellCommand } from "./shell";
+import { exec } from "./shell";
 import { fetch } from "./fetch";
 
 interface GitHubReleaseInfo {
@@ -24,7 +24,7 @@ export class GitHub {
 
     private async ensureAuth(): Promise<void> {
         if (!this.authSet) {
-            await execShellCommand(`echo "${process.env.GH_PAT}" | gh auth login --with-token`);
+            await exec(`echo "${process.env.GH_PAT}" | gh auth login --with-token`);
         }
     }
 
@@ -32,10 +32,16 @@ export class GitHub {
         await this.ensureAuth();
 
         const repoArgument = pr.repo ? `-R "${pr.repo}"` : "";
+        const command = [
+            `gh pr create`,
+            `--title '${pr.title}'`,
+            `--body '${pr.body}'`,
+            `--base '${pr.base}'`,
+            `--head '${pr.head}'`,
+            `'${repoArgument}'`
+        ].join(" ");
 
-        await execShellCommand(
-            `gh pr create --title "${pr.title}" --body "${pr.body}" --base ${pr.base} --head ${pr.head} ${repoArgument}`
-        );
+        await exec(command, { stdio: "inherit" });
     }
 
     async createGithubReleaseFrom({
@@ -49,7 +55,7 @@ export class GitHub {
     }: GitHubReleaseInfo): Promise<void> {
         await this.ensureAuth();
 
-        const targetHash = (await execShellCommand(`git rev-parse --verify ${target}`)).trim();
+        const targetHash = (await exec(`git rev-parse --verify ${target}`)).stdout.trim();
         const command = [
             `gh release create`,
             `--title '${title}'`,
@@ -63,7 +69,7 @@ export class GitHub {
             .filter(str => str !== "")
             .join(" ");
 
-        await execShellCommand(command);
+        await exec(command, { stdio: "inherit" });
     }
 
     async getReleaseIdByReleaseTag(releaseTag: string): Promise<string | undefined> {

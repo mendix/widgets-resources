@@ -1,30 +1,19 @@
-import { exec } from "child_process";
+import execa from "execa";
 import { readdir } from "fs/promises";
 import { extname, resolve } from "path";
 
-export function execShellCommand(cmd: string | string[], workingDirectory: string = process.cwd()): Promise<string> {
-    const command = Array.isArray(cmd) ? cmd.join(" && ") : cmd;
-    return new Promise<string>((resolve, reject) => {
-        exec(command, { cwd: workingDirectory }, (error, stdout, stderr) => {
-            if (error) {
-                console.warn(stderr);
-                console.warn(stdout);
-                reject(error);
-            }
-            if (stderr) {
-                console.warn(stderr);
-            }
-            resolve(stdout);
-        });
-    });
+export function exec(command: string, options?: execa.Options): execa.ExecaChildProcess {
+    return execa(command, { shell: true, ...options });
 }
 
 export async function zip(src: string, fileName: string): Promise<string> {
-    return execShellCommand(`cd "${src}" && zip -r ${fileName} .`);
+    const { stdout } = await exec(`cd "${src}" && zip -r ${fileName} .`);
+    return stdout.trim();
 }
 
 export async function unzip(src: string, dest: string): Promise<string> {
-    return execShellCommand(`unzip "${src}" -d "${dest}"`);
+    const { stdout } = await exec(`unzip "${src}" -d "${dest}"`);
+    return stdout.trim();
 }
 
 export async function getFiles(dir: string, includeExtension: string[] = []): Promise<string[]> {
