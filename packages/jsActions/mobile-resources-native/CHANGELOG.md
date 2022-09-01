@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## Added
+
+-   We introduced a new [Download File] action to download document files stored in Mendix to native device storage.
+
 ## [3.11.0] Native Mobile Resources - 2022-8-18
 
 ### Added
