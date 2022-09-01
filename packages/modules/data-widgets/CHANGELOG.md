@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.5.5] Data Widgets - 2022-9-1
+
+## [2.4.2] Datagrid
+
+### Fixed
+
+-   We fixed the issue with column selector, where the list would go out of the screen, making part of it inaccessible. (Ticket(s) #162255 and #163129)
+
 ## [2.5.4] Data Widgets - 2022-8-11
 
 ## [2.4.1] DatagridDateFilter
