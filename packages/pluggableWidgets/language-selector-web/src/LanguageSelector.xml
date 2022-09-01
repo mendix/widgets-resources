@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.web.languageSelector.LanguageSelector" needsEntityContext="true" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+    <name>Language selector</name>
+    <description />
+    <studioProCategory>Display</studioProCategory>
+    <studioCategory>Display</studioCategory>
+    <helpUrl>https://docs.mendix.com/appstore/widgets/languageSelector</helpUrl>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Languages">
+                <property key="languageOptions" type="datasource" isList="true" required="true">
+                    <caption>Data source</caption>
+                    <description>Recommended: Database data source with System.Language as entity.</description>
+                </property>
+                <property key="languageCaption" type="textTemplate" dataSource="languageOptions" required="true">
+                    <caption>Language caption</caption>
+                    <description>Recommended: {1} with attribute Language.Description as parameter.</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="General">
+                <property key="position" type="enumeration" defaultValue="bottom">
+                    <caption>Menu position</caption>
+                    <description>The location of the menu relative to the current selected language (click area).</description>
+                    <enumerationValues>
+                        <enumerationValue key="left">Left</enumerationValue>
+                        <enumerationValue key="right">Right</enumerationValue>
+                        <enumerationValue key="top">Top</enumerationValue>
+                        <enumerationValue key="bottom">Bottom</enumerationValue>
+                    </enumerationValues>
+                </property>
+
+                <property key="trigger" type="enumeration" defaultValue="click">
+                    <caption>Open menu on</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="click">Click</enumerationValue>
+                        <enumerationValue key="hover">Hover</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="hideForSingle" type="boolean" defaultValue="true">
+                    <caption>Hide for single language</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>
