@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [9.17.0] - 2022-09-01
+
 ### Added
 
 -   We added support for association properties linked to a data source, introduced in Mendix 9.17.
