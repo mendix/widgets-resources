@@ -27,7 +27,7 @@ describe("Background image", () => {
         await btnDynamicImage.tap();
 
         const dynamicImage = element(by.id("dynamicImageText"));
-        await waitFor(dynamicImage).toBeVisible().withTimeout(2000);
+        await waitFor(dynamicImage).toBeVisible().withTimeout(10000);
 
         await expectToMatchScreenshot();
     });
@@ -37,7 +37,7 @@ describe("Background image", () => {
         await btnDynamicSvgImage.tap();
 
         const dynamicImage = element(by.id("dynamicSvgImageText"));
-        await waitFor(dynamicImage).toBeVisible().withTimeout(2000);
+        await waitFor(dynamicImage).toBeVisible().withTimeout(10000);
 
         await expectToMatchScreenshot();
     });

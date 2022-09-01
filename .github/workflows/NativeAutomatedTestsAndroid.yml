@@ -251,14 +251,14 @@ jobs:
             /Users/runner/.android/avd/*
             /Users/runner/.android/adb*
             /Users/runner/Library/Android/sdk/system-images/**/*
-          key: pixel_30_x86_aosp-atd_3core_and_system_images
+          key: pixel_30_x86_64_default_3core_and_system_images
       - name: "Create AVD and generate snapshot for caching"
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@e790971012b979513b4e2fe70d4079bc0ca8a1ae #v2.24.0
         with:
           api-level: 30
-          target: aosp_atd
-          arch: x86
+          target: default
+          arch: x86_64
           profile: pixel
           cores: 3
           ram-size: 4096M
@@ -308,13 +308,13 @@ jobs:
             /Users/runner/.android/avd/*
             /Users/runner/.android/adb*
             /Users/runner/Library/Android/sdk/system-images/**/*
-          key: pixel_30_x86_aosp-atd_3core_and_system_images
+          key: pixel_30_x86_64_default_3core_and_system_images
       - name: "Run tests"
         uses: reactivecircus/android-emulator-runner@e790971012b979513b4e2fe70d4079bc0ca8a1ae #v2.24.0
         with:
           api-level: 30
-          target: aosp_atd
-          arch: x86
+          target: default
+          arch: x86_64
           profile: pixel
           cores: 3
           ram-size: 4096M
