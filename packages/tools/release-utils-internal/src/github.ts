@@ -1,5 +1,7 @@
 import { execShellCommand } from "./shell";
 import { fetch } from "./fetch";
+import { mkdtemp, writeFile } from "fs/promises";
+import { join } from "path";
 
 interface GitHubReleaseInfo {
     title: string;
@@ -49,11 +51,13 @@ export class GitHub {
     }: GitHubReleaseInfo): Promise<void> {
         await this.ensureAuth();
 
+        const notesFilePath = await this.createReleaseNotesFile(notes);
+
         const targetHash = (await execShellCommand(`git rev-parse --verify ${target}`)).trim();
         const command = [
             `gh release create`,
             `--title '${title}'`,
-            `--notes '${notes}'`,
+            `--notes-file '${notesFilePath}'`,
             isDraft ? `--draft` : "",
             repo ? `-R '${repo}'` : "",
             `'${tag}'`,
@@ -114,6 +118,14 @@ export class GitHub {
         }
 
         return downloadUrl;
+    }
+
+    async createReleaseNotesFile(releaseNotesText: string): Promise<string> {
+        const folderPath = await mkdtemp("gh-");
+        const filePath = join(folderPath, "release-notes.txt");
+        await writeFile(filePath, releaseNotesText);
+
+        return filePath;
     }
 }
 
