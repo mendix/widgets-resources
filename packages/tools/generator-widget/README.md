@@ -83,7 +83,7 @@ If `Yes` is selected, unit tests are included to ensure individual units of the 
 
 If `Yes` is selected, end to end tests are included to ensure that the integrated components of an application function as expected. Default value is `No`.
 
-Note: Both `Unit` and `End to end` tests apply only to the Full Boilerplate. `End to End` is exclusive for web and hybrid mobile apps.
+Note: Both `Unit` and `End to end` tests apply only to the Full Boilerplate. `End to End` is exclusive for web and PWA apps.
 
 The tool will then create copied files, and run `npm install` to install development dependencies.
 

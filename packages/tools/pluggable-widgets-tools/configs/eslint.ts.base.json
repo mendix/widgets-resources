@@ -36,14 +36,14 @@
             "warn",
             {
                 "varsIgnorePattern": "createElement",
-                "args":  "none"
+                "args": "none"
             }
         ],
         "@typescript-eslint/no-unused-vars": [
             "warn",
             {
                 "varsIgnorePattern": "createElement",
-                "args":  "none"
+                "args": "none"
             }
         ],
         "@typescript-eslint/ban-types": "warn",
@@ -147,7 +147,7 @@
     },
     "overrides": [
         {
-            "files": ["prettier.config.js", "*.webmodeler.*", "*.editorPreview.*", ".eslintrc.js", "wdio.conf.js"],
+            "files": ["prettier.config.js", "*.webmodeler.*", "*.editorPreview.*", ".eslintrc.js"],
             "rules": {
                 "@typescript-eslint/no-var-requires": "off",
                 "@typescript-eslint/class-name-casing": "off"

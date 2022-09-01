@@ -80,14 +80,10 @@ function getRealCommand(cmd, toolsRoot) {
             return `jest --projects "${join(toolsRoot, "test-config/jest.native.config.js")}"`;
         case "test:e2e":
         case "test:e2e:ts":
-        case "test:e2e:js":
-            return `wdio "${join(toolsRoot, "test-config/wdio.conf.js")}"`;
-        case "test:e2e:web:dev":
-            return `cross-env DEBUG=true wdio "${join(toolsRoot, "test-config/wdio.conf.js")}"`;
-        case "test:e2e:web":
-            return `node "${join(toolsRoot, "scripts/e2e.js")}" $@`;
         case "test:e2e:web:cypress":
             return `node "${join(toolsRoot, "scripts/e2e.cypress.js")}" $@`;
+        case "test:e2e:web:cypress:local":
+            return "npx cypress open --browser chrome --e2e";
         case "start:js":
         case "start:ts":
             return "echo This command has no effect, use pluggable-widgets-tools start:web instead!";

@@ -10,11 +10,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 -   We added support for association properties linked to a data source, introduced in Mendix 9.17.
 
+### Breaking changes
+
+-   We removed `webdriverio` from our dependencies as we're using Cypress for e2e testing purposes. In case if you want to continue using WebDriverIO, please install the dependencies manually.
+
 ## [9.13.4] - 2022-08-26
 
 ### Changed
 
--   We updated `cypress` to version 10
+-   We updated `cypress` to version 10.
 
 ### Fixed
 

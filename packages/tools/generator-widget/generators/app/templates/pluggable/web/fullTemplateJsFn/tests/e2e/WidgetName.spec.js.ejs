@@ -1,17 +1,15 @@
-const homepage = require("./pages/home.page");
-
-const badgeValue = "Badge";
-
 describe("<%- name %>", () => {
-    it("should render a badge with a caption", () => {
-        homepage.open();
+    it("changes caption when attribute value is changed", () => {
+        cy.visit("/");
 
         /**
         * Create here your tests, Example:
-        * homepage.badge().waitForVisible();
+        * const newAttributeValue = "Test";
+        * const badge = ".mx-name-badgeDanger";
         *
-        * const widgetValue = homepage.badge().getText();
-        * expect(widgetValue).toContain(badgeValue);
+        * cy.get(badge).should("not.contain.text", newAttributeValue);
+        * cy.get(".mx-name-dataInput").find("input").type(newAttributeValue).type("{enter}");
+        * cy.get(badge).should("contain.text", newAttributeValue);
         **/
     });
 });
