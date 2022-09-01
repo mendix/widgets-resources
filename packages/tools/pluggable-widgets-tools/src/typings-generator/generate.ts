@@ -14,6 +14,8 @@ const mxExports = [
     "ListActionValue",
     "ListAttributeValue",
     "ListExpressionValue",
+    "ListReferenceValue",
+    "ListReferenceSetValue",
     "ListWidgetValue",
     "ReferenceValue",
     "ReferenceSetValue",

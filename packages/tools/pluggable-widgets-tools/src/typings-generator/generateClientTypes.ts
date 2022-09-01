@@ -130,7 +130,7 @@ function toClientPropType(
             const types = prop.associationTypes
                 .map(ats => ats.associationType)
                 .reduce((a, i) => a.concat(i), [])
-                .map(at => toAssociationOutputType(at.$.name));
+                .map(at => toAssociationOutputType(at.$.name, !!prop.$.dataSource));
             const uniqueTypes = Array.from(new Set(types));
             return uniqueTypes.join(" | ");
         }
@@ -195,12 +195,12 @@ export function toAttributeClientType(xmlType: string): string {
     }
 }
 
-export function toAssociationOutputType(xmlType: string) {
+export function toAssociationOutputType(xmlType: string, linkedToDataSource: boolean) {
     switch (xmlType) {
         case "Reference":
-            return "ReferenceValue";
+            return linkedToDataSource ? "ListReferenceValue" : "ReferenceValue";
         case "ReferenceSet":
-            return "ReferenceSetValue";
+            return linkedToDataSource ? "ListReferenceSetValue" : "ReferenceSetValue";
         default:
             return "any";
     }
