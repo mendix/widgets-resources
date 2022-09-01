@@ -1,8 +1,4 @@
-const { exec } = require("child_process");
-const { rmSync } = require("fs");
-const { promisify } = require("util");
-const { join } = require("path");
-const { downloadFile, execCommand } = require("./helpers");
+const { execSync } = require("child_process");
 
 main().catch(e => {
     console.error(e);
@@ -16,10 +12,16 @@ async function main() {
     }
 
     console.log("Installing xcode-select...");
-    execCommand("xcode-select --install", "command line tools are already installed");
+    try {
+        execSync("xcode-select --install");
+    } catch (error) {
+        if (!error.message.includes("command line tools are already installed")) {
+            throw new Error(error);
+        }
+    }
 
     console.log("Installing simutils...");
-    execCommand("brew tap wix/brew && brew install applesimutils");
+    execSync("brew tap wix/brew && brew install applesimutils");
 
     console.log("Done!");
 }
