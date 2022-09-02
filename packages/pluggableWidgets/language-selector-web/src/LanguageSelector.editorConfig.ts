@@ -15,20 +15,20 @@ export function getPreview(__values: LanguageSelectorPreviewProps, isDarkMode: b
         children: [
             {
                 type: "Text",
-                content: "Current language",
+                content: "Selected language",
                 fontColor: isDarkMode ? "#DEDEDE" : "#899499"
             },
             { type: "Container", grow: 0.001 }, // small space between items
             {
                 type: "Container",
-                padding: 6,
+                padding: 4,
                 children: [
                     {
                         type: "Image",
                         document: decodeURIComponent(
                             (isDarkMode ? ArrowLight : ArrowDark).replace("data:image/svg+xml,", "")
                         ),
-                        height: 8
+                        height: 14
                     }
                 ]
             },

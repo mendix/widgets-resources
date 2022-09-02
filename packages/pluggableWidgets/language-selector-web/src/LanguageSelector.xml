@@ -12,9 +12,10 @@
                     <caption>Data source</caption>
                     <description>Recommended: Database data source with System.Language as entity.</description>
                 </property>
-                <property key="languageCaption" type="textTemplate" dataSource="languageOptions" required="true">
+                <property key="languageCaption" type="expression" dataSource="languageOptions" required="true">
                     <caption>Language caption</caption>
-                    <description>Recommended: {1} with attribute Language.Description as parameter.</description>
+                    <description>Recommended: $currentObject/Description.</description>
+                    <returnType type="String" />
                 </property>
             </propertyGroup>
             <propertyGroup caption="General">

@@ -14,6 +14,7 @@ import {
 } from "../utils/document";
 import { PositionEnum, TriggerEnum } from "../../typings/LanguageSelectorProps";
 import { LanguageItem } from "../LanguageSelector";
+import ArrowIcon from "../assets/arrow_black.svg";
 
 export interface LanguageSwitcherProps {
     preview: boolean;
@@ -67,16 +68,17 @@ export const LanguageSwitcher = (props: LanguageSwitcherProps): ReactElement => 
         <div ref={ref} className={classNames(props.className, "widget-language-selector", "popupmenu")} {...onHover}>
             <div className={"popupmenu-trigger popupmenu-trigger-alignment"} {...onClick}>
                 <span className="current-language-text">{props.currentLanguage?.value || ""}</span>
-                <span
-                    className={`language-arrow glyphicon glyphicon-chevron-${visibility ? "up" : "down"}`}
-                    aria-hidden="true"
-                ></span>
+                <span className="language-arrow" aria-hidden="true">
+                    <img className={`${visibility ? "arrow-up" : "arrow-down"}`} src={ArrowIcon} alt="" />
+                </span>
             </div>
             <div className={classNames("popupmenu-menu", `popupmenu-position-${props.position}`)}>
                 {languageList.map(item => (
                     <div
                         key={item._guid}
-                        className={"popupmenu-basic-item"}
+                        className={`popupmenu-basic-item ${
+                            item._guid === props.currentLanguage?._guid ? "popupmenu-basic-item-active" : ""
+                        }`}
                         onClick={() => {
                             if (props.onSelect) {
                                 return props.onSelect(item);
