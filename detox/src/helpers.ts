@@ -63,13 +63,6 @@ export async function expectToMatchScreenshot(
     if (nativeElement) {
         screenshotPath = await nativeElement.takeScreenshot("screenshot");
     } else {
-        // if (device.getPlatform() === "android") {
-        //     nativeElement = element(by.type("android.widget.FrameLayout")).atIndex(0);
-        //     screenshotPath = await nativeElement.takeScreenshot("screenshot");
-        // } else {
-        //     nativeElement = element(by.type("RCTRootView")).atIndex(0);
-        //     screenshotPath = await nativeElement.takeScreenshot("screenshot");
-        // }
         screenshotPath = await device.takeScreenshot("screenshot");
     }
     expect(readFileSync(screenshotPath)).toMatchImageSnapshot(options);
