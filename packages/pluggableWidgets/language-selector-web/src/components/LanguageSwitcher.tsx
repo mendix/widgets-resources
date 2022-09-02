@@ -26,12 +26,11 @@ export interface LanguageSwitcherProps {
     className: string;
 }
 export const LanguageSwitcher = (props: LanguageSwitcherProps): ReactElement => {
-    const preview = !!props.preview;
     const { languageList, trigger } = props;
     const [visibility, setVisibility] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
 
-    if (!preview) {
+    if (!props.preview) {
         handleOnClickOutsideElement(ref, () => setVisibility(false));
     }
 
@@ -77,7 +76,7 @@ export const LanguageSwitcher = (props: LanguageSwitcherProps): ReactElement => 
                     <div
                         key={item._guid}
                         className={`popupmenu-basic-item ${
-                            item._guid === props.currentLanguage?._guid ? "popupmenu-basic-item-active" : ""
+                            item._guid === props.currentLanguage?._guid ? "active" : ""
                         }`}
                         onClick={() => {
                             if (props.onSelect) {

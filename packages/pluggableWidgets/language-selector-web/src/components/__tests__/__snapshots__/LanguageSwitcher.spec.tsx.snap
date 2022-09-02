@@ -55,7 +55,7 @@ exports[`Language switcher renders the structure with language list and selected
       class="popupmenu-menu popupmenu-position-left"
     >
       <div
-        class="popupmenu-basic-item popupmenu-basic-item-active"
+        class="popupmenu-basic-item active"
       >
         En us
       </div>
