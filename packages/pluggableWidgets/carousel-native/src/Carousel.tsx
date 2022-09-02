@@ -70,18 +70,26 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): ReactElement => {
             );
         }
 
+        const { color: dotColor, ...dotStyles } = pagination.dotStyle || {};
+        const {
+            color: inActiveDotColor,
+            opacity: inActiveDotOpacity,
+            scale: inActiveDotScale,
+            ...inActiveDotStyles
+        } = pagination.inactiveDotStyle || {};
+
         return (
             <Pagination
                 dotsLength={contentLength}
                 activeDotIndex={activeSlide}
                 containerStyle={pagination.container}
                 dotContainerStyle={pagination.dotContainerStyle}
-                dotColor={pagination.dotStyle?.color}
-                dotStyle={pagination.dotStyle}
-                inactiveDotStyle={pagination.inactiveDotStyle}
-                inactiveDotColor={pagination.inactiveDotStyle?.color}
-                inactiveDotOpacity={pagination.inactiveDotStyle?.opacity}
-                inactiveDotScale={pagination.inactiveDotStyle?.scale}
+                dotColor={dotColor}
+                dotStyle={dotStyles}
+                inactiveDotStyle={inActiveDotStyles}
+                inactiveDotColor={inActiveDotColor}
+                inactiveDotOpacity={inActiveDotOpacity}
+                inactiveDotScale={inActiveDotScale}
                 carouselRef={carouselRef}
                 tappableDots
                 {...a11yProps}
