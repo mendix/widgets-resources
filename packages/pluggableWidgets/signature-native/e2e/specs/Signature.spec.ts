@@ -8,11 +8,15 @@ describe("Signature widget", () => {
     });
 
     it("should be able to save a complex signature", async () => {
-        await element(by.id("signature")).swipe("up", "slow", 0.4, 0.5, 0.5);
-        await element(by.id("signature")).swipe("right", "slow", 0.4, 0.5, 0.5);
-        await element(by.id("signature")).swipe("down", "slow", 0.4, 0.5, 0.5);
-        await element(by.id("signature")).swipe("left", "slow", 0.4, 0.5, 0.5);
-        await expectToMatchScreenshot(undefined, { failureThreshold: 500, failureThresholdType: "pixel" });
+        const signature = element(by.id("signature"));
+        await signature.swipe("up", "slow", 0.4, 0.5, 0.5);
+        await signature.swipe("right", "slow", 0.4, 0.5, 0.5);
+        await signature.swipe("down", "slow", 0.4, 0.5, 0.5);
+        await signature.swipe("left", "slow", 0.4, 0.5, 0.5);
+        await expectToMatchScreenshot(undefined, {
+            failureThreshold: 500,
+            failureThresholdType: "pixel"
+        });
 
         await element(by.id("signature$SaveButton$Touchable")).tap();
         const attributes = (await element(by.id("textArea")).getAttributes()) as Detox.ElementAttributes;
@@ -20,7 +24,8 @@ describe("Signature widget", () => {
     });
 
     it("should be able to clear a signature", async () => {
-        await element(by.id("signature")).swipe("down", "slow", 0.9, 0.5, 0.1);
+        const signature = element(by.id("signature"));
+        await signature.swipe("down", "slow", 0.9, 0.5, 0.1);
         await expectToMatchScreenshot(undefined, { failureThreshold: 500, failureThresholdType: "pixel" });
 
         await element(by.id("signature$ClearButton$Touchable")).tap();

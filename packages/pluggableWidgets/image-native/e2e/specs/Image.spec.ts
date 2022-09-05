@@ -1,5 +1,5 @@
-import { expectToMatchScreenshot, launchApp, tapMenuItem } from "../../../../../detox/src/helpers";
-import { element, by, waitFor, expect } from "detox";
+import { expectToMatchScreenshot, launchApp, sleep, tapMenuItem } from "../../../../../detox/src/helpers";
+import { element, by, expect } from "detox";
 import { Alert } from "../../../../../detox/src/Alert";
 
 describe("Image", () => {
@@ -19,8 +19,7 @@ describe("Image", () => {
         const btnImageDynamic = element(by.text("Image dynamic"));
         await btnImageDynamic.tap();
 
-        const dynamicImage = element(by.id("dynamicImageText"));
-        await waitFor(dynamicImage).toBeVisible().withTimeout(2000);
+        await sleep(5000);
 
         await expectToMatchScreenshot();
     });

@@ -9,8 +9,7 @@ describe("Background Gradient", () => {
     });
 
     it("should render one color", async () => {
-        const backgroundGradientWidget = "bgGradientOneColor";
-        await expectToMatchScreenshot(element(by.id(backgroundGradientWidget)));
+        await expectToMatchScreenshot(element(by.id("bgGradientOneColor")));
     });
 
     it("should render more than one color", async () => {
