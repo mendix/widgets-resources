@@ -1,5 +1,5 @@
 import { element, by } from "detox";
-import { expectToMatchScreenshot, launchApp, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, launchApp, sleep, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Signature widget", () => {
     beforeEach(async () => {
@@ -9,6 +9,7 @@ describe("Signature widget", () => {
 
     it("should be able to save a complex signature", async () => {
         const signature = element(by.id("signature"));
+        await sleep(1000);
         await signature.swipe("up", "slow", 0.4, 0.5, 0.5);
         await signature.swipe("right", "slow", 0.4, 0.5, 0.5);
         await signature.swipe("down", "slow", 0.4, 0.5, 0.5);

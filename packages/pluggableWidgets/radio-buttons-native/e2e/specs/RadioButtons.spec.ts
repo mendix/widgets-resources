@@ -10,9 +10,9 @@ describe("Radio Buttons", () => {
 
     it("should call on change when selected option changes", async () => {
         await expectToMatchScreenshot();
-        await element(by.text("Option 1")).tap();
+        await element(by.text("Option 2")).tap();
         const alert = Alert();
-        await expect(alert.messageElement).toHaveText("Option_1");
+        await expect(alert.messageElement).toHaveText("Option_2");
         await alert.confirm();
         await expectToMatchScreenshot(element(by.id("radioButtonsVertical")));
     });

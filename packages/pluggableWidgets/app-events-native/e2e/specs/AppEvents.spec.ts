@@ -20,7 +20,7 @@ describe("App events", () => {
     });
 
     it("should generate looping onTimeout event", async () => {
-        await waitFor(element(by.text("Event: Interval 3s")))
+        await waitFor(element(by.text("Event: Interval 3s")).atIndex(0))
             .toBeVisible()
             .withTimeout(4000);
     });

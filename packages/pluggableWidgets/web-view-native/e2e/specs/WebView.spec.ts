@@ -1,4 +1,4 @@
-import { expectToMatchScreenshot, launchApp, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, launchApp, sleep, tapMenuItem } from "../../../../../detox/src/helpers";
 import { expect, element, by, device, waitFor } from "detox";
 import { Alert } from "../../../../../detox/src/Alert";
 
@@ -65,7 +65,7 @@ describe("Web view", () => {
             await waitForAndCloseOnLoadAlert();
 
             await element(by.id("webViewExternal")).tap({ x: 3, y: 3 });
-            await new Promise(res => setTimeout(res, timeout));
+            await sleep(timeout);
             await expectToMatchScreenshot();
         }
     });

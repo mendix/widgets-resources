@@ -19,7 +19,7 @@ describe("Image", () => {
         const btnImageDynamic = element(by.text("Image dynamic"));
         await btnImageDynamic.tap();
 
-        await sleep(5000);
+        await sleep(10000);
 
         await expectToMatchScreenshot();
     });

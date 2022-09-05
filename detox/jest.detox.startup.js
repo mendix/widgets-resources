@@ -1,5 +1,4 @@
 const { cleanup, init, device } = require("detox");
-const adapter = require("detox/runners/jest/adapter");
 const specReporter = require("detox/runners/jest/specReporter");
 const config = require("./detox.config");
 const { toMatchImageSnapshot } = require("jest-image-snapshot");
@@ -7,7 +6,6 @@ const { join, resolve } = require("path");
 const { execSync } = require("child_process");
 
 jest.setTimeout(300000);
-jasmine.getEnv().addReporter(adapter);
 jasmine.getEnv().addReporter(specReporter);
 
 expect.extend({
@@ -51,11 +49,6 @@ beforeAll(async () => {
     }
 }, 1800000);
 
-beforeEach(async () => {
-    await adapter.beforeEach();
-});
-
 afterAll(async () => {
-    await adapter.afterAll();
     await cleanup();
 });

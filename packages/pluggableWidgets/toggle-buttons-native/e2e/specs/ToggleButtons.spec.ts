@@ -34,7 +34,7 @@ describe("Toggle Buttons", () => {
         await expectToMatchScreenshot(toggleBtnsCustomStyle);
     });
 
-    fit("triggers configured event", async () => {
+    it("triggers configured event", async () => {
         const mapsType = "Satellite";
         const toggleBtnsOnChange = element(by.id("toggleButtonsOnChange").withDescendant(by.label(mapsType)));
         const alert = Alert();
