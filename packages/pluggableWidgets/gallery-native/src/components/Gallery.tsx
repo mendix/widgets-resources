@@ -15,6 +15,7 @@ export interface GalleryProps<T extends ObjectItem> {
     ) => ReactElement;
     items: T[];
     loadMoreItems: () => void;
+    filters?: ReactNode;
     name: string;
     pagination: PaginationEnum;
     loadMoreButtonCaption?: DynamicValue<string>;
@@ -82,6 +83,7 @@ export const Gallery = <T extends ObjectItem>(props: GalleryProps<T>): ReactElem
 
     return (
         <View testID={`${props.name}`} style={props.style.container}>
+            {props.filters ? <View>{props.filters}</View> : null}
             <FlatList
                 {...(isScrollDirectionVertical && props.pullDown ? { onRefresh: props.pullDown } : {})}
                 ListFooterComponent={loadMoreButton}

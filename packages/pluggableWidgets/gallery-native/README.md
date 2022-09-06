@@ -4,10 +4,6 @@
 
 The Gallery widget, a replacement for both the template grid and list view, helps you build beautiful lists and grids for tablet, and mobile devices. The Gallery widget provides options for varying columns per device type and gives you the power to create amazing grid and list experiences for every user.
 
-Here is an example of Gallery widget using:
-
-![Gallery](./assets/gallery-widget.gif)
-
 ### 1.2 Features
 
 -   Pagination.

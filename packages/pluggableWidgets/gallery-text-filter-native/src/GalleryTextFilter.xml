@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.native.gallerytextfilter.GalleryTextFilter" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+    <name>Text filter</name>
+    <description />
+    <studioProCategory>Data controls</studioProCategory>
+    <studioCategory>Data controls</studioCategory>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="defaultValue" type="expression" required="false">
+                    <caption>Default value</caption>
+                    <description />
+                    <returnType type="String" />
+                </property>
+                <property key="defaultFilter" type="enumeration" defaultValue="contains">
+                    <caption>Default filter</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="contains">Contains</enumerationValue>
+                        <enumerationValue key="startsWith">Starts with</enumerationValue>
+                        <enumerationValue key="endsWith">Ends with</enumerationValue>
+                        <enumerationValue key="greater">Greater than</enumerationValue>
+                        <enumerationValue key="greaterEqual">Greater than or equal</enumerationValue>
+                        <enumerationValue key="equal">Equal</enumerationValue>
+                        <enumerationValue key="notEqual">Not equal</enumerationValue>
+                        <enumerationValue key="smaller">Smaller than</enumerationValue>
+                        <enumerationValue key="smallerEqual">Smaller than or equal</enumerationValue>
+                        <enumerationValue key="empty">Empty</enumerationValue>
+                        <enumerationValue key="notEmpty">Not empty</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="placeholder" type="textTemplate" required="false">
+                    <caption>Placeholder</caption>
+                    <description />
+                    <translations>
+                        <translation lang="en_US">What do you want to filter?</translation>
+                    </translations>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="On change behavior">
+                <property key="delay" type="integer" defaultValue="500">
+                    <caption>Apply after (ms)</caption>
+                    <description>Wait this period before applying then change(s) to the filter</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Configurations">
+                <property key="valueAttribute" type="attribute" required="false">
+                    <caption>Saved attribute</caption>
+                    <description>Attribute used to store the last value of the filter.</description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                        <attributeType name="HashString" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Events">
+                <property key="onChange" type="action" required="false">
+                    <caption>On change</caption>
+                    <description>Action to be triggered when the value or filter changes.</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

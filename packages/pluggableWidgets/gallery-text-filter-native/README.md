@@ -1,0 +1,1 @@
+# Gallery text filter widget

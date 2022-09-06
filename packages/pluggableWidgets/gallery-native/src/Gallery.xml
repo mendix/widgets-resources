@@ -77,5 +77,65 @@
                 </property>
             </propertyGroup>
         </propertyGroup>
+        <propertyGroup caption="Filtering">
+            <propertyGroup caption="Filtering">
+                <property key="filterList" type="object" isList="true" required="false">
+                    <caption>Filters</caption>
+                    <description />
+                    <properties>
+                        <propertyGroup caption="General">
+                            <property key="filter" type="attribute" dataSource="../datasource">
+                                <caption>Filter attribute</caption>
+                                <description />
+                                <attributeTypes>
+                                    <attributeType name="String" />
+                                    <attributeType name="AutoNumber" />
+                                    <attributeType name="Boolean" />
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Enum" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                </attributeTypes>
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
+                <property key="filtersPlaceholder" type="widgets" required="false">
+                    <caption>Filters placeholder</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Sorting">
+            <propertyGroup caption="Sorting">
+                <property key="sortList" type="object" isList="true" required="false">
+                    <caption>Sort attributes</caption>
+                    <description />
+                    <properties>
+                        <propertyGroup caption="General">
+                            <property key="attribute" type="attribute" dataSource="../datasource">
+                                <caption>Attribute</caption>
+                                <description />
+                                <attributeTypes>
+                                    <attributeType name="String" />
+                                    <attributeType name="AutoNumber" />
+                                    <attributeType name="Boolean" />
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Enum" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                </attributeTypes>
+                            </property>
+                            <property key="caption" type="textTemplate">
+                                <caption>Caption</caption>
+                                <description />
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
     </properties>
 </widget>
