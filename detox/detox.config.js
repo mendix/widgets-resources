@@ -67,7 +67,7 @@ module.exports = {
             screenshot: {
                 enabled: true,
                 shouldTakeAutomaticSnapshots: true,
-                keepOnlyFailedTestsArtifacts: true,
+                keepOnlyFailedTestsArtifacts: false,
                 takeWhen: {
                     testStart: true,
                     testDone: true,
@@ -76,7 +76,7 @@ module.exports = {
             },
             video: {
                 enabled: true,
-                keepOnlyFailedTestsArtifacts: true
+                keepOnlyFailedTestsArtifacts: false
             }
         }
     }
