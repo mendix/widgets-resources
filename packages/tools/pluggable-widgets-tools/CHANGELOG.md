@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Deprecated
+
+-   We've deprecated the `className` preview property. From now on, you have to use `class` property instead.
+
+## [9.17.0] - 2022-09-02
+
 ### Added
 
 -   We added support for association properties linked to a data source, introduced in Mendix 9.17.
