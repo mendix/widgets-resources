@@ -20,6 +20,6 @@ describe("Feedback widget", () => {
 
         await waitFor(element(by.text("Feedback successfully sent")))
             .toBeVisible()
-            .withTimeout(5000);
+            .withTimeout(10000);
     });
 });

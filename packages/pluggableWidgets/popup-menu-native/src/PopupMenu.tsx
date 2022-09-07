@@ -90,7 +90,12 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
                 </TouchableButton>
             }
         >
-            <View style={{ overflow: "hidden", borderRadius: styles.container?.borderRadius }}>{menuOptions}</View>
+            <View
+                style={{ overflow: "hidden", borderRadius: styles.container?.borderRadius }}
+                testID={`${props.name}_menu`}
+            >
+                {menuOptions}
+            </View>
         </Menu>
     );
 }

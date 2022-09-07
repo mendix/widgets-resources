@@ -2,7 +2,7 @@ import { expectToMatchScreenshot, launchApp, sleep, tapMenuItem } from "../../..
 import { expect, element, by, device, waitFor } from "detox";
 import { Alert } from "../../../../../detox/src/Alert";
 
-const timeout = 5000;
+const timeout = 10000;
 
 describe("Web view", () => {
     beforeEach(async () => {

@@ -10,7 +10,7 @@ describe("Popup menu", () => {
 
     it("has a basic menu with an action", async () => {
         await element(by.text("Basic")).tap();
-        await expectToMatchScreenshot();
+        await expectToMatchScreenshot(element(by.id("popupMenuBasic_menu")));
 
         await element(by.text("Alert")).tap();
         const alert = Alert();
@@ -19,7 +19,7 @@ describe("Popup menu", () => {
 
     it("has a custom menu with an action", async () => {
         await element(by.text("Custom")).tap();
-        await expectToMatchScreenshot();
+        await expectToMatchScreenshot(element(by.id("popupMenuCustom_menu")));
 
         await element(by.text("Alert")).tap();
         const alert = Alert();
