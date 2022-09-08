@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.11.1] Native Mobile Resources - 2022-9-8
+
+## [2.2.2] Carousel
+
+### Fixed
+
+-   Console errors were removed.
+
 ## [3.11.0] Native Mobile Resources - 2022-8-18
 
 ### Added
