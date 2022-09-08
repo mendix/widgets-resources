@@ -3,19 +3,36 @@
         .current-language-text,
         .language-arrow {
             color: white;
+            img {
+                filter: invert(1);
+            }
         }
     }
 }
 
 .widget-language-selector {
-    .popupmenu-trigger-alignement {
-        display: flex;
-        align-items: center;
+    .language-arrow {
+        transition: transform 0.2s ease-in-out 50ms;
+        img {
+            height: 14px !important;
+            &.arrow-up {
+                transform: rotate(180deg);
+            }
+        }
     }
     .current-language-text {
         margin-right: 6px;
+        font-size: 14px;
     }
-    .popupmenu-basic-item {
-        border: 1px solid #ced0d3;
+    .popupmenu-menu {
+        background: #f8f8f8;
+        .popupmenu-basic-item {
+            &.active {
+                font-weight: 600;
+            }
+            &:hover {
+                background: #ffffff;
+            }
+        }
     }
 }

@@ -5,7 +5,7 @@ import { LanguageSwitcher } from "./components/LanguageSwitcher";
 export const preview = (props: LanguageSelectorPreviewProps): ReactElement => {
     return (
         <LanguageSwitcher
-            preview={false}
+            preview
             currentLanguage={{ _guid: "1", value: "Current language" }}
             languageList={[{ _guid: "1", value: "Current language" }]}
             position={props.position}

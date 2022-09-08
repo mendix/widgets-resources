@@ -13,8 +13,13 @@ exports[`Language switcher renders the structure with empty language list 1`] = 
       />
       <span
         aria-hidden="true"
-        class="language-arrow glyphicon glyphicon-chevron-down"
-      />
+        class="language-arrow"
+      >
+        <img
+          alt=""
+          class="arrow-down"
+        />
+      </span>
     </div>
     <div
       class="popupmenu-menu popupmenu-position-left"
@@ -38,14 +43,19 @@ exports[`Language switcher renders the structure with language list and selected
       </span>
       <span
         aria-hidden="true"
-        class="language-arrow glyphicon glyphicon-chevron-down"
-      />
+        class="language-arrow"
+      >
+        <img
+          alt=""
+          class="arrow-down"
+        />
+      </span>
     </div>
     <div
       class="popupmenu-menu popupmenu-position-left"
     >
       <div
-        class="popupmenu-basic-item"
+        class="popupmenu-basic-item active"
       >
         En us
       </div>
