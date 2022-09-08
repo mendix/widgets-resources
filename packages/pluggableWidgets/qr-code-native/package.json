@@ -25,7 +25,7 @@
     "version": "npm run release"
   },
   "dependencies": {
-    "react-native-qrcode-svg": "^6.0.6",
+    "react-native-qrcode-svg": "6.0.6",
     "@mendix/piw-native-utils-internal": "^1.0.0",
     "react-native-svg": "^9.6.4"
   },
