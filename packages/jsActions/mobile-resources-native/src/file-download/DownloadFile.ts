@@ -8,14 +8,9 @@
 import { Platform } from "react-native";
 import RNBlobUtil from "react-native-blob-util";
 import FileViewer from "react-native-file-viewer";
+import mimeTypes from "mime";
 
 // BEGIN EXTRA CODE
-function formatMendixFileUrl(file: mendix.lib.MxObject): string {
-    return `${mx.remoteUrl}file?guid=${file.getGuid()}&changedDate=${
-        file.get("changedDate") ?? ""
-    }&name=${encodeURIComponent(file.get("Name"))}`;
-}
-
 function formatPath(...pathArgs: string[]): string {
     return pathArgs.filter(arg => !!arg).join("/");
 }
@@ -25,6 +20,23 @@ function sanitizeFileName(name: string) {
     return name.replace(/[<>"?:|*/\\\u0000-\u001F\u007F]/g, "_");
 }
 
+function getFilePathWithNextVersion(path: string) {
+    const fileVersion = path.match(/\(\d+\)(?!.*\(\d+\))/);
+    if (!fileVersion) {
+        return path.replace(/\.(?!.*\.)/, "(1).");
+    }
+    const newFileVersion = `(${Number(fileVersion[0].match(/\d+/)?.[0]) + 1})`;
+    return path.replace(/\(\d+\)(?!.*\(\d+\))/, newFileVersion);
+}
+
+async function getUniqueFileName(path: string) {
+    let uniqueFilePath = path;
+    do {
+        uniqueFilePath = getFilePathWithNextVersion(uniqueFilePath);
+    } while (await RNBlobUtil.fs.exists(uniqueFilePath));
+    return uniqueFilePath;
+}
+
 // END EXTRA CODE
 
 /**
@@ -32,6 +44,7 @@ function sanitizeFileName(name: string) {
  * @param {boolean} openWithOS - Set to True to let the OS open the file and ask the user with which applciation.\nSet to False if the file only needs to be saved to the device storage.
  * @returns {Promise.<void>}
  */
+
 export async function DownloadFile(file: mendix.lib.MxObject, openWithOS: boolean) {
     // BEGIN USER CODE
     if (!file) {
@@ -39,29 +52,32 @@ export async function DownloadFile(file: mendix.lib.MxObject, openWithOS: boolea
     }
 
     const dirs = RNBlobUtil.fs.dirs;
-
     const fileName = file.get("Name") as string;
+    const mimeType = mimeTypes.getType(fileName);
     const sanitizedFileName = sanitizeFileName(fileName);
-    const baseDir = Platform.OS === "ios" ? dirs.DocumentDir : dirs.CacheDir;
-    const fileURL = formatMendixFileUrl(file);
-    const downloadedFile = await RNBlobUtil.config({
-        path: formatPath(baseDir, sanitizedFileName)
-    }).fetch("GET", fileURL);
-
-    if (Platform.OS === "android") {
-        await RNBlobUtil.MediaCollection.copyToMediaStore(
+    const baseDir = Platform.OS === "ios" ? dirs.DocumentDir : dirs.DownloadDir;
+    const filePath = mx.data.getDocumentUrl(file.getGuid(), Number(file.get("changedDate")));
+    let accessiblePath;
+    if (Platform.OS === "ios") {
+        accessiblePath = formatPath(baseDir, sanitizedFileName);
+        const fileExist = await RNBlobUtil.fs.exists(accessiblePath);
+        if (fileExist) {
+            accessiblePath = await getUniqueFileName(accessiblePath);
+        }
+        await RNBlobUtil.fs.cp(filePath, accessiblePath);
+    } else {
+        accessiblePath = await RNBlobUtil.MediaCollection.copyToMediaStore(
             {
                 name: sanitizedFileName,
-                mimeType: "*",
+                mimeType: mimeType ?? "*",
                 parentFolder: ""
             },
             "Download",
-            downloadedFile.path()
+            filePath
         );
     }
-
     if (openWithOS) {
-        await FileViewer.open(downloadedFile.path(), {
+        await FileViewer.open(accessiblePath, {
             showOpenWithDialog: true,
             showAppsSuggestions: true
         });
