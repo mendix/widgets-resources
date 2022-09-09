@@ -20,20 +20,21 @@ function sanitizeFileName(name: string) {
     return name.replace(/[<>"?:|*/\\\u0000-\u001F\u007F]/g, "_");
 }
 
-function getFilePathWithNextVersion(path: string) {
-    const fileVersion = path.match(/\(\d+\)(?!.*\(\d+\))/);
-    if (!fileVersion) {
-        return path.replace(/\.(?!.*\.)/, "(1).");
-    }
-    const newFileVersion = `(${Number(fileVersion[0].match(/\d+/)?.[0]) + 1})`;
-    return path.replace(/\(\d+\)(?!.*\(\d+\))/, newFileVersion);
-}
-
-async function getUniqueFileName(path: string) {
+async function getUniqueFilePath(path: string) {
     let uniqueFilePath = path;
-    do {
-        uniqueFilePath = getFilePathWithNextVersion(uniqueFilePath);
-    } while (await RNBlobUtil.fs.exists(uniqueFilePath));
+    if (!(await RNBlobUtil.fs.exists(uniqueFilePath))) {
+        return uniqueFilePath;
+    }
+    const fileVersion = path.match(/\(\d+\)(?!.*\(\d+\))/);
+    let newFileVersion = 0;
+    if (!fileVersion) {
+        uniqueFilePath = path.replace(/\.(?!.*\.)/, "(1).");
+        newFileVersion++;
+    }
+    while (await RNBlobUtil.fs.exists(uniqueFilePath)) {
+        newFileVersion++;
+        uniqueFilePath = uniqueFilePath.replace(/\(\d+\)(?!.*\(\d+\))/, `(${newFileVersion})`);
+    }
     return uniqueFilePath;
 }
 
@@ -59,11 +60,7 @@ export async function DownloadFile(file: mendix.lib.MxObject, openWithOS: boolea
     const filePath = mx.data.getDocumentUrl(file.getGuid(), Number(file.get("changedDate")));
     let accessiblePath;
     if (Platform.OS === "ios") {
-        accessiblePath = formatPath(baseDir, sanitizedFileName);
-        const fileExist = await RNBlobUtil.fs.exists(accessiblePath);
-        if (fileExist) {
-            accessiblePath = await getUniqueFileName(accessiblePath);
-        }
+        accessiblePath = await getUniqueFilePath(formatPath(baseDir, sanitizedFileName));
         await RNBlobUtil.fs.cp(filePath, accessiblePath);
     } else {
         accessiblePath = await RNBlobUtil.MediaCollection.copyToMediaStore(
