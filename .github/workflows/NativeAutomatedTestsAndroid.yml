@@ -110,7 +110,13 @@ jobs:
         uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
         with:
           name: widgets
-          path: packages/pluggableWidgets
+          path: builtWidgets
+      - name: "Move widgets"
+        run: |
+          for oldPath in builtWidgets/**/dist/*/*.mpk; do
+            newPath=Native-Mobile-Resources-main/widgets/$(basename $oldPath)
+            mv -f $oldPath $newPath
+          done
       - name: "Update widgets"
         run: mx update-widgets --loose-version-check Native-Mobile-Resources-main/NativeComponentsTestProject.mpr
       - name: "Build test project"
