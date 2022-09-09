@@ -21,19 +21,21 @@ function sanitizeFileName(name: string) {
 }
 
 async function getUniqueFilePath(path: string) {
+    if (!(await RNBlobUtil.fs.exists(path))) {
+        return path;
+    }
+
+    const extentionIndex = path.lastIndexOf(".");
+    const extension = path.substring(extentionIndex);
+    let insertionIndex = path.lastIndexOf("(");
+    if (insertionIndex === -1) {
+        insertionIndex = extentionIndex;
+    }
+    const pathWithoutExtension = path.substring(0, insertionIndex);
     let uniqueFilePath = path;
-    if (!(await RNBlobUtil.fs.exists(uniqueFilePath))) {
-        return uniqueFilePath;
-    }
-    const fileVersion = path.match(/\(\d+\)(?!.*\(\d+\))/);
-    let newFileVersion = 0;
-    if (!fileVersion) {
-        uniqueFilePath = path.replace(/\.(?!.*\.)/, "(1).");
-        newFileVersion++;
-    }
+    let version = 0;
     while (await RNBlobUtil.fs.exists(uniqueFilePath)) {
-        newFileVersion++;
-        uniqueFilePath = uniqueFilePath.replace(/\(\d+\)(?!.*\(\d+\))/, `(${newFileVersion})`);
+        uniqueFilePath = `${pathWithoutExtension} (${++version})${extension}`;
     }
     return uniqueFilePath;
 }
