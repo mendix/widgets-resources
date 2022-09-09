@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Changed
+
+-   Readme.md file reformatted.
+
 ## [2.2.0] - 2022-04-07
 
 ### Added

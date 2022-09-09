@@ -36,9 +36,9 @@ A main object has four objects. Objects with **?** are optional and do not need 
 
 | Style Key                                    | Description                                                                                               |
 | -------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| container?: ViewStlye;                       | Styles the wrapper view around the whole expanding bottom sheet\.                                         |
+| container?: ViewStyle;                       | Styles the wrapper view around the whole expanding bottom sheet\.                                         |
 | containerWhenExpandedFullscreen?: ViewStyle; | Styles the wrapper view around the whole expanding bottom sheet when full screen is enabled and reached\. |
-| modal?: ViewStlye;                           | Styles the wrapper view around the modal\.                                                                |
+| modal?: ViewStyle;                           | Styles the wrapper view around the modal\.                                                                |
 | modalItems?: ModalItemsStyle;                | Styles the items inside according to selected style                                                       |
 
 #### ModalItemsStyle
