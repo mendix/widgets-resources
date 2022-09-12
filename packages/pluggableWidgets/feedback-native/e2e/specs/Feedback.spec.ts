@@ -1,4 +1,10 @@
-import { expectToMatchScreenshot, launchApp, setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import {
+    expectToMatchScreenshot,
+    launchApp,
+    sessionLogout,
+    setText,
+    tapMenuItem
+} from "../../../../../detox/src/helpers";
 import { element, by, waitFor } from "detox";
 
 describe("Feedback widget", () => {
@@ -7,6 +13,10 @@ describe("Feedback widget", () => {
     beforeEach(async () => {
         await launchApp();
         await tapMenuItem("Feedback");
+    });
+
+    afterEach(async () => {
+        await sessionLogout();
     });
 
     it("should be able to submit a feedback item", async () => {

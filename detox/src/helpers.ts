@@ -28,6 +28,19 @@ export async function launchApp(): Promise<void> {
         .withTimeout(180000);
 }
 
+export async function sessionLogout(): Promise<void> {
+    /**
+     * Since we have a runtime without license we are limited to 5 concurrent sessions
+     * For iOS, the app is reinstalled ofter which seemms to create new sessions.
+     * Old sessions are not cleaned up. The app contains an app event that signs out the session
+     * when the app is put to background and foreground again.
+     **/
+    if (device.getPlatform() === "ios") {
+        await device.sendToHome();
+        await device.launchApp({ newInstance: false });
+    }
+}
+
 async function setDemoMode(): Promise<void> {
     if (device.getPlatform() === "ios") {
         const type = device.name.substring(device.name.indexOf("(") + 1, device.name.lastIndexOf(")"));

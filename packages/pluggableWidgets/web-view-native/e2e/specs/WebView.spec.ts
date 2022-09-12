@@ -1,4 +1,10 @@
-import { expectToMatchScreenshot, launchApp, sleep, tapMenuItem } from "../../../../../detox/src/helpers";
+import {
+    expectToMatchScreenshot,
+    launchApp,
+    sessionLogout,
+    sleep,
+    tapMenuItem
+} from "../../../../../detox/src/helpers";
 import { expect, element, by, device, waitFor } from "detox";
 import { Alert } from "../../../../../detox/src/Alert";
 
@@ -8,6 +14,10 @@ describe("Web view", () => {
     beforeEach(async () => {
         await launchApp();
         await tapMenuItem("Web view");
+    });
+
+    afterEach(async () => {
+        await sessionLogout();
     });
 
     it("should render messge if no content is provided", async () => {

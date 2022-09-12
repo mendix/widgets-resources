@@ -1,4 +1,10 @@
-import { expectToMatchScreenshot, launchApp, sleep, tapMenuItem } from "../../../../../detox/src/helpers";
+import {
+    expectToMatchScreenshot,
+    launchApp,
+    sessionLogout,
+    sleep,
+    tapMenuItem
+} from "../../../../../detox/src/helpers";
 import { element, by, expect } from "detox";
 import { Alert } from "../../../../../detox/src/Alert";
 
@@ -6,6 +12,10 @@ describe("Image", () => {
     beforeEach(async () => {
         await launchApp();
         await tapMenuItem("Image");
+    });
+
+    afterEach(async () => {
+        await sessionLogout();
     });
 
     it("renders the static image", async () => {

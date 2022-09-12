@@ -1,11 +1,15 @@
 import { expect, element, by } from "detox";
 import { Alert } from "../../../../../detox/src/Alert";
-import { expectToMatchScreenshot, launchApp, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, launchApp, sessionLogout, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Radio Buttons", () => {
     beforeEach(async () => {
         await launchApp();
         await tapMenuItem("Radio buttons");
+    });
+
+    afterEach(async () => {
+        await sessionLogout();
     });
 
     it("should call on change when selected option changes", async () => {

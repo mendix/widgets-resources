@@ -1,6 +1,6 @@
 import { Alert } from "../../../../../detox/src/Alert";
 import { expect, element, by } from "detox";
-import { launchApp, setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import { launchApp, sessionLogout, setText, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Badge", () => {
     beforeAll(async () => {
@@ -9,6 +9,10 @@ describe("Badge", () => {
 
         const textBox = element(by.id("textBoxBadge"));
         await setText(textBox, "Detox");
+    });
+
+    afterAll(async () => {
+        await sessionLogout();
     });
 
     it("renders the normal badge", async () => {

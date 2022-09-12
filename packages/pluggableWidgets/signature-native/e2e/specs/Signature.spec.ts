@@ -1,10 +1,20 @@
 import { element, by } from "detox";
-import { expectToMatchScreenshot, launchApp, sleep, tapMenuItem } from "../../../../../detox/src/helpers";
+import {
+    expectToMatchScreenshot,
+    launchApp,
+    sessionLogout,
+    sleep,
+    tapMenuItem
+} from "../../../../../detox/src/helpers";
 
 describe("Signature widget", () => {
     beforeEach(async () => {
         await launchApp();
         await tapMenuItem("Signature");
+    });
+
+    afterEach(async () => {
+        await sessionLogout();
     });
 
     it("should be able to save a complex signature", async () => {

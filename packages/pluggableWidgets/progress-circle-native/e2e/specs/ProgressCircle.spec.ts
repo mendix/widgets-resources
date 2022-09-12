@@ -1,5 +1,11 @@
 import { expect, element, by } from "detox";
-import { expectToMatchScreenshot, launchApp, setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import {
+    expectToMatchScreenshot,
+    launchApp,
+    sessionLogout,
+    setText,
+    tapMenuItem
+} from "../../../../../detox/src/helpers";
 
 describe("Progress Circle", () => {
     const percentage = "75";
@@ -10,6 +16,10 @@ describe("Progress Circle", () => {
 
         const textBox = element(by.id("textBoxProgressCircleValue"));
         await setText(textBox, percentage);
+    });
+
+    afterAll(async () => {
+        await sessionLogout();
     });
 
     it("renders correctly", async () => {

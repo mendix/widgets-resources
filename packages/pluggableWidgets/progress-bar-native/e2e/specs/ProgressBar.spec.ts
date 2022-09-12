@@ -1,5 +1,11 @@
 import { expect, by, element } from "detox";
-import { expectToMatchScreenshot, launchApp, setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import {
+    expectToMatchScreenshot,
+    launchApp,
+    sessionLogout,
+    setText,
+    tapMenuItem
+} from "../../../../../detox/src/helpers";
 
 describe("Progress Bar", () => {
     beforeAll(async () => {
@@ -8,6 +14,10 @@ describe("Progress Bar", () => {
 
         const textBox = element(by.id("textBoxProgressBarValue"));
         await setText(textBox, "75");
+    });
+
+    afterAll(async () => {
+        await sessionLogout();
     });
 
     it("renders correctly", async () => {

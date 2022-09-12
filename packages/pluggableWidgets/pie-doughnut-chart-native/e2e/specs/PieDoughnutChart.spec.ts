@@ -1,10 +1,14 @@
 import { element, by, waitFor } from "detox";
-import { expectToMatchScreenshot, launchApp, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, launchApp, sessionLogout, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Pie-doughnut chart", () => {
     beforeEach(async () => {
         await launchApp();
         await tapMenuItem("Pie doughnut chart");
+    });
+
+    afterEach(async () => {
+        await sessionLogout();
     });
 
     it("renders pie chart correctly", async () => {
