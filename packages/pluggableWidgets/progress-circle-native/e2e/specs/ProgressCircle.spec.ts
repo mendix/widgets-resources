@@ -13,11 +13,6 @@ describe("Progress Circle", () => {
     });
 
     it("renders correctly", async () => {
-        /**
-         * Taking a full page screenshot because when only taking a screenshot of a single
-         * progress circle does not seem to work for Android. The circles do not show up
-         * on the screenshot. For iOS it works fine.
-         **/
         await expectToMatchScreenshot();
     });
 

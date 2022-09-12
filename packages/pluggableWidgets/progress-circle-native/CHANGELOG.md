@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Changed
+
+-   Bump react-native-progress dependency to 5.0.0
+
 ## [3.1.0] - 2022-01-24
 
 ### Added
