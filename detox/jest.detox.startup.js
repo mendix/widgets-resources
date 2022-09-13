@@ -7,6 +7,7 @@ const { join, resolve } = require("path");
 const { execSync } = require("child_process");
 
 jest.setTimeout(300000);
+jest.retryTimes(3);
 jasmine.getEnv().addReporter(adapter);
 jasmine.getEnv().addReporter(specReporter);
 
