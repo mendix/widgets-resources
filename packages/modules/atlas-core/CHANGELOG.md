@@ -8,8 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
--   We added the LanguageSelector widget which will be supported from Studio Pro v9.12.0.
--   We added the widget to Atlas_Default and Atlas_TopBar responsive layouts.
+-   We added Language Selector widget to Atlas_Default and Atlas_TopBar responsive layouts.
+-   Minimal required version of Studio Pro is v9.12.0 and above.
 
 ## [3.5.0] Atlas Core - 2022-7-15
 
