@@ -19,7 +19,7 @@ describe("Signature widget", () => {
 
     it("should be able to save a complex signature", async () => {
         const signature = element(by.id("signature"));
-        await sleep(1000);
+        await sleep(10000);
         await signature.swipe("up", "slow", 0.4, 0.5, 0.5);
         await signature.swipe("right", "slow", 0.4, 0.5, 0.5);
         await signature.swipe("down", "slow", 0.4, 0.5, 0.5);
@@ -36,8 +36,12 @@ describe("Signature widget", () => {
 
     it("should be able to clear a signature", async () => {
         const signature = element(by.id("signature"));
+        await sleep(10000);
         await signature.swipe("down", "slow", 0.9, 0.5, 0.1);
-        await expectToMatchScreenshot(undefined, { failureThreshold: 500, failureThresholdType: "pixel" });
+        await expectToMatchScreenshot(undefined, {
+            failureThreshold: 500,
+            failureThresholdType: "pixel"
+        });
 
         await element(by.id("signature$ClearButton$Touchable")).tap();
         await expectToMatchScreenshot();
