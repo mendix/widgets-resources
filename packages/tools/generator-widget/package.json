@@ -1,6 +1,6 @@
 {
   "name": "@mendix/generator-widget",
-  "version": "9.2.4",
+  "version": "9.3.0",
   "description": "Mendix Pluggable Widgets Generator",
   "license": "Apache-2.0",
   "copyright": "© Mendix Technology BV 2022. All rights reserved.",
