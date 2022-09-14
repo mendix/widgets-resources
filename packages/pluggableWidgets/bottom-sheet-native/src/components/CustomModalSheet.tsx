@@ -1,5 +1,5 @@
 import { createElement, ReactElement, ReactNode, useCallback, useEffect, useState } from "react";
-import { LayoutChangeEvent, SafeAreaView, StyleSheet, View } from "react-native";
+import { InteractionManager, LayoutChangeEvent, SafeAreaView, StyleSheet, View } from "react-native";
 import Modal, { OnSwipeCompleteParams } from "react-native-modal";
 import { EditableValue, ValueStatus } from "mendix";
 import { BottomSheetStyle, defaultPaddings } from "../ui/Styles";
@@ -17,7 +17,7 @@ export const CustomModalSheet = (props: CustomModalSheetProps): ReactElement => 
     useEffect(() => {
         if (props.triggerAttribute && props.triggerAttribute.status === ValueStatus.Available) {
             if (props.triggerAttribute.value && !currentStatus) {
-                setCurrentStatus(true);
+                InteractionManager.runAfterInteractions(() => setCurrentStatus(true));
             } else if (!props.triggerAttribute.value && currentStatus) {
                 setCurrentStatus(false);
             }
