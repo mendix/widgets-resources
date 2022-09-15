@@ -4,7 +4,7 @@ import { useOnClickOutside } from "./utils";
 import { createPortal } from "react-dom";
 import { usePositionObserver } from "./usePositionObserver";
 
-interface FilterSelectorProps<T> {
+interface FilterSelectorProps<T extends string> {
     ariaLabel?: string;
     id?: string;
     defaultFilter: T;
@@ -12,7 +12,7 @@ interface FilterSelectorProps<T> {
     options: Array<{ value: T; label: string }>;
 }
 
-export function FilterSelector<T>(props: FilterSelectorProps<T>): ReactElement {
+export function FilterSelector<T extends string>(props: FilterSelectorProps<T>): ReactElement {
     const [value, setValue] = useState(props.defaultFilter);
     const [show, setShow] = useState(false);
     const componentRef = useRef<HTMLDivElement>(null);
