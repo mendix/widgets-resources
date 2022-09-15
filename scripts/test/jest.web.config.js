@@ -7,10 +7,13 @@ module.exports = {
     rootDir: "../../",
     testMatch: [`${cwd}/src/**/?(*.)(spec|test).[jt]s?(x)`],
     testPathIgnorePatterns: [`${cwd}/dist`, "<rootDir>/node_modules"],
-    globals: {
-        "ts-jest": {
-            tsconfig: `${cwd}/tsconfig.spec.json`
-        }
+    transform: {
+        "\\.tsx?$": [
+            "ts-jest",
+            {
+                tsconfig: `${cwd}/tsconfig.spec.json`
+            }
+        ]
     },
     moduleDirectories: undefined,
     moduleNameMapper: {

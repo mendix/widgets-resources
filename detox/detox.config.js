@@ -8,8 +8,9 @@ module.exports = {
     ANDROID_DEVICE_TYPE,
     IOS_SDK_VERSION,
     IOS_DEVICE_TYPE,
-    "test-runner": "npx jest",
-    "runner-config": `${__dirname}/jest.detox.config.js`,
+    "test-runner": "jest",
+    "runner-config": `${__dirname}/jest.config.js`,
+    skipLegacyWorkersInjection: true,
     apps: {
         "ios.developerapp": {
             type: "ios.app",

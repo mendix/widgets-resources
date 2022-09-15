@@ -30,7 +30,7 @@
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/react-native-material-menu": "1.0.3",
-    "detox": "^19.9.3",
+    "detox": "^19.12.1",
     "eslint": "^7.20.0"
   }
 }

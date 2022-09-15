@@ -1,15 +1,10 @@
-const { cleanup, init, device } = require("detox");
-const adapter = require("detox/runners/jest/adapter");
-const specReporter = require("detox/runners/jest/specReporter");
+const { device } = require("detox");
 const config = require("./detox.config");
 const { toMatchImageSnapshot } = require("jest-image-snapshot");
 const { join, resolve } = require("path");
 const { execSync } = require("child_process");
 
-jest.setTimeout(300000);
 jest.retryTimes(3);
-jasmine.getEnv().addReporter(adapter);
-jasmine.getEnv().addReporter(specReporter);
 
 expect.extend({
     toMatchImageSnapshot(screenshot, options = {}) {
@@ -43,20 +38,9 @@ expect.extend({
 });
 
 beforeAll(async () => {
-    await init();
-
     if (device.getPlatform() === "android") {
         const id = device.id;
         execSync(`adb -s ${id} shell setprop debug.hwui.renderer skiagl`);
         execSync(`adb -s ${id} reverse tcp:8080 tcp:8080`);
     }
-}, 1800000);
-
-beforeEach(async () => {
-    await adapter.beforeEach();
-});
-
-afterAll(async () => {
-    await adapter.afterAll();
-    await cleanup();
 });

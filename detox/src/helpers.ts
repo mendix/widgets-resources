@@ -2,7 +2,6 @@ import { execSync } from "child_process";
 import { by, element, device, waitFor } from "detox";
 import { readFileSync } from "fs";
 import { MatchImageSnapshotOptions } from "jest-image-snapshot";
-import "../jest.detox.startup";
 
 export async function launchApp(): Promise<void> {
     await device.launchApp({

@@ -41,7 +41,7 @@
     "@types/classnames": "^2.2.6",
     "@types/react-resize-detector": "^5.0.0",
     "eslint": "^7.20.0",
-    "jest": "^26.6.1"
+    "jest": "^29.0.3"
   },
   "dependencies": {
     "classnames": "^2.2.6",
