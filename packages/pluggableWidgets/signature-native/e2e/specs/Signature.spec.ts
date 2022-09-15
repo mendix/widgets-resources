@@ -7,7 +7,11 @@ import {
     tapMenuItem
 } from "../../../../../detox/src/helpers";
 
-describe("Signature widget", () => {
+/**
+ * Since the drawing does not get captured on Android devices
+ * we are only running these tests on iOS.
+ **/
+describe(":ios:Signature widget", () => {
     beforeEach(async () => {
         await launchApp();
         await tapMenuItem("Signature");

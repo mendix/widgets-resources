@@ -68,7 +68,7 @@ describe("Web view", () => {
     });
 
     // Skipping this test for Android because link is not clickable in web view
-    it(":ios: should open URL externally", async () => {
+    it(":ios:should open URL externally", async () => {
         await element(by.text("External")).tap();
 
         await waitForAndCloseOnLoadAlert();

@@ -11,7 +11,7 @@ import {
  * Since we do not have a Google API key for testing
  * we are only running these tests on iOS Maps
  **/
-describe(":ios: Maps widget", () => {
+describe(":ios:Maps widget", () => {
     beforeEach(async () => {
         await launchApp();
         await tapMenuItem("Maps");

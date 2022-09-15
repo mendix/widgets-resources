@@ -8,7 +8,7 @@ jest.retryTimes(3);
 
 expect.extend({
     toMatchImageSnapshot(screenshot, options = {}) {
-        const { currentTestName } = this;
+        const currentTestName = this.currentTestName.replace(/:ios:|:android:/g, "");
         const platform = device.getPlatform();
         let type;
         let sdk;
