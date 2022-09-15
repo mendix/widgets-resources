@@ -38,7 +38,7 @@ ChangelogHeadLine3
 
 // Specific helpers
 SectionType
-  = "Added" / "Changed" / "Fixed" / "Removed" / "Breaking changes" / "Documentation" / "Security" { return text() }
+  = "Added" / "Changed" / "Deprecated" / "Removed" / "Fixed" / "Security" / "Breaking changes" / "Documentation" { return text() }
 
 
 // Generic helpers
