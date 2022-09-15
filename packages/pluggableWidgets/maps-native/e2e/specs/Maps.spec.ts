@@ -7,7 +7,11 @@ import {
     sessionLogout
 } from "../../../../../detox/src/helpers";
 
-describe("Maps widget", () => {
+/**
+ * Since we do not have a Google API key for testing
+ * we are only running these tests on iOS Maps
+ **/
+describe(":ios: Maps widget", () => {
     beforeEach(async () => {
         await launchApp();
         await tapMenuItem("Maps");
@@ -22,7 +26,7 @@ describe("Maps widget", () => {
 
         await btnStaticMarkers.tap();
 
-        await sleep(10000);
+        await sleep(20000);
 
         await expectToMatchScreenshot();
     });
@@ -32,7 +36,7 @@ describe("Maps widget", () => {
 
         await btnDynamicMarkers.tap();
 
-        await sleep(10000);
+        await sleep(20000);
 
         await expectToMatchScreenshot();
     });

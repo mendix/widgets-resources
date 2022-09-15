@@ -5,7 +5,7 @@ import {
     sleep,
     tapMenuItem
 } from "../../../../../detox/src/helpers";
-import { expect, element, by, device, waitFor } from "detox";
+import { expect, element, by, waitFor } from "detox";
 import { Alert } from "../../../../../detox/src/Alert";
 
 const timeout = 10000;
@@ -67,17 +67,15 @@ describe("Web view", () => {
         await expectToMatchScreenshot(element(by.id("webViewUserAgent")));
     });
 
-    it("should open URL externally", async () => {
-        // Skipping this test for Android because link is not clickable in web view
-        if (device.getPlatform() !== "android") {
-            await element(by.text("External")).tap();
+    // Skipping this test for Android because link is not clickable in web view
+    it(":ios: should open URL externally", async () => {
+        await element(by.text("External")).tap();
 
-            await waitForAndCloseOnLoadAlert();
+        await waitForAndCloseOnLoadAlert();
 
-            await element(by.id("webViewExternal")).tap({ x: 3, y: 3 });
-            await sleep(timeout);
-            await expectToMatchScreenshot();
-        }
+        await element(by.id("webViewExternal")).tap({ x: 3, y: 3 });
+        await sleep(timeout);
+        await expectToMatchScreenshot();
     });
 });
 
