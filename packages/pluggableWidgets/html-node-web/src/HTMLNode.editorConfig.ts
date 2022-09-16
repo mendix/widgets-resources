@@ -90,7 +90,17 @@ export function check(_values: HTMLNodePreviewProps): Problem[] {
             message: "Property 'Data source' is required."
         });
     } else {
+        const existingAttributeNames = new Set();
         _values.attributes.forEach((attr, i) => {
+            if (existingAttributeNames.has(attr.attributeName)) {
+                errors.push({
+                    severity: "error",
+                    property: `attributes/${i + 1}/attributeName`,
+                    message: `Attribute with name '${attr.attributeName}' already exists.`
+                });
+            }
+            existingAttributeNames.add(attr.attributeName);
+
             const attributePropName = attributeValuePropNameFor(_values, attr.attributeValueType);
             if (!attr[attributePropName].length) {
                 errors.push({
@@ -99,6 +109,18 @@ export function check(_values: HTMLNodePreviewProps): Problem[] {
                     message: `Value is not specified for attribute '${attr.attributeName}'.`
                 });
             }
+        });
+
+        const existingEventNames = new Set();
+        _values.events.forEach((attr, i) => {
+            if (existingEventNames.has(attr.eventName)) {
+                errors.push({
+                    severity: "error",
+                    property: `attributes/${i + 1}/eventName`,
+                    message: `Event with name '${attr.eventName}' already exists.`
+                });
+            }
+            existingEventNames.add(attr.eventName);
         });
     }
 
