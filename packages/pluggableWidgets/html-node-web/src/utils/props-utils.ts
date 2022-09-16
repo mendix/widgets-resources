@@ -12,48 +12,63 @@ export function prepareTag(tag: TagNameEnum, customTag: string): keyof JSX.Intri
     return tag;
 }
 
-export function prepareEvents(events: EventsType[], item?: ObjectItem): DOMAttributes<Element> {
-    return Object.fromEntries(
-        events.map(evt => [
-            evt.eventName,
-            (e: SyntheticEvent<Element>) => {
-                if (evt.eventPreventDefault) {
-                    e.preventDefault();
-                }
-                if (evt.eventStopPropagation) {
-                    e.stopPropagation();
-                }
-
-                const action = item ? evt.eventActionRepeat?.get(item) : evt.eventAction;
-
-                if (action && action.canExecute) {
-                    action.execute();
-                }
-            }
-        ])
-    );
-}
-
-function prepareAttributeValue(a: AttributesType, item?: ObjectItem): string | undefined {
-    if (item) {
-        return (
-            a.attributeValueType === "template" ? a.attributeValueTemplateRepeat : a.attributeValueExpressionRepeat
-        )?.get(item).value;
-    } else {
-        return (a.attributeValueType === "template" ? a.attributeValueTemplate : a.attributeValueExpression)?.value;
-    }
-}
-
-export function prepareAttributes(
-    attrs: AttributesType[],
-    cls: string,
-    style?: CSSProperties,
+export function createEventResolver(
     item?: ObjectItem
+): (event: EventsType) => [string, (e: SyntheticEvent<Element>) => void] {
+    return event => {
+        const name = event.eventName;
+        const cb = (e: SyntheticEvent<Element>): void => {
+            if (event.eventPreventDefault) {
+                e.preventDefault();
+            }
+            if (event.eventStopPropagation) {
+                e.stopPropagation();
+            }
+
+            const action = item ? event.eventActionRepeat?.get(item) : event.eventAction;
+
+            if (action && action.canExecute) {
+                action.execute();
+            }
+        };
+
+        return [name, cb];
+    };
+}
+
+export function prepareEvents<T>(
+    eventResolver: (event: T) => [string, (e: SyntheticEvent<Element>) => void],
+    events: T[]
+): DOMAttributes<Element> {
+    return Object.fromEntries(events.map(evt => eventResolver(evt)));
+}
+
+export function createAttributeResolver(item?: ObjectItem): (a: AttributesType) => [name: string, value: string] {
+    return (a: AttributesType) => {
+        const name = a.attributeName;
+        let value;
+        if (item) {
+            value = (
+                a.attributeValueType === "template" ? a.attributeValueTemplateRepeat : a.attributeValueExpressionRepeat
+            )?.get(item).value;
+        } else {
+            value = (a.attributeValueType === "template" ? a.attributeValueTemplate : a.attributeValueExpression)
+                ?.value;
+        }
+
+        return [name, value ?? ""];
+    };
+}
+
+export function prepareAttributes<T>(
+    attrResolver: (a: T) => [name: string, value: string],
+    attrs: T[],
+    cls: string,
+    style?: CSSProperties
 ): HTMLAttributes<Element> {
     const result: HTMLAttributes<Element> = Object.fromEntries(
         attrs.map(a => {
-            const name = a.attributeName;
-            const value = prepareAttributeValue(a, item) ?? "";
+            const [name, value] = attrResolver(a);
 
             switch (name) {
                 case "style":
@@ -87,7 +102,10 @@ export function prepareHtml(
     return props.tagContentRepeatHTML?.get(item).value;
 }
 
-export function prepareChildren(props: HTMLNodeContainerProps, item?: ObjectItem): ReactNode | undefined {
+export function prepareChildren(
+    props: Pick<HTMLNodeContainerProps, "tagContentMode" | "tagContentContainer" | "tagContentRepeatContainer">,
+    item?: ObjectItem
+): ReactNode | undefined {
     if (props.tagContentMode !== "container") {
         return;
     }

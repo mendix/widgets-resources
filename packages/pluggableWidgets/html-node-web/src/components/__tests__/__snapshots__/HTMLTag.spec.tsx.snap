@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HTMLTag renders correctly with content 1`] = `
+<DocumentFragment>
+  <div
+    class="html-node-root my-another-class"
+    style="color: red;"
+  >
+    <div>
+      Lorem ipsum
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`HTMLTag renders correctly with innerHTML 1`] = `
+<DocumentFragment>
+  <div
+    class="html-node-root my-class"
+  >
+    <p>
+      Lorem ipsum
+    </p>
+  </div>
+</DocumentFragment>
+`;

@@ -7,7 +7,6 @@
         <propertyGroup caption="General">
             <propertyGroup caption="Tag">
                 <property key="tagName" type="enumeration" defaultValue="div" required="true">
-                    <!-- TODO: sudo make me a list-->
                     <caption>Tag name</caption>
                     <description />
                     <enumerationValues>

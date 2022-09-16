@@ -1,4 +1,4 @@
-import { convertInlineCssToReactStyle } from "../../utils/style-utils";
+import { convertInlineCssToReactStyle } from "../style-utils";
 
 describe("style-utils", () => {
     it("converts usual properties", () => {

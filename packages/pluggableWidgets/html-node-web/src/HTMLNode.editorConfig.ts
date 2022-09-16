@@ -86,6 +86,7 @@ export function check(_values: HTMLNodePreviewProps): Problem[] {
     if (_values.tagUseRepeat && _values.tagContentRepeatDataSource === null) {
         // make date source required if set to repeat
         errors.push({
+            severity: "error",
             property: `tagContentRepeatDataSource`,
             message: "Property 'Data source' is required."
         });
