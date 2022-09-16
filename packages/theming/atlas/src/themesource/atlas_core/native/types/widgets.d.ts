@@ -182,6 +182,7 @@ export interface ContainerType {
 export interface DatePickerType {
     container?: ViewStyle;
     containerDisabled?: ViewStyle;
+    valueContainerError?: TextStyle;
     label?: InputLabelType;
     labelDisabled?: TextStyle;
     pickerIOS?: {
@@ -214,6 +215,7 @@ export interface DropDownType {
         underlayColor?: string;
         activeOpacity?: number;
     };
+    valueContainerError?: TextStyle;
     valueContainerDisabled?: ViewStyle;
     valueContainerFocused?: ViewStyle;
     iconStyle?: TextStyle;

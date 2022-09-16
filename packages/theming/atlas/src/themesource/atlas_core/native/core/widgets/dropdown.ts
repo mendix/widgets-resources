@@ -55,6 +55,11 @@ export const DropDown: DropDownType = {
         // All TextStyle properties are allowed
         ...TextBox.validationMessage
     },
+    valueContainerError: {
+        // autoCapitalize, selectionColor and all TextStyle properties are allowed
+        color: input.inputError.color,
+        borderColor: input.inputError.borderColor
+    },
     /*  New dropdown styles start */
     valueContainer: {
         // All ViewStyle properties & rippleColor & activeOpacity & underlayColor are allowed
