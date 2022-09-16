@@ -2,20 +2,6 @@
 
 Displays swipeable contents with buttons to proceed or go back and pagination.
 
-## Available patterns
-
-### Pagination above
-
-![Above](./assets/above.gif)
-
-### Pagination between
-
-![Between](./assets/between.gif)
-
-## Using Custom styles
-
-![Between](./assets/custom_styles.gif)
-
 You can define your styles through Atlas using the following properties:
 
 ```$js

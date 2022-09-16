@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Removed
+
+-   We removed animated GIFs from the README file.
+
 ### Added
 
 -   We added structure mode preview.
