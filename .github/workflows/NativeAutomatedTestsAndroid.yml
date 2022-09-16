@@ -61,7 +61,7 @@ jobs:
           push: true
           tags: ${{ matrix.container }}:${{ env.MENDIX_VERSION }}
           secrets: GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
-  widgets:
+  resources:
     needs: scope
     runs-on: ubuntu-22.04
     permissions:
@@ -90,13 +90,23 @@ jobs:
         run: npm run build:native
         env:
           NODE_OPTIONS: --max_old_space_size=6144
-      - name: "Upload widgets"
+      - name: "Upload widgets artifact"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         with:
           name: widgets
           path: packages/pluggableWidgets/**/dist/*/*.mpk
+      - name: "Upload mobile-resources artifact"
+        uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
+        with:
+          name: mobile-resources
+          path: packages/jsActions/mobile-resources-native/dist/**/*
+      - name: "Upload nanoflow-actions artifact"
+        uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
+        with:
+          name: nanoflow-actions
+          path: packages/jsActions/nanoflow-actions-native/dist/**/*
   project:
-    needs: [ widgets, mendix-version ]
+    needs: [ resources, mendix-version ]
     runs-on: ubuntu-22.04
     container: ghcr.io/mendix/widgets-resources/mxbuild:${{ needs.mendix-version.outputs.mendix-version }}
     steps:
@@ -106,7 +116,7 @@ jobs:
         uses: montudor/action-zip@0852c26906e00f8a315c704958823928d8018b28
         with:
           args: unzip -qq project.zip
-      - name: "Download built widgets"
+      - name: "Download widgets artifact"
         uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
         with:
           name: widgets
@@ -119,6 +129,24 @@ jobs:
           done
       - name: "Update widgets"
         run: mx update-widgets --loose-version-check Native-Mobile-Resources-main/NativeComponentsTestProject.mpr
+      - name: "Download mobile-resources artifact"
+        uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
+        with:
+          name: mobile-resources
+          path: builtMobileResources
+      - name: "Move mobile-resources"
+        run: |
+          rm -rf Native-Mobile-Resources-main/javascriptsource/nativemobileresources/actions/*
+          mv builtMobileResources/* Native-Mobile-Resources-main/javascriptsource/nativemobileresources/actions/
+      - name: "Download nanoflow-actions artifact"
+        uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
+        with:
+          name: nanoflow-actions
+          path: builtNanoflowActions
+      - name: "Move nanoflow-actions"
+        run: |
+          rm -rf Native-Mobile-Resources-main/javascriptsource/nanoflowcommons/actions/*
+          mv builtNanoflowActions/* Native-Mobile-Resources-main/javascriptsource/nanoflowcommons/actions/
       - name: "Build test project"
         run: mxbuild -o automation.mda Native-Mobile-Resources-main/NativeComponentsTestProject.mpr
       - name: "Upload MDA"
