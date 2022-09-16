@@ -3,7 +3,7 @@ import { ObjectItem } from "mendix";
 import classNames from "classnames";
 
 import { AttributesType, EventsType } from "../../typings/HTMLNodeProps";
-import { convertInlineCssToReactStyle } from "./styleUtils";
+import { convertInlineCssToReactStyle } from "./style-utils";
 
 export function prepareEvents(events: EventsType[], item?: ObjectItem): DOMAttributes<Element> {
     return Object.fromEntries(

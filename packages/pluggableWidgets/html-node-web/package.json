@@ -27,6 +27,7 @@
     "dev": "pluggable-widgets-tools start:web",
     "build": "pluggable-widgets-tools build:web",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "pluggable-widgets-tools test:unit:web",
     "prerelease": "npm run lint",
     "release": "pluggable-widgets-tools release:web",
     "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
