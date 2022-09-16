@@ -44,7 +44,7 @@ async function main(): Promise<void> {
         await copyStylesAndAssets(mode === "start", outputDir);
     }
 
-    await buildAndCopyWidgets(mode, ["feedback-native"], outputDir);
+    await buildAndCopyWidgets(mode, ["feedback-native", "language-selector-web"], outputDir);
 }
 
 async function buildAndCopyWidgets(command = "build", widgets: string[] = [], destination?: string) {
