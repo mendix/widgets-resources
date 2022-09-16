@@ -26,7 +26,7 @@ describe(":ios:Maps widget", () => {
 
         await btnStaticMarkers.tap();
 
-        await sleep(120000);
+        await sleep(10000);
 
         await expectToMatchScreenshot();
     });
@@ -36,7 +36,7 @@ describe(":ios:Maps widget", () => {
 
         await btnDynamicMarkers.tap();
 
-        await sleep(120000);
+        await sleep(10000);
 
         await expectToMatchScreenshot();
     });
