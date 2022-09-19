@@ -36,7 +36,7 @@ describe("Background image", () => {
         await expectToMatchScreenshot();
     });
 
-    it("renders the dynamic svg image", async () => {
+    fit("renders the dynamic svg image", async () => {
         const btnDynamicSvgImage = element(by.id("btnDynamicSvgImage"));
         await btnDynamicSvgImage.tap();
 
