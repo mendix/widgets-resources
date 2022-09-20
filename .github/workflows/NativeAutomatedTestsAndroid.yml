@@ -325,6 +325,8 @@ jobs:
         with:
           mda-file: automation.mda
           mendix-version: ${{ needs.mendix-version.outputs.mendix-version }}
+      - name: "Output folder structure"
+        run: ls -lR ${{ github.workspace }}/project
       - name: "Download Android app"
         uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
         with:
