@@ -41,10 +41,6 @@ export const ReferenceSelector: DropDownType = {
         // All TextStyle properties are allowed
         ...DropDown.valueFocused
     },
-    valueContainerError: {
-        // autoCapitalize, placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
-        ...DropDown.valueContainerError
-    },
     validationMessage: {
         // All TextStyle properties are allowed
         ...DropDown.validationMessage
@@ -60,6 +56,10 @@ export const ReferenceSelector: DropDownType = {
     valueContainerFocused: {
         // All ViewStyle properties are allowed
         ...DropDown.valueContainerFocused
+    },
+    valueContainerError: {
+        // All ViewStyle properties are allowed
+        ...DropDown.valueContainerError
     },
     iconStyle: {
         // All TextStyle properties are allowed
