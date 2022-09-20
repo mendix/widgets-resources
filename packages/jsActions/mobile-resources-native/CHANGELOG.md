@@ -6,9 +6,73 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.11.1] Native Mobile Resources - 2022-9-20
+
 ## Added
 
 -   We introduced a new [Download File] action to download document files stored in Mendix to native device storage.
+
+## [3.1.1] Animation
+
+### Removed
+
+-   We removed animated GIFs from the README file.
+
+### Added
+
+-   We added structure mode preview.
+
+## [3.2.1] BottomSheet
+
+### Changed
+
+-   Correction to README.md file.
+
+### Fixed
+
+-   We fixed an issue that happens during opening modal on ios
+
+## [2.2.2] Carousel
+
+### Fixed
+
+-   Console errors were removed.
+
+## [1.0.2] Image
+
+### Changed
+
+-   Readme.md file reformatted.
+
+## [3.2.2] IntroScreen
+
+### Removed
+
+-   We removed animated GIFs from the README file.
+
+## [2.1.1] ListViewSwipe
+
+### Removed
+
+-   We removed animated GIFs from the README file.
+
+## [1.1.1] PieDoughnutChart
+
+### Changed
+
+-   Readme.md file reformatted.
+
+## [2.2.1] Repeater
+
+### Changed
+
+-   Readme.md file reformatted.
+
+## [3.3.1] VideoPlayer
+
+### Changed
+
+-   Updated the README file.
 
 ## [3.11.0] Native Mobile Resources - 2022-8-18
 
