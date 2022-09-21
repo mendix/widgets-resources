@@ -14,10 +14,12 @@ jobs:
     outputs:
       since: ${{ steps.since.outputs.since }}
     steps:
-      - name: "Determine target ref"
-        id: since
+      - name: "Determine scope for PR"
         if: github.event_name == 'pull_request'
-        run: echo "::set-output name=since::--since origin/${{ github.base_ref }}"
+        run: echo "::set-output name=scope::--since 'origin/${{ github.base_ref }}' --scope '*-native'"
+      - name: "Determine scope for non-PR"
+        if: github.event_name != 'pull_request'
+        run: echo "::set-output name=scope::--scope '*-native'
   mendix-version:
     runs-on: ubuntu-22.04
     steps:
@@ -80,14 +82,10 @@ jobs:
           cache-dependency-path: "**/package-lock.json"
       - name: "Install dependencies"
         run: npm ci --legacy-peer-deps
-      - name: "Run build for development (MR)"
-        if: github.event_name == 'pull_request'
-        run: npm run build:native -- ${{ needs.scope.outputs.since }}
-        env:
-          NODE_OPTIONS: --max_old_space_size=6144
+      - name: "Unit test"
+        run: npm run test -- ${{ needs.scope.outputs.scope }}
       - name: "Run build for development"
-        if: github.event_name != 'pull_request'
-        run: npm run build:native
+        run: npm run build -- ${{ needs.scope.outputs.scope }}
         env:
           NODE_OPTIONS: --max_old_space_size=6144
       - name: "Upload widgets artifact"
@@ -364,7 +362,7 @@ jobs:
             adb push "/Users/runner/work/widgets-resources/widgets-resources/detox/apps/app-appstore-release-androidTest.apk" "/data/local/tmp/detox/Test.apk"
             adb shell pm install -r -g -t /data/local/tmp/detox/Application.apk 2>/dev/null
             adb shell pm install -r -g -t /data/local/tmp/detox/Test.apk 2>/dev/null
-            npm run test:e2e:android -- ${{ needs.scope.outputs.since }}
+            npm run test:e2e:android -- ${{ needs.scope.outputs.scope }}
       - name: "Archive runtime logs"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         if: always()
@@ -425,7 +423,7 @@ jobs:
           brew tap wix/brew
           brew install applesimutils
       - name: "Run tests"
-        run: npm run test:e2e:ios -- ${{ needs.scope.outputs.since }}
+        run: npm run test:e2e:ios -- ${{ needs.scope.outputs.scope }}
       - name: "Archive runtime logs"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         if: always()
