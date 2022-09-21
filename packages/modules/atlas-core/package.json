@@ -9,7 +9,7 @@
     "url": "https://github.com/mendix/widgets-resources.git"
   },
   "marketplace": {
-    "minimumMXVersion": "9.12.0.41679",
+    "minimumMXVersion": "9.12.6.53361",
     "marketplaceId": 117187
   },
   "testProject": {
