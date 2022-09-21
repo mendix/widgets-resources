@@ -14,7 +14,7 @@
     "developmentPort": 3000
   },
   "marketplace": {
-    "minimumMXVersion": "9.12.0",
+    "minimumMXVersion": "9.12.6",
     "marketplaceId": 0
   },
   "testProject": {
