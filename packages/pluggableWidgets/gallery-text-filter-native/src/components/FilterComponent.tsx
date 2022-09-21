@@ -5,12 +5,13 @@ import { debounce } from "@mendix/piw-utils-internal";
 
 import { GalleryTextFilterStyle, defaultGalleryTextFilterStyle } from "../ui/Styles";
 
-interface FilterComponentProps {
+export interface FilterComponentProps {
     delay: number;
     placeholder?: string;
-    styles: GalleryTextFilterStyle;
+    styles?: GalleryTextFilterStyle;
     updateFilters?: (value: string) => void;
     value?: string;
+    name: string;
 }
 
 export default function FilterComponent(props: FilterComponentProps): ReactElement {
@@ -18,7 +19,9 @@ export default function FilterComponent(props: FilterComponentProps): ReactEleme
     const [valueInput, setValueInput] = useState("");
     const inputRef = useRef<TextInput | null>(null);
 
-    const [textInputContainerStyle, setTextInputContainerStyle] = useState<ViewStyle>(props.styles.textInputContainer);
+    const [textInputContainerStyle, setTextInputContainerStyle] = useState<ViewStyle>(
+        props.styles?.textInputContainer || {}
+    );
     const [renderClearTextIcon, setRenderClearTextIcon] = useState<boolean>(false);
 
     const xIconSVG = (
@@ -57,8 +60,9 @@ export default function FilterComponent(props: FilterComponentProps): ReactEleme
     }, [inputRef]);
 
     return (
-        <View style={textInputContainerStyle}>
+        <View testID={`${props.name}-text-filter`} style={textInputContainerStyle}>
             <TextInput
+                testID={`${props.name}-text-input`}
                 value={valueInput}
                 placeholder={props.placeholder}
                 ref={inputRef}
@@ -66,23 +70,24 @@ export default function FilterComponent(props: FilterComponentProps): ReactEleme
                     onChange(e);
                     setValueInput(e);
                 }}
-                style={props.styles.textInput}
+                style={props.styles?.textInput}
                 onFocus={() =>
                     setTextInputContainerStyle({
                         ...textInputContainerStyle,
-                        ...props.styles.textInputOnFocusContainer
+                        ...props.styles?.textInputOnFocusContainer
                     })
                 }
                 onBlur={() => setTextInputContainerStyle(defaultGalleryTextFilterStyle.textInputContainer)}
             />
             {renderClearTextIcon ? (
                 <TouchableOpacity
+                    testID={`${props.name}-clear-text-button`}
                     onPress={() => {
                         setValue("");
                         setValueInput("");
                         focusInput();
                     }}
-                    style={props.styles.textInputClearIcon}
+                    style={props.styles?.textInputClearIcon}
                 >
                     {xIconSVG}
                 </TouchableOpacity>

@@ -68,6 +68,7 @@ export function GalleryTextFilter(props: GalleryTextFilterProps<GalleryTextFilte
                 }
                 return (
                     <FilterComponent
+                        name={props.name}
                         delay={props.delay}
                         styles={styles}
                         placeholder={props.placeholder?.value}

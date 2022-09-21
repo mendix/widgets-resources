@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Text Filter with multiple attributes renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "borderColor": "#606671",
+      "borderRadius": 6,
+      "borderWidth": 1,
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "paddingEnd": 8,
+    }
+  }
+  testID="filter-test-text-filter"
+>
+  <TextInput
+    allowFontScaling={true}
+    onBlur={[Function]}
+    onChangeText={[Function]}
+    onFocus={[Function]}
+    rejectResponderTermination={true}
+    style={
+      Object {
+        "color": "#A9ACB3",
+        "height": 40,
+        "marginStart": 12,
+        "width": "90%",
+      }
+    }
+    testID="filter-test-text-input"
+    underlineColorAndroid="transparent"
+    value=""
+  />
+</View>
+`;
+
+exports[`Text Filter with single attribute renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "borderColor": "#606671",
+      "borderRadius": 6,
+      "borderWidth": 1,
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "paddingEnd": 8,
+    }
+  }
+  testID="filter-test-text-filter"
+>
+  <TextInput
+    allowFontScaling={true}
+    onBlur={[Function]}
+    onChangeText={[Function]}
+    onFocus={[Function]}
+    rejectResponderTermination={true}
+    style={
+      Object {
+        "color": "#A9ACB3",
+        "height": 40,
+        "marginStart": 12,
+        "width": "90%",
+      }
+    }
+    testID="filter-test-text-input"
+    underlineColorAndroid="transparent"
+    value=""
+  />
+</View>
+`;
+
+exports[`Text Filter with wrong attribute's type renders error message 1`] = `
+<Text>
+  The attribute type being used for Text filter is not 'Hashed string or String'
+</Text>
+`;
+
+exports[`Text Filter with wrong multiple attributes' types renders error message 1`] = `
+<Text>
+  The Text filter widget can't be used with the filters options you have selected. It requires a "Hashed string or String" attribute to be selected.
+</Text>
+`;
+
+exports[`Text Filter without context renders error message 1`] = `
+<Text>
+  The Text filter widget must be placed inside the header of the Gallery widget.
+</Text>
+`;
