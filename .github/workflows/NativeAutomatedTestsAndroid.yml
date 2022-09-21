@@ -3,10 +3,10 @@ on:
   workflow_dispatch:
 
   push:
-    branches: [ master ]
+    branches: [master]
 
-#  pull_request:
-#    branches: [ master ]
+  pull_request:
+    branches: [master]
 
 jobs:
   scope:
@@ -106,7 +106,7 @@ jobs:
           name: nanoflow-actions
           path: packages/jsActions/nanoflow-actions-native/dist/**/*
   project:
-    needs: [ resources, mendix-version ]
+    needs: [resources, mendix-version]
     runs-on: ubuntu-22.04
     container: ghcr.io/mendix/widgets-resources/mxbuild:${{ needs.mendix-version.outputs.mendix-version }}
     steps:
@@ -155,7 +155,7 @@ jobs:
           name: mda
           path: automation.mda
   android-bundle:
-    needs: [ project, mendix-version ]
+    needs: [project, mendix-version]
     runs-on: ubuntu-22.04
     container: ghcr.io/mendix/widgets-resources/mxbuild:${{ needs.mendix-version.outputs.mendix-version }}
     steps:
@@ -171,7 +171,7 @@ jobs:
           platform: android
           mda-file: automation.mda
   ios-bundle:
-    needs: [ project, mendix-version ]
+    needs: [project, mendix-version]
     runs-on: ubuntu-22.04
     container: ghcr.io/mendix/widgets-resources/mxbuild:${{ needs.mendix-version.outputs.mendix-version }}
     steps:
@@ -187,7 +187,7 @@ jobs:
           platform: ios
           mda-file: automation.mda
   android-app:
-    needs: [ android-bundle ]
+    needs: [android-bundle]
     runs-on: ubuntu-22.04
     steps:
       - name: "Check out Native Template for Native Components Test Project"
@@ -228,7 +228,7 @@ jobs:
           name: android-app
           path: android/app/build/outputs/apk/**/*.apk
   ios-app:
-    needs: [ ios-bundle ]
+    needs: [ios-bundle]
     runs-on: macos-12
     steps:
       - name: "Check out Native Template for Native Components Test Project"
@@ -303,7 +303,7 @@ jobs:
           disable-animations: true
           script: echo "AVD created"
   android-tests:
-    needs: [ scope, mendix-version, project, android-app, android-avd ]
+    needs: [scope, mendix-version, project, android-app, android-avd]
     runs-on: macos-12
     steps:
       - name: "Check out code"
@@ -364,7 +364,7 @@ jobs:
             adb push "/Users/runner/work/widgets-resources/widgets-resources/detox/apps/app-appstore-release-androidTest.apk" "/data/local/tmp/detox/Test.apk"
             adb shell pm install -r -g -t /data/local/tmp/detox/Application.apk 2>/dev/null
             adb shell pm install -r -g -t /data/local/tmp/detox/Test.apk 2>/dev/null
-            npm run test:e2e:local:android -- ${{ needs.scope.outputs.since }}
+            npm run test:e2e:android -- ${{ needs.scope.outputs.since }}
       - name: "Archive runtime logs"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         if: always()
@@ -389,7 +389,7 @@ jobs:
           path: packages/pluggableWidgets/**/.artifacts/
           if-no-files-found: ignore
   ios-tests:
-    needs: [ scope, mendix-version, project, ios-app ]
+    needs: [scope, mendix-version, project, ios-app]
     runs-on: macos-12
     steps:
       - name: "Check out code"
@@ -425,7 +425,7 @@ jobs:
           brew tap wix/brew
           brew install applesimutils
       - name: "Run tests"
-        run: npm run test:e2e:local:ios -- ${{ needs.scope.outputs.since }}
+        run: npm run test:e2e:ios -- ${{ needs.scope.outputs.since }}
       - name: "Archive runtime logs"
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         if: always()
