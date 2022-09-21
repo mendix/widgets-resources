@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.6.0] Nanoflow Commons - 2022-8-31
+
 ### Breaking
 
 -   We removed next actions:
