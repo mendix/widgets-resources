@@ -82,29 +82,23 @@ Array [
   <Modal
     animationType="none"
     hardwareAccelerated={false}
-    hideModalContentWhileAnimating={false}
+    onHide={[Function]}
     onModalHide={[Function]}
-    onModalWillHide={[Function]}
-    onModalWillShow={[Function]}
-    onRequestClose={[Function]}
-    scrollOffset={0}
-    scrollOffsetMax={0}
-    scrollTo={null}
+    renderToHardwareTextureAndroid={true}
     supportedOrientations={
       Array [
         "portrait",
         "landscape",
       ]
     }
-    swipeThreshold={100}
     testID="feedback-test$popup"
     transparent={true}
+    useNativeDriver={false}
     visible={false}
   >
     <View
       accessible={true}
       focusable={true}
-      forwardedRef={[Function]}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -116,370 +110,28 @@ Array [
         Object {
           "backgroundColor": "black",
           "bottom": 0,
-          "height": 1334,
           "left": 0,
           "opacity": 0,
           "position": "absolute",
           "right": 0,
           "top": 0,
-          "width": 750,
         }
       }
     />
-    <View
-      onLayout={[Function]}
-      pointerEvents="box-none"
-      style={
-        Array [
-          Array [
-            Object {
-              "margin": 37.5,
-              "transform": Array [
-                Object {
-                  "translateY": 0,
-                },
-              ],
-            },
-            Object {
-              "flex": 1,
-              "justifyContent": "center",
-            },
-            Object {
-              "flex": 1,
-              "marginBottom": 0,
-              "marginLeft": 0,
-              "marginRight": 0,
-              "marginTop": 0,
-            },
-            Object {
-              "margin": 0,
-            },
-          ],
-          Object {
-            "paddingBottom": 0,
-          },
-        ]
-      }
-    >
-      <View
-        forwardedRef={[Function]}
-        hideModalContentWhileAnimating={false}
-        onModalHide={[Function]}
-        onModalWillHide={[Function]}
-        onModalWillShow={[Function]}
-        pointerEvents="box-none"
-        scrollOffset={0}
-        scrollOffsetMax={0}
-        scrollTo={null}
-        style={
-          Object {
-            "flex": 1,
-            "justifyContent": "center",
-            "margin": 37.5,
-            "marginBottom": 0,
-            "marginLeft": 0,
-            "marginRight": 0,
-            "marginTop": 0,
-            "transform": Array [
-              Object {
-                "translateY": 0,
-              },
-            ],
-          }
-        }
-        supportedOrientations={
-          Array [
-            "portrait",
-            "landscape",
-          ]
-        }
-        swipeThreshold={100}
-        testID="feedback-test$popup"
-      >
-        <View
-          onLayout={[Function]}
-          style={
-            Array [
-              Object {
-                "alignItems": "center",
-                "justifyContent": "center",
-              },
-              Object {
-                "paddingBottom": 0,
-              },
-            ]
-          }
-        >
-          <View
-            style={
-              Array [
-                Object {
-                  "borderRadius": 13,
-                  "flexDirection": "column",
-                  "overflow": "hidden",
-                  "width": 270,
-                },
-                Object {},
-              ]
-            }
-          >
-            <View
-              style={
-                Array [
-                  Object {
-                    "backgroundColor": "rgb(255,255,255)",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {},
-                ]
-              }
-            />
-            <View
-              style={
-                Array [
-                  Object {
-                    "margin": 18,
-                  },
-                  Object {},
-                ]
-              }
-            >
-              <Text
-                style={
-                  Array [
-                    Object {
-                      "color": "black",
-                      "fontSize": 18,
-                      "fontWeight": "600",
-                      "textAlign": "center",
-                    },
-                    Object {},
-                  ]
-                }
-              >
-                Send Feedback
-              </Text>
-            </View>
-            <TextInput
-              allowFontScaling={true}
-              multiline={true}
-              numberOfLines={5}
-              onChangeText={[Function]}
-              placeholder="Type your feedback here"
-              placeholderTextColor="#888"
-              rejectResponderTermination={true}
-              selectionColor="#aaa"
-              style={
-                Object {
-                  "backgroundColor": "#FFF",
-                  "borderBottomWidth": 1,
-                  "borderColor": "#eee",
-                  "borderLeftWidth": 0,
-                  "borderRightWidth": 0,
-                  "borderTopWidth": 1,
-                  "color": "#666",
-                  "fontFamily": "System",
-                  "fontSize": 16,
-                  "height": 100,
-                  "padding": 10,
-                  "textAlignVertical": "top",
-                }
-              }
-              testID="feedback-test$input"
-              underlineColorAndroid="transparent"
-              value=""
-            />
-            <View
-              style={
-                Object {
-                  "alignItems": "center",
-                  "flexDirection": "row",
-                  "justifyContent": "space-between",
-                  "paddingHorizontal": 10,
-                  "paddingVertical": 10,
-                }
-              }
-            >
-              <Text
-                style={
-                  Object {
-                    "color": "#444",
-                    "fontFamily": "System",
-                    "fontSize": 16,
-                  }
-                }
-              >
-                Include Screenshot
-              </Text>
-              <RCTSwitch
-                accessibilityRole="switch"
-                onChange={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
-                onTintColor=""
-                style={
-                  Array [
-                    Object {
-                      "height": 31,
-                      "width": 51,
-                    },
-                    Object {
-                      "margin": 0,
-                      "marginRight": 0,
-                      "padding": 0,
-                    },
-                  ]
-                }
-                testID="feedback-test$switch"
-                tintColor=""
-                value={true}
-              />
-            </View>
-            <View
-              style={
-                Array [
-                  Object {
-                    "borderTopColor": "#A9ADAE",
-                    "borderTopWidth": 0.5,
-                    "flexDirection": "row",
-                    "height": 46,
-                    "justifyContent": "space-between",
-                  },
-                  Object {
-                    "borderTopColor": "#eee",
-                    "borderTopWidth": 1,
-                  },
-                ]
-              }
-            >
-              <View
-                accessible={true}
-                focusable={true}
-                onClick={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
-                style={
-                  Object {
-                    "alignItems": "center",
-                    "flex": 1,
-                    "justifyContent": "center",
-                    "opacity": 1,
-                  }
-                }
-              >
-                <Text
-                  style={
-                    Array [
-                      Object {
-                        "backgroundColor": "transparent",
-                        "fontSize": 17,
-                        "textAlign": "center",
-                      },
-                      Object {
-                        "color": "#007ff9",
-                        "fontWeight": "normal",
-                      },
-                      undefined,
-                    ]
-                  }
-                  testID="feedback-test$cancel"
-                >
-                  Cancel
-                </Text>
-              </View>
-              <View
-                style={
-                  Array [
-                    Object {
-                      "backgroundColor": "#A9ADAE",
-                      "height": "100%",
-                      "width": 0.5,
-                    },
-                    Object {
-                      "backgroundColor": "#eee",
-                      "width": 1,
-                    },
-                  ]
-                }
-              />
-              <View
-                accessible={true}
-                focusable={true}
-                onClick={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
-                style={
-                  Object {
-                    "alignItems": "center",
-                    "flex": 1,
-                    "justifyContent": "center",
-                    "opacity": 1,
-                  }
-                }
-              >
-                <Text
-                  style={
-                    Array [
-                      Object {
-                        "backgroundColor": "transparent",
-                        "fontSize": 17,
-                        "textAlign": "center",
-                      },
-                      Object {
-                        "color": "gray",
-                        "fontWeight": "normal",
-                      },
-                      undefined,
-                    ]
-                  }
-                  testID="feedback-test$send"
-                >
-                  Send
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
-    </View>
   </Modal>,
   <Modal
     animationType="none"
     hardwareAccelerated={false}
-    hideModalContentWhileAnimating={false}
+    onHide={[Function]}
     onModalHide={[Function]}
-    onModalWillHide={[Function]}
-    onModalWillShow={[Function]}
-    onRequestClose={[Function]}
-    scrollOffset={0}
-    scrollOffsetMax={0}
-    scrollTo={null}
-    supportedOrientations={
-      Array [
-        "portrait",
-        "landscape",
-      ]
-    }
-    swipeThreshold={100}
+    renderToHardwareTextureAndroid={true}
     transparent={true}
+    useNativeDriver={false}
     visible={false}
   >
     <View
       accessible={true}
       focusable={true}
-      forwardedRef={[Function]}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -491,158 +143,27 @@ Array [
         Object {
           "backgroundColor": "black",
           "bottom": 0,
-          "height": 1334,
           "left": 0,
           "opacity": 0,
           "position": "absolute",
           "right": 0,
           "top": 0,
-          "width": 750,
         }
       }
     />
-    <View
-      forwardedRef={[Function]}
-      hideModalContentWhileAnimating={false}
-      onModalHide={[Function]}
-      onModalWillHide={[Function]}
-      onModalWillShow={[Function]}
-      pointerEvents="box-none"
-      scrollOffset={0}
-      scrollOffsetMax={0}
-      scrollTo={null}
-      style={
-        Object {
-          "flex": 1,
-          "justifyContent": "center",
-          "margin": 37.5,
-          "marginBottom": 0,
-          "marginLeft": 0,
-          "marginRight": 0,
-          "marginTop": 0,
-          "transform": Array [
-            Object {
-              "translateY": 0,
-            },
-          ],
-        }
-      }
-      supportedOrientations={
-        Array [
-          "portrait",
-          "landscape",
-        ]
-      }
-      swipeThreshold={100}
-    >
-      <View
-        onLayout={[Function]}
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-            },
-            Object {
-              "paddingBottom": 0,
-            },
-          ]
-        }
-      >
-        <View
-          style={
-            Array [
-              Object {
-                "borderRadius": 13,
-                "flexDirection": "column",
-                "overflow": "hidden",
-                "width": 270,
-              },
-              Object {},
-            ]
-          }
-        >
-          <View
-            style={
-              Array [
-                Object {
-                  "backgroundColor": "rgb(255,255,255)",
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                Object {},
-              ]
-            }
-          />
-          <View
-            style={
-              Array [
-                Object {
-                  "margin": 18,
-                },
-                Object {},
-              ]
-            }
-          >
-            <Text
-              style={
-                Array [
-                  Object {
-                    "color": "black",
-                    "fontSize": 18,
-                    "fontWeight": "600",
-                    "textAlign": "center",
-                  },
-                  Object {},
-                ]
-              }
-            >
-              Sending...
-            </Text>
-          </View>
-          <ActivityIndicator
-            animating={true}
-            color="#666"
-            hidesWhenStopped={true}
-            size="large"
-            style={
-              Object {
-                "marginBottom": 15,
-              }
-            }
-          />
-        </View>
-      </View>
-    </View>
   </Modal>,
   <Modal
     animationType="none"
     hardwareAccelerated={false}
-    hideModalContentWhileAnimating={false}
-    onModalHide={[Function]}
-    onModalWillHide={[Function]}
-    onModalWillShow={[Function]}
-    onRequestClose={[Function]}
-    scrollOffset={0}
-    scrollOffsetMax={0}
-    scrollTo={null}
-    supportedOrientations={
-      Array [
-        "portrait",
-        "landscape",
-      ]
-    }
-    swipeThreshold={100}
+    onHide={[Function]}
+    renderToHardwareTextureAndroid={true}
     transparent={true}
+    useNativeDriver={false}
     visible={false}
   >
     <View
       accessible={true}
       focusable={true}
-      forwardedRef={[Function]}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -654,224 +175,27 @@ Array [
         Object {
           "backgroundColor": "black",
           "bottom": 0,
-          "height": 1334,
           "left": 0,
           "opacity": 0,
           "position": "absolute",
           "right": 0,
           "top": 0,
-          "width": 750,
         }
       }
     />
-    <View
-      forwardedRef={[Function]}
-      hideModalContentWhileAnimating={false}
-      onModalHide={[Function]}
-      onModalWillHide={[Function]}
-      onModalWillShow={[Function]}
-      pointerEvents="box-none"
-      scrollOffset={0}
-      scrollOffsetMax={0}
-      scrollTo={null}
-      style={
-        Object {
-          "flex": 1,
-          "justifyContent": "center",
-          "margin": 37.5,
-          "marginBottom": 0,
-          "marginLeft": 0,
-          "marginRight": 0,
-          "marginTop": 0,
-          "transform": Array [
-            Object {
-              "translateY": 0,
-            },
-          ],
-        }
-      }
-      supportedOrientations={
-        Array [
-          "portrait",
-          "landscape",
-        ]
-      }
-      swipeThreshold={100}
-    >
-      <View
-        onLayout={[Function]}
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-            },
-            Object {
-              "paddingBottom": 0,
-            },
-          ]
-        }
-      >
-        <View
-          style={
-            Array [
-              Object {
-                "borderRadius": 13,
-                "flexDirection": "column",
-                "overflow": "hidden",
-                "width": 270,
-              },
-              Object {},
-            ]
-          }
-        >
-          <View
-            style={
-              Array [
-                Object {
-                  "backgroundColor": "rgb(255,255,255)",
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                Object {},
-              ]
-            }
-          />
-          <View
-            style={
-              Array [
-                Object {
-                  "margin": 18,
-                },
-                Object {},
-              ]
-            }
-          >
-            <Text
-              style={
-                Array [
-                  Object {
-                    "color": "black",
-                    "fontSize": 18,
-                    "fontWeight": "600",
-                    "textAlign": "center",
-                  },
-                  Object {},
-                ]
-              }
-            >
-              Result
-            </Text>
-            <Text
-              style={
-                Array [
-                  Object {
-                    "color": "black",
-                    "fontSize": 13,
-                    "marginTop": 4,
-                    "textAlign": "center",
-                  },
-                  Object {
-                    "color": "#666",
-                    "fontFamily": "System",
-                    "fontSize": 16,
-                  },
-                ]
-              }
-              testID="feedback-test$success"
-            >
-              Feedback successfully sent
-            </Text>
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderTopColor": "#A9ADAE",
-                  "borderTopWidth": 0.5,
-                  "flexDirection": "row",
-                  "height": 46,
-                  "justifyContent": "space-between",
-                },
-                Object {
-                  "borderTopColor": "#eee",
-                  "borderTopWidth": 1,
-                },
-              ]
-            }
-          >
-            <View
-              accessible={true}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "alignItems": "center",
-                  "flex": 1,
-                  "justifyContent": "center",
-                  "opacity": 1,
-                }
-              }
-            >
-              <Text
-                style={
-                  Array [
-                    Object {
-                      "backgroundColor": "transparent",
-                      "fontSize": 17,
-                      "textAlign": "center",
-                    },
-                    Object {
-                      "color": "#007ff9",
-                      "fontWeight": "normal",
-                    },
-                    undefined,
-                  ]
-                }
-                testID="feedback-test$success$ok"
-              >
-                OK
-              </Text>
-            </View>
-          </View>
-        </View>
-      </View>
-    </View>
   </Modal>,
   <Modal
     animationType="none"
     hardwareAccelerated={false}
-    hideModalContentWhileAnimating={false}
-    onModalHide={[Function]}
-    onModalWillHide={[Function]}
-    onModalWillShow={[Function]}
-    onRequestClose={[Function]}
-    scrollOffset={0}
-    scrollOffsetMax={0}
-    scrollTo={null}
-    supportedOrientations={
-      Array [
-        "portrait",
-        "landscape",
-      ]
-    }
-    swipeThreshold={100}
+    onHide={[Function]}
+    renderToHardwareTextureAndroid={true}
     transparent={true}
+    useNativeDriver={false}
     visible={false}
   >
     <View
       accessible={true}
       focusable={true}
-      forwardedRef={[Function]}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -883,198 +207,14 @@ Array [
         Object {
           "backgroundColor": "black",
           "bottom": 0,
-          "height": 1334,
           "left": 0,
           "opacity": 0,
           "position": "absolute",
           "right": 0,
           "top": 0,
-          "width": 750,
         }
       }
     />
-    <View
-      forwardedRef={[Function]}
-      hideModalContentWhileAnimating={false}
-      onModalHide={[Function]}
-      onModalWillHide={[Function]}
-      onModalWillShow={[Function]}
-      pointerEvents="box-none"
-      scrollOffset={0}
-      scrollOffsetMax={0}
-      scrollTo={null}
-      style={
-        Object {
-          "flex": 1,
-          "justifyContent": "center",
-          "margin": 37.5,
-          "marginBottom": 0,
-          "marginLeft": 0,
-          "marginRight": 0,
-          "marginTop": 0,
-          "transform": Array [
-            Object {
-              "translateY": 0,
-            },
-          ],
-        }
-      }
-      supportedOrientations={
-        Array [
-          "portrait",
-          "landscape",
-        ]
-      }
-      swipeThreshold={100}
-    >
-      <View
-        onLayout={[Function]}
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-            },
-            Object {
-              "paddingBottom": 0,
-            },
-          ]
-        }
-      >
-        <View
-          style={
-            Array [
-              Object {
-                "borderRadius": 13,
-                "flexDirection": "column",
-                "overflow": "hidden",
-                "width": 270,
-              },
-              Object {},
-            ]
-          }
-        >
-          <View
-            style={
-              Array [
-                Object {
-                  "backgroundColor": "rgb(255,255,255)",
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                Object {},
-              ]
-            }
-          />
-          <View
-            style={
-              Array [
-                Object {
-                  "margin": 18,
-                },
-                Object {},
-              ]
-            }
-          >
-            <Text
-              style={
-                Array [
-                  Object {
-                    "color": "black",
-                    "fontSize": 18,
-                    "fontWeight": "600",
-                    "textAlign": "center",
-                  },
-                  Object {},
-                ]
-              }
-            >
-              Result
-            </Text>
-            <Text
-              style={
-                Array [
-                  Object {
-                    "color": "black",
-                    "fontSize": 13,
-                    "marginTop": 4,
-                    "textAlign": "center",
-                  },
-                  Object {
-                    "color": "#666",
-                    "fontFamily": "System",
-                    "fontSize": 16,
-                  },
-                ]
-              }
-              testID="feedback-test$error"
-            >
-              Error sending feedback
-            </Text>
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderTopColor": "#A9ADAE",
-                  "borderTopWidth": 0.5,
-                  "flexDirection": "row",
-                  "height": 46,
-                  "justifyContent": "space-between",
-                },
-                Object {
-                  "borderTopColor": "#eee",
-                  "borderTopWidth": 1,
-                },
-              ]
-            }
-          >
-            <View
-              accessible={true}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "alignItems": "center",
-                  "flex": 1,
-                  "justifyContent": "center",
-                  "opacity": 1,
-                }
-              }
-            >
-              <Text
-                style={
-                  Array [
-                    Object {
-                      "backgroundColor": "transparent",
-                      "fontSize": 17,
-                      "textAlign": "center",
-                    },
-                    Object {
-                      "color": "#007ff9",
-                      "fontWeight": "normal",
-                    },
-                    undefined,
-                  ]
-                }
-                testID="feedback-test$error$ok"
-              >
-                OK
-              </Text>
-            </View>
-          </View>
-        </View>
-      </View>
-    </View>
   </Modal>,
 ]
 `;
