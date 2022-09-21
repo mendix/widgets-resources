@@ -1,4 +1,4 @@
-name: Run native automated end-to-end tests for Android
+name: Run native automated end-to-end tests
 on:
   workflow_dispatch:
 
