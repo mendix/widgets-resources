@@ -13,7 +13,6 @@ import {
 } from "react-native";
 import Dialog from "react-native-dialog";
 import { captureScreen } from "react-native-view-shot";
-
 import { FeedbackProps } from "../typings/FeedbackProps";
 import {
     activityIndicatorStyle,
@@ -51,7 +50,6 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
     private readonly onCancelHandler = this.onCancel.bind(this);
     private readonly onSendHandler = this.onSend.bind(this);
     private readonly onDialogHideHandler = this.onDialogHide.bind(this);
-
     private readonly styles = flattenStyles(defaultFeedbackStyle, this.props.style);
     private readonly processedStyles = processStyles(this.styles);
     private readonly dialogContainerProps = {
@@ -98,9 +96,12 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
         return (
             <Dialog.Container
                 visible={this.state.status === "todo"}
-                {...{ avoidKeyboard: true, onModalHide: this.onDialogHideHandler }}
+                {...{
+                    onModalHide: this.onDialogHideHandler,
+                    supportedOrientations: ["portrait", "landscape"],
+                    testID: `${this.props.name}$popup`
+                }}
                 {...this.dialogContainerProps}
-                testID={`${this.props.name}$popup`}
             >
                 <Dialog.Title style={this.styles.title}>Send Feedback</Dialog.Title>
                 <TextInput
