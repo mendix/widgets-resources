@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 -   We updated templates to use Cypress instead of Wdio for e2e testing purposes.
+-   We updated templates to provide the latest available functionalities.
 
 ## [9.2.3] - 2022-07-04
 

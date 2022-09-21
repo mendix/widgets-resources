@@ -27,7 +27,7 @@ function transformProps(props) {
 export function preview(props) {
     return (
         <div ref={parentInline}>
-            <BadgeSample {...transformProps(this.props)}></BadgeSample>
+            <BadgeSample {...transformProps(props)}></BadgeSample>
         </div>
     );
 }
