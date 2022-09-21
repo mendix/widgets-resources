@@ -86,6 +86,7 @@ export const Gallery = <T extends ObjectItem>(props: GalleryProps<T>): ReactElem
             {props.filters ? <View>{props.filters}</View> : null}
             <FlatList
                 {...(isScrollDirectionVertical && props.pullDown ? { onRefresh: props.pullDown } : {})}
+                {...(isScrollDirectionVertical ? { numColumns: numOfColumns } : {})}
                 ListFooterComponent={loadMoreButton}
                 ListFooterComponentStyle={{
                     ...props.style.loadMoreButtonContainer,
@@ -96,7 +97,6 @@ export const Gallery = <T extends ObjectItem>(props: GalleryProps<T>): ReactElem
                 horizontal={!isScrollDirectionVertical}
                 keyExtractor={item => item.id}
                 ListEmptyComponent={renderEmptyPlaceholder}
-                numColumns={numOfColumns}
                 onEndReached={onEndReached}
                 renderItem={renderItem}
                 style={props.style.list}

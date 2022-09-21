@@ -802,6 +802,186 @@ exports[`Gallery rendering renders correctly 1`] = `
 </View>
 `;
 
+exports[`Gallery rendering renders correctly horizontal 1`] = `
+<View
+  style={Object {}}
+  testID="gallery-test"
+>
+  <RCTScrollView
+    ListEmptyComponent={[Function]}
+    ListFooterComponent={null}
+    ListFooterComponentStyle={
+      Object {
+        "marginStart": 8,
+      }
+    }
+    data={
+      Array [
+        Object {
+          "id": "11",
+        },
+        Object {
+          "id": "22",
+        },
+        Object {
+          "id": "33",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    horizontal={true}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    onContentSizeChange={[Function]}
+    onEndReached={[Function]}
+    onEndReachedThreshold={2}
+    onLayout={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    refreshing={false}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
+    testID="gallery-test-list"
+    updateCellsBatchingPeriod={50}
+    viewabilityConfigCallbackPairs={Array []}
+    windowSize={21}
+  >
+    <View>
+      <View
+        onLayout={[Function]}
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+            },
+            null,
+          ]
+        }
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={false}
+          testID="gallery-test-list-item-11"
+        >
+          <View
+            style={
+              Array [
+                undefined,
+                undefined,
+                false,
+                false,
+              ]
+            }
+          >
+            11
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+            },
+            null,
+          ]
+        }
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={false}
+          testID="gallery-test-list-item-22"
+        >
+          <View
+            style={
+              Array [
+                undefined,
+                false,
+                false,
+                false,
+              ]
+            }
+          >
+            22
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+            },
+            null,
+          ]
+        }
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={false}
+          testID="gallery-test-list-item-33"
+        >
+          <View
+            style={
+              Array [
+                undefined,
+                false,
+                undefined,
+                false,
+              ]
+            }
+          >
+            33
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
+
 exports[`Gallery rendering renders correctly with dynamic item class 1`] = `
 <View
   testID="gallery-test"
@@ -1033,6 +1213,195 @@ exports[`Gallery rendering renders correctly with empty list and custom placehol
         <Text>
           Empty list...
         </Text>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
+
+exports[`Gallery rendering renders correctly with filter 1`] = `
+<View
+  style={Object {}}
+  testID="gallery-test"
+>
+  <View>
+    <TextInput
+      allowFontScaling={true}
+      rejectResponderTermination={true}
+      underlineColorAndroid="transparent"
+    />
+  </View>
+  <RCTScrollView
+    ListEmptyComponent={[Function]}
+    ListFooterComponent={null}
+    ListFooterComponentStyle={
+      Object {
+        "marginTop": 8,
+      }
+    }
+    data={
+      Array [
+        Object {
+          "id": "11",
+        },
+        Object {
+          "id": "22",
+        },
+        Object {
+          "id": "33",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    onContentSizeChange={[Function]}
+    onEndReached={[Function]}
+    onEndReachedThreshold={2}
+    onLayout={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    refreshing={false}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
+    testID="gallery-test-list"
+    updateCellsBatchingPeriod={50}
+    viewabilityConfigCallbackPairs={Array []}
+    windowSize={21}
+  >
+    <View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "width": "50%",
+              }
+            }
+            testID="gallery-test-list-item-11"
+          >
+            <View
+              style={
+                Array [
+                  undefined,
+                  undefined,
+                  false,
+                  false,
+                ]
+              }
+            >
+              11
+            </View>
+          </View>
+          <View
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "width": "50%",
+              }
+            }
+            testID="gallery-test-list-item-22"
+          >
+            <View
+              style={
+                Array [
+                  undefined,
+                  false,
+                  false,
+                  false,
+                ]
+              }
+            >
+              22
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "width": "50%",
+              }
+            }
+            testID="gallery-test-list-item-33"
+          >
+            <View
+              style={
+                Array [
+                  undefined,
+                  false,
+                  undefined,
+                  false,
+                ]
+              }
+            >
+              33
+            </View>
+          </View>
+        </View>
       </View>
     </View>
   </RCTScrollView>

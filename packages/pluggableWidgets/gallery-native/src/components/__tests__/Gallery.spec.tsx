@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import { createElement } from "react";
-import { Text } from "react-native";
+import { Text, TextInput } from "react-native";
 import { ObjectItem, GUID, DynamicValue, ValueStatus } from "mendix";
 import { render, fireEvent, act } from "@testing-library/react-native";
 import { Gallery, GalleryProps } from "../Gallery";
@@ -40,6 +40,11 @@ describe("Gallery", () => {
             expect(gallery).toMatchSnapshot();
         });
 
+        it("renders correctly horizontal", () => {
+            const gallery = render(<Gallery {...defaultProps} scrollDirection="horizontal" />);
+            expect(gallery).toMatchSnapshot();
+        });
+
         it("renders correctly with empty list and custom placeholder", () => {
             const gallery = render(
                 <Gallery
@@ -63,6 +68,11 @@ describe("Gallery", () => {
                     style={{ dynamicItemClasses: { testClass: { listItem: { backgroundColor: "blue" } } } }}
                 />
             );
+            expect(gallery).toMatchSnapshot();
+        });
+
+        it("renders correctly with filter", () => {
+            const gallery = render(<Gallery {...defaultProps} filters={<TextInput />} />);
             expect(gallery).toMatchSnapshot();
         });
 
