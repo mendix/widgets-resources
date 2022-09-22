@@ -6,8 +6,8 @@ export const preview = (props: LanguageSelectorPreviewProps): ReactElement => {
     return (
         <LanguageSwitcher
             preview
-            currentLanguage={{ _guid: "1", value: "Current language" }}
-            languageList={[{ _guid: "1", value: "Current language" }]}
+            currentLanguage={{ _guid: "1", value: "Selected language" }}
+            languageList={[{ _guid: "1", value: "Selected language" }]}
             position={props.position}
             onSelect={undefined}
             trigger={props.trigger}
