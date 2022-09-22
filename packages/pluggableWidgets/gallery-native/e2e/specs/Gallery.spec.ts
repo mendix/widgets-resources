@@ -5,6 +5,7 @@ import { expectToMatchScreenshot, resetDevice, tapMenuItem } from "../../../../.
 describe("Gallery", () => {
     beforeEach(async () => {
         await tapMenuItem("Gallery");
+        await element(by.id("galleryButton")).tap();
     });
 
     it("renders correctly", async () => {
