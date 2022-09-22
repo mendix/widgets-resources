@@ -41,17 +41,17 @@ describe("Feedback", () => {
         fireEvent.press(component.getByTestId("feedback-test$button"));
         await waitFor(() => {
             fireEvent.changeText(component.getByTestId("feedback-test$input"), feedbackMsg);
-            fireEvent.press(component.getByTestId("feedback-test$send"));
-            expect(fetch).toHaveBeenCalledWith(
-                "https://feedback-api.mendix.com/rest/v3/feedbackapi/projects/sprintr-app-id/issues",
-                {
-                    body: '{"title":"unittest","description":"","issueType":"Issue","submitter":{"userId":"","email":"unknown@example.com","displayName":"Unknown Native User"},"metadata":{"userRoles":"","location":"","form":"","userAgent":"Native for ios","screenWidth":750,"screenHeight":1334},"imageAttachment":""}',
-                    headers: { ClientIdentifier: "feedback-native-v2", "Content-Type": "application/json" },
-                    method: "POST",
-                    mode: "no-cors",
-                    referrer: "no-referrer"
-                }
-            );
         });
+        fireEvent.press(component.getByTestId("feedback-test$send"));
+        expect(fetch).toHaveBeenCalledWith(
+            "https://feedback-api.mendix.com/rest/v3/feedbackapi/projects/sprintr-app-id/issues",
+            {
+                body: '{"title":"unittest","description":"","issueType":"Issue","submitter":{"userId":"","email":"unknown@example.com","displayName":"Unknown Native User"},"metadata":{"userRoles":"","location":"","form":"","userAgent":"Native for ios","screenWidth":750,"screenHeight":1334},"imageAttachment":""}',
+                headers: { ClientIdentifier: "feedback-native-v2", "Content-Type": "application/json" },
+                method: "POST",
+                mode: "no-cors",
+                referrer: "no-referrer"
+            }
+        );
     });
 });
