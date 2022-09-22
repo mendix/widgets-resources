@@ -12,7 +12,6 @@ Array [
         "zIndex": 9999,
       }
     }
-    testID="feedback-test$button"
   >
     <View
       style={
@@ -45,6 +44,7 @@ Array [
             "opacity": 1,
           }
         }
+        testID="feedback-test$button"
       >
         <Image
           source={

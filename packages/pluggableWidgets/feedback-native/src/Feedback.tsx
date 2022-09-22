@@ -73,9 +73,9 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
 
     private renderFloatingButton(): JSX.Element | null {
         return this.state.status === "initial" ? (
-            <View style={floatingButtonContainer} testID={`${this.props.name}$button`}>
+            <View style={floatingButtonContainer}>
                 <View style={this.styles.floatingButton}>
-                    <TouchableOpacity onPress={this.onFeedbackButtonPressHandler}>
+                    <TouchableOpacity onPress={this.onFeedbackButtonPressHandler} testID={`${this.props.name}$button`}>
                         {this.props.logo && this.props.logo.value ? (
                             <Image style={imageStyle as StyleProp<SvgImageStyle>} source={this.props.logo.value} />
                         ) : null}
