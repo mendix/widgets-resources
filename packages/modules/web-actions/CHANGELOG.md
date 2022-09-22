@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.5.0] Web Actions - 2022-8-31
+
 ### Added
 
 -   We added new actions: SetCookie, ReadCookie, SetFavicon.
