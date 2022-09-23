@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.6.0] Atlas Core - 2022-9-23
+
 ### Changed
 
 -   We added Language Selector widget to Atlas_Default and Atlas_TopBar responsive layouts.
