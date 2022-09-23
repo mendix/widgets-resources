@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.6.1] Nanoflow Commons - 2022-9-23
+
 ### Fixed
 
 -   We fixed issue with Base64 actions throwing error
