@@ -52,17 +52,16 @@ async function buildAndCopyWidgets(command = "build", widgets: string[] = [], de
     if (cwd.endsWith("atlas-core")) {
         cwd = join(cwd, "../../../");
     }
-    execSync(
-        `${
-            command !== "release" && destination ? `npx cross-env MX_PROJECT_PATH=${destination} ` : ""
-        }npm run ${command} -- --scope '${
-            widgets.length > 1 ? `{${widgets.join(",")}}` : widgets.join("")
-        }' --include-dependencies`,
-        {
-            stdio: "inherit",
-            cwd
-        }
-    );
+    const scope = `'${widgets.length > 1 ? `{${widgets.join(",")}}` : widgets.join("")}'`;
+    const cmd = `npm run ${command} -- --scope=${scope} --include-dependencies`;
+    const execSyncCmd =
+        command !== "release" && destination ? `npx cross-env MX_PROJECT_PATH=${destination} ${cmd}` : cmd;
+
+    execSync(execSyncCmd, {
+        stdio: "inherit",
+        cwd
+    });
+
     if (command === "release") {
         const pluggableWidgetsFolderPath = join(cwd, "packages/pluggableWidgets");
         const mpkPathsToCopy = [];
