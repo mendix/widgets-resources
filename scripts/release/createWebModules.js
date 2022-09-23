@@ -101,7 +101,9 @@ async function createAtlasWebContentModule() {
 async function createAtlasCoreModule() {
     console.log("Creating the Atlas Core module.");
     execSync("npm run release:module", { stdio: "inherit", cwd: join(repoRootPath, "packages/modules", "atlas-core") });
-    const widgets = ["feedback-native"].map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
+    const widgets = ["feedback-native", "language-selector-web"].map(folder =>
+        join(repoRootPath, "packages/pluggableWidgets", folder)
+    );
     const moduleInfo = {
         ...(await getPackageInfo(moduleFolder)),
         moduleNameInModeler: "Atlas_Core",
