@@ -3,6 +3,7 @@ import { Image, SvgImageStyle } from "mendix/components/native/Image";
 import { Component, createElement, Fragment } from "react";
 import {
     ActivityIndicator,
+    Dimensions,
     Image as RNImage,
     StyleProp,
     Switch,
@@ -34,6 +35,7 @@ interface State {
     sendScreenshot: boolean;
     feedbackMessage: string;
     screenshot: string;
+    deviceHeight: number;
 }
 
 export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
@@ -41,7 +43,8 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
         status: "initial",
         sendScreenshot: true,
         feedbackMessage: "",
-        screenshot: ""
+        screenshot: "",
+        deviceHeight: Dimensions.get("screen").height
     };
 
     private readonly onFeedbackButtonPressHandler = this.onFeedbackButtonPress.bind(this);
@@ -59,6 +62,10 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
         blurStyle: this.processedStyles.blurStyle
     };
 
+    componentDidMount() {
+        Dimensions.addEventListener("change", this.updateDeviceHeight);
+    }
+
     render(): JSX.Element {
         return (
             <Fragment>
@@ -73,7 +80,7 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
 
     private renderFloatingButton(): JSX.Element | null {
         return this.state.status === "initial" ? (
-            <View style={floatingButtonContainer}>
+            <View style={floatingButtonContainer(this.state.deviceHeight)}>
                 <View style={this.styles.floatingButton}>
                     <TouchableOpacity onPress={this.onFeedbackButtonPressHandler} testID={`${this.props.name}$button`}>
                         {this.props.logo && this.props.logo.value ? (
@@ -253,4 +260,10 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
             return "";
         }
     }
+
+    private updateDeviceHeight = ({ screen: { height } }: { screen: { height: number } }) => {
+        this.setState({
+            deviceHeight: height
+        });
+    };
 }
