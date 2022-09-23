@@ -82,8 +82,8 @@ Array [
   <Modal
     animationType="none"
     hardwareAccelerated={false}
+    onDismiss={[Function]}
     onHide={[Function]}
-    onModalHide={[Function]}
     renderToHardwareTextureAndroid={true}
     supportedOrientations={
       Array [
@@ -122,8 +122,8 @@ Array [
   <Modal
     animationType="none"
     hardwareAccelerated={false}
+    onDismiss={[Function]}
     onHide={[Function]}
-    onModalHide={[Function]}
     renderToHardwareTextureAndroid={true}
     transparent={true}
     useNativeDriver={false}

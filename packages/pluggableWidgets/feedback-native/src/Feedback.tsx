@@ -104,7 +104,7 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
             <Dialog.Container
                 visible={this.state.status === "todo"}
                 {...{
-                    onModalHide: this.onDialogHideHandler,
+                    onDismiss: this.onDialogHideHandler,
                     supportedOrientations: ["portrait", "landscape"],
                     testID: `${this.props.name}$popup`
                 }}
@@ -154,7 +154,7 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
         return (
             <Dialog.Container
                 visible={this.state.status === "inprogress"}
-                {...{ onModalHide: this.onDialogHideHandler }}
+                {...{ onDismiss: this.onDialogHideHandler }}
                 {...this.dialogContainerProps}
             >
                 <Dialog.Title style={this.styles.title}>Sending...</Dialog.Title>
