@@ -2,7 +2,7 @@ import { PopupMenuProps } from "../../typings/PopupMenuProps";
 import { PopupMenuStyle } from "../ui/Styles";
 import { Modal, Text, View } from "react-native";
 import { createElement } from "react";
-import { actionValue } from "@mendix/piw-utils-internal";
+import { actionValue, dynamicValue } from "@mendix/piw-utils-internal";
 import { fireEvent, render, within } from "@testing-library/react-native";
 import { PopupMenu } from "../PopupMenu";
 import { MenuDivider } from "react-native-material-menu";
@@ -24,8 +24,13 @@ describe("Popup menu", () => {
             style: [],
             menuTriggerer: <Text>Menu Triggerer</Text>,
             basicItems: [
-                { itemType: "item", action: dummyActionValue, caption: "yolo", styleClass: "defaultStyle" },
-                { itemType: "divider", styleClass: "defaultStyle", caption: "" }
+                {
+                    itemType: "item",
+                    action: dummyActionValue,
+                    caption: dynamicValue<string>("yolo"),
+                    styleClass: "defaultStyle"
+                },
+                { itemType: "divider", styleClass: "defaultStyle", caption: dynamicValue<string>("") }
             ],
             customItems: [{ content: <Text>Yolo</Text>, action: dummyActionValue }]
         };

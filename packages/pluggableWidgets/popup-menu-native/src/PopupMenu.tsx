@@ -55,7 +55,7 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
                     {...getRippleColor(styles.basic?.itemStyle?.rippleColor)}
                     testID={`${props.name}_basic-item`}
                 >
-                    {item.caption}
+                    {item.caption?.value}
                 </MenuItem>
             );
         });
