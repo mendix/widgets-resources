@@ -5,7 +5,7 @@
             <widgetFile path="LanguageSelector.xml" />
         </widgetFiles>
         <files>
-            <file path="com/mendix/widget/web/languageSelector/" />
+            <file path="com/mendix/widget/web/languageselector/" />
         </files>
     </clientModule>
 </package>
