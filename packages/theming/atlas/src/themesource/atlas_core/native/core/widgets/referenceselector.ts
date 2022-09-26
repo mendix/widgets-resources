@@ -57,6 +57,10 @@ export const ReferenceSelector: DropDownType = {
         // All ViewStyle properties are allowed
         ...DropDown.valueContainerFocused
     },
+    valueContainerError: {
+        // All ViewStyle properties are allowed
+        ...DropDown.valueContainerError
+    },
     iconStyle: {
         // All TextStyle properties are allowed
         ...DropDown.iconStyle

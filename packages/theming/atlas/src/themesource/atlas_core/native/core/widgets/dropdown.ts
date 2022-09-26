@@ -77,6 +77,11 @@ export const DropDown: DropDownType = {
     valueContainerFocused: {
         // All ViewStyle properties are allowed
     },
+    valueContainerError: {
+        // All ViewStyle properties are allowed
+        color: input.inputError.color,
+        borderColor: input.inputError.borderColor
+    },
     iconStyle: {
         // All TextStyle properties are allowed
         color: input.input.color
