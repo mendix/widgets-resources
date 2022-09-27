@@ -1,5 +1,5 @@
 import { FeedbackStyle } from "../ui/styles";
-import { fireEvent, render, waitFor } from "@testing-library/react-native";
+import { fireEvent, render, waitFor, cleanup } from "@testing-library/react-native";
 import { createElement } from "react";
 import { FeedbackProps } from "../../typings/FeedbackProps";
 import { Feedback } from "../Feedback";
@@ -22,6 +22,8 @@ describe("Feedback", () => {
             logo: dynamicValue<NativeImage>({ uri: "path/to/image" })
         };
     });
+
+    afterEach(cleanup);
 
     it("renders", () => {
         const component = render(<Feedback {...defaultProps} />);

@@ -82,7 +82,6 @@ Array [
   <Modal
     animationType="none"
     hardwareAccelerated={false}
-    onDismiss={[Function]}
     onHide={[Function]}
     renderToHardwareTextureAndroid={true}
     supportedOrientations={
@@ -122,9 +121,14 @@ Array [
   <Modal
     animationType="none"
     hardwareAccelerated={false}
-    onDismiss={[Function]}
     onHide={[Function]}
     renderToHardwareTextureAndroid={true}
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
     transparent={true}
     useNativeDriver={false}
     visible={false}
@@ -157,6 +161,12 @@ Array [
     hardwareAccelerated={false}
     onHide={[Function]}
     renderToHardwareTextureAndroid={true}
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
     transparent={true}
     useNativeDriver={false}
     visible={false}
@@ -189,6 +199,12 @@ Array [
     hardwareAccelerated={false}
     onHide={[Function]}
     renderToHardwareTextureAndroid={true}
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
     transparent={true}
     useNativeDriver={false}
     visible={false}

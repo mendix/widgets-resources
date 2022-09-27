@@ -5,6 +5,7 @@ import {
     ActivityIndicator,
     Dimensions,
     Image as RNImage,
+    InteractionManager,
     StyleProp,
     Switch,
     Text,
@@ -52,18 +53,29 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
     private readonly onScreenshotToggleChangeHandler = this.onScreenshotToggleValueChange.bind(this);
     private readonly onCancelHandler = this.onCancel.bind(this);
     private readonly onSendHandler = this.onSend.bind(this);
-    private readonly onDialogHideHandler = this.onDialogHide.bind(this);
     private readonly styles = flattenStyles(defaultFeedbackStyle, this.props.style);
     private readonly processedStyles = processStyles(this.styles);
     private readonly dialogContainerProps = {
         contentStyle: this.processedStyles.dialogStyle,
         buttonSeparatorStyle: this.processedStyles.buttonSeparatorIos,
         footerStyle: this.processedStyles.borderIos,
-        blurStyle: this.processedStyles.blurStyle
+        blurStyle: this.processedStyles.blurStyle,
+        supportedOrientations: ["portrait", "landscape"]
     };
 
     componentDidMount() {
         Dimensions.addEventListener("change", this.updateDeviceHeight);
+    }
+    componentDidUpdate(_: Readonly<FeedbackProps<FeedbackStyle>>, prevState: Readonly<State>) {
+        if (
+            ["todo", "inprogress"].includes(prevState.status) &&
+            this.state.status === "closingDialog" &&
+            this.state.nextStatus
+        ) {
+            InteractionManager.runAfterInteractions(() =>
+                this.setState(({ nextStatus }) => ({ status: nextStatus || "initial", nextStatus: undefined }))
+            );
+        }
     }
 
     render(): JSX.Element {
@@ -104,8 +116,6 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
             <Dialog.Container
                 visible={this.state.status === "todo"}
                 {...{
-                    onDismiss: this.onDialogHideHandler,
-                    supportedOrientations: ["portrait", "landscape"],
                     testID: `${this.props.name}$popup`
                 }}
                 {...this.dialogContainerProps}
@@ -152,11 +162,7 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
 
     private renderInProgressDialog(): JSX.Element {
         return (
-            <Dialog.Container
-                visible={this.state.status === "inprogress"}
-                {...{ onDismiss: this.onDialogHideHandler }}
-                {...this.dialogContainerProps}
-            >
+            <Dialog.Container visible={this.state.status === "inprogress"} {...this.dialogContainerProps}>
                 <Dialog.Title style={this.styles.title}>Sending...</Dialog.Title>
                 <ActivityIndicator
                     color={this.styles.activityIndicator.color}
@@ -218,13 +224,6 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
 
     private onCancel(): void {
         this.setState({ status: "initial", nextStatus: undefined });
-    }
-
-    private onDialogHide(): void {
-        if (this.state.status === "closingDialog" && this.state.nextStatus) {
-            // eslint-disable-next-line react/no-access-state-in-setstate
-            this.setState({ status: this.state.nextStatus, nextStatus: undefined });
-        }
     }
 
     private async onSend(): Promise<void> {
