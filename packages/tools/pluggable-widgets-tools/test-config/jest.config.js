@@ -8,6 +8,8 @@ module.exports = {
     setupFilesAfterEnv: [join(__dirname, "test-index.js")],
     snapshotSerializers: ["enzyme-to-json/serializer"],
     testMatch: ["<rootDir>/**/*.spec.{js,jsx,ts,tsx}"],
+    testRunner: "jest-jasmine2",
+    testEnvironment: "jsdom",
     transform: {
         "\\.tsx?$": [
             "ts-jest",
@@ -16,7 +18,7 @@ module.exports = {
             }
         ],
         "\\.jsx?$": join(__dirname, "transform.js"),
-        "^.+\\.svg$": "jest-svg-transformer"
+        "^.+\\.svg$": "jest-transformer-svg"
     },
     moduleNameMapper: {
         "\\.(css|less|scss|sass)$": "identity-obj-proxy",
@@ -25,5 +27,6 @@ module.exports = {
         "\\.png$": join(__dirname, "assetsTransformer.js")
     },
     collectCoverage: !process.env.CI,
-    coverageDirectory: "<rootDir>/../dist/coverage"
+    coverageDirectory: "<rootDir>/../dist/coverage",
+    setupFiles: ["jest-canvas-mock"]
 };
