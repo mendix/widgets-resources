@@ -7,7 +7,8 @@ import {
     SortFunction,
     useFilterContext,
     useMultipleFiltering,
-    useSortContext
+    useSortContext,
+    FilterFunction
 } from "@mendix/piw-utils-internal/components/native";
 import { and } from "mendix/filters/builders";
 import { defaultGalleryStyle, GalleryStyle } from "./ui/Styles";
@@ -111,7 +112,7 @@ export const Gallery = (props: GalleryProps<GalleryStyle>): ReactElement => {
             isSortableFilterable ? (
                 <FilterContext.Provider
                     value={{
-                        filterDispatcher: prev => {
+                        filterDispatcher: (prev: FilterFunction) => {
                             if (prev.filterType) {
                                 const [, filterDispatcher] = customFiltersState[prev.filterType];
                                 filterDispatcher(prev);
@@ -125,7 +126,7 @@ export const Gallery = (props: GalleryProps<GalleryStyle>): ReactElement => {
                 >
                     <SortContext.Provider
                         value={{
-                            sortDispatcher: prev => {
+                            sortDispatcher: (prev: SortFunction) => {
                                 setSorted(true);
                                 setSortState(prev);
                                 return prev;
