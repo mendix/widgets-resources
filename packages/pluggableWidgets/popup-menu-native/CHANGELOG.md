@@ -6,9 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-### Fixed
+### Breaking
 
--   We added a translation feature for the menu items.
+-   We added a translation feature for the menu items. This update will erase old captions on all existing widgets.
 
 ## [2.2.0] - 2022-04-07
 
