@@ -106,55 +106,57 @@ export const Gallery = (props: GalleryProps<GalleryStyle>): ReactElement => {
 
     const pullDown = useCallback(() => props.pullDown && executeAction(props.pullDown), [props.pullDown]);
 
+    const filterAndSortContextProvider = useMemo(
+        () =>
+            isSortableFilterable ? (
+                <FilterContext.Provider
+                    value={{
+                        filterDispatcher: prev => {
+                            if (prev.filterType) {
+                                const [, filterDispatcher] = customFiltersState[prev.filterType];
+                                filterDispatcher(prev);
+                                setFiltered(true);
+                            }
+                            return prev;
+                        },
+                        multipleAttributes: filterList,
+                        multipleInitialFilters: initialFilters
+                    }}
+                >
+                    <SortContext.Provider
+                        value={{
+                            sortDispatcher: prev => {
+                                setSorted(true);
+                                setSortState(prev);
+                                return prev;
+                            },
+                            attributes: sortList,
+                            initialSort: viewStateSort.current
+                        }}
+                    >
+                        {props.filtersPlaceholder}
+                    </SortContext.Provider>
+                </FilterContext.Provider>
+            ) : null,
+        [
+            FilterContext,
+            SortContext,
+            customFiltersState,
+            filterList,
+            initialFilters,
+            isSortableFilterable,
+            props.filtersPlaceholder,
+            sortList
+        ]
+    );
+
     return (
         <GalleryComponent
             emptyPlaceholder={props.emptyPlaceholder}
             hasMoreItems={props.datasource.hasMoreItems ?? false}
             itemRenderer={itemRenderer}
             items={props.datasource.items ?? []}
-            filters={useMemo(
-                () =>
-                    isSortableFilterable ? (
-                        <FilterContext.Provider
-                            value={{
-                                filterDispatcher: prev => {
-                                    if (prev.filterType) {
-                                        const [, filterDispatcher] = customFiltersState[prev.filterType];
-                                        filterDispatcher(prev);
-                                        setFiltered(true);
-                                    }
-                                    return prev;
-                                },
-                                multipleAttributes: filterList,
-                                multipleInitialFilters: initialFilters
-                            }}
-                        >
-                            <SortContext.Provider
-                                value={{
-                                    sortDispatcher: prev => {
-                                        setSorted(true);
-                                        setSortState(prev);
-                                        return prev;
-                                    },
-                                    attributes: sortList,
-                                    initialSort: viewStateSort.current
-                                }}
-                            >
-                                {props.filtersPlaceholder}
-                            </SortContext.Provider>
-                        </FilterContext.Provider>
-                    ) : null,
-                [
-                    FilterContext,
-                    SortContext,
-                    customFiltersState,
-                    filterList,
-                    initialFilters,
-                    isSortableFilterable,
-                    props.filtersPlaceholder,
-                    sortList
-                ]
-            )}
+            filters={filterAndSortContextProvider}
             loadMoreItems={loadMoreItems}
             name={props.name}
             pagination={props.pagination}
