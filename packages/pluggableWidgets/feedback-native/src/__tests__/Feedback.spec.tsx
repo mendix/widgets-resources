@@ -1,12 +1,11 @@
 import { FeedbackStyle } from "../ui/styles";
-import { fireEvent, render } from "@testing-library/react-native";
+import { fireEvent, render, waitFor, cleanup } from "@testing-library/react-native";
 import { createElement } from "react";
 import { FeedbackProps } from "../../typings/FeedbackProps";
 import { Feedback } from "../Feedback";
 import { dynamicValue } from "@mendix/piw-utils-internal";
 import { NativeImage } from "mendix";
 // import { sendToSprintr } from "../utils/sprintrApi";
-import { TouchableOpacity } from "react-native";
 
 // jest.mock("../utils/sprintrApi");
 global.fetch = jest.fn();
@@ -24,6 +23,8 @@ describe("Feedback", () => {
         };
     });
 
+    afterEach(cleanup);
+
     it("renders", () => {
         const component = render(<Feedback {...defaultProps} />);
         expect(component.toJSON()).toMatchSnapshot();
@@ -36,11 +37,13 @@ describe("Feedback", () => {
         expect(component.queryByTestId("feedback-test$switch")).toBeNull();
     });
 
-    it("should call the api when sending", () => {
+    it("should call the api when sending", async () => {
         const feedbackMsg = "unittest";
         const component = render(<Feedback {...defaultProps} />);
-        fireEvent.press(component.getByTestId("feedback-test$button").findByType(TouchableOpacity));
-        fireEvent.changeText(component.getByTestId("feedback-test$input"), feedbackMsg);
+        fireEvent.press(component.getByTestId("feedback-test$button"));
+        await waitFor(() => {
+            fireEvent.changeText(component.getByTestId("feedback-test$input"), feedbackMsg);
+        });
         fireEvent.press(component.getByTestId("feedback-test$send"));
         expect(fetch).toHaveBeenCalledWith(
             "https://feedback-api.mendix.com/rest/v3/feedbackapi/projects/sprintr-app-id/issues",

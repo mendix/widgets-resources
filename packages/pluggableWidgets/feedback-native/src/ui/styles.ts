@@ -1,17 +1,17 @@
 import { exclude, only, Style } from "@mendix/piw-native-utils-internal";
-import { Dimensions, ImageStyle, ImageURISource, Platform, TextInputProps, TextStyle, ViewStyle } from "react-native";
+import { ImageStyle, ImageURISource, Platform, TextInputProps, TextStyle, ViewStyle } from "react-native";
 
 /**
  * Specific styles
  */
 
-export const floatingButtonContainer: ViewStyle = {
+export const floatingButtonContainer = (deviceHeight: number): ViewStyle => ({
     position: "absolute",
     right: 0,
     top: 0,
-    marginTop: Dimensions.get("window").height / 2 - 100,
+    marginTop: deviceHeight / 2 - 100,
     zIndex: 9999
-};
+});
 
 export const imageStyle: ImageStyle = {
     width: 30,

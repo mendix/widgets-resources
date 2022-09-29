@@ -3,7 +3,9 @@ import { Image, SvgImageStyle } from "mendix/components/native/Image";
 import { Component, createElement, Fragment } from "react";
 import {
     ActivityIndicator,
+    Dimensions,
     Image as RNImage,
+    InteractionManager,
     StyleProp,
     Switch,
     Text,
@@ -13,7 +15,6 @@ import {
 } from "react-native";
 import Dialog from "react-native-dialog";
 import { captureScreen } from "react-native-view-shot";
-
 import { FeedbackProps } from "../typings/FeedbackProps";
 import {
     activityIndicatorStyle,
@@ -35,6 +36,7 @@ interface State {
     sendScreenshot: boolean;
     feedbackMessage: string;
     screenshot: string;
+    deviceHeight: number;
 }
 
 export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
@@ -42,7 +44,8 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
         status: "initial",
         sendScreenshot: true,
         feedbackMessage: "",
-        screenshot: ""
+        screenshot: "",
+        deviceHeight: Dimensions.get("screen").height
     };
 
     private readonly onFeedbackButtonPressHandler = this.onFeedbackButtonPress.bind(this);
@@ -50,16 +53,30 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
     private readonly onScreenshotToggleChangeHandler = this.onScreenshotToggleValueChange.bind(this);
     private readonly onCancelHandler = this.onCancel.bind(this);
     private readonly onSendHandler = this.onSend.bind(this);
-    private readonly onDialogHideHandler = this.onDialogHide.bind(this);
-
     private readonly styles = flattenStyles(defaultFeedbackStyle, this.props.style);
     private readonly processedStyles = processStyles(this.styles);
     private readonly dialogContainerProps = {
         contentStyle: this.processedStyles.dialogStyle,
         buttonSeparatorStyle: this.processedStyles.buttonSeparatorIos,
         footerStyle: this.processedStyles.borderIos,
-        blurStyle: this.processedStyles.blurStyle
+        blurStyle: this.processedStyles.blurStyle,
+        supportedOrientations: ["portrait", "landscape"]
     };
+
+    componentDidMount() {
+        Dimensions.addEventListener("change", this.updateDeviceHeight);
+    }
+    componentDidUpdate(_: Readonly<FeedbackProps<FeedbackStyle>>, prevState: Readonly<State>) {
+        if (
+            ["todo", "inprogress"].includes(prevState.status) &&
+            this.state.status === "closingDialog" &&
+            this.state.nextStatus
+        ) {
+            InteractionManager.runAfterInteractions(() =>
+                this.setState(({ nextStatus }) => ({ status: nextStatus || "initial", nextStatus: undefined }))
+            );
+        }
+    }
 
     render(): JSX.Element {
         return (
@@ -75,9 +92,9 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
 
     private renderFloatingButton(): JSX.Element | null {
         return this.state.status === "initial" ? (
-            <View style={floatingButtonContainer} testID={`${this.props.name}$button`}>
+            <View style={floatingButtonContainer(this.state.deviceHeight)}>
                 <View style={this.styles.floatingButton}>
-                    <TouchableOpacity onPress={this.onFeedbackButtonPressHandler}>
+                    <TouchableOpacity onPress={this.onFeedbackButtonPressHandler} testID={`${this.props.name}$button`}>
                         {this.props.logo && this.props.logo.value ? (
                             <Image style={imageStyle as StyleProp<SvgImageStyle>} source={this.props.logo.value} />
                         ) : null}
@@ -98,9 +115,10 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
         return (
             <Dialog.Container
                 visible={this.state.status === "todo"}
-                {...{ avoidKeyboard: true, onModalHide: this.onDialogHideHandler }}
+                {...{
+                    testID: `${this.props.name}$popup`
+                }}
                 {...this.dialogContainerProps}
-                testID={`${this.props.name}$popup`}
             >
                 <Dialog.Title style={this.styles.title}>Send Feedback</Dialog.Title>
                 <TextInput
@@ -144,11 +162,7 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
 
     private renderInProgressDialog(): JSX.Element {
         return (
-            <Dialog.Container
-                visible={this.state.status === "inprogress"}
-                {...{ onModalHide: this.onDialogHideHandler }}
-                {...this.dialogContainerProps}
-            >
+            <Dialog.Container visible={this.state.status === "inprogress"} {...this.dialogContainerProps}>
                 <Dialog.Title style={this.styles.title}>Sending...</Dialog.Title>
                 <ActivityIndicator
                     color={this.styles.activityIndicator.color}
@@ -212,13 +226,6 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
         this.setState({ status: "initial", nextStatus: undefined });
     }
 
-    private onDialogHide(): void {
-        if (this.state.status === "closingDialog" && this.state.nextStatus) {
-            // eslint-disable-next-line react/no-access-state-in-setstate
-            this.setState({ status: this.state.nextStatus, nextStatus: undefined });
-        }
-    }
-
     private async onSend(): Promise<void> {
         this.setState({ status: "closingDialog", nextStatus: "inprogress" });
 
@@ -252,4 +259,10 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
             return "";
         }
     }
+
+    private updateDeviceHeight = ({ screen: { height } }: { screen: { height: number } }) => {
+        this.setState({
+            deviceHeight: height
+        });
+    };
 }

@@ -1,7 +1,7 @@
 {
   "name": "feedback-native",
   "widgetName": "Feedback",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -27,7 +27,7 @@
   "dependencies": {
     "@mendix/piw-native-utils-internal": "^1.0.0",
     "querystringify": "^2.1.1",
-    "react-native-dialog": "^5.6.0",
+    "react-native-dialog": "9.2.2",
     "react-native-view-shot": "3.1.2"
   },
   "devDependencies": {
