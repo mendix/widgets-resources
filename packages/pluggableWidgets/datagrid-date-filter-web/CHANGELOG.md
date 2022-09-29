@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.4.2] - 2022-9-29
+
 ### Fixed
 
 -   We fixed an issue with DateFilter causing poor page performance (#166116)
