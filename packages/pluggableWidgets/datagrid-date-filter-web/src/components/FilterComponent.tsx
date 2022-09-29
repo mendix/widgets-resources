@@ -29,12 +29,18 @@ interface FilterComponentProps {
 
 export function FilterComponent(props: FilterComponentProps): ReactElement {
     const [type, setType] = useState<DefaultFilterEnum>(props.defaultFilter);
-    const [value, setValue] = useState<Date | undefined>(undefined);
+    const [value, setValue] = useState<Date | undefined>(props.defaultValue);
     const [rangeValues, setRangeValues] = useState<RangeDateValue>([props.defaultStartDate, props.defaultEndDate]);
     const pickerRef = useRef<DatePickerComponent | null>(null);
 
     useEffect(() => {
-        setValue(props.defaultValue);
+        setValue(prev => {
+            if (prev?.toISOString() === props.defaultValue?.toISOString()) {
+                return prev;
+            }
+
+            return props.defaultValue;
+        });
     }, [props.defaultValue]);
 
     useEffect(() => {
