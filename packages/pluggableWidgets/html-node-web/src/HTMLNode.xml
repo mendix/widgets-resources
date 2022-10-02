@@ -99,7 +99,7 @@
 
                 <!-- **************************** TAG CONTENT ****************************** -->
                 <!-- HTML content, non-repeating -->
-                <property key="tagContentHTML" type="textTemplate" required="false">
+                <property key="tagContentHTML" type="textTemplate" multiline="true" required="false">
                     <caption>HTML</caption>
                     <description />
                 </property>
@@ -111,7 +111,7 @@
                 </property>
 
                 <!-- HTML content, repeating -->
-                <property key="tagContentRepeatHTML" type="textTemplate" required="false" dataSource="tagContentRepeatDataSource">
+                <property key="tagContentRepeatHTML" type="textTemplate" multiline="true" required="false" dataSource="tagContentRepeatDataSource">
                     <caption>HTML</caption>
                     <description />
                 </property>
