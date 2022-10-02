@@ -3,6 +3,31 @@ import { hideNestedPropertiesIn, hidePropertiesIn, Problem, Properties } from "@
 
 type TagAttributeValuePropName = keyof HTMLNodePreviewProps["attributes"][number];
 
+const voidElements = [
+    "area",
+    "base",
+    "br",
+    "col",
+    "embed",
+    "hr",
+    "img",
+    "input",
+    "link",
+    "meta",
+    "source",
+    "track",
+    "wbr",
+    // react specific, it uses `value` prop
+    "textarea"
+];
+
+const disabledElements = ["script"];
+
+function isValidHtmlTagName(name: string): boolean {
+    // rather naive approach that works in most cases
+    return /^[a-z_][\w.-]*$/i.test(name);
+}
+
 function attributeValuePropsExcept(valueName: TagAttributeValuePropName): TagAttributeValuePropName[] {
     const allPropNames: TagAttributeValuePropName[] = [
         "attributeValueExpression",
@@ -53,8 +78,23 @@ export function getProperties(values: HTMLNodePreviewProps, defaultProperties: P
         propsToHide.push("tagNameCustom");
     }
 
-    if (values.tagUseRepeat) {
-        // hide non-repeating props
+    if (!values.tagUseRepeat) {
+        propsToHide.push("tagContentRepeatDataSource");
+    }
+
+    const tagName = values.tagName === "__customTag__" ? values.tagNameCustom : values.tagName;
+
+    if (voidElements.includes(tagName)) {
+        // void elements don't allow children, hide all content props and the content mode switch
+        propsToHide.push(
+            "tagContentMode",
+            "tagContentHTML",
+            "tagContentContainer",
+            "tagContentRepeatHTML",
+            "tagContentRepeatContainer"
+        );
+    } else if (values.tagUseRepeat) {
+        // hide non-repeating content props
         propsToHide.push("tagContentHTML", "tagContentContainer");
 
         if (values.tagContentMode === "innerHTML") {
@@ -63,8 +103,8 @@ export function getProperties(values: HTMLNodePreviewProps, defaultProperties: P
             propsToHide.push("tagContentRepeatHTML");
         }
     } else {
-        // hide all repeating props
-        propsToHide.push("tagContentRepeatDataSource", "tagContentRepeatHTML", "tagContentRepeatContainer");
+        // hide repeating content props
+        propsToHide.push("tagContentRepeatHTML", "tagContentRepeatContainer");
 
         if (values.tagContentMode === "innerHTML") {
             propsToHide.push("tagContentContainer");
@@ -80,19 +120,35 @@ export function getProperties(values: HTMLNodePreviewProps, defaultProperties: P
     return defaultProperties;
 }
 
-export function check(_values: HTMLNodePreviewProps): Problem[] {
+export function check(values: HTMLNodePreviewProps): Problem[] {
     const errors: Problem[] = [];
 
-    if (_values.tagUseRepeat && _values.tagContentRepeatDataSource === null) {
+    if (values.tagName === "__customTag__") {
+        if (disabledElements.includes(values.tagNameCustom)) {
+            errors.push({
+                severity: "error",
+                property: "tagNameCustom",
+                message: `Tag '${values.tagNameCustom}' is not supported.`
+            });
+        } else if (!isValidHtmlTagName(values.tagNameCustom)) {
+            errors.push({
+                severity: "error",
+                property: "tagNameCustom",
+                message: `Invalid tag name '${values.tagNameCustom}'.`
+            });
+        }
+    }
+
+    if (values.tagUseRepeat && values.tagContentRepeatDataSource === null) {
         // make date source required if set to repeat
         errors.push({
             severity: "error",
-            property: `tagContentRepeatDataSource`,
+            property: "tagContentRepeatDataSource",
             message: "Property 'Data source' is required."
         });
     } else {
         const existingAttributeNames = new Set();
-        _values.attributes.forEach((attr, i) => {
+        values.attributes.forEach((attr, i) => {
             if (existingAttributeNames.has(attr.attributeName)) {
                 errors.push({
                     severity: "error",
@@ -102,7 +158,7 @@ export function check(_values: HTMLNodePreviewProps): Problem[] {
             }
             existingAttributeNames.add(attr.attributeName);
 
-            const attributePropName = attributeValuePropNameFor(_values, attr.attributeValueType);
+            const attributePropName = attributeValuePropNameFor(values, attr.attributeValueType);
             if (!attr[attributePropName].length) {
                 errors.push({
                     severity: "warning",
@@ -113,7 +169,7 @@ export function check(_values: HTMLNodePreviewProps): Problem[] {
         });
 
         const existingEventNames = new Set();
-        _values.events.forEach((attr, i) => {
+        values.events.forEach((attr, i) => {
             if (existingEventNames.has(attr.eventName)) {
                 errors.push({
                     severity: "error",
