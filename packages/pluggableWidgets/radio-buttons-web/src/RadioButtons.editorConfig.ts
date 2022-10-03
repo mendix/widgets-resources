@@ -1,10 +1,6 @@
-import {
-    Problem,
-    Properties,
-    StructurePreviewProps,
-    transformGroupsIntoTabs,
-    hidePropertyIn
-} from "@mendix/piw-utils-internal";
+import { StructurePreviewProps } from "@mendix/piw-utils-internal";
+import { hidePropertyIn, Problem, Properties, transformGroupsIntoTabs } from "@mendix/pluggable-widgets-tools";
+
 import { RadioButtonsPreviewProps } from "../typings/RadioButtonsProps";
 
 export function getProperties(

@@ -10,7 +10,7 @@ export type OrientationEnum = "horizontal" | "vertical";
 
 export interface OptionsType {
     caption?: DynamicValue<string>;
-    value: DynamicValue<boolean>;
+    value: DynamicValue<string>;
     optionContent?: ReactNode;
 }
 

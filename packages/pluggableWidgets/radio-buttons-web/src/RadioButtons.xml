@@ -11,10 +11,6 @@
                     <caption>Data source</caption>
                     <description />
                 </property>
-                <property key="type" type="enumeration">
-                    <caption>Attribute type</caption>
-                    <description />
-                </property>
                 <property key="dsAttribute" type="attribute" required="false">
                     <caption>Attribute</caption>
                     <description />
