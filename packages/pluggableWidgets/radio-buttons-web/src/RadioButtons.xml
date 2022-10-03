@@ -13,6 +13,7 @@
                 </property>
                 <property key="type" type="enumeration">
                     <caption>Attribute type</caption>
+                    <description />
                 </property>
                 <property key="dsAttribute" type="attribute" required="false">
                     <caption>Attribute</caption>
@@ -55,7 +56,7 @@
                             <property key="value" type="expression">
                                 <caption>Value</caption>
                                 <description />
-                                <returnType type="E" />
+                                <returnType type="String" />
                             </property>
                             <property key="optionContent" type="widgets" required="false">
                                 <caption>Content</caption>
