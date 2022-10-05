@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.11.2] Native Mobile Resources - 2022-10-5
+
+## [3.2.2] Feedback
+
+### Fixed
+
+-   We have fixed layout issue with the landscape mode and ipad devices
+
 ## [3.11.1] Native Mobile Resources - 2022-9-20
 
 ## Added
