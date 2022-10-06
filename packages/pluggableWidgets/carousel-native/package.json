@@ -1,7 +1,7 @@
 {
   "name": "carousel-native",
   "widgetName": "Carousel",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -27,7 +27,7 @@
   "dependencies": {
     "@mendix/piw-native-utils-internal": "^1.0.0",
     "@mendix/piw-utils-internal": "^1.0.0",
-    "react-native-snap-carousel": "^3.8.4"
+    "react-native-snap-carousel": "^3.9.1"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
