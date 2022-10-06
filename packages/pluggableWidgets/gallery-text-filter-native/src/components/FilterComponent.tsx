@@ -3,7 +3,7 @@ import { View, TextInput, TouchableOpacity, ViewStyle } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import { debounce } from "@mendix/piw-utils-internal";
 
-import { GalleryTextFilterStyle, defaultGalleryTextFilterStyle } from "../ui/Styles";
+import { GalleryTextFilterStyle } from "../ui/Styles";
 
 export interface FilterComponentProps {
     delay: number;
@@ -77,7 +77,7 @@ export default function FilterComponent(props: FilterComponentProps): ReactEleme
                         ...props.styles?.textInputOnFocusContainer
                     })
                 }
-                onBlur={() => setTextInputContainerStyle(defaultGalleryTextFilterStyle.textInputContainer)}
+                onBlur={() => props.styles && setTextInputContainerStyle(props.styles.textInputContainer)}
             />
             {renderClearTextIcon ? (
                 <TouchableOpacity

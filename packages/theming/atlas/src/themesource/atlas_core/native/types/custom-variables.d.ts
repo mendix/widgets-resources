@@ -223,3 +223,12 @@ export interface VariablesGallery {
     loadMoreButtonPressableContainer?: ViewStyle;
     loadMoreButtonCaption?: TextStyle;
 }
+
+export interface VariablesGalleryTextFilter {
+    container?: ViewStyle;
+    caption?: TextStyle;
+    textInputContainer?: ViewStyle;
+    textInputOnFocusContainer?: ViewStyle;
+    textInput?: TextStyle;
+    textInputClearIcon?: ViewStyle;
+}

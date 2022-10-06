@@ -2,7 +2,7 @@
     Types
 ========================================================================== */
 
-import { ViewStyle } from "react-native";
+import { TextStyle, ViewStyle } from "react-native";
 import { CheckBoxInputType, GradientColorList } from "./widgets";
 
 declare type FontWeight = "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
@@ -679,4 +679,13 @@ export interface VariablesGallery {
     loadMoreButtonContainer?: ViewStyle;
     loadMoreButtonPressableContainer?: ViewStyle;
     loadMoreButtonCaption?: TextStyle;
+}
+
+export interface VariablesGalleryTextFilter {
+    container?: ViewStyle;
+    caption?: TextStyle;
+    textInputContainer?: ViewStyle;
+    textInputOnFocusContainer?: ViewStyle;
+    textInput?: TextStyle;
+    textInputClearIcon?: ViewStyle;
 }

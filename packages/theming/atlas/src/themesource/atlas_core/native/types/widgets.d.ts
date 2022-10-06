@@ -860,3 +860,12 @@ export interface GalleryType {
     loadMoreButtonPressableContainer?: ViewStyle;
     loadMoreButtonCaption?: TextStyle;
 }
+
+export interface GalleryTextFilterType {
+    container?: ViewStyle;
+    caption?: TextStyle;
+    textInputContainer?: ViewStyle;
+    textInputOnFocusContainer?: ViewStyle;
+    textInput?: TextStyle;
+    textInputClearIcon?: ViewStyle;
+}
