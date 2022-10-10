@@ -1,5 +1,5 @@
 import { createElement, Fragment, ReactElement, useCallback, useEffect, useState } from "react";
-import { ActivityIndicator, LayoutChangeEvent, Text, View } from "react-native";
+import { ActivityIndicator, LayoutChangeEvent, Platform, Text, View } from "react-native";
 import { CarouselProps } from "../typings/CarouselProps";
 import { CarouselStyle, defaultCarouselStyle, LayoutStyle } from "./ui/styles";
 import { default as NativeCarousel, Pagination } from "react-native-snap-carousel";
@@ -162,6 +162,8 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): ReactElement => {
                             inactiveSlideOpacity={layoutSpecificStyle.inactiveSlideItem?.opacity}
                             onSnapToItem={onSnap}
                             ref={(r: any) => setCarouselRef(r)}
+                            enableMomentum={Platform.OS === "android"}
+                            decelerationRate={0.9}
                         />
                         {renderPagination()}
                     </Fragment>
