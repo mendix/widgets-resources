@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.11.3] Native Mobile Resources - 2022-10-10
+
+## [2.2.3] Carousel
+
+### Fixed
+
+-   Improved the snapping behavior on Android.
+
 ## [3.11.2] Native Mobile Resources - 2022-10-5
 
 ## [3.2.2] Feedback
