@@ -61,6 +61,22 @@ Triggers an action (such as a nanoflow, Show page, etc. action) when the end-use
 
 Triggers an action (such as a nanoflow, Synchronize, etc. action) when the end-user swipe down of the list.
 
+### Filtering
+
+In order to enable filtering within the gallery items you need to select the desired attributes to be filtered in the Filtering tab.
+
+The attributes selected here will be used for the matching filter placed inside the composable region. When using multiple attributes, the filters will automatically select the matching attributes and then compose the desired filter value in an OR expression. Make sure you just have one filter widget for each type, for example Text Filter and Number Filter.
+
+> ⚠️ **If a filter is being used and its type does not match with any selected attribute it will throw an error requesting you to select the correct filter widget.**
+
+An example of filtering configuration:
+
+![FilteringConfiguration](./assets/filtering-configuration.png)
+
+An example of text filter:
+
+![TextFilter](./assets/text-filter.png)
+
 ## Custom styling
 
 The look and feel of the widget is fully customizable. Check out the <a href="https://docs.mendix.com/refguide/mobile/designing-mobile-user-interfaces/widget-styling-guide/#1132-gallery">Native Mobile Styling documentation</a> for a full overview of the available style customizations.
