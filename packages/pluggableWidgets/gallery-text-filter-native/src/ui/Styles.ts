@@ -5,7 +5,7 @@ export interface GalleryTextFilterStyle extends Style {
     container: ViewStyle & { rippleColor?: string };
     caption: TextStyle;
     textInputContainer: ViewStyle;
-    textInputOnFocusContainer: ViewStyle;
+    textInputContainerOnFocus: ViewStyle;
     textInput: TextStyle;
     textInputClearIcon: ViewStyle;
 }
@@ -32,7 +32,7 @@ export const defaultGalleryTextFilterStyle: GalleryTextFilterStyle = {
         borderRadius: 6,
         paddingEnd: 8
     },
-    textInputOnFocusContainer: {
+    textInputContainerOnFocus: {
         borderColor: "#264AE5"
     },
     textInput: { height: 40, marginStart: 12, width: "90%", color: "#A9ACB3" },

@@ -74,7 +74,7 @@ export default function FilterComponent(props: FilterComponentProps): ReactEleme
                 onFocus={() =>
                     setTextInputContainerStyle({
                         ...textInputContainerStyle,
-                        ...props.styles?.textInputOnFocusContainer
+                        ...props.styles?.textInputContainerOnFocus
                     })
                 }
                 onBlur={() => props.styles && setTextInputContainerStyle(props.styles.textInputContainer)}

@@ -828,11 +828,6 @@ let galleryTextFilter: VariablesGalleryTextFilter = {
         backgroundColor: "#ccc",
         justifyContent: "center"
     },
-    caption: {
-        fontSize: 14,
-        fontWeight: "bold",
-        color: "#444"
-    },
     textInputContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
@@ -841,7 +836,7 @@ let galleryTextFilter: VariablesGalleryTextFilter = {
         borderRadius: 6,
         paddingEnd: 8
     },
-    textInputOnFocusContainer: {
+    textInputContainerOnFocus: {
         borderColor: brand.primary
     },
     textInput: { height: 40, marginStart: 12, width: "90%", color: "#A9ACB3" },

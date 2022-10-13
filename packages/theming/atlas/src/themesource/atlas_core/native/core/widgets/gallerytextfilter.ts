@@ -17,17 +17,13 @@ export const com_mendix_widget_native_gallerytextfilter_GalleryTextFilter: Requi
         // All ViewStyle properties are allowed
         ...galleryTextFilter.container
     },
-    caption: {
-        // All TextStyle properties are allowed
-        ...galleryTextFilter.caption
-    },
     textInputContainer: {
         // All ViewStyle properties are allowed
         ...galleryTextFilter.textInputContainer
     },
-    textInputOnFocusContainer: {
+    textInputContainerOnFocus: {
         // All ViewStyle properties are allowed
-        ...galleryTextFilter.textInputOnFocusContainer
+        ...galleryTextFilter.textInputContainerOnFocus
     },
     textInput: {
         // All TextStyle properties are allowed

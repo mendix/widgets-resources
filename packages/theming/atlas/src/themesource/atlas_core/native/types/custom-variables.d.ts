@@ -226,9 +226,8 @@ export interface VariablesGallery {
 
 export interface VariablesGalleryTextFilter {
     container?: ViewStyle;
-    caption?: TextStyle;
     textInputContainer?: ViewStyle;
-    textInputOnFocusContainer?: ViewStyle;
+    textInputContainerOnFocus?: ViewStyle;
     textInput?: TextStyle;
     textInputClearIcon?: ViewStyle;
 }
