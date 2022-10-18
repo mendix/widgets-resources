@@ -9,6 +9,15 @@ declare type FontWeight = "normal" | "bold" | "100" | "200" | "300" | "400" | "5
 declare type TextAlign = "auto" | "left" | "right" | "center" | "justify";
 declare type TextTransform = "none" | "capitalize" | "uppercase" | "lowercase";
 
+interface InputStyleProps {
+    autoCapitalize?: "none" | "sentences" | "words" | "characters";
+    placeholderTextColor?: string;
+    selectionColor?: string;
+    underlineColorAndroid?: string;
+}
+
+interface InputStyle extends TextStyle, InputStyleProps {}
+
 export interface VariablesBrand {
     primary: string;
     success: string;
@@ -684,7 +693,7 @@ export interface VariablesGallery {
 export interface VariablesGalleryTextFilter {
     container?: ViewStyle;
     textInputContainer?: ViewStyle;
-    textInputContainerOnFocus?: ViewStyle;
-    textInput?: TextStyle;
+    textInputContainerFocused?: ViewStyle;
+    textInput?: InputStyle;
     textInputClearIcon?: ViewStyle;
 }

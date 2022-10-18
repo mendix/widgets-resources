@@ -795,26 +795,27 @@ export const gallery: VariablesGallery = {
 
 // Gallery text filter style
 export const galleryTextFilter: VariablesGalleryTextFilter = {
-    container: {
-        alignSelf: "baseline",
-        borderRadius: 30,
-        paddingHorizontal: 10,
-        paddingVertical: 5,
-        backgroundColor: "#ccc",
-        justifyContent: "center"
-    },
+    container: {},
     textInputContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
-        borderWidth: 1,
-        borderColor: "#606671",
-        borderRadius: 6,
+        borderWidth: input.input.borderWidth,
+        borderColor: input.input.borderColor,
+        borderRadius: input.input.borderRadius,
         paddingEnd: 8
     },
-    textInputContainerOnFocus: {
+    textInputContainerFocused: {
         borderColor: brand.primary
     },
-    textInput: { height: 40, marginStart: 12, width: "90%", color: "#A9ACB3" },
+    textInput: {
+        height: 40,
+        marginStart: spacing.regular,
+        width: "90%",
+        color: input.input.color,
+        backgroundColor: input.input.backgroundColor,
+        selectionColor: input.input.selectionColor,
+        placeholderTextColor: input.input.placeholderTextColor
+    },
     textInputClearIcon: {
         justifyContent: "center",
         alignContent: "center"

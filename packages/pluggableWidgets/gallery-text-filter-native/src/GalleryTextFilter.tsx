@@ -1,5 +1,5 @@
 import { createElement, ReactElement } from "react";
-import { Text } from "react-native";
+import { View, Text } from "react-native";
 import { all } from "deepmerge";
 import { GalleryTextFilterProps, DefaultFilterEnum } from "../typings/GalleryTextFilterProps";
 import { defaultGalleryTextFilterStyle, GalleryTextFilterStyle } from "./ui/Styles";
@@ -67,28 +67,30 @@ export function GalleryTextFilter(props: GalleryTextFilterProps<GalleryTextFilte
                     return <Text>{errorMessage}</Text>;
                 }
                 return (
-                    <FilterComponent
-                        name={props.name}
-                        delay={props.delay}
-                        styles={styles}
-                        placeholder={props.placeholder?.value}
-                        updateFilters={(value: string): void => {
-                            const attributeCurrentValue = props.valueAttribute?.value || "";
-                            if (value !== attributeCurrentValue) {
-                                props.valueAttribute?.setValue(value);
-                                props.onChange?.execute();
-                            }
-                            const conditions = attributes
-                                ?.map(attribute => getFilterCondition(attribute, value, props.defaultFilter))
-                                .filter((filter): filter is FilterCondition => filter !== undefined);
-                            filterDispatcher({
-                                getFilterCondition: () =>
-                                    conditions && conditions.length > 1 ? or(...conditions) : conditions?.[0],
-                                filterType: FilterType.STRING
-                            });
-                        }}
-                        value={props.defaultValue?.value}
-                    />
+                    <View style={styles.container}>
+                        <FilterComponent
+                            name={props.name}
+                            delay={props.delay}
+                            styles={styles}
+                            placeholder={props.placeholder?.value}
+                            updateFilters={(value: string): void => {
+                                const attributeCurrentValue = props.valueAttribute?.value || "";
+                                if (value !== attributeCurrentValue) {
+                                    props.valueAttribute?.setValue(value);
+                                    props.onChange?.execute();
+                                }
+                                const conditions = attributes
+                                    ?.map(attribute => getFilterCondition(attribute, value, props.defaultFilter))
+                                    .filter((filter): filter is FilterCondition => filter !== undefined);
+                                filterDispatcher({
+                                    getFilterCondition: () =>
+                                        conditions && conditions.length > 1 ? or(...conditions) : conditions?.[0],
+                                    filterType: FilterType.STRING
+                                });
+                            }}
+                            value={props.defaultValue?.value}
+                        />
+                    </View>
                 );
             }}
         </FilterContext.Consumer>

@@ -1,5 +1,5 @@
 import { GalleryTextFilterType } from "../../types/widgets";
-import { galleryTextFilter } from "../../variables";
+import { brand, input, spacing } from "../../variables";
 /*
 
 DISCLAIMER:
@@ -15,22 +15,33 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const com_mendix_widget_native_gallerytextfilter_GalleryTextFilter: Required<GalleryTextFilterType> = {
     container: {
         // All ViewStyle properties are allowed
-        ...galleryTextFilter.container
     },
     textInputContainer: {
         // All ViewStyle properties are allowed
-        ...galleryTextFilter.textInputContainer
+        flexDirection: "row",
+        justifyContent: "space-between",
+        borderWidth: input.input.borderWidth,
+        borderColor: input.input.borderColor,
+        borderRadius: input.input.borderRadius,
+        paddingEnd: spacing.small
     },
-    textInputContainerOnFocus: {
+    textInputContainerFocused: {
         // All ViewStyle properties are allowed
-        ...galleryTextFilter.textInputContainerOnFocus
+        borderColor: brand.primary
     },
     textInput: {
         // All TextStyle properties are allowed
-        ...galleryTextFilter.textInput
+        height: 40,
+        marginStart: spacing.regular,
+        width: "90%",
+        color: input.input.color,
+        backgroundColor: input.input.backgroundColor,
+        selectionColor: input.input.selectionColor,
+        placeholderTextColor: input.input.placeholderTextColor
     },
     textInputClearIcon: {
         // All ViewStyle properties are allowed
-        ...galleryTextFilter.textInputClearIcon
+        justifyContent: "center",
+        alignContent: "center"
     }
 };

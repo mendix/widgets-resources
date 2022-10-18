@@ -19,10 +19,12 @@ exports[`Filter component renders correctly 1`] = `
     onBlur={[Function]}
     onChangeText={[Function]}
     onFocus={[Function]}
+    placeholderTextColor="#264AE5"
     rejectResponderTermination={true}
     style={
       Object {
-        "color": "#A9ACB3",
+        "backgroundColor": "#FFFFFF",
+        "color": "#6C717E",
         "height": 40,
         "marginStart": 12,
         "width": "90%",

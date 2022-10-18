@@ -32,9 +32,7 @@ import {
     VariablesCheckbox,
     VariablesRadioButtons,
     VariableBackgroundGradient,
-    VariablesColumnChart,
-    VariablesGallery,
-    VariablesGalleryTextFilter
+    VariablesColumnChart
 } from "./types/variables";
 //
 //
@@ -796,58 +794,6 @@ let columnChart: VariablesColumnChart = {
 
 columnChart = merge(columnChart, custom.columnChart || ({} as any));
 
-let gallery: VariablesGallery = {
-    container: {},
-    emptyPlaceholder: {},
-    firstItem: {},
-    lastItem: {},
-    list: {},
-    listItem: { flexGrow: 1 },
-    loadMoreButtonContainer: {
-        alignSelf: "stretch"
-    },
-    loadMoreButtonPressableContainer: {
-        alignItems: "center",
-        backgroundColor: "#264AE5",
-        borderRadius: 4
-    },
-    loadMoreButtonCaption: {
-        padding: 8,
-        color: "#FFFFFF"
-    }
-};
-
-gallery = merge(gallery, custom.gallery || ({} as any));
-
-let galleryTextFilter: VariablesGalleryTextFilter = {
-    container: {
-        alignSelf: "baseline",
-        borderRadius: 30,
-        paddingHorizontal: 10,
-        paddingVertical: 5,
-        backgroundColor: "#ccc",
-        justifyContent: "center"
-    },
-    textInputContainer: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        borderWidth: 1,
-        borderColor: "#606671",
-        borderRadius: 6,
-        paddingEnd: 8
-    },
-    textInputContainerOnFocus: {
-        borderColor: brand.primary
-    },
-    textInput: { height: 40, marginStart: 12, width: "90%", color: "#A9ACB3" },
-    textInputClearIcon: {
-        justifyContent: "center",
-        alignContent: "center"
-    }
-};
-
-galleryTextFilter = merge(galleryTextFilter, custom.galleryTextFilter || ({} as any));
-
 export * from "../../../theme/native/custom-variables";
 export {
     accordion,
@@ -878,7 +824,5 @@ export {
     rating,
     radioButtons,
     backgroundGradient,
-    columnChart,
-    gallery,
-    galleryTextFilter
+    columnChart
 };

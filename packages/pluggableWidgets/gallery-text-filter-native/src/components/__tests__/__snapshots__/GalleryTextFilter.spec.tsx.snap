@@ -2,71 +2,83 @@
 
 exports[`Text Filter with multiple attributes renders correctly 1`] = `
 <View
-  style={
-    Object {
-      "borderColor": "#606671",
-      "borderRadius": 6,
-      "borderWidth": 1,
-      "flexDirection": "row",
-      "justifyContent": "space-between",
-      "paddingEnd": 8,
-    }
-  }
-  testID="filter-test-text-filter"
+  style={Object {}}
 >
-  <TextInput
-    allowFontScaling={true}
-    onBlur={[Function]}
-    onChangeText={[Function]}
-    onFocus={[Function]}
-    rejectResponderTermination={true}
+  <View
     style={
       Object {
-        "color": "#A9ACB3",
-        "height": 40,
-        "marginStart": 12,
-        "width": "90%",
+        "borderColor": "#606671",
+        "borderRadius": 6,
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingEnd": 8,
       }
     }
-    testID="filter-test-text-input"
-    underlineColorAndroid="transparent"
-    value=""
-  />
+    testID="filter-test-text-filter"
+  >
+    <TextInput
+      allowFontScaling={true}
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholderTextColor="#264AE5"
+      rejectResponderTermination={true}
+      style={
+        Object {
+          "backgroundColor": "#FFFFFF",
+          "color": "#6C717E",
+          "height": 40,
+          "marginStart": 12,
+          "width": "90%",
+        }
+      }
+      testID="filter-test-text-input"
+      underlineColorAndroid="transparent"
+      value=""
+    />
+  </View>
 </View>
 `;
 
 exports[`Text Filter with single attribute renders correctly 1`] = `
 <View
-  style={
-    Object {
-      "borderColor": "#606671",
-      "borderRadius": 6,
-      "borderWidth": 1,
-      "flexDirection": "row",
-      "justifyContent": "space-between",
-      "paddingEnd": 8,
-    }
-  }
-  testID="filter-test-text-filter"
+  style={Object {}}
 >
-  <TextInput
-    allowFontScaling={true}
-    onBlur={[Function]}
-    onChangeText={[Function]}
-    onFocus={[Function]}
-    rejectResponderTermination={true}
+  <View
     style={
       Object {
-        "color": "#A9ACB3",
-        "height": 40,
-        "marginStart": 12,
-        "width": "90%",
+        "borderColor": "#606671",
+        "borderRadius": 6,
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingEnd": 8,
       }
     }
-    testID="filter-test-text-input"
-    underlineColorAndroid="transparent"
-    value=""
-  />
+    testID="filter-test-text-filter"
+  >
+    <TextInput
+      allowFontScaling={true}
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholderTextColor="#264AE5"
+      rejectResponderTermination={true}
+      style={
+        Object {
+          "backgroundColor": "#FFFFFF",
+          "color": "#6C717E",
+          "height": 40,
+          "marginStart": 12,
+          "width": "90%",
+        }
+      }
+      testID="filter-test-text-input"
+      underlineColorAndroid="transparent"
+      value=""
+    />
+  </View>
 </View>
 `;
 

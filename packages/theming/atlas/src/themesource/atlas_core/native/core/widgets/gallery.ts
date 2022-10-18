@@ -1,5 +1,5 @@
 import { GalleryType } from "../../types/widgets";
-import { gallery } from "../../variables";
+import { brand, border, spacing } from "../../variables";
 /*
 
 DISCLAIMER:
@@ -15,41 +15,38 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const com_mendix_widget_native_gallery_Gallery: GalleryType = {
     container: {
         // All ViewStyle properties are allowed
-        ...gallery.container
     },
     dynamicItemClasses: {
         // All custom style properties are allowed
     },
     emptyPlaceholder: {
         // All ViewStyle properties are allowed
-        ...gallery.emptyPlaceholder
     },
     firstItem: {
         // All ViewStyle properties are allowed
-        ...gallery.firstItem
     },
     lastItem: {
         // All ViewStyle properties are allowed
-        ...gallery.lastItem
     },
     list: {
         // All ViewStyle properties are allowed
-        ...gallery.list
     },
     listItem: {
         // All ViewStyle properties are allowed
-        ...gallery.listItem
     },
     loadMoreButtonContainer: {
         // All ViewStyle properties are allowed
-        ...gallery.loadMoreButtonContainer
+        alignSelf: "stretch"
     },
     loadMoreButtonPressableContainer: {
         // All ViewStyle properties are allowed
-        ...gallery.loadMoreButtonPressableContainer
+        alignItems: "center",
+        backgroundColor: brand.primary,
+        borderRadius: border.radiusSmall
     },
     loadMoreButtonCaption: {
         // All TextStyle properties are allowed
-        ...gallery.loadMoreButtonCaption
+        padding: spacing.small,
+        color: "#FFFFFF"
     }
 };

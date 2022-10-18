@@ -2,8 +2,9 @@ import { createElement, ReactElement, useRef, useState, useEffect, useCallback }
 import { View, TextInput, TouchableOpacity, ViewStyle } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import { debounce } from "@mendix/piw-utils-internal";
+import { extractStyles } from "@mendix/pluggable-widgets-tools";
 
-import { GalleryTextFilterStyle } from "../ui/Styles";
+import { GalleryTextFilterStyle, InputStyleProps } from "../ui/Styles";
 
 export interface FilterComponentProps {
     delay: number;
@@ -14,16 +15,24 @@ export interface FilterComponentProps {
     name: string;
 }
 
+const textInputPropsKeys: Array<keyof InputStyleProps> = [
+    "autoCapitalize",
+    "placeholderTextColor",
+    "selectionColor",
+    "underlineColorAndroid"
+];
+
 export default function FilterComponent(props: FilterComponentProps): ReactElement {
     const [value, setValue] = useState("");
     const [valueInput, setValueInput] = useState("");
-    const inputRef = useRef<TextInput | null>(null);
-
     const [textInputContainerStyle, setTextInputContainerStyle] = useState<ViewStyle>(
         props.styles?.textInputContainer || {}
     );
     const [renderClearTextIcon, setRenderClearTextIcon] = useState<boolean>(false);
 
+    const inputRef = useRef<TextInput | null>(null);
+
+    const [textInputProps, textInput] = extractStyles(props.styles?.textInput, textInputPropsKeys);
     const xIconSVG = (
         <Svg width={24} height={24} fill="none">
             <Path
@@ -59,6 +68,20 @@ export default function FilterComponent(props: FilterComponentProps): ReactEleme
         }
     }, [inputRef]);
 
+    const onFocus = (): void =>
+        setTextInputContainerStyle({
+            ...textInputContainerStyle,
+            ...props.styles?.textInputContainerOnFocus
+        });
+
+    const onBlur = (): void => props.styles && setTextInputContainerStyle(props.styles.textInputContainer);
+
+    const onPressClearTextIcon = (): void => {
+        setValue("");
+        setValueInput("");
+        focusInput();
+    };
+
     return (
         <View testID={`${props.name}-text-filter`} style={textInputContainerStyle}>
             <TextInput
@@ -70,23 +93,15 @@ export default function FilterComponent(props: FilterComponentProps): ReactEleme
                     onChange(e);
                     setValueInput(e);
                 }}
-                style={props.styles?.textInput}
-                onFocus={() =>
-                    setTextInputContainerStyle({
-                        ...textInputContainerStyle,
-                        ...props.styles?.textInputContainerOnFocus
-                    })
-                }
-                onBlur={() => props.styles && setTextInputContainerStyle(props.styles.textInputContainer)}
+                style={textInput}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                {...textInputProps}
             />
             {renderClearTextIcon ? (
                 <TouchableOpacity
                     testID={`${props.name}-clear-text-button`}
-                    onPress={() => {
-                        setValue("");
-                        setValueInput("");
-                        focusInput();
-                    }}
+                    onPress={onPressClearTextIcon}
                     style={props.styles?.textInputClearIcon}
                 >
                     {xIconSVG}
