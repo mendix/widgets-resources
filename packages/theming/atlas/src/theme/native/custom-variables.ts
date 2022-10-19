@@ -28,7 +28,9 @@ import {
     VariablesTabContainer,
     VariablesRadioButtons,
     VariableBackgroundGradient,
-    VariablesColumnChart
+    VariablesColumnChart,
+    VariablesGallery,
+    VariablesGalleryTextFilter
 } from "../../themesource/atlas_core/native/types/variables";
 import "./exclusion-variables";
 /*
@@ -767,5 +769,55 @@ export const columnChart: VariablesColumnChart = {
         }
     }
 };
-
 // TODO add bar chart styles
+
+// Gallery style
+export const gallery: VariablesGallery = {
+    container: {},
+    emptyPlaceholder: {},
+    firstItem: {},
+    lastItem: {},
+    list: {},
+    listItem: { flexGrow: 1 },
+    loadMoreButtonContainer: {
+        alignSelf: "stretch"
+    },
+    loadMoreButtonPressableContainer: {
+        alignItems: "center",
+        backgroundColor: brand.primary,
+        borderRadius: 4
+    },
+    loadMoreButtonCaption: {
+        padding: 8,
+        color: "#FFFFFF"
+    }
+};
+
+// Gallery text filter style
+export const galleryTextFilter: VariablesGalleryTextFilter = {
+    container: {},
+    textInputContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        borderWidth: input.input.borderWidth,
+        borderColor: input.input.borderColor,
+        borderRadius: input.input.borderRadius,
+        paddingEnd: 8
+    },
+    textInputContainerFocused: {
+        borderColor: brand.primary
+    },
+    textInput: {
+        height: 40,
+        marginStart: spacing.regular,
+        width: "90%",
+        color: input.input.color,
+        backgroundColor: input.input.backgroundColor,
+        selectionColor: input.input.selectionColor,
+        placeholderTextColor: input.input.placeholderTextColor
+    },
+    textInputClearIcon: {
+        justifyContent: "center",
+        alignContent: "center"
+    }
+};

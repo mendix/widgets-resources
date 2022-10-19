@@ -2,12 +2,21 @@
     Types
 ========================================================================== */
 
-import { ViewStyle } from "react-native";
+import { TextStyle, ViewStyle } from "react-native";
 import { CheckBoxInputType, GradientColorList } from "./widgets";
 
 declare type FontWeight = "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
 declare type TextAlign = "auto" | "left" | "right" | "center" | "justify";
 declare type TextTransform = "none" | "capitalize" | "uppercase" | "lowercase";
+
+interface InputStyleProps {
+    autoCapitalize?: "none" | "sentences" | "words" | "characters";
+    placeholderTextColor?: string;
+    selectionColor?: string;
+    underlineColorAndroid?: string;
+}
+
+interface InputStyle extends TextStyle, InputStyleProps {}
 
 export interface VariablesBrand {
     primary: string;
@@ -664,4 +673,27 @@ export interface VariablesColumnChart {
     domain?: {
         padding?: { x: number; y: number };
     };
+}
+
+export interface VariablesGallery {
+    container?: ViewStyle;
+    dynamicItemClasses?: {
+        [key: string]: Pick<VariablesGallery, "listItem">;
+    };
+    emptyPlaceholder?: ViewStyle;
+    firstItem?: ViewStyle;
+    lastItem?: ViewStyle;
+    list?: ViewStyle;
+    listItem?: ViewStyle;
+    loadMoreButtonContainer?: ViewStyle;
+    loadMoreButtonPressableContainer?: ViewStyle;
+    loadMoreButtonCaption?: TextStyle;
+}
+
+export interface VariablesGalleryTextFilter {
+    container?: ViewStyle;
+    textInputContainer?: ViewStyle;
+    textInputContainerFocused?: ViewStyle;
+    textInput?: InputStyle;
+    textInputClearIcon?: ViewStyle;
 }

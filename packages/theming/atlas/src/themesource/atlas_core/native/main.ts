@@ -80,6 +80,9 @@ import * as backgroundGradient from "./core/widgets/backgroundgradient";
 import * as helperBackgroundGradient from "./core/helpers/backgroundgradient";
 import * as widgetsColumnChart from "./core/widgets/columnchart";
 import * as helpersColumnChart from "./core/helpers/columnchart";
+import * as widgetsGallery from "./core/widgets/gallery";
+import * as helpersGallery from "./core/helpers/gallery";
+import * as widgetsGalleryTextFilter from "./core/widgets/gallerytextfilter";
 //
 //
 // ================================= CUSTOM =================================\\
@@ -172,6 +175,9 @@ module.exports = [
         : {},
     !exclusionVariables.excludeColumnChart ? widgetsColumnChart : {},
     !exclusionVariables.excludeColumnChart && !exclusionVariables.excludeColumnChartHelper ? helpersColumnChart : {},
+    !exclusionVariables.excludeGallery ? widgetsGallery : {},
+    !exclusionVariables.excludeGallery && !exclusionVariables.excludeGallery ? helpersGallery : {},
+    !exclusionVariables.excludeGalleryTextFilter ? widgetsGalleryTextFilter : {},
     layout,
     page
 ].reduce((merged, object) => ({ ...merged, ...object }), {});
