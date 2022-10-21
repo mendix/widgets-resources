@@ -13,9 +13,6 @@ To customize any core styling, copy the part you want to customize to styles/nat
     Default Class For Mendix Gallery Text Filter Widget
 ========================================================================== */
 export const com_mendix_widget_native_gallerytextfilter_GalleryTextFilter: Required<GalleryTextFilterType> = {
-    container: {
-        // All ViewStyle properties are allowed
-    },
     textInputContainer: {
         // All ViewStyle properties are allowed
         flexDirection: "row",

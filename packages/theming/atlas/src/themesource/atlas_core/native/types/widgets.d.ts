@@ -864,7 +864,6 @@ export interface GalleryType {
 }
 
 export interface GalleryTextFilterType {
-    container?: ViewStyle;
     textInputContainer?: ViewStyle;
     textInputContainerFocused?: ViewStyle;
     textInput?: InputType;

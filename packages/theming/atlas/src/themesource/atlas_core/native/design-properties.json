@@ -3154,28 +3154,32 @@
             "description": "The spacing above this element.",
             "options": [
                 {
-                    "name": "Inner small",
-                    "class": "spacingInnerTopSmaller"
+                    "name": "Smallest",
+                    "class": "galleryTextFilterSpacingOuterTopSmallest"
                 },
                 {
-                    "name": "Inner medium",
-                    "class": "spacingInnerTopMedium"
+                    "name": "Smaller",
+                    "class": "galleryTextFilterSpacingOuterTopSmaller"
                 },
                 {
-                    "name": "Inner large",
-                    "class": "spacingInnerTopLarger"
+                    "name": "Small",
+                    "class": "galleryTextFilterSpacingOuterTopSmall"
                 },
                 {
-                    "name": "Outer small",
-                    "class": "spacingOuterTopSmaller"
+                    "name": "Medium",
+                    "class": "galleryTextFilterSpacingOuterTopMedium"
                 },
                 {
-                    "name": "Outer medium",
-                    "class": "spacingOuterTopMedium"
+                    "name": "Large",
+                    "class": "galleryTextFilterSpacingOuterTopLarge"
                 },
                 {
-                    "name": "Outer large",
-                    "class": "spacingOuterTopLarger"
+                    "name": "Larger",
+                    "class": "galleryTextFilterSpacingOuterTopLarger"
+                },
+                {
+                    "name": "Largest",
+                    "class": "galleryTextFilterSpacingOuterTopLargest"
                 }
             ]
         },
@@ -3185,28 +3189,32 @@
             "description": "The spacing below this element.",
             "options": [
                 {
-                    "name": "Inner small",
-                    "class": "spacingInnerBottomSmaller"
+                    "name": "Smallest",
+                    "class": "galleryTextFilterSpacingOuterBottomSmallest"
                 },
                 {
-                    "name": "Inner medium",
-                    "class": "spacingInnerBottomMedium"
+                    "name": "Smaller",
+                    "class": "galleryTextFilterSpacingOuterBottomSmaller"
                 },
                 {
-                    "name": "Inner large",
-                    "class": "spacingInnerBottomLarger"
+                    "name": "Small",
+                    "class": "galleryTextFilterSpacingOuterBottomSmall"
                 },
                 {
-                    "name": "Outer small",
-                    "class": "spacingOuterBottomSmaller"
+                    "name": "Medium",
+                    "class": "galleryTextFilterSpacingOuterBottomMedium"
                 },
                 {
-                    "name": "Outer medium",
-                    "class": "spacingOuterBottomMedium"
+                    "name": "Large",
+                    "class": "galleryTextFilterSpacingOuterBottomLarge"
                 },
                 {
-                    "name": "Outer large",
-                    "class": "spacingOuterBottomLarger"
+                    "name": "Larger",
+                    "class": "galleryTextFilterSpacingOuterBottomLarger"
+                },
+                {
+                    "name": "Largest",
+                    "class": "galleryTextFilterSpacingOuterBottomLargest"
                 }
             ]
         },
@@ -3216,28 +3224,32 @@
             "description": "The spacing to the left of this element.",
             "options": [
                 {
-                    "name": "Inner small",
-                    "class": "spacingInnerLeftSmaller"
+                    "name": "Smallest",
+                    "class": "galleryTextFilterSpacingOuterLeftSmallest"
                 },
                 {
-                    "name": "Inner medium",
-                    "class": "spacingInnerLeftMedium"
+                    "name": "Smaller",
+                    "class": "galleryTextFilterSpacingOuterLeftSmaller"
                 },
                 {
-                    "name": "Inner large",
-                    "class": "spacingInnerLeftLarger"
+                    "name": "Small",
+                    "class": "galleryTextFilterSpacingOuterLeftSmall"
                 },
                 {
-                    "name": "Outer small",
-                    "class": "spacingOuterLeftSmaller"
+                    "name": "Medium",
+                    "class": "galleryTextFilterSpacingOuterLeftMedium"
                 },
                 {
-                    "name": "Outer medium",
-                    "class": "spacingOuterLeftMedium"
+                    "name": "Large",
+                    "class": "galleryTextFilterSpacingOuterLeftLarge"
                 },
                 {
-                    "name": "Outer large",
-                    "class": "spacingOuterLeftLarger"
+                    "name": "Larger",
+                    "class": "galleryTextFilterSpacingOuterLeftLarger"
+                },
+                {
+                    "name": "Largest",
+                    "class": "galleryTextFilterSpacingOuterLeftLargest"
                 }
             ]
         },
@@ -3247,28 +3259,32 @@
             "description": "The spacing to the right of this element.",
             "options": [
                 {
-                    "name": "Inner small",
-                    "class": "spacingInnerRightSmaller"
+                    "name": "Smallest",
+                    "class": "galleryTextFilterSpacingOuterRightSmallest"
                 },
                 {
-                    "name": "Inner medium",
-                    "class": "spacingInnerRightMedium"
+                    "name": "Smaller",
+                    "class": "galleryTextFilterSpacingOuterRightSmaller"
                 },
                 {
-                    "name": "Inner large",
-                    "class": "spacingInnerRightLarger"
+                    "name": "Small",
+                    "class": "galleryTextFilterSpacingOuterRightSmall"
                 },
                 {
-                    "name": "Outer small",
-                    "class": "spacingOuterRightSmaller"
+                    "name": "Medium",
+                    "class": "galleryTextFilterSpacingOuterRightMedium"
                 },
                 {
-                    "name": "Outer medium",
-                    "class": "spacingOuterRightMedium"
+                    "name": "Large",
+                    "class": "galleryTextFilterSpacingOuterRightLarge"
                 },
                 {
-                    "name": "Outer large",
-                    "class": "spacingOuterRightLarger"
+                    "name": "Larger",
+                    "class": "galleryTextFilterSpacingOuterRightLarger"
+                },
+                {
+                    "name": "Largest",
+                    "class": "galleryTextFilterSpacingOuterRightLargest"
                 }
             ]
         }

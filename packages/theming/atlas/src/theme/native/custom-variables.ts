@@ -795,7 +795,6 @@ export const gallery: VariablesGallery = {
 
 // Gallery text filter style
 export const galleryTextFilter: VariablesGalleryTextFilter = {
-    container: {},
     textInputContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
