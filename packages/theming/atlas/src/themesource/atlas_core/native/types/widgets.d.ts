@@ -850,9 +850,6 @@ export interface BackgroundGradientStyles {
 
 export interface GalleryType {
     container?: ViewStyle;
-    dynamicItemClasses?: {
-        [key: string]: Pick<GalleryType, "listItem">;
-    };
     emptyPlaceholder?: ViewStyle;
     firstItem?: ViewStyle;
     lastItem?: ViewStyle;

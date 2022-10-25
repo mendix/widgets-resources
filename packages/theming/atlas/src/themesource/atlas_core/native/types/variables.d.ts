@@ -677,9 +677,6 @@ export interface VariablesColumnChart {
 
 export interface VariablesGallery {
     container?: ViewStyle;
-    dynamicItemClasses?: {
-        [key: string]: Pick<VariablesGallery, "listItem">;
-    };
     emptyPlaceholder?: ViewStyle;
     firstItem?: ViewStyle;
     lastItem?: ViewStyle;

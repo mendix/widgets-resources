@@ -16,9 +16,6 @@ export const com_mendix_widget_native_gallery_Gallery: GalleryType = {
     container: {
         // All ViewStyle properties are allowed
     },
-    dynamicItemClasses: {
-        // All custom style properties are allowed
-    },
     emptyPlaceholder: {
         // All ViewStyle properties are allowed
     },
