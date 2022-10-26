@@ -783,13 +783,28 @@ export const gallery: VariablesGallery = {
         alignSelf: "stretch"
     },
     loadMoreButtonPressableContainer: {
+        // Ripplecolor and all ViewStyle properties are allowed
+        borderWidth: 1,
+        borderStyle: "solid",
+        rippleColor: button.container.rippleColor,
+        borderColor: button.primary.borderColor,
+        backgroundColor: button.primary.backgroundColor,
         alignItems: "center",
-        backgroundColor: brand.primary,
-        borderRadius: 4
+        justifyContent: "center",
+        borderRadius: button.container.borderRadius,
+
+        minWidth: button.container.minWidth,
+        minHeight: button.container.minHeight,
+        paddingVertical: button.container.paddingVertical,
+        paddingHorizontal: button.container.paddingHorizontal
     },
     loadMoreButtonCaption: {
-        padding: 8,
-        color: "#FFFFFF"
+        // All TextStyle properties are allowed
+        color: button.primary.color,
+        fontSize: button.caption.fontSize,
+        fontFamily: font.family,
+        fontWeight: button.caption.fontWeight,
+        lineHeight: font.lineHeight
     }
 };
 

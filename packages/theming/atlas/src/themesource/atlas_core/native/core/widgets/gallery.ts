@@ -1,5 +1,5 @@
 import { GalleryType } from "../../types/widgets";
-import { brand, border, spacing } from "../../variables";
+import { font, button } from "../../variables";
 /*
 
 DISCLAIMER:
@@ -36,14 +36,27 @@ export const com_mendix_widget_native_gallery_Gallery: GalleryType = {
         alignSelf: "stretch"
     },
     loadMoreButtonPressableContainer: {
-        // All ViewStyle properties are allowed
+        // Ripplecolor and all ViewStyle properties are allowed
+        borderWidth: 1,
+        borderStyle: "solid",
+        rippleColor: button.container.rippleColor,
+        borderColor: button.primary.borderColor,
+        backgroundColor: button.primary.backgroundColor,
         alignItems: "center",
-        backgroundColor: brand.primary,
-        borderRadius: border.radiusSmall
+        justifyContent: "center",
+        borderRadius: button.container.borderRadius,
+
+        minWidth: button.container.minWidth,
+        minHeight: button.container.minHeight,
+        paddingVertical: button.container.paddingVertical,
+        paddingHorizontal: button.container.paddingHorizontal
     },
     loadMoreButtonCaption: {
         // All TextStyle properties are allowed
-        padding: spacing.small,
-        color: "#FFFFFF"
+        color: button.primary.color,
+        fontSize: button.caption.fontSize,
+        fontFamily: font.family,
+        fontWeight: button.caption.fontWeight,
+        lineHeight: font.lineHeight
     }
 };

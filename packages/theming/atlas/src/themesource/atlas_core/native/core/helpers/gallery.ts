@@ -168,25 +168,41 @@ export const galleryGridJustifyContentSpaceEvenly: VariablesGallery = {
 
 export const loadMoreButtonBackgroundSecondary: VariablesGallery = {
     loadMoreButtonPressableContainer: {
+        borderColor: button.secondary.borderColor,
         backgroundColor: button.secondary.backgroundColor
+    },
+    loadMoreButtonCaption: {
+        color: button.secondary.color
     }
 };
 
 export const loadMoreButtonBackgroundSuccess: VariablesGallery = {
     loadMoreButtonPressableContainer: {
+        borderColor: button.success.borderColor,
         backgroundColor: button.success.backgroundColor
+    },
+    loadMoreButtonCaption: {
+        color: button.success.color
     }
 };
 
 export const loadMoreButtonBackgroundWarning: VariablesGallery = {
     loadMoreButtonPressableContainer: {
+        borderColor: button.warning.borderColor,
         backgroundColor: button.warning.backgroundColor
+    },
+    loadMoreButtonCaption: {
+        color: button.warning.color
     }
 };
 
 export const loadMoreButtonBackgroundDanger: VariablesGallery = {
     loadMoreButtonPressableContainer: {
+        borderColor: button.danger.borderColor,
         backgroundColor: button.danger.backgroundColor
+    },
+    loadMoreButtonCaption: {
+        color: button.danger.color
     }
 };
 

@@ -18,6 +18,15 @@ interface InputStyleProps {
 
 interface InputStyle extends TextStyle, InputStyleProps {}
 
+interface TouchableStyleProps {
+    rippleColor?: ColorValue;
+    borderless?: boolean;
+    radius?: number;
+    foreground?: boolean;
+}
+
+interface TouchableStyle extends ViewStyle, TouchableStyleProps {}
+
 export interface VariablesBrand {
     primary: string;
     success: string;
@@ -683,7 +692,7 @@ export interface VariablesGallery {
     list?: ViewStyle;
     listItem?: ViewStyle;
     loadMoreButtonContainer?: ViewStyle;
-    loadMoreButtonPressableContainer?: ViewStyle;
+    loadMoreButtonPressableContainer?: TouchableStyle;
     loadMoreButtonCaption?: TextStyle;
 }
 

@@ -13,6 +13,15 @@ interface InputType extends TextStyle {
     underlineColorAndroid?: string;
 }
 
+interface TouchableStyleProps {
+    rippleColor?: ColorValue;
+    borderless?: boolean;
+    radius?: number;
+    foreground?: boolean;
+}
+
+interface TouchableStyle extends ViewStyle, TouchableStyleProps {}
+
 // Accordion
 export interface AccordionType {
     container?: ViewStyle;
@@ -856,7 +865,7 @@ export interface GalleryType {
     list?: ViewStyle;
     listItem?: ViewStyle;
     loadMoreButtonContainer?: ViewStyle;
-    loadMoreButtonPressableContainer?: ViewStyle;
+    loadMoreButtonPressableContainer?: TouchableStyle;
     loadMoreButtonCaption?: TextStyle;
 }
 
