@@ -13,6 +13,15 @@ interface InputType extends TextStyle {
     underlineColorAndroid?: string;
 }
 
+interface TouchableStyleProps {
+    rippleColor?: ColorValue;
+    borderless?: boolean;
+    radius?: number;
+    foreground?: boolean;
+}
+
+interface TouchableStyle extends ViewStyle, TouchableStyleProps {}
+
 // Accordion
 export interface AccordionType {
     container?: ViewStyle;
@@ -846,4 +855,23 @@ export interface BackgroundGradientStyles {
     angle?: number;
     colorList?: GradientColorList[];
     opacity?: number;
+}
+
+export interface GalleryType {
+    container?: ViewStyle;
+    emptyPlaceholder?: ViewStyle;
+    firstItem?: ViewStyle;
+    lastItem?: ViewStyle;
+    list?: ViewStyle;
+    listItem?: ViewStyle;
+    loadMoreButtonContainer?: ViewStyle;
+    loadMoreButtonPressableContainer?: TouchableStyle;
+    loadMoreButtonCaption?: TextStyle;
+}
+
+export interface GalleryTextFilterType {
+    textInputContainer?: ViewStyle;
+    textInputContainerFocused?: ViewStyle;
+    textInput?: InputType;
+    textInputClearIcon?: ViewStyle;
 }

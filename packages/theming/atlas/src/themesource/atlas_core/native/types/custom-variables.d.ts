@@ -208,3 +208,22 @@ export interface VariablesBackgroundGradient {
     colorList?: GradientColorList[];
     opacity: number;
 }
+
+export interface VariablesGallery {
+    container?: ViewStyle;
+    emptyPlaceholder?: ViewStyle;
+    firstItem?: ViewStyle;
+    lastItem?: ViewStyle;
+    list?: ViewStyle;
+    listItem?: ViewStyle;
+    loadMoreButtonContainer?: ViewStyle;
+    loadMoreButtonPressableContainer?: ViewStyle;
+    loadMoreButtonCaption?: TextStyle;
+}
+
+export interface VariablesGalleryTextFilter {
+    textInputContainer?: ViewStyle;
+    textInputContainerFocused?: ViewStyle;
+    textInput?: TextStyle;
+    textInputClearIcon?: ViewStyle;
+}
