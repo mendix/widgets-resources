@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+
+-   We added Atlas styling support for Gallery Native widget.
+-   We added Atlas styling support for Gallery Text Filter Native widget.
+
 ## [3.6.1] Atlas Core - 2022-9-26
 
 ### Changed
