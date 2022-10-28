@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Changed
+
+-   We migrated from Google Fonts to locally hosted fonts.
+
 ## [3.7.0] Atlas Core - 2022-10-27
 
 ### Added
