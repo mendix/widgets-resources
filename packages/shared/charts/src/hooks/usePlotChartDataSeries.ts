@@ -206,10 +206,6 @@ function extractDataPoints(
         const x = xValue.get(item);
         const y = yValue.get(item);
 
-        if (!x.value || !y.value) {
-            return null;
-        }
-
         xData.push(x.value instanceof Big ? Number(x.value.toString()) : x.value);
         yData.push(y.value instanceof Big ? Number(y.value.toString()) : y.value);
 
