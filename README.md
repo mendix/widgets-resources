@@ -28,7 +28,7 @@ Please visit [Atlas repo](https://github.com/mendix/atlas) for more information.
 
 ## Pluggable widgets tools & Widget generator
 
-We are in progress of moving these 2 projects to another repository.
+Please visit [Widgets Tools repo](https://github.com/mendix/widgets-tools) for more information.
 
 ## Nanoflow commons
 
